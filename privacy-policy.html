@@ -13,16 +13,16 @@
     }
 
     :root {
-      --md-primary: #6750A4;
-      --md-primary-container: #EADDFF;
-      --md-secondary: #625B71;
-      --md-surface: #FEF7FF;
-      --md-surface-variant: #E7E0EC;
+      --md-primary: #C2185B;
+      --md-primary-container: #FCE4EC;
+      --md-secondary: #6D4C41;
+      --md-surface: #FFF8FA;
+      --md-surface-variant: #F8E8EE;
       --md-on-surface: #1C1B1F;
-      --md-on-surface-variant: #49454F;
-      --md-outline: #79747E;
-      --md-shadow: rgba(0, 0, 0, 0.08);
-      --gradient: linear-gradient(135deg, #6750A4 0%, #7F67BE 100%);
+      --md-on-surface-variant: #4A4458;
+      --md-outline: #7A7485;
+      --md-shadow: rgba(194, 24, 91, 0.08);
+      --gradient: linear-gradient(135deg, #C2185B 0%, #D84B7A 100%);
     }
 
     body {
@@ -458,9 +458,9 @@
       <h3>2.2 Automatically Collected Information</h3>
       <ul>
         <li>App usage duration and screen time statistics</li>
-        <li>Installed app identifiers (for categorization and limits)</li>
-        <li>Non-personal device identifiers for syncing parent and child devices</li>
-        <li>App configuration and enforcement data</li>
+        <li>List of installed apps (package names only, for categorization and limit enforcement)</li>
+        <li>Device identifiers (non-personal) for syncing parent and child devices</li>
+        <li>App configuration and enforcement settings</li>
       </ul>
     </div>
 
@@ -480,11 +480,12 @@
       </ul>
 
       <div class="warning-box">
-        <p><strong>We do NOT:</strong></p>
+        <p><strong>Important Clarifications:</strong></p>
         <ul style="margin: 12px 0 0 0;">
-          <li>Read or record screen content</li>
-          <li>Capture keystrokes or passwords</li>
-          <li>Monitor messages, calls, photos, or personal communications</li>
+          <li>We do NOT read, record, or transmit screen content</li>
+          <li>We do NOT capture keystrokes, passwords, or any text input</li>
+          <li>We do NOT access messages, calls, photos, contacts, or personal communications</li>
+          <li>Accessibility permissions are used solely for enforcing the parental controls you set</li>
         </ul>
       </div>
     </div>
@@ -533,11 +534,15 @@
       <div class="section-number">6</div>
       <h2>Data Sharing</h2>
       <p>
-        We do not share personal or child data with third parties except:
+        <strong>We do not sell, rent, or share personal information or child data with third parties for marketing or advertising purposes.</strong>
+      </p>
+      <p>
+        Data may only be disclosed:
       </p>
       <ul>
-        <li>When required by law</li>
-        <li>To protect legal rights or prevent misuse of the service</li>
+        <li>When legally required (e.g., valid court order or law enforcement request)</li>
+        <li>To protect the safety, rights, or security of iLimits, our users, or others</li>
+        <li>With service providers who help operate our app (e.g., cloud hosting), under strict confidentiality agreements</li>
       </ul>
     </div>
 
@@ -545,8 +550,9 @@
       <div class="section-number">7</div>
       <h2>Data Storage & Security</h2>
       <p>
-        Data is stored securely using industry-standard security practices. Access is limited to
-        authorized systems and reviewed regularly.
+        Data is stored securely using encryption and industry-standard security practices. 
+        We use secure cloud infrastructure with restricted access controls. While no system 
+        is 100% secure, we continuously monitor and update our security measures.
       </p>
       <div class="info-grid">
         <div class="info-card">
@@ -576,9 +582,10 @@
       <div class="section-number">9</div>
       <h2>Permissions Used</h2>
       <ul>
-        <li><strong>Accessibility Service</strong> – enforce app limits</li>
-        <li><strong>Usage Access</strong> – calculate screen time</li>
-        <li><strong>Foreground Service</strong> – ensure reliable enforcement</li>
+        <li><strong>Accessibility Service</strong> – Used exclusively to detect the active app and enforce screen time limits and app blocking rules set by parents</li>
+        <li><strong>Usage Access (App Usage Stats)</strong> – Required to calculate accurate screen time and generate usage reports</li>
+        <li><strong>Foreground Service</strong> – Ensures parental controls remain active and cannot be easily bypassed</li>
+        <li><strong>Device Admin (optional)</strong> – Prevents uninstallation of the app without parent permission</li>
       </ul>
     </div>
 
@@ -588,6 +595,23 @@
       <p>
         We may update this Privacy Policy from time to time. Any changes will be posted on this page
         with an updated date.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="section-number">11</div>
+      <h2>Your Rights</h2>
+      <p>
+        As a parent or legal guardian, you have the right to:
+      </p>
+      <ul>
+        <li>Access and review the data we collect about your child</li>
+        <li>Request correction of inaccurate information</li>
+        <li>Request deletion of your account and associated child data</li>
+        <li>Withdraw consent and stop using the app at any time</li>
+      </ul>
+      <p>
+        To exercise these rights, contact us at <a href="mailto:support@ilimits.app">support@ilimits.app</a>
       </p>
     </div>
 
