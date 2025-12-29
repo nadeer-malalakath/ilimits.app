@@ -6,8 +6,12 @@
   <title>Privacy Policy – iLimits</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ===== NO DESIGN CHANGES MADE ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     :root {
       --md-primary: #6750A4;
       --md-primary-container: #EADDFF;
@@ -20,213 +24,591 @@
       --md-shadow: rgba(0, 0, 0, 0.08);
       --gradient: linear-gradient(135deg, #6750A4 0%, #7F67BE 100%);
     }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--md-surface);
       color: var(--md-on-surface);
       line-height: 1.7;
+      overflow-x: hidden;
     }
-    /* (styles unchanged – omitted for brevity in explanation only) */
+
+    .hero {
+      background: var(--gradient);
+      padding: 80px 24px 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, -30px) scale(1.1); }
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 100px;
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ADE80;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.9); }
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: white;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.9);
+      max-width: 600px;
+      margin-bottom: 32px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 16px 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: -60px auto 0;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 48px;
+      box-shadow: 0 4px 16px var(--md-shadow), 0 8px 32px var(--md-shadow);
+      margin-bottom: 24px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--md-shadow), 0 16px 48px var(--md-shadow);
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: var(--md-primary-container);
+      color: var(--md-primary);
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--md-on-surface);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--md-secondary);
+      margin: 24px 0 12px;
+    }
+
+    p {
+      color: var(--md-on-surface-variant);
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      margin: 16px 0;
+    }
+
+    li {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 12px;
+      color: var(--md-on-surface-variant);
+    }
+
+    li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--md-primary-container);
+      color: var(--md-primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, var(--md-primary-container) 0%, #F3E8FF 100%);
+      border-left: 4px solid var(--md-primary);
+      padding: 24px 28px;
+      border-radius: 16px;
+      margin: 24px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight::before {
+      content: '🔒';
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 3rem;
+      opacity: 0.1;
+    }
+
+    .highlight p {
+      color: var(--md-on-surface);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .warning-box {
+      background: #FFF4E6;
+      border-left: 4px solid #F59E0B;
+      padding: 20px 24px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .warning-box strong {
+      color: #92400E;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .info-card {
+      background: var(--md-surface-variant);
+      padding: 20px;
+      border-radius: 16px;
+      transition: transform 0.2s ease;
+    }
+
+    .info-card:hover {
+      transform: scale(1.02);
+    }
+
+    .info-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .info-title {
+      font-weight: 600;
+      color: var(--md-on-surface);
+      margin-bottom: 8px;
+    }
+
+    .info-text {
+      font-size: 0.875rem;
+      color: var(--md-on-surface-variant);
+      margin: 0;
+    }
+
+    .contact-card {
+      background: var(--gradient);
+      color: white;
+      padding: 40px;
+      border-radius: 24px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .contact-card h2 {
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .contact-card p {
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 24px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--md-primary);
+      padding: 12px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      text-decoration: none;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--md-on-surface-variant);
+      font-size: 0.875rem;
+    }
+
+    a {
+      color: var(--md-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--md-secondary);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px 100px;
+      }
+
+      .card {
+        padding: 32px 24px;
+        border-radius: 24px;
+      }
+
+      .stats {
+        gap: 16px;
+      }
+
+      .stat-item {
+        flex: 1;
+        min-width: 140px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        padding: 32px 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
-
 <body>
 
-<div class="hero">
-  <div class="hero-content">
-    <div class="badge">
-      <span class="badge-dot"></span>
-      Last Updated: December 29, 2025
+  <div class="hero">
+    <div class="hero-content">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Last Updated: December 29, 2025
+      </div>
+      <h1>Privacy Policy</h1>
+      <p class="hero-subtitle">
+        Your family's privacy and security are our top priorities. Learn how iLimits protects your data.
+      </p>
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-value">100%</span>
+          <span class="stat-label">Data Encryption</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">Zero</span>
+          <span class="stat-label">Ads to Children</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">COPPA</span>
+          <span class="stat-label">Compliant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <div class="card">
+      <p style="font-size: 1.125rem; font-weight: 500; color: var(--md-on-surface);">
+        This Privacy Policy explains how <strong>iLimits – Parental Control & Screen Time App</strong>
+        ("iLimits", "we", "our", or "us") collects, uses, and protects information when parents or legal
+        guardians use our application.
+      </p>
+      <p>
+        By using iLimits, you agree to the practices described in this policy.
+      </p>
     </div>
 
-    <h1>Privacy Policy</h1>
-    <p class="hero-subtitle">
-      Your family's privacy and security are our top priorities. Learn how iLimits protects your data.
-    </p>
-
-    <div class="stats">
-      <div class="stat-item">
-        <span class="stat-value">Secure</span>
-        <span class="stat-label">Encrypted Storage</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">Zero</span>
-        <span class="stat-label">Ads to Children</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">Kids</span>
-        <span class="stat-label">Privacy First</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="card">
-    <p style="font-size: 1.125rem; font-weight: 500; color: var(--md-on-surface);">
-      This Privacy Policy explains how <strong>iLimits – Parental Control & Screen Time App</strong>
-      ("iLimits", "we", "our", or "us") collects, uses, and protects information when parents or legal
-      guardians use our application.
-    </p>
-    <p>
-      This policy applies to the Android application
-      <strong>iLimits – Parental Control & Screen Time App</strong>.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="section-number">1</div>
-    <h2>Who This App Is For</h2>
-    <p>
-      iLimits is designed exclusively for <strong>parents or legal guardians</strong> to manage and
-      monitor their child's device usage. Children do not create independent accounts without parental
-      involvement.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="section-number">2</div>
-    <h2>Information We Collect</h2>
-
-    <h3>2.1 Information Provided by Parents</h3>
-    <ul>
-      <li>Parent account email address</li>
-      <li>Child profile details (name or nickname – optional)</li>
-      <li>Screen time limits, app rules, and schedules</li>
-    </ul>
-
-    <h3>2.2 Automatically Collected Information</h3>
-    <ul>
-      <li>App usage duration and screen time statistics</li>
-      <li>Installed app identifiers (for categorization and limits)</li>
-      <li>Non-personal device identifiers for syncing parent and child devices</li>
-      <li>App configuration and enforcement data</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <div class="section-number">3</div>
-    <h2>Accessibility Service Usage</h2>
-
-    <div class="highlight">
-      <p>🔒 iLimits uses Android Accessibility Service strictly to enforce parental controls.</p>
+    <div class="card">
+      <div class="section-number">1</div>
+      <h2>Who This App Is For</h2>
+      <p>
+        iLimits is designed exclusively for <strong>parents or legal guardians</strong> to manage and
+        monitor their child's device usage. Children do not create independent accounts without parental
+        involvement.
+      </p>
     </div>
 
-    <p><strong>Accessibility access is used only to:</strong></p>
-    <ul>
-      <li>Detect which app is currently active</li>
-      <li>Apply app blocking and screen time limits</li>
-      <li>Prevent access to restricted apps</li>
-    </ul>
+    <div class="card">
+      <div class="section-number">2</div>
+      <h2>Information We Collect</h2>
 
-    <p>
-      Accessibility permissions are never used for advertising, analytics, user profiling,
-      or monitoring personal communications.
-    </p>
-
-    <div class="warning-box">
-      <p><strong>We do NOT:</strong></p>
+      <h3>2.1 Information Provided by Parents</h3>
       <ul>
-        <li>Read or record screen content</li>
-        <li>Capture keystrokes or passwords</li>
-        <li>Monitor messages, calls, photos, or personal communications</li>
+        <li>Parent account email address</li>
+        <li>Child profile details (name or nickname – optional)</li>
+        <li>Screen time limits, app rules, and schedules</li>
+      </ul>
+
+      <h3>2.2 Automatically Collected Information</h3>
+      <ul>
+        <li>App usage duration and screen time statistics</li>
+        <li>Installed app identifiers (for categorization and limits)</li>
+        <li>Non-personal device identifiers for syncing parent and child devices</li>
+        <li>App configuration and enforcement data</li>
       </ul>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="section-number">4</div>
-    <h2>Child Data Protection</h2>
-    <p>
-      Protecting children's privacy is a core principle of iLimits.
-    </p>
-    <ul>
-      <li>No advertisements are shown to children</li>
-      <li>We do not sell or share child data</li>
-      <li>Data is accessible only to parents or legal guardians</li>
-    </ul>
-  </div>
+    <div class="card">
+      <div class="section-number">3</div>
+      <h2>Accessibility Service Usage</h2>
+      
+      <div class="highlight">
+        <p>🔒 iLimits uses Android Accessibility Service strictly to enforce parental controls.</p>
+      </div>
 
-  <div class="card">
-    <div class="section-number">5</div>
-    <h2>How We Use Information</h2>
-    <ul>
-      <li>Enforce screen time and app usage limits</li>
-      <li>Provide usage reports to parents</li>
-      <li>Sync settings across linked devices</li>
-      <li>Improve app stability and performance</li>
-    </ul>
-    <p>
-      iLimits does not use data for advertising or cross-app tracking.
-    </p>
-  </div>
+      <p><strong>Accessibility access is used only to:</strong></p>
+      <ul>
+        <li>Detect which app is currently active</li>
+        <li>Apply app blocking and screen time limits</li>
+        <li>Prevent access to restricted apps</li>
+      </ul>
 
-  <div class="card">
-    <div class="section-number">6</div>
-    <h2>Data Sharing</h2>
-    <p>
-      We do not share personal or child data with third parties except when required by law
-      or to protect legal rights.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="section-number">7</div>
-    <h2>Data Storage & Security</h2>
-    <p>
-      Data is protected using industry-standard security measures, including encryption
-      and controlled access.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="section-number">8</div>
-    <h2>Data Retention & Deletion</h2>
-    <ul>
-      <li>Data is retained only while the parent account is active</li>
-      <li>Parents may request deletion at any time</li>
-      <li>Upon account deletion, associated child data is removed</li>
-    </ul>
-    <p>
-      Parents may request complete data deletion by contacting
-      <a href="mailto:support@ilimits.app">support@ilimits.app</a>.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="section-number">9</div>
-    <h2>Permissions Used</h2>
-    <ul>
-      <li><strong>Accessibility Service</strong> – enforce app limits</li>
-      <li><strong>Usage Access</strong> – calculate screen time</li>
-      <li><strong>Foreground Service</strong> – ensure reliable enforcement</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <div class="section-number">10</div>
-    <h2>Policy Updates</h2>
-    <p>
-      This Privacy Policy may be updated periodically. Changes will be posted on this page
-      with an updated date.
-    </p>
-  </div>
-
-  <div class="contact-card">
-    <h2>Questions or Concerns?</h2>
-    <p>Contact us anytime.</p>
-    <div class="contact-links">
-      <a href="mailto:support@ilimits.app" class="contact-btn">📧 Email Support</a>
-      <a href="https://ilimits.app" class="contact-btn">🌐 Visit Website</a>
+      <div class="warning-box">
+        <p><strong>We do NOT:</strong></p>
+        <ul style="margin: 12px 0 0 0;">
+          <li>Read or record screen content</li>
+          <li>Capture keystrokes or passwords</li>
+          <li>Monitor messages, calls, photos, or personal communications</li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <div class="footer">
-    © 2025 iLimits. All rights reserved.
-  </div>
+    <div class="card">
+      <div class="section-number">4</div>
+      <h2>Child Data Protection</h2>
+      <p>
+        Protecting children's privacy is a core principle of iLimits.
+      </p>
+      
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">🛡️</div>
+          <div class="info-title">No Ads</div>
+          <p class="info-text">Zero advertisements shown to children</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🔐</div>
+          <div class="info-title">Private Data</div>
+          <p class="info-text">We never sell or share child data</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">👨‍👩‍👧</div>
+          <div class="info-title">Parent Control</div>
+          <p class="info-text">Only accessible by parents/guardians</p>
+        </div>
+      </div>
+    </div>
 
-</div>
+    <div class="card">
+      <div class="section-number">5</div>
+      <h2>How We Use Information</h2>
+      <ul>
+        <li>Enforce screen time and app usage limits</li>
+        <li>Provide clear usage reports to parents</li>
+        <li>Sync settings across linked devices</li>
+        <li>Improve app stability and performance</li>
+      </ul>
+      <p>
+        iLimits does <strong>not</strong> use data for advertising, profiling, or tracking across apps.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="section-number">6</div>
+      <h2>Data Sharing</h2>
+      <p>
+        We do not share personal or child data with third parties except:
+      </p>
+      <ul>
+        <li>When required by law</li>
+        <li>To protect legal rights or prevent misuse of the service</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-number">7</div>
+      <h2>Data Storage & Security</h2>
+      <p>
+        Data is stored securely using industry-standard security practices. Access is limited to
+        authorized systems and reviewed regularly.
+      </p>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">🔐</div>
+          <div class="info-title">Encryption</div>
+          <p class="info-text">End-to-end data encryption</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🏢</div>
+          <div class="info-title">Secure Servers</div>
+          <p class="info-text">Industry-standard infrastructure</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-number">8</div>
+      <h2>Data Retention & Deletion</h2>
+      <ul>
+        <li>Data is retained only while the parent account is active</li>
+        <li>Parents may request deletion at any time</li>
+        <li>Upon account deletion, associated child data is removed</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-number">9</div>
+      <h2>Permissions Used</h2>
+      <ul>
+        <li><strong>Accessibility Service</strong> – enforce app limits</li>
+        <li><strong>Usage Access</strong> – calculate screen time</li>
+        <li><strong>Foreground Service</strong> – ensure reliable enforcement</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-number">10</div>
+      <h2>Policy Updates</h2>
+      <p>
+        We may update this Privacy Policy from time to time. Any changes will be posted on this page
+        with an updated date.
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h2>Questions or Concerns?</h2>
+      <p>We're here to help. Reach out to us anytime.</p>
+      <div class="contact-links">
+        <a href="mailto:support@ilimits.app" class="contact-btn">
+          📧 Email Support
+        </a>
+        <a href="https://ilimits.app" class="contact-btn">
+          🌐 Visit Website
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2025 iLimits. All rights reserved.
+    </div>
+
+  </div>
 
 </body>
 </html>
