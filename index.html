@@ -40,8 +40,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(254, 247, 255, 0.85);
-      backdrop-filter: blur(20px);
+      background: rgba(254, 247, 255, 0.95);
       border-bottom: 1px solid rgba(103, 80, 164, 0.1);
       z-index: 1000;
       padding: 16px 0;
@@ -101,12 +100,11 @@
       padding: 10px 24px;
       border-radius: 100px;
       box-shadow: 0 4px 12px rgba(103, 80, 164, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease;
     }
 
     .nav-cta:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(103, 80, 164, 0.4);
     }
 
     /* Hero Section */
@@ -125,26 +123,9 @@
       right: -15%;
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float 25s infinite ease-in-out;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -20%;
-      left: -10%;
-      width: 600px;
-      height: 600px;
       background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
       border-radius: 50%;
-      animation: float 20s infinite ease-in-out reverse;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-30px, -30px) scale(1.1); }
+      opacity: 0.6;
     }
 
     .hero-content {
@@ -189,7 +170,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.3s ease;
+      transition: transform 0.2s ease;
       border: none;
       cursor: pointer;
     }
@@ -201,20 +182,18 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
     }
 
     .btn-secondary {
       background: rgba(255,255,255,0.2);
       color: white;
       border: 2px solid rgba(255,255,255,0.4);
-      backdrop-filter: blur(10px);
     }
 
     .btn-secondary:hover {
       background: rgba(255,255,255,0.3);
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
 
     .hero-visual {
@@ -229,12 +208,6 @@
       border-radius: 48px;
       padding: 16px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      animation: floatPhone 6s infinite ease-in-out;
-    }
-
-    @keyframes floatPhone {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
     }
 
     .phone-screen {
@@ -322,9 +295,8 @@
       padding: 40px;
       border-radius: 28px;
       border: 2px solid var(--md-surface-variant);
-      transition: all 0.3s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease;
       position: relative;
-      overflow: hidden;
     }
 
     .feature-card::before {
@@ -335,18 +307,17 @@
       right: 0;
       height: 4px;
       background: var(--gradient);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
+      opacity: 0;
+      transition: opacity 0.2s ease;
     }
 
     .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 40px var(--md-shadow);
+      transform: translateY(-4px);
       border-color: var(--md-primary);
     }
 
     .feature-card:hover::before {
-      transform: scaleX(1);
+      opacity: 1;
     }
 
     .feature-icon {
@@ -391,7 +362,6 @@
 
     .stat-box {
       background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
       padding: 32px 24px;
       border-radius: 24px;
       border: 1px solid rgba(255,255,255,0.2);
@@ -436,7 +406,7 @@
       right: -20%;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
       border-radius: 50%;
     }
 
@@ -557,10 +527,19 @@
       }
     }
 
+    /* Performance optimizations */
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
