@@ -2,16 +2,744 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>iLimits – Parental Control App</title>
-</head>
-<body style="font-family: Arial; padding: 40px;">
-  <h1>iLimits – Parental Control & Screen Time App</h1>
-  <p>Build healthy digital habits for your family.</p>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iLimits – Smart Parental Control & Screen Time Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <p>
-    <a href="/privacy-policy.html">Privacy Policy</a> |
-    <a href="mailto:support@yourdomain.com">Contact</a>
-  </p>
+    :root {
+      --md-primary: #6750A4;
+      --md-primary-container: #EADDFF;
+      --md-secondary: #625B71;
+      --md-surface: #FEF7FF;
+      --md-surface-variant: #E7E0EC;
+      --md-on-surface: #1C1B1F;
+      --md-on-surface-variant: #49454F;
+      --md-outline: #79747E;
+      --md-shadow: rgba(0, 0, 0, 0.08);
+      --gradient: linear-gradient(135deg, #6750A4 0%, #7F67BE 100%);
+      --gradient-2: linear-gradient(135deg, #7F67BE 0%, #9D87D3 100%);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--md-surface);
+      color: var(--md-on-surface);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(254, 247, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(103, 80, 164, 0.1);
+      z-index: 1000;
+      padding: 16px 0;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--md-primary);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--md-on-surface-variant);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--md-primary);
+    }
+
+    .nav-cta {
+      background: var(--gradient);
+      color: white !important;
+      padding: 10px 24px;
+      border-radius: 100px;
+      box-shadow: 0 4px 12px rgba(103, 80, 164, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(103, 80, 164, 0.4);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--gradient);
+      padding: 140px 24px 120px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 72px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -15%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 25s infinite ease-in-out;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 20s infinite ease-in-out reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, -30px) scale(1.1); }
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      color: white;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .hero-text p {
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 16px 32px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--md-primary);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-3px);
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .phone-mockup {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 48px;
+      padding: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: floatPhone 6s infinite ease-in-out;
+    }
+
+    @keyframes floatPhone {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .phone-screen {
+      background: var(--gradient-2);
+      border-radius: 36px;
+      padding: 40px 20px;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .screen-stat {
+      background: rgba(255,255,255,0.95);
+      padding: 20px;
+      border-radius: 20px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .screen-stat-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--md-primary);
+      display: block;
+    }
+
+    .screen-stat-label {
+      font-size: 0.9rem;
+      color: var(--md-on-surface-variant);
+      font-weight: 600;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 24px;
+      background: white;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: var(--md-primary-container);
+      color: var(--md-primary);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--md-on-surface);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--md-on-surface-variant);
+    }
+
+    .features-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: var(--md-surface);
+      padding: 40px;
+      border-radius: 28px;
+      border: 2px solid var(--md-surface-variant);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px var(--md-shadow);
+      border-color: var(--md-primary);
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--gradient);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 24px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--md-on-surface);
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: var(--md-on-surface-variant);
+      line-height: 1.7;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: var(--gradient);
+      padding: 80px 24px;
+      color: white;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      text-align: center;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 32px 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 900;
+      display: block;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 1.125rem;
+      opacity: 0.9;
+      font-weight: 600;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 100px 24px;
+      background: white;
+    }
+
+    .cta-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--gradient);
+      padding: 60px;
+      border-radius: 32px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cta-container h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-container p {
+      font-size: 1.25rem;
+      margin-bottom: 32px;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--md-on-surface);
+      color: white;
+      padding: 60px 24px 24px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h4 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.875rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--md-primary);
+      cursor: pointer;
+    }
+
+    @media (max-width: 968px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .phone-mockup {
+        max-width: 300px;
+      }
+
+      .cta-container {
+        padding: 40px 24px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <div class="logo-icon">⏱️</div>
+        <span>iLimits</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="#download" class="nav-cta">Download App</a>
+      </div>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Smart Screen Time Management for Modern Families</h1>
+        <p>Take control of your family's digital wellbeing with intelligent parental controls, real-time monitoring, and healthy screen time habits.</p>
+        <div class="hero-buttons">
+          <a href="#download" class="btn btn-primary">
+            📱 Get Started Free
+          </a>
+          <a href="#features" class="btn btn-secondary">
+            ✨ See Features
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="screen-stat">
+              <span class="screen-stat-value">2h 15m</span>
+              <span class="screen-stat-label">Screen Time Today</span>
+            </div>
+            <div class="screen-stat">
+              <span class="screen-stat-value">12</span>
+              <span class="screen-stat-label">Apps Blocked</span>
+            </div>
+            <div class="screen-stat">
+              <span class="screen-stat-value">85%</span>
+              <span class="screen-stat-label">Goal Achieved</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-box">
+        <span class="stat-number">500K+</span>
+        <span class="stat-label">Active Families</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">4.8★</span>
+        <span class="stat-label">App Store Rating</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">50M+</span>
+        <span class="stat-label">Hours Managed</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Privacy Protected</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <span class="section-badge">✨ Powerful Features</span>
+      <h2>Everything You Need for Digital Wellbeing</h2>
+      <p>Comprehensive parental controls designed with your family's safety and balance in mind.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⏰</div>
+        <h3>Smart Screen Time Limits</h3>
+        <p>Set daily limits, schedule screen-free times, and automatically enforce healthy digital habits with intelligent time management.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚫</div>
+        <h3>App Blocking & Control</h3>
+        <p>Block specific apps, set age-appropriate restrictions, and manage what your children can access on their devices.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Real-Time Monitoring</h3>
+        <p>Get instant insights into device usage with detailed reports, activity tracking, and comprehensive analytics.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌙</div>
+        <h3>Bedtime Enforcement</h3>
+        <p>Automatic device locking during bedtime hours ensures healthy sleep patterns and better rest for growing minds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Privacy First</h3>
+        <p>Bank-level encryption, zero data selling, and complete transparency. Your family's data stays private, always.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">☁️</div>
+        <h3>Multi-Device Sync</h3>
+        <p>Manage all family devices from one dashboard. Perfect synchronization across phones, tablets, and devices.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" id="download">
+    <div class="cta-container">
+      <h2>Ready to Build Healthy Digital Habits?</h2>
+      <p>Join thousands of families who trust iLimits to create a balanced digital life.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary">
+          📱 Download for Android
+        </a>
+        <a href="privacy-policy.html" class="btn btn-secondary">
+          📄 Read Privacy Policy
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>iLimits</h4>
+        <p style="color: rgba(255,255,255,0.7); margin-top: 12px;">
+          Empowering families to build healthy digital habits and meaningful connections.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="#">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">COPPA Compliance</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:support@ilimits.app">support@ilimits.app</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 iLimits. All rights reserved. Made with ❤️ for families everywhere.
+    </div>
+  </footer>
+
 </body>
 </html>
