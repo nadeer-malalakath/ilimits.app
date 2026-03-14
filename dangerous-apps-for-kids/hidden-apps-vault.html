@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hide Photos Videos – Restricted App Info · iLimits</title>
+<title>Hidden Apps Vault – Restricted App Info · iLimits</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -155,7 +155,7 @@
     color: #fff; letter-spacing: -0.2px; line-height: 1.15;
   }
   .app-sub {
-    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-size: 11px; color: rgba(255,255,255,0.42);
     font-weight: 500; margin-top: 4px;
     text-transform: uppercase; letter-spacing: 0.5px;
   }
@@ -225,7 +225,7 @@
     background: var(--surface);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
-    box-shadow: 0 2px 14px rgba(240,67,106,0.09);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
     margin-bottom: 22px;
   }
@@ -353,7 +353,7 @@
   }
   .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
 
-  /* ── Section 5 – Note ── */
+  /* ── Section 5 ── */
   .note-box {
     background: var(--amber-bg);
     border: 1.5px solid var(--amber-bdr);
@@ -372,7 +372,7 @@
   .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
   .note-body strong { font-weight: 700; }
 
-  /* ── Section 6 – Tips ── */
+  /* ── Section 6 ── */
   .tip-row {
     display: flex; gap: 14px; align-items: flex-start;
     padding: 16px 20px;
@@ -395,7 +395,7 @@
     padding: 30px 22px;
     text-align: center;
     margin-bottom: 14px;
-    box-shadow: 0 2px 14px rgba(240,67,106,0.09);
+    box-shadow: var(--shadow-sm);
     position: relative; overflow: hidden;
   }
   .closing::before {
@@ -460,10 +460,10 @@
 
     <div class="app-card">
       <div class="app-top">
-        <div class="app-icon-wrap">🙈</div>
+        <div class="app-icon-wrap">🫥</div>
         <div>
-          <div class="app-name">Hide Photos Videos</div>
-          <div class="app-sub">Hidden Media Vault</div>
+          <div class="app-name">Hidden Apps Vault</div>
+          <div class="app-sub">Hidden Storage &amp; App Vault</div>
         </div>
       </div>
 
@@ -479,7 +479,7 @@
       </div>
       <div class="meta-full">
         <div class="meta-lbl">Primary Reason</div>
-        <div class="meta-val">Allows users to hide photos and videos in a password-protected vault</div>
+        <div class="meta-val">Allows apps, photos, and files to be hidden from the main device interface</div>
       </div>
 
       <div class="restricted-pill">
@@ -501,46 +501,46 @@
   <div class="sh">
     <div class="sh-pill">📱 Section 1</div>
     <h2 class="sh-title">What This App Does</h2>
-    <p class="sh-desc">A clear look at how Hide Photos Videos works and why its core design raises concerns for families.</p>
+    <p class="sh-desc">A clear look at how Hidden Apps Vault works and why its design raises specific concerns for families.</p>
   </div>
 
   <div class="card">
     <div class="s1-intro">
-      Hide Photos Videos is an application designed to <strong>conceal photos and videos</strong> from a device's normal gallery — placing them inside a private, locked storage area that is invisible to casual device browsing.
+      Hidden Apps Vault is an application designed to <strong>conceal entire apps and private files</strong> from a device's main interface — placing them behind a password-protected space that is invisible to anyone without access.
     </div>
     <div class="feat-row">
-      <div class="feat-ico" style="background:#FFF0F4;">🖼️</div>
+      <div class="feat-ico" style="background:#FFF0F4;">📲</div>
       <div>
-        <div class="feat-name">Moves Media Out of the Normal Gallery</div>
-        <div class="feat-desc">Users can select any photo or video from the device's standard gallery and move it directly into the app's hidden vault. The original files are removed from the gallery once transferred.</div>
+        <div class="feat-name">Hides Entire Apps From the Home Screen</div>
+        <div class="feat-desc">Unlike media vaults that only store photos and videos, Hidden Apps Vault can conceal fully functioning applications — removing them from the app drawer so they appear completely uninstalled to anyone browsing the device.</div>
       </div>
     </div>
     <div class="feat-row">
-      <div class="feat-ico" style="background:#F5F0FF;">🔐</div>
+      <div class="feat-ico" style="background:#F5F0FF;">🗂️</div>
       <div>
-        <div class="feat-name">PIN, Password or Biometric Lock</div>
-        <div class="feat-desc">The hidden vault is secured with a personal PIN, password, or fingerprint — making all content inside completely inaccessible to anyone without the correct authentication.</div>
+        <div class="feat-name">Stores Files, Photos &amp; Videos in a Private Vault</div>
+        <div class="feat-desc">Beyond apps, the vault also stores photos, videos and other documents in a locked private area that does not appear in the standard gallery or file manager — consolidating all hidden content in one secured location.</div>
       </div>
     </div>
     <div class="feat-row">
-      <div class="feat-ico" style="background:#FFF7F0;">👁️‍🗨️</div>
+      <div class="feat-ico" style="background:#FFF7F0;">🔐</div>
       <div>
-        <div class="feat-name">Invisible to the Device's File Manager</div>
-        <div class="feat-desc">Once files are stored inside the vault, they do not appear in the device's photo gallery, file manager, or any other standard browsing tool — making them undetectable during routine checks.</div>
+        <div class="feat-name">Password or PIN Protection</div>
+        <div class="feat-desc">Access to the vault and its hidden apps is locked behind a personal password or PIN code, making all concealed content and applications completely inaccessible to anyone who does not hold the credentials.</div>
       </div>
     </div>
     <div class="feat-row">
-      <div class="feat-ico" style="background:#F0F8FF;">📤</div>
+      <div class="feat-ico" style="background:#F0F8FF;">🪄</div>
       <div>
-        <div class="feat-name">Supports Bulk Media Transfer</div>
-        <div class="feat-desc">The app allows multiple photos and videos to be moved into the vault at once, making it quick and easy to hide a large volume of content in a single action.</div>
+        <div class="feat-name">Content Vanishes From Standard Device Views</div>
+        <div class="feat-desc">Apps moved into the vault no longer appear in the device's home screen, app drawer or settings — and hidden files do not show in the gallery or file manager. The device appears to contain far less than it actually does.</div>
       </div>
     </div>
     <div class="feat-row">
-      <div class="feat-ico" style="background:#F0FFF8;">🔄</div>
+      <div class="feat-ico" style="background:#F0FFF8;">⚡</div>
       <div>
-        <div class="feat-name">Files Can Be Restored or Re-Hidden</div>
-        <div class="feat-desc">Content can be moved back to the normal gallery at any time — or returned to the vault again — giving users full control over what is visible and what remains concealed at any given moment.</div>
+        <div class="feat-name">Apps Remain Fully Functional Inside the Vault</div>
+        <div class="feat-desc">Hidden apps do not stop working — they continue to receive notifications, send messages and operate normally from within the vault. A child can continue using a restricted app while it remains invisible on the device surface.</div>
       </div>
     </div>
   </div>
@@ -550,39 +550,39 @@
   <div class="sh">
     <div class="sh-pill">⚠️ Section 2</div>
     <h2 class="sh-title">Why It May Be Risky for Children</h2>
-    <p class="sh-desc">Specific concerns that arise when children use hidden media vault apps on their devices.</p>
+    <p class="sh-desc">Specific concerns that arise when children use app-hiding and vault tools on their personal devices.</p>
   </div>
 
   <div class="risk-grid">
     <div class="risk-card">
-      <span class="rc-emoji">👁️</span>
-      <div class="rc-name">Hidden From Parents</div>
-      <div class="rc-desc">The app's core function is to hide content — making it structurally difficult for parents to know what media their child is storing</div>
-    </div>
-    <div class="risk-card">
-      <span class="rc-emoji">📉</span>
-      <div class="rc-name">Reduced Device Transparency</div>
-      <div class="rc-desc">A child's device may appear to have far less media than it actually contains, giving parents a misleading picture of activity</div>
-    </div>
-    <div class="risk-card">
-      <span class="rc-emoji">📵</span>
-      <div class="rc-name">Inappropriate Media Storage</div>
-      <div class="rc-desc">Children may use the vault to conceal explicit or age-inappropriate images and videos from parents or guardians</div>
+      <span class="rc-emoji">📲</span>
+      <div class="rc-name">Apps Hidden From Parents</div>
+      <div class="rc-desc">Entire apps — including social, messaging or dating platforms — can be hidden so they appear completely absent from the device</div>
     </div>
     <div class="risk-card">
       <span class="rc-emoji">🚫</span>
-      <div class="rc-name">Bypasses Supervision</div>
-      <div class="rc-desc">Standard gallery checks become ineffective when photos and videos are moved to a locked vault that parents cannot access</div>
+      <div class="rc-name">Bypasses App Restrictions</div>
+      <div class="rc-desc">Apps previously blocked or removed by a parent can be reinstalled and immediately hidden in the vault — making the restriction appear to remain in place</div>
     </div>
     <div class="risk-card">
-      <span class="rc-emoji">🔄</span>
-      <div class="rc-name">Easy to Conceal Usage</div>
-      <div class="rc-desc">Children can quickly restore files to the normal gallery before handing over a device, then re-hide them immediately after — making detection very difficult</div>
+      <span class="rc-emoji">📉</span>
+      <div class="rc-name">Reduced Device Visibility</div>
+      <div class="rc-desc">A child's device may appear far simpler than it actually is — with hidden apps actively running in the background while parents see only approved ones</div>
     </div>
     <div class="risk-card">
-      <span class="rc-emoji">🔗</span>
-      <div class="rc-name">Stores Content From Any Source</div>
-      <div class="rc-desc">Media received from unknown contacts via messaging apps or social platforms can be imported and hidden inside the vault out of parental sight</div>
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Secret Communication Apps</div>
+      <div class="rc-desc">Messaging apps, social platforms or anonymous chat tools can be hidden and used continuously — with no visible trace of them on the device's surface</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📵</span>
+      <div class="rc-name">Inappropriate Content Storage</div>
+      <div class="rc-desc">Photos, videos or files that would be flagged during a routine check can be stored invisibly in the private vault alongside the hidden apps</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Dual Device Impression</div>
+      <div class="rc-desc">Children can maintain two versions of their device — one seen by parents and one hidden — making genuine oversight structurally very difficult</div>
     </div>
   </div>
 
@@ -597,29 +597,29 @@
     <div class="know-row">
       <div class="know-num">1</div>
       <div>
-        <div class="know-title">These Apps Are Designed to Conceal Content</div>
-        <div class="know-body">Hide Photos Videos is not a general-purpose photo manager — it is specifically designed to make media invisible. Concealment is the primary function, which makes standard oversight methods such as gallery checks unreliable when the app is in use.</div>
+        <div class="know-title">This App Hides More Than Just Photos</div>
+        <div class="know-body">Unlike basic media vaults, Hidden Apps Vault can conceal entire applications — including messaging platforms, social media, and anonymous chat apps. This means a parent may believe a particular app has been removed when it is actually still in active use, simply hidden from view.</div>
       </div>
     </div>
     <div class="know-row">
       <div class="know-num">2</div>
       <div>
-        <div class="know-title">Children May Use It Without Harmful Intent</div>
-        <div class="know-body">Not every child who installs a vault app is hiding something harmful — many are simply curious about privacy or following a trend among peers. However, the structural inability to see what is stored removes an important layer of safety regardless of the child's motivation.</div>
+        <div class="know-title">Hidden Apps Continue to Work Normally</div>
+        <div class="know-body">An app hidden inside the vault still functions, still receives messages and notifications, and can still be used freely by the child. Concealment does not disable the app — it only removes it from the visible surface of the device that a parent would check.</div>
       </div>
     </div>
     <div class="know-row">
       <div class="know-num">3</div>
       <div>
-        <div class="know-title">Standard Gallery Checks Are No Longer Reliable</div>
-        <div class="know-body">If a child is using this app, browsing the photo gallery will give an incomplete and potentially misleading view of the device's content. Parents who rely on casual gallery reviews may not realise that a significant portion of the device's media is being actively hidden from them.</div>
+        <div class="know-title">Standard Device Checks Are Not Reliable</div>
+        <div class="know-body">Browsing the app drawer or home screen of a child's device will not reveal apps stored inside Hidden Apps Vault. Parents who rely on visual device checks to confirm which apps are installed may receive a significantly misleading picture of what the device contains.</div>
       </div>
     </div>
     <div class="know-row">
       <div class="know-num">4</div>
       <div>
-        <div class="know-title">Privacy Is Natural — Secrecy From Caregivers Is Different</div>
-        <div class="know-body">Children naturally want personal space as they grow, and that is entirely healthy. The concern with vault apps is the complete removal of parental visibility — not the desire for privacy itself. The goal is to support trust and openness, not to eliminate a child's sense of personal space.</div>
+        <div class="know-title">Not All Children Install It With Harmful Intent</div>
+        <div class="know-body">Some children install vault apps out of curiosity, a peer recommendation, or a general desire for personal space. The risk is not necessarily the child's intent — it is the structural removal of parental visibility that the app creates regardless of why it was installed.</div>
       </div>
     </div>
   </div>
@@ -634,11 +634,11 @@
   <div class="il-card">
     <div class="il-eyebrow">✦ iLimits Protection</div>
     <h3 class="il-title">You Stay Fully in Control</h3>
-    <p class="il-desc">iLimits gives parents clear, simple tools to block hidden storage and vault apps like Hide Photos Videos — restoring full visibility into what is on your child's device.</p>
+    <p class="il-desc">iLimits gives parents clear, simple tools to block hidden storage and vault apps like Hidden Apps Vault — preventing the creation of invisible spaces on your child's device.</p>
     <div class="il-rows">
       <div class="il-row">
         <div class="il-chk">✓</div>
-        <div class="il-lbl">Block hidden storage and vault apps by category</div>
+        <div class="il-lbl">Block hidden storage, app vault and concealment apps by category</div>
       </div>
       <div class="il-row">
         <div class="il-chk">✓</div>
@@ -670,7 +670,7 @@
     <div class="note-ico">⚠️</div>
     <div>
       <div class="note-title">iLimits Does Not Block Apps Automatically</div>
-      <div class="note-body">iLimits identifies and flags apps like Hide Photos Videos as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own values, guidelines and your child's specific needs.</div>
+      <div class="note-body">iLimits identifies and flags apps like Hidden Apps Vault as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own values, guidelines and your child's specific needs.</div>
     </div>
   </div>
 
@@ -687,21 +687,21 @@
       <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
       <div>
         <div class="tip-name">Encourage Open Conversations About Digital Habits</div>
-        <div class="tip-body">Talk regularly and openly with your child about what they keep on their device and why. Children who feel safe to be honest with a trusted adult are far less likely to seek out hidden spaces for concealment. Approach the topic with curiosity rather than accusation.</div>
+        <div class="tip-body">Talk regularly with your child about the apps they use, why they use them, and what appeals to them about certain platforms. Children who feel genuinely heard and understood by a trusted adult are far less likely to seek hidden spaces to conceal their digital activity.</div>
       </div>
     </div>
     <div class="tip-row">
       <div class="tip-ico" style="background: var(--purple-bg); border-color: var(--purple-bdr);">📱</div>
       <div>
-        <div class="tip-name">Discuss Responsible Device Usage With Your Child</div>
-        <div class="tip-body">Help your child understand the difference between healthy personal privacy and hiding content from the adults who care for them. Set clear, age-appropriate expectations about what types of media should always be accessible to a trusted parent or guardian.</div>
+        <div class="tip-name">Discuss Responsible Device Use With Your Child</div>
+        <div class="tip-body">Help your child understand that hiding apps from parents is meaningfully different from healthy personal space. Establish clear, age-appropriate expectations — including which apps are allowed, how they should be used, and why transparency with trusted adults is part of staying safe online.</div>
       </div>
     </div>
     <div class="tip-row">
       <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
       <div>
-        <div class="tip-name">Use Parental Controls to Monitor or Restrict Vault-Style Apps</div>
-        <div class="tip-body">Technology-based safeguards are most effective when combined with honest, ongoing family dialogue. Use iLimits to block vault-style apps across every device your child uses — and pair those controls with regular conversations about why digital transparency is a foundation of their safety.</div>
+        <div class="tip-name">Use Parental Controls to Restrict Vault-Style Applications</div>
+        <div class="tip-body">Technology safeguards are most powerful when combined with honest family dialogue. Use iLimits to block app-hiding tools across every device your child uses — and pair those controls with consistent, open conversations that reinforce why digital transparency is a foundation of their safety.</div>
       </div>
     </div>
   </div>
@@ -709,9 +709,9 @@
   <!-- Closing -->
   <div class="closing">
     <span class="closing-emoji">💗</span>
-    <h3 class="closing-title">Visibility and Trust Go Hand in Hand</h3>
+    <h3 class="closing-title">What You Can See, You Can Help With</h3>
     <p class="closing-body">
-      Children grow best when they feel both safe and seen. iLimits helps you create a digital environment where openness is the default — giving your child the freedom to explore, connect and learn online within boundaries that keep them protected and supported.
+      Children navigate a complex digital world every day. iLimits helps you stay genuinely present in that world — not as a surveillance tool, but as a way to ensure the spaces where your child spends their time are ones you know about, trust, and can support them through.
     </p>
   </div>
 
