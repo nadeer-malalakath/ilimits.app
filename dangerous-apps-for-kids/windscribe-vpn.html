@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Windscribe VPN – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Windscribe brand: deep arctic steel-blue */
+    --ws:           #2563EB;
+    --ws-mid:       #1D4ED8;
+    --ws-deep:      #1E3A8A;
+    --ws-light:     #EFF6FF;
+    --ws-bdr:       #93C5FD;
+    --ws-text:      #1E3A8A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --ice-bg:       #EFF6FF;
+    --ice-bdr:      #93C5FD;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --sky-bg:       #F0F9FF;
+    --sky-bdr:      #BAE6FD;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #040C1E 0%, #0A1540 50%, #102060 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(37,99,235,0.48) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(147,197,253,0.26) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(37,99,235,0.20);
+    border: 1px solid rgba(147,197,253,0.36);
+    color: #93C5FD; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #040C1E 0%, #2563EB 58%, #60A5FA 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(37,99,235,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Windscribe callout ── */
+  .ws-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ice-bg); border: 1.5px solid var(--ice-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .ws-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--ice-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .ws-title { font-size: 13px; font-weight: 700; color: var(--ws-text); line-height: 1.3; margin-bottom: 3px; }
+  .ws-body  { font-size: 12px; color: #1E3A8A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Free tier badge ── */
+  .free-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--sky-bg); border: 1.5px solid var(--sky-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .free-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #E0F2FE; border: 1.5px solid var(--sky-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .free-text strong { font-size: 12.5px; font-weight: 700; color: #0C4A6E; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .free-text span   { font-size: 11.5px; color: #0369A1; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ice-bg); border: 1.5px solid var(--ice-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--ice-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--ws-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #1E3A8A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #040C1E 0%, #0A1540 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(37,99,235,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🌬️</div>
+        <div>
+          <div class="app-name-text">Windscribe VPN</div>
+          <div class="app-sub">Free &amp; Premium VPN Service</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">VPN / Privacy Service</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Provides a device-wide encrypted VPN tunnel with a generous permanent free tier requiring no payment, plus a built-in ad blocker and firewall that can suppress monitoring signals — all accessible to any child with no account verification</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Windscribe and VPN services from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Windscribe VPN — a well-regarded privacy service offering both a free and paid tier, with a permanently available free plan that includes a generous monthly data allowance and servers in multiple countries, making it the most accessible no-cost option that also bundles ad blocking, firewall controls, and anti-monitoring features into the same tool.</p>
+  </div>
+
+  <div class="ws-callout">
+    <div class="ws-ico">🌬️</div>
+    <div>
+      <div class="ws-title">Windscribe Combines a Generous Permanent Free VPN Tier With Ad Blocking, Firewall Controls, and Anti-Tracking Features — Making It One of the Most Feature-Rich No-Cost Bypass Tools Available</div>
+      <div class="ws-body">Windscribe is a Canadian VPN service offering both a free and a paid tier. Unlike many free VPN services that impose severe restrictions or require payment after a short trial, Windscribe's free plan provides a meaningful and permanent monthly data allowance — sufficient for regular browsing use — across servers in multiple countries, with no credit card required to sign up. When active, it routes all device traffic through an encrypted VPN tunnel, bypassing every network-level parental control and content filter simultaneously. What makes Windscribe distinctive beyond its free tier is its bundled feature set: the app includes a built-in ad and tracker blocker, a firewall that prevents non-VPN traffic from leaking, and split tunnelling — giving a child access to a substantially more capable privacy and bypass toolkit than most free VPN tools provide.</div>
+    </div>
+  </div>
+
+  <div class="free-band">
+    <div class="free-icon">🆓</div>
+    <div class="free-text">
+      <strong>Generous Permanent Free Tier — No Credit Card, No Trial Expiry</strong>
+      <span>Windscribe's free plan is permanent and provides a meaningful monthly data allowance with servers in multiple countries — accessible to any child with an email address and no payment required.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#2563EB;"></span> Device-Wide VPN</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Free Permanent Tier</div>
+    <div class="mode-chip"><span class="cdot" style="background:#93C5FD;"></span> Built-In Ad Blocker</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Firewall Controls</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Split Tunnelling</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Windscribe VPN is a <strong>free and paid privacy service</strong> offering a device-wide VPN tunnel, a built-in ad and tracker blocker, firewall controls, and split tunnelling — all accessible on its permanent free tier with no payment required. It combines the full bypass capability of a device-level VPN with additional features specifically designed to suppress monitoring and tracking signals.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--ice-bg);">🆓</div>
+      <div>
+        <div class="feat-name">Permanent Free Tier With Meaningful Data Allowance — No Payment or Credit Card Required</div>
+        <div class="feat-desc">Windscribe's free plan provides a permanent monthly data allowance — sufficient for substantial browsing and streaming activity — with access to servers in multiple countries, and requires only an email address to create an account. There is no trial period, no credit card required, and no payment needed to use the core VPN functionality. A child can sign up with any email address and begin using the full bypass capability immediately, with no financial barrier whatsoever. This permanent free tier distinguishes Windscribe from premium-only VPN services and makes it accessible to any child regardless of their access to payment methods.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🌐</div>
+      <div>
+        <div class="feat-name">Device-Wide VPN Tunnel Bypasses All Network-Level Parental Controls</div>
+        <div class="feat-desc">When Windscribe's VPN is connected, all internet traffic from every app on the device is routed through an encrypted tunnel to a Windscribe server. Router parental controls, DNS safe search systems, ISP filtering, and any other network-level content protection tool are simultaneously bypassed for every app — browsing, messaging, streaming, and social media — with a single connection. The bypass applies across every network the child uses, including home Wi-Fi, school networks, and mobile data, making it as comprehensive as any other device-level VPN tool.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🛡️</div>
+      <div>
+        <div class="feat-name">Built-In Ad Blocker and Anti-Tracker Suppresses Monitoring Signals</div>
+        <div class="feat-desc">Windscribe includes a built-in feature called R.O.B.E.R.T. — a customisable ad blocker, tracker blocker, and DNS-level content filter that operates within the VPN tunnel. Beyond its standard privacy benefits for adults, R.O.B.E.R.T. can suppress advertising and tracking signals that some third-party parental monitoring tools use to identify app usage, browsing patterns, and screen time. A child using Windscribe with ad and tracker blocking enabled may appear to generate less monitoring-visible activity than one using a VPN tool without these features, potentially reducing the completeness of reports generated by monitoring tools that rely on advertising ecosystem signals.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🔥</div>
+      <div>
+        <div class="feat-name">Firewall Feature Prevents Traffic From Leaking Outside the VPN Tunnel</div>
+        <div class="feat-desc">Windscribe includes a firewall feature that blocks all internet traffic if the VPN connection drops — preventing the device from temporarily connecting through the unprotected network while the VPN reconnects. This is a feature designed for privacy-conscious adults who need to ensure no traffic is ever sent outside the encrypted tunnel. For children, it has a secondary implication: it reduces the likelihood of brief moments of unprotected traffic that a monitoring or filtering tool operating at the network level might capture between VPN connection and disconnection events, making the bypass more complete and continuous.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🔀</div>
+      <div>
+        <div class="feat-name">Split Tunnelling Allows Selective App Routing</div>
+        <div class="feat-desc">Windscribe supports split tunnelling, allowing users to route some apps through the VPN while others connect directly to the internet. A child can configure specific apps — a browser, a social media platform, a messaging app — to use the VPN tunnel while other apps, including any monitoring or management tool installed by a parent, connect normally. This selective routing can reduce the visibility of VPN use to monitoring tools that check per-app network behaviour, and allows targeted bypass of content controls for specific applications rather than the entire device simultaneously.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Windscribe combines the standard device-wide VPN bypass with a richer additional feature set than most free tools — its permanent free tier, built-in ad and tracker blocker, firewall, and split tunnelling collectively make it one of the most capable no-cost privacy tools a child can access without any financial transaction.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🆓</span>
+      <div class="rc-name">Permanent Free — No Payment Barrier</div>
+      <div class="rc-desc">Windscribe's free tier is permanent and requires only an email address — there is no trial period, no credit card, and no financial event that could alert a parent to the app's installation or use</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📱</span>
+      <div class="rc-name">All Apps and Filters Bypassed at Once</div>
+      <div class="rc-desc">Windscribe's device-level tunnel simultaneously bypasses every content filter, DNS safe search, and router control across every app — messaging, social media, streaming, and all browsing — with a single connection</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">Ad Blocker Suppresses Monitoring Signals</div>
+      <div class="rc-desc">The built-in R.O.B.E.R.T. feature blocks ads and trackers at the DNS level — which may reduce the completeness of monitoring reports generated by tools that rely on advertising ecosystem signals to track browsing activity</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔥</span>
+      <div class="rc-name">Firewall Makes Bypass More Continuous</div>
+      <div class="rc-desc">Windscribe's firewall prevents any traffic from leaking outside the VPN tunnel during connection drops — making the bypass more complete and reducing brief windows of unprotected traffic that network-level monitoring might otherwise capture</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔀</span>
+      <div class="rc-name">Split Tunnelling Enables Targeted Bypass</div>
+      <div class="rc-desc">Split tunnelling allows specific apps to be routed through the VPN while others connect normally — a child can bypass filters for targeted apps while appearing to a device-level check as though only partial VPN use is occurring</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📧</span>
+      <div class="rc-name">Requires Only an Email Address</div>
+      <div class="rc-desc">Account creation requires only an email address — a child can use a secondary email account a parent is unaware of, leaving no identity record associated with their primary account or any monitored profile</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Windscribe Carries the Highest Risk Rating — The Most Feature-Rich Free VPN Available to Children</strong>
+      <span>Windscribe is distinctive in that it combines a permanent free tier — requiring no payment — with a feature set that includes device-wide VPN, ad and tracker blocking, a firewall, and split tunnelling. No other free VPN tool in common use provides this breadth of functionality at zero cost. For families whose parental controls operate at the network, DNS, or advertising signal level, Windscribe's combination of features addresses each of those monitoring vectors simultaneously.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🌬️</div>
+    <div>
+      <div class="control-title">Windscribe's R.O.B.E.R.T. Feature Targets the Same DNS Infrastructure That Many Parental Controls Rely On — It Blocks at the DNS Level Within an Already-Encrypted Tunnel</div>
+      <div class="control-body">Windscribe's built-in R.O.B.E.R.T. feature is a DNS-level blocker that operates within the VPN tunnel. While its primary purpose is ad and tracker blocking, it applies the same DNS-level blocking mechanism that parental DNS filters use — but in the reverse direction, from within an encrypted tunnel that parental controls cannot see inside. This means that Windscribe provides not just a bypass of the parent's DNS filter, but an active DNS-level filtering tool of its own within the tunnel — one that the child controls and that can be configured independently of any parental control system. A child can effectively replace a parent's DNS filter with their own Windscribe-controlled DNS filter, setting it to block anything they choose while the parent's filter becomes entirely inactive for that device.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Windscribe Is One of the Best-Regarded Free VPN Services — Its Quality Makes It a Go-To Recommendation in Privacy Communities Accessible to Teenagers</div>
+        <div class="know-body">Windscribe consistently receives strong reviews in technology and privacy communities as one of the most capable free VPN options available. In the online communities — subreddits, forums, Discord servers, YouTube channels — where teenagers discuss tools for accessing blocked content or improving digital privacy, Windscribe is regularly recommended specifically because its free tier is genuinely useful rather than artificially limited. A teenager researching VPN options is likely to encounter Windscribe as a top recommendation for a no-cost option with real capabilities. The quality of the free tier and the strength of its reputation in privacy-aware online communities means its discovery by technically curious teenagers is not a matter of chance — it is a predictable consequence of where those communities direct their recommendations.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Absence of a Payment Event Removes the Financial Detection Signal Available for Paid VPN Services</div>
+        <div class="know-body">For paid VPN services like ExpressVPN, the subscription creates a financial transaction that a parent can potentially identify through payment history review. Windscribe's free tier removes this detection signal entirely — a child can use Windscribe indefinitely without any payment event occurring. The only account requirement is an email address, which a child with a secondary email account can provide without using any identity or contact information a parent monitors. This makes Windscribe significantly harder to detect through financial or account-review channels than paid VPN services, and places the detection burden entirely on device-level review — checking for the app in the installed app list — rather than any external signal.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Windscribe's Bundled Features Collectively Address Multiple Parental Monitoring Vectors Simultaneously</div>
+        <div class="know-body">Most device-wide VPN tools bypass parental controls at the network and DNS level — Windscribe does this and additionally includes features that can affect other monitoring vectors. The R.O.B.E.R.T. ad and tracker blocker can suppress the advertising and analytics signals that some monitoring tools use to identify app usage patterns. The firewall feature reduces brief windows of unprotected traffic that might be captured during VPN reconnection events. Split tunnelling enables targeted bypass of controls for specific apps while maintaining apparently normal traffic for others. Together, these features mean that Windscribe addresses parental monitoring more comprehensively than a straightforward VPN tool — the combination is more than the sum of its parts, and parents should treat Windscribe as a more capable bypass tool than its free price point might suggest.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The Monthly Data Allowance on the Free Tier Is Sufficient for Regular Browsing and Social Media Use</div>
+        <div class="know-body">A common characteristic of free VPN services is a data allowance so restrictive that it is impractical for regular use — limiting the tool's utility for sustained bypass. Windscribe's free tier provides a genuinely usable monthly allowance that is sufficient for regular social media browsing, messaging, and light video consumption, making it practical for a child to use as a daily or regular bypass tool rather than only occasionally. This practical usability on the free tier is a meaningful distinction from free VPN services with more restrictive data caps, and it means the absence of a paid subscription does not indicate limited use — a child can be a regular, active Windscribe user without ever upgrading to the paid tier.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Windscribe and the broader category of VPN services — preventing a feature-rich, permanently free bypass tool from silently defeating every parental control and monitoring system on a child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Windscribe and VPN services with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Category-level restrictions cover similar free and paid VPN tools automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Device-level prevention works regardless of free tier or account status</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged VPN tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Windscribe as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits gives you the information to make an informed choice, and the tools to act on it immediately when you decide to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for addressing Windscribe — reflecting the absence of a financial detection signal, the specific monitoring implications of its bundled features, and the device-level restriction approach that remains effective regardless of the tool's technical capabilities.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About Why VPN Tools — Including Free, Reputable Ones — Are Not Appropriate on Their Device</div>
+        <div class="tip-body">Windscribe has a reputation in online privacy communities as a trustworthy, privacy-focused service with a genuine commitment to user privacy — a reputation that is not undeserved. A child who has installed it may present it as simply a privacy tool rather than a bypass tool, and that framing is not entirely wrong. The conversation is most productive when it acknowledges that privacy online is a legitimate concern that adults address with tools like this — while explaining clearly that the effect on parental oversight is identical regardless of the tool's reputation or the child's framing of their motivation. A VPN that bypasses every parental content filter simultaneously does not become less of a bypass tool because the company that made it is trustworthy. The oversight it removes is real, and the safety function of that oversight does not depend on the child's assessment of whether the VPN company's privacy practices are reputable.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check the Installed App List Directly — No Financial Signal Is Available for the Free Tier</div>
+        <div class="tip-body">Unlike paid VPN services where a subscription payment provides a potential financial detection signal, Windscribe's free tier leaves no payment record to review. Detection relies entirely on checking the device's installed app list directly for the Windscribe app by name and icon. When reviewing the device, also check the device's VPN settings and active configuration profiles — on iOS through Settings under General and VPN and Device Management, and on Android through network settings — for any active VPN connection or installed profile associated with Windscribe. Check for the VPN status bar indicator when reviewing the device directly, though be aware that split tunnelling may reduce the consistency of this indicator. A secondary email address used to create the Windscribe account will not be associated with the child's primary email — searching for Windscribe confirmation emails in the child's primary email account may yield no results if a secondary account was used.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Category-Level Device Restrictions — Windscribe's Feature Richness Does Not Change the Effectiveness of Device-Level Prevention</div>
+        <div class="tip-body">Use iLimits to block Windscribe and the broader category of VPN tools at the device level across every device your child uses. Windscribe's additional features — R.O.B.E.R.T., the firewall, and split tunnelling — make it more capable than simpler VPN tools at the network and monitoring layer, but they do not affect the reliability of device-level prevention: an app-level block that prevents Windscribe from running is equally effective against a feature-rich VPN as against a basic one. On iOS, pair iLimits restrictions with Screen Time settings that prevent new VPN configuration profile installation. On Android, use the unknown sources restriction to prevent sideloaded APK reinstallation. The same combination of iLimits category restrictions and platform-native VPN controls that applies to all VPN tools in this category provides the same complete protection against Windscribe — the tool's feature richness does not require a different technical response, only an awareness that its free tier removes the financial detection signal that might otherwise supplement device-level monitoring.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Most Feature-Rich Free VPN Still Has the Same Single Point of Prevention</h3>
+    <p class="closing-body">
+      Windscribe's combination of a permanent free tier, device-wide VPN, ad and tracker blocking, firewall, and split tunnelling makes it the most capable no-cost bypass tool available to children without any financial barrier. But all of those features operate downstream of one condition: the app has to be able to run on the device. iLimits addresses that single condition at the device level — before the VPN connects, before the tunnel is established, before any feature of the tool can take effect — and that prevention is as complete against a feature-rich free VPN as against any other tool in this category.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
