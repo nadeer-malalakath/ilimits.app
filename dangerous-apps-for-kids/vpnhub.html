@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VPNhub – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* VPNhub: deep charcoal-amber — neutral but with a warning undertone */
+    --vh:           #B45309;
+    --vh-mid:       #92400E;
+    --vh-deep:      #451A03;
+    --vh-light:     #FFFBEB;
+    --vh-bdr:       #FCD34D;
+    --vh-text:      #3A1800;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --warn-bg:      #FFF7ED;
+    --warn-bdr:     #FED7AA;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --red-bg:       #FFF1F2;
+    --red-bdr:      #FECDD3;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #100800 0%, #1E1000 50%, #2C1800 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(180,83,9,0.48) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(252,211,77,0.26) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(180,83,9,0.20);
+    border: 1px solid rgba(252,211,77,0.34);
+    color: #FCD34D; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #100800 0%, #B45309 58%, #F59E0B 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(180,83,9,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── VPNhub callout ── */
+  .vh-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--vh-light); border: 1.5px solid var(--vh-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .vh-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF3C7; border: 1.5px solid var(--vh-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .vh-title { font-size: 13px; font-weight: 700; color: var(--vh-text); line-height: 1.3; margin-bottom: 3px; }
+  .vh-body  { font-size: 12px; color: #5C2700; font-weight: 400; line-height: 1.55; }
+
+  /* ── Adult connection badge ── */
+  .adult-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .adult-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E8; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .adult-text strong { font-size: 12.5px; font-weight: 700; color: #881337; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .adult-text span   { font-size: 11.5px; color: #9F1239; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--warn-bg); border: 1.5px solid var(--warn-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFEDD5; border: 1.5px solid var(--warn-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: #7C2D12; line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #9A3412; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #100800 0%, #1E1000 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(180,83,9,0.30) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔐</div>
+        <div>
+          <div class="app-name-text">VPNhub</div>
+          <div class="app-sub">VPN Proxy — Adult Platform Connection</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">VPN / Proxy Tool</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">A device-wide VPN that bypasses all parental content filters — operated by an adult entertainment company, giving it a direct connection to explicit content distribution and making it uniquely inappropriate for children's devices</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block VPNhub and similar tools from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of VPNhub — a free, device-wide VPN proxy app that tunnels all internet traffic on a device through an encrypted connection, bypassing every content filter and monitoring tool simultaneously — and which is operated by Milkshake Media Inc., the same parent company behind one of the world's largest adult content platforms.</p>
+  </div>
+
+  <div class="vh-callout">
+    <div class="vh-ico">🔐</div>
+    <div>
+      <div class="vh-title">VPNhub Is a Free Device-Wide VPN Operated by an Adult Entertainment Company — Its Connection to Explicit Content Makes It Uniquely Concerning for Children's Devices</div>
+      <div class="vh-body">VPNhub is a free consumer VPN proxy app available on Android and iOS that routes all internet traffic from the entire device through an encrypted tunnel, bypassing content filters, DNS monitoring, router controls, and parental oversight tools simultaneously. What makes VPNhub distinct from other consumer VPN apps is its ownership: VPNhub is operated by Milkshake Media Inc., the parent company of one of the world's most widely accessed adult entertainment platforms. The app was launched as a free consumer VPN with explicit promotional ties to the adult platform it is connected to. A child using VPNhub is not simply using a generic privacy tool — they are using a product developed, operated, and promoted by a major adult content company, with a direct promotional connection to that company's explicit content library.</div>
+    </div>
+  </div>
+
+  <div class="adult-band">
+    <div class="adult-icon">🔞</div>
+    <div class="adult-text">
+      <strong>Operated by an Adult Entertainment Company — Not a Standard Privacy Tool</strong>
+      <span>VPNhub is owned and operated by the parent company of a major adult content platform. Its promotional ties to explicit content make it categorically different from independent VPN products.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#B45309;"></span> Device-Wide VPN</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Adult Co. Owned</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FCD34D;"></span> Bypasses Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Free No Account</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> All Apps Affected</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      VPNhub is a <strong>free, device-wide VPN proxy</strong> that encrypts and routes all internet traffic from every app on the device. It is operated by the parent company of a major adult content platform, creating a direct promotional and operational link between the VPN product and explicit content distribution that is unique among consumer VPN tools.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--vh-light);">🏢</div>
+      <div>
+        <div class="feat-name">Owned and Operated by the Parent Company of a Major Adult Content Platform</div>
+        <div class="feat-desc">VPNhub is not an independent privacy product — it was created by and continues to be operated by Milkshake Media Inc., the corporate parent of one of the world's most widely accessed adult content platforms. The VPN app was launched with explicit branding and promotional ties to the adult platform, including co-branding, cross-promotional campaigns, and promotional offers linking the two products. This ownership relationship is not incidental — VPNhub's existence is directly connected to the adult content ecosystem operated by its parent company, making it categorically different from VPN products developed by independent privacy or technology companies.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🌐</div>
+      <div>
+        <div class="feat-name">Device-Wide Tunnel Bypasses Every Content Filter and Parental Control Simultaneously</div>
+        <div class="feat-desc">Like all device-level VPN apps, VPNhub routes all internet traffic from every app on the device through its encrypted tunnel when connected. This means router parental controls, DNS safe search systems, ISP filtering, and any other network-level content protection tool are simultaneously bypassed for every app — browsing, messaging, streaming, and social media — with a single connection. The bypass is not limited to a single browser or application; it applies to everything the child does online from the moment VPNhub connects until it disconnects.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🆓</div>
+      <div>
+        <div class="feat-name">Free to Use With No Account or Registration Required</div>
+        <div class="feat-desc">VPNhub's free tier is available without creating an account or providing any personal information. A child can download the app, connect to the VPN, and route all device traffic through the encrypted tunnel without leaving any account-associated record of having done so. The absence of any account requirement means there is no login history, no registered identity, and no usage record associated with a named profile — nothing that would appear in any account-based monitoring review a parent conducts.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--warn-bg);">📣</div>
+      <div>
+        <div class="feat-name">Promotional Exposure to Adult Content Within the App's Ecosystem</div>
+        <div class="feat-desc">VPNhub's promotional connection to its parent company's adult platform means that the app itself — not just the internet access it provides — has been associated with explicit content promotion. While the app's primary function is a VPN tunnel, its branding, promotional campaigns, and in-app marketing have included references to the adult platform it is linked to. A child who downloads VPNhub may encounter promotional content connected to the adult platform within the app's own interface or associated marketing, beyond the general internet access the VPN provides.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--red-bg);">🎯</div>
+      <div>
+        <div class="feat-name">Available in Official App Stores Despite Its Adult Entertainment Connections</div>
+        <div class="feat-desc">VPNhub is available in both the Google Play Store and Apple App Store, meaning it can be installed on a child's device through the standard official installation route without any sideloading or third-party source. Its presence in official stores gives it an appearance of legitimacy that belies its connection to adult content distribution. A parent reviewing recently installed apps through Google Family Link or Apple Screen Time will see VPNhub listed as a standard app store download — with no indication from the installation record of its ownership by an adult entertainment company or its promotional ties to explicit content.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">VPNhub combines the standard risks of any device-wide VPN — bypassing all network-level parental controls simultaneously — with risks specific to its ownership: a direct connection to an adult entertainment company, promotional ties to explicit content, and an official-store installation route that conceals those connections.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Operated by an Adult Entertainment Company</div>
+      <div class="rc-desc">VPNhub is owned by the parent company of a major adult content platform — its existence, branding, and promotional campaigns are directly connected to explicit content distribution, making it categorically unsuitable for installation on a child's device</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📱</span>
+      <div class="rc-name">All Apps and All Filters Bypassed at Once</div>
+      <div class="rc-desc">VPNhub's device-level tunnel simultaneously bypasses every content filter, DNS safe search, and router control applied to every app on the device — not just a single browser — with one connection</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📣</span>
+      <div class="rc-name">In-App Exposure to Adult Content Promotion</div>
+      <div class="rc-desc">VPNhub's branding and promotional campaigns have included references and links to the adult platform it is connected to — a child using the app may encounter promotional content tied to explicit material within the app's own interface or marketing</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👁️‍🗨️</span>
+      <div class="rc-name">Traffic From All Apps Hidden From Monitoring</div>
+      <div class="rc-desc">When VPNhub is connected, all internet traffic from every app on the device is encrypted and invisible to any network-level or DNS-level monitoring tool — a parent has no visibility into any online activity conducted while VPNhub is active</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏪</span>
+      <div class="rc-name">Available in Official Stores — Adult Connections Not Visible at Install</div>
+      <div class="rc-desc">VPNhub's presence in the Play Store and App Store gives it a misleading appearance of legitimacy, and its installation record provides no indication of its adult entertainment connections — a parent monitoring installs through official tools will not see its true nature</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🆓</span>
+      <div class="rc-name">Free With No Account — No Trace in Any Monitored Profile</div>
+      <div class="rc-desc">VPNhub requires no registration or payment to use, meaning its use leaves no account-associated record for a parent to review — no login history, no usage trail, no identity linked to the app's download or activation</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>VPNhub Carries the Highest Risk Rating — A Device-Wide VPN With a Direct Adult Entertainment Company Connection</strong>
+      <span>VPNhub carries all the risks of any device-wide VPN — simultaneously bypassing every network-level parental control across all apps — compounded by its unique status as a product owned, operated, and promoted by an adult entertainment company. No other consumer VPN in common use combines a full device bypass capability with a direct promotional connection to explicit content distribution. Its presence on a child's device warrants immediate restriction.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">⚠️</div>
+    <div>
+      <div class="control-title">VPNhub's Adult Entertainment Ownership Is the Factor That Most Clearly Distinguishes It From Other Consumer VPN Tools — It Should Be Treated as Both a VPN Risk and a Content Risk</div>
+      <div class="control-body">Most consumer VPN apps carry risk for children primarily because of what they enable — bypassing parental content filters. VPNhub carries that risk and an additional one: it is a product of an adult entertainment company with promotional ties to explicit content, meaning the risk is not only about the internet access it provides but about the direct connection to explicit content distribution built into the product itself. Parents should restrict VPNhub for both reasons — as a VPN bypass tool and as a product with an inherent adult entertainment connection — rather than treating it as simply another generic VPN app with standard bypass risks.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">VPNhub Was Created and Promoted by an Adult Content Platform — This Is Not a Coincidence or a Secondary Association</div>
+        <div class="know-body">VPNhub was not an independent privacy product later acquired by an adult entertainment company — it was created by the adult entertainment company from the outset, launched with explicit promotional ties to its parent platform, and marketed in part to the adult platform's existing user base. The connection between VPNhub and the adult content ecosystem it operates within is structural and intentional, not peripheral. Parents should understand that a child who discovers and installs VPNhub has installed a product that was developed by an adult entertainment company specifically in a context where the connection between the VPN and the adult content platform was a feature, not an incidental fact. This distinguishes VPNhub from every other consumer VPN tool in common use and makes it uniquely inappropriate for any child's device.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The App's Official Store Listing Does Not Reflect Its Adult Entertainment Connections</div>
+        <div class="know-body">A parent who sees VPNhub in their child's app list and looks up the app in the Play Store or App Store will find a standard VPN application listing — describing its function as a privacy and security tool, with no disclosure of its ownership by an adult entertainment company in the store listing itself. The adult entertainment connection is not prominently disclosed in the app's store page or within the app in a way that would be immediately apparent to a parent reviewing the device. Recognising VPNhub as a product connected to adult entertainment requires knowing its ownership before looking it up, rather than being able to identify it from the store listing alone. Parents who encounter VPNhub on a child's device should search specifically for "VPNhub parent company" or "VPNhub owner" to understand the full context of the product.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children Who Have VPNhub Installed Are Likely Aware of Its Adult Content Connection</div>
+        <div class="know-body">While a parent may not be aware of VPNhub's adult entertainment connections from the app's store listing alone, the same is typically not true of a child who has installed it. VPNhub is predominantly known and shared among its users specifically because of its association with the adult platform it is connected to — the adult content connection is part of the app's identity within the communities where it is most commonly discussed and recommended. A child who has sought out and installed VPNhub has in the large majority of cases done so with awareness of its adult entertainment connections, rather than having found a generic VPN and subsequently discovered those connections. The installation of VPNhub is therefore a more specific signal than the installation of a generic VPN tool.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">VPNhub's Device-Wide Bypass Extends to Every App — Messaging, Social Media, and Streaming Are All Affected</div>
+        <div class="know-body">Like all device-level VPN apps, VPNhub's encrypted tunnel applies to every app on the device simultaneously, not just a web browser. When VPNhub is connected, content restrictions applied to messaging apps, social media platforms, streaming services, and every other networked application are bypassed at the same time as browser content filters. A parent who has applied careful controls to specific apps through their family account settings should be aware that those controls — to the extent they rely on network-level or DNS-level mechanisms — are as ineffective as browser-level content filters when VPNhub is active. The scope of the bypass is the entire device's internet activity, not a single component of it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block VPNhub immediately — addressing both its device-wide VPN bypass capability and its direct connection to adult entertainment, with a single restriction that prevents the app from running on your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block VPNhub and adult-connected VPN tools with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Category-level restrictions cover VPN tools and adult content proxies automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restores the effectiveness of all network and DNS-level content controls</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged VPN or adult-connected tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like VPNhub as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits gives you the information to make an informed choice, and the tools to act on it immediately when you decide to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that address VPNhub's combined risks — its adult entertainment connection and its device-wide bypass capability — with guidance on how to approach the conversation, how to identify the app's true nature, and how to apply restrictions that address both risk dimensions simultaneously.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Approach the Conversation With Both Dimensions of the Risk — the Adult Content Connection and the Bypass Capability</div>
+        <div class="tip-body">A conversation about VPNhub on a child's device needs to address both of the reasons it is restricted, because they are distinct and both significant. The VPN bypass capability — removing all parental content controls across every app on the device — is the concern that applies to any VPN tool and is worth discussing in the terms of safety and oversight that apply to that category broadly. The adult content connection — that the app was created by and is operated by an adult entertainment company with explicit promotional ties to explicit content — is a separate and additional concern specific to VPNhub. A child who has installed VPNhub has almost certainly done so with awareness of both dimensions. Addressing both directly, calmly, and specifically — rather than treating the app as simply another generic bypass tool — reflects the full nature of the concern and is more likely to result in a genuine understanding of why it is restricted rather than simply that it is.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check for VPNhub by Name — Its Adult Connections Are Not Visible in the Store Listing Without a Separate Search</div>
+        <div class="tip-body">When reviewing a child's device for VPN and bypass tools, look specifically for VPNhub by name in the installed app list. Unlike some tools whose function is indicated by their icon or name, VPNhub's store listing presents it as a standard VPN application — its adult entertainment connections are not disclosed on the store page and are not immediately apparent from the app's icon or description. A parent who finds VPNhub installed should search for "VPNhub parent company" to confirm the ownership context before speaking with their child, so that the conversation is based on a complete understanding of the product rather than the store listing description alone. Also check for any VPN configuration profiles on the device through iOS Settings — General — VPN and Device Management, as VPNhub may install a profile that persists even if the app is deleted.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply VPN Restrictions at Both the App Level and the Configuration Profile Level</div>
+        <div class="tip-body">Use iLimits to block VPNhub and the broader category of VPN and proxy tools across every device your child uses. Because VPNhub may establish a VPN configuration profile on iOS devices in addition to operating as a standalone app, removing the app alone may not fully remove the VPN tunnel configuration — check iOS Settings under General and VPN and Device Management and remove any VPNhub-associated profile alongside deleting the app itself. On Android, pair the iLimits app restriction with the device's unknown sources setting to prevent a reinstall via a direct APK download. On iOS, use Screen Time to restrict new VPN profile installations, preventing a child from reinstalling a VPN configuration even if they find a way to obtain the app again. The combination of iLimits category restrictions, manual profile removal, and platform-native VPN profile controls provides the most complete protection against both the VPN bypass and any residual connection to the app's adult content ecosystem.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A VPN With an Adult Entertainment Connection Carries Two Risks That Both Require a Response</h3>
+    <p class="closing-body">
+      VPNhub is unique among the tools in this category because it carries two distinct risks simultaneously — the device-wide bypass of every parental content control, and a direct operational and promotional connection to an adult entertainment company. iLimits gives you the tools to block both of these risks with a single restriction, applied at the device level before either risk materialises, so that the protections you have put in place remain intact and the content connection built into this product has no route onto your child's device.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
