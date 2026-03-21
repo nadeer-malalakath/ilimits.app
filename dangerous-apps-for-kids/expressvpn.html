@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ExpressVPN – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* ExpressVPN brand: deep crimson-red */
+    --ex:           #DA3347;
+    --ex-mid:       #B52638;
+    --ex-deep:      #6E1020;
+    --ex-light:     #FFF5F6;
+    --ex-bdr:       #FECDD3;
+    --ex-text:      #4A0010;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #120005 0%, #220009 50%, #300010 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(218,51,71,0.48) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 290px; height: 290px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(254,205,211,0.26) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.24) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(218,51,71,0.20);
+    border: 1px solid rgba(254,205,211,0.36);
+    color: #FECDD3; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #120005 0%, #DA3347 58%, #FB7185 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(218,51,71,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── ExpressVPN callout ── */
+  .ex-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ex-light); border: 1.5px solid var(--ex-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .ex-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E8; border: 1.5px solid var(--ex-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .ex-title { font-size: 13px; font-weight: 700; color: var(--ex-text); line-height: 1.3; margin-bottom: 3px; }
+  .ex-body  { font-size: 12px; color: #6E1020; font-weight: 400; line-height: 1.55; }
+
+  /* ── Premium grade badge ── */
+  .premium-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--slate-bg); border: 1.5px solid var(--slate-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .premium-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #E2E8F0; border: 1.5px solid var(--slate-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .premium-text strong { font-size: 12.5px; font-weight: 700; color: #1E293B; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .premium-text span   { font-size: 11.5px; color: #475569; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ex-light); border: 1.5px solid var(--ex-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E8; border: 1.5px solid var(--ex-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--ex-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #6E1020; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #120005 0%, #220009 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(218,51,71,0.30) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔴</div>
+        <div>
+          <div class="app-name-text">ExpressVPN</div>
+          <div class="app-sub">Premium Commercial VPN Service</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">VPN / Privacy Service</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">One of the world's most powerful commercial VPNs — routes all device traffic through an encrypted tunnel across 105 countries, providing the most technically robust and persistent bypass of parental controls available to a child as a consumer product</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block ExpressVPN and premium VPN services from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of ExpressVPN — one of the world's most established and technically capable commercial VPN services, offering premium-grade encryption, servers in 105 countries, proprietary connection protocols, and obfuscation technology specifically designed to prevent VPN detection — making it the most robust single bypass tool a child can access as a standard consumer product.</p>
+  </div>
+
+  <div class="ex-callout">
+    <div class="ex-ico">🔴</div>
+    <div>
+      <div class="ex-title">ExpressVPN Is One of the World's Most Powerful Commercial VPNs — Its Premium Infrastructure Makes It the Most Technically Capable Bypass Tool Available to Children</div>
+      <div class="ex-body">ExpressVPN is a leading commercial VPN service with over a decade of operation, servers in 105 countries, and a proprietary connection protocol — Lightway — engineered for both speed and reliability. When connected, it routes all traffic from every app on the device through an encrypted tunnel, bypassing every network-level parental control, content filter, DNS-based safe search, and monitoring tool simultaneously. What distinguishes ExpressVPN from free and consumer-grade VPN tools is the quality and robustness of its infrastructure: its proprietary protocol is significantly harder for network operators to detect and block than standard VPN protocols, its server network is maintained at enterprise grade, and its obfuscation features are specifically designed to make VPN traffic appear as ordinary HTTPS traffic to inspection systems that attempt to identify and block it.</div>
+    </div>
+  </div>
+
+  <div class="premium-band">
+    <div class="premium-icon">💎</div>
+    <div class="premium-text">
+      <strong>Premium-Grade Infrastructure — Harder to Detect and Block Than Free VPN Tools</strong>
+      <span>ExpressVPN's proprietary Lightway protocol and obfuscation technology are designed to evade VPN detection systems — making it significantly more persistent than free VPN apps when network operators attempt to block it.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#DA3347;"></span> Device-Wide VPN</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> 105 Countries</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FECDD3;"></span> Obfuscation Tech</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Bypasses All Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Lightway Protocol</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      ExpressVPN is a <strong>premium commercial VPN service</strong> that routes all device traffic through an encrypted tunnel, bypassing every parental control and content filter simultaneously. Its proprietary protocol, obfuscation features, and enterprise-grade server network make it more persistent and harder to counter than any free or consumer-grade VPN tool.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--ex-light);">🌐</div>
+      <div>
+        <div class="feat-name">Device-Wide Encrypted Tunnel Across 105 Countries</div>
+        <div class="feat-desc">ExpressVPN routes all internet traffic from every app on the device through an encrypted tunnel, with server locations in 105 countries available at a single tap. Every content filter, DNS safe search, router control, and network monitoring tool is bypassed simultaneously for every app — messaging, social media, streaming, and all browsing — the moment a connection is established. The breadth of server locations means that geo-restricted content from virtually any country in the world becomes accessible alongside the bypass of local content controls.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">⚡</div>
+      <div>
+        <div class="feat-name">Proprietary Lightway Protocol — Faster and More Reliable Than Standard VPN</div>
+        <div class="feat-desc">ExpressVPN's Lightway protocol is a proprietary VPN connection protocol engineered for speed, reliability, and battery efficiency. Unlike standard VPN protocols such as OpenVPN or WireGuard — which are available across many VPN services — Lightway is exclusive to ExpressVPN and is specifically optimised to maintain stable connections even under adverse network conditions. This means that a child using ExpressVPN experiences a significantly more reliable bypass than with free VPN tools — connections drop less frequently, reconnect faster, and perform better across a wider range of network environments.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🕵️</div>
+      <div>
+        <div class="feat-name">Obfuscation Technology Makes VPN Traffic Appear as Ordinary Web Traffic</div>
+        <div class="feat-desc">ExpressVPN includes obfuscation capabilities — sometimes called "stealth" features — that disguise VPN traffic to appear as standard HTTPS web browsing to network inspection systems. This is significant because some network-level parental control tools and school or institutional network systems attempt to identify and block VPN traffic rather than relying solely on DNS-based filtering. A free VPN tool may be detectable and blockable by these inspection systems; ExpressVPN's obfuscation technology specifically targets this detection mechanism, making the VPN traffic substantially harder to identify as VPN traffic at the network layer.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🔑</div>
+      <div>
+        <div class="feat-name">Subscription-Based — Likely Paid for by a Parent's Stored Credentials</div>
+        <div class="feat-desc">ExpressVPN is a paid subscription service, typically billed monthly or annually. Unlike free VPN tools that any child can access without a payment event, ExpressVPN requires an active paid subscription. A child who has access to ExpressVPN on their device has either paid for it themselves, used a parent's payment credentials stored on the device, used a parent's account on a shared plan, or been given access by a peer. The subscription requirement means that the presence of ExpressVPN on a child's device often involves a financial transaction that a parent may be able to identify in their payment history — providing an additional potential detection signal beyond the app itself.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🛡️</div>
+      <div>
+        <div class="feat-name">Split Tunnelling Allows Selective Routing — Some Apps Can Bypass Filters While Others Appear Normal</div>
+        <div class="feat-desc">ExpressVPN's split tunnelling feature allows users to route some apps through the VPN while others connect directly to the internet. This means a child can configure ExpressVPN to route only specific apps — such as a browser or social media platform — through the VPN tunnel, while other apps, including any monitoring tools or the device's default browser, connect normally. From the perspective of a monitoring tool that checks whether a VPN is active across the whole device, split tunnelling may make the VPN less visible — some traffic appears normal while specific apps operate through an unmonitored, filter-bypassing tunnel.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">ExpressVPN's risks exceed those of free and consumer-grade VPN tools in every technical dimension — its bypass is more reliable, harder to detect, more persistent across different networks, and more strategically flexible through split tunnelling. It represents the upper end of what a consumer VPN can offer as a bypass tool.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">💎</span>
+      <div class="rc-name">Premium Infrastructure — Most Robust Consumer Bypass</div>
+      <div class="rc-desc">ExpressVPN's enterprise-grade server network, proprietary protocol, and years of development make it significantly more reliable and harder to counter than free VPN tools — the bypass it provides is more persistent and less likely to fail or be detected</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🕵️</span>
+      <div class="rc-name">Obfuscation Defeats VPN Detection Systems</div>
+      <div class="rc-desc">ExpressVPN's obfuscation technology disguises VPN traffic as ordinary HTTPS browsing, specifically targeting the detection mechanisms that school networks, institutional filters, and some home network systems use to identify and block VPN connections</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📱</span>
+      <div class="rc-name">All Apps and All Networks Bypassed</div>
+      <div class="rc-desc">Like all device-level VPNs, ExpressVPN's tunnel applies to every app simultaneously — messaging, social media, streaming, and all browsing — and operates identically on home Wi-Fi, school networks, and mobile data</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔀</span>
+      <div class="rc-name">Split Tunnelling Enables Selective Bypass</div>
+      <div class="rc-desc">Split tunnelling allows specific apps to route through the VPN while others connect normally — a child can bypass filters for targeted apps while other device activity appears unaffected, potentially reducing the visibility of VPN use to monitoring tools</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">105 Countries — Maximum Geo-Block Bypass</div>
+      <div class="rc-desc">Server locations in 105 countries provide access to content from virtually any region — geo-restricted platforms, regionally blocked websites, and location-specific content libraries all become accessible alongside the bypass of local content controls</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Subscription May Indicate Parental Payment Use</div>
+      <div class="rc-desc">As a paid service, ExpressVPN's presence on a child's device typically involves a payment transaction — through stored parental credentials, a shared family account, or independent payment — providing a potential financial signal parents can investigate</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>ExpressVPN Carries the Highest Risk Rating — The Most Technically Capable Consumer VPN Available</strong>
+      <span>ExpressVPN's combination of premium infrastructure, obfuscation technology, proprietary protocol, split tunnelling, and 105-country server network makes it the most technically robust consumer VPN bypass tool available. Every parental control that operates at the network, DNS, or traffic inspection level is defeated simultaneously, with a reliability and persistence that significantly exceeds any free or consumer-grade alternative. Its presence on a child's device represents the most capable form of complete parental oversight removal available through a standard app store download.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">⚡</div>
+    <div>
+      <div class="control-title">ExpressVPN's Obfuscation Technology Specifically Targets the Detection Systems That Schools and Advanced Home Networks Use to Block VPNs — Standard VPN Blocking Is Not Sufficient</div>
+      <div class="control-body">Some parents and school network administrators who are aware of the VPN bypass risk have configured their networks to detect and block VPN traffic at the protocol level — a measure that is effective against many free and standard VPN tools. ExpressVPN's obfuscation technology is specifically engineered to defeat this approach by making its traffic appear as ordinary encrypted web browsing rather than VPN traffic. This means that network-level VPN blocking — which might successfully block free VPN tools — may be ineffective against ExpressVPN's obfuscated connections. Device-level prevention through iLimits is the only approach that does not depend on being able to detect or classify the VPN traffic at the network level.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">ExpressVPN Is a Paid Service — Its Presence on a Child's Device Involves a Payment Transaction Worth Investigating</div>
+        <div class="know-body">Unlike free VPN apps that a child can download and use without any financial transaction, ExpressVPN requires an active paid subscription. A child who has ExpressVPN on their device has obtained access through one of a small number of routes: they may have purchased a subscription themselves using a payment method available to them, used a parent's payment credentials stored on a shared device or browser, accessed the service through a parent's existing subscription on a shared plan, or been given account access by a peer. The payment angle is a meaningful investigative starting point — a parent who checks their recent payment history, their saved payment credentials on shared devices, and their existing subscriptions is likely to find the payment event if it was made using their credentials. This is not a signal available with free VPN tools and makes ExpressVPN somewhat more discoverable through financial review than its free counterparts.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Obfuscation Means Standard Network VPN Blocking May Not Stop It — Only Device-Level Prevention Is Reliable</div>
+        <div class="know-body">Parents who have configured router-level VPN blocking, or who rely on a network system that identifies and blocks VPN protocols, should be aware that this measure — effective against many simpler VPN tools — may be insufficient against ExpressVPN's obfuscated connections. Obfuscation technology works by making VPN traffic appear as standard HTTPS traffic to inspection systems, specifically targeting the protocol fingerprinting that VPN-blocking network tools rely on. A network that successfully blocks free VPN tools at the protocol level may find ExpressVPN's obfuscated connections pass through undetected. The only reliable countermeasure that is not dependent on traffic classification is device-level prevention — blocking the app from operating before the connection is established.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Split Tunnelling Can Reduce the Visibility of VPN Use to Monitoring Tools</div>
+        <div class="know-body">ExpressVPN's split tunnelling feature allows a child to route only selected apps through the VPN tunnel while others connect normally. This has an important implication for monitoring: a device-level monitoring tool that checks whether a VPN is active across the whole device may not flag split tunnelling as active, since only some traffic is routed through the VPN. A child who has configured split tunnelling to route their messaging app or browser through the VPN — while keeping other apps connecting normally — may present a device that appears less obviously VPN-active to a parent reviewing the device for signs of VPN use. The status bar VPN indicator may still be present when split tunnelling is active, but the child may be aware of this and configure usage accordingly. The most reliable detection approach is checking for the ExpressVPN app in the installed app list rather than looking for signs of active connection.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">ExpressVPN Is Marketed and Used Primarily by Adults — A Child With It Installed Has Actively Sought a Professional-Grade Privacy Tool</div>
+        <div class="know-body">ExpressVPN's pricing, marketing, and primary user base are firmly in the adult professional and privacy-conscious consumer market. Unlike free consumer VPN tools that are accessible to anyone who performs a basic app store search, ExpressVPN requires a financial commitment and a degree of deliberate research to find and set up. A child who has ExpressVPN installed has actively sought out a premium privacy tool — not simply installed the first free option they encountered. This level of deliberateness is itself significant: it suggests either a strong motivation to bypass parental oversight specifically, a genuine and sustained interest in digital privacy that warrants a direct and substantive conversation, or access through a parent's account that the parent may not be aware has been shared or accessed by the child.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block ExpressVPN and premium VPN services — providing the device-level prevention that is the only reliable countermeasure against a commercial VPN with obfuscation technology that can defeat network-level detection.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block ExpressVPN and premium commercial VPN services with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Category-level restrictions cover the full class of VPN tools automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Device-level prevention works regardless of obfuscation or protocol type</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged VPN tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like ExpressVPN as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits gives you the information to make an informed choice, and the tools to act on it immediately when you decide to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect the distinct characteristics of a premium, paid VPN — beginning with the financial investigation route that free VPN tools do not offer, through to the technical controls that address obfuscation-capable VPN traffic at the device level rather than the network level.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Start With the Payment Trail — ExpressVPN's Subscription Leaves a Financial Record</div>
+        <div class="tip-body">The most distinctive investigative step available for ExpressVPN — and not for free VPN tools — is checking the payment record. If ExpressVPN is on a child's device, a subscription is active. Check your recent payment history for any ExpressVPN charge, review the payment credentials saved on shared devices and browsers, check whether your existing ExpressVPN subscription (if you have one) shows any additional connected devices or logins, and review any payment apps the child may have access to. Finding the payment event answers the question of how the child obtained access and is often the starting point for a more productive conversation about why they sought a professional-grade VPN tool. A child who has used a parent's payment credentials has done something specific and deliberate that is worth addressing directly and calmly alongside the VPN conversation.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check for ExpressVPN by Name — and Review All VPN Configuration Profiles on the Device</div>
+        <div class="tip-body">When reviewing a child's device, search the full installed app list for ExpressVPN by name. Also check for any active VPN configuration profiles — on iOS, these are visible through Settings under General and then VPN and Device Management, where active VPN connections and any installed profiles will appear. On Android, check the network settings for active VPN connections. If split tunnelling is in use, the VPN status bar indicator may be present but only intermittently visible depending on which apps the child has routed through the tunnel. The most reliable detection signal is the presence of the ExpressVPN app itself in the installed app list — this does not depend on the VPN being actively connected at the moment of the device check. Also consider checking the child's email for any ExpressVPN subscription confirmation emails, which would confirm the account used to access the service.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Device-Level Restrictions — Network-Level VPN Blocking Is Not Sufficient Against Obfuscated Traffic</div>
+        <div class="tip-body">Use iLimits to block ExpressVPN and the broader category of premium VPN services at the device level across every device your child uses. Because ExpressVPN's obfuscation technology is specifically designed to evade the protocol-level detection that router-based VPN blocking relies on, network-level VPN blocking alone is not a reliable countermeasure for this particular tool. Device-level app prevention — blocking the app from running before a connection is established — is the only approach that does not depend on being able to classify or detect the VPN traffic at the network layer. On iOS, pair iLimits restrictions with Screen Time settings that prevent new VPN profile installation, to close the configuration profile route alongside the app installation route. Review stored payment credentials on shared devices and browsers to prevent a child from purchasing a new subscription using saved details if the existing one is cancelled. The combination of device-level app restriction, payment credential review, and iOS VPN profile controls provides the most complete protection against a premium VPN service with obfuscation capability.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Premium Tools Require the Same Answer as Free Ones — Prevention at the Device Level</h3>
+    <p class="closing-body">
+      ExpressVPN's premium infrastructure, obfuscation technology, and proprietary protocol make it the most technically capable consumer VPN a child can access — and the one least susceptible to the network-level countermeasures that work against simpler tools. But its bypass of parental controls is fundamentally the same as any other VPN: it removes every network-level protection simultaneously. iLimits addresses it at the only layer that works regardless of the VPN's technical sophistication — the device level, before the connection is ever established.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
