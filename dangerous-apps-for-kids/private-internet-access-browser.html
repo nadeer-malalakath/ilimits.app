@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>PIA Browser – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* PIA brand: deep military green-grey */
+    --pia:          #2E7D32;
+    --pia-mid:      #1B5E20;
+    --pia-deep:     #0A280C;
+    --pia-light:    #F1F8E9;
+    --pia-bdr:      #A5D6A7;
+    --pia-text:     #1B3A1D;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --green-bg:     #F1F8E9;
+    --green-bdr:    #A5D6A7;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #050D06 0%, #0C1E0D 50%, #122416 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(46,125,50,0.46) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(165,214,167,0.26) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(46,125,50,0.20);
+    border: 1px solid rgba(165,214,167,0.35);
+    color: #A5D6A7; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #050D06 0%, #2E7D32 58%, #66BB6A 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(46,125,50,0.56), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── PIA callout ── */
+  .pia-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--pia-light); border: 1.5px solid var(--pia-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .pia-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DCEDC8; border: 1.5px solid var(--pia-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pia-title { font-size: 13px; font-weight: 700; color: var(--pia-text); line-height: 1.3; margin-bottom: 3px; }
+  .pia-body  { font-size: 12px; color: #1B3A1D; font-weight: 400; line-height: 1.55; }
+
+  /* ── Combined product badge ── */
+  .combo-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--slate-bg); border: 1.5px solid var(--slate-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .combo-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #E2E8F0; border: 1.5px solid var(--slate-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .combo-text strong { font-size: 12.5px; font-weight: 700; color: #1E293B; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .combo-text span   { font-size: 11.5px; color: #475569; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--pia-light); border: 1.5px solid var(--pia-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DCEDC8; border: 1.5px solid var(--pia-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--pia-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #1B3A1D; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #050D06 0%, #0C1E0D 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,125,50,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🌐</div>
+        <div>
+          <div class="app-name-text">PIA Browser</div>
+          <div class="app-sub">Private Internet Access Browser</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Privacy Browser / VPN-Integrated</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Combines a full web browser with built-in VPN routing, making all browsing activity invisible to parental monitoring tools, bypassing content filters, and masking internet traffic entirely</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block privacy browsers and VPN tools from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of PIA Browser — the dedicated browser produced by Private Internet Access, one of the world's largest commercial VPN providers, which routes all browsing through an encrypted VPN tunnel from the moment it opens, making every website visited completely invisible to any monitoring tool operating at the device, router, or network level.</p>
+  </div>
+
+  <div class="pia-callout">
+    <div class="pia-ico">🌐</div>
+    <div>
+      <div class="pia-title">PIA Browser Is a Full Web Browser With VPN Routing Built In From the Start — Every Website Visited Through It Is Invisible to Parental Monitoring</div>
+      <div class="pia-body">PIA Browser is the dedicated mobile and desktop web browser produced by Private Internet Access, one of the most established commercial VPN providers in the world. Unlike conventional browsers where a VPN must be separately activated, PIA Browser routes all traffic through an encrypted VPN tunnel automatically and by default — the moment the browser opens, every page visited is encrypted, the destination is concealed, and the traffic is routed through a server in a location the child selects. No parental monitoring tool that operates at the network, router, or DNS level can see what websites are being visited through PIA Browser. Safe search filters, content blocking systems, and browsing history tools that depend on unencrypted or DNS-visible traffic are entirely ineffective against it.</div>
+    </div>
+  </div>
+
+  <div class="combo-band">
+    <div class="combo-icon">🔗</div>
+    <div class="combo-text">
+      <strong>Browser + VPN in a Single App — Two Bypass Tools Combined Into One</strong>
+      <span>PIA Browser merges a full-featured web browser and a commercial-grade VPN into a single application — a child needs only one install to bypass both content filters and browsing history monitoring simultaneously.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#2E7D32;"></span> Built-In VPN</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Bypasses Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A5D6A7;"></span> Encrypted Traffic</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> No Browse History</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Location Masking</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      PIA Browser is a <strong>VPN-integrated web browser</strong> that encrypts and tunnels all browsing traffic by default. It renders network-level content filters, DNS-based safe search tools, router-level monitoring, and browsing history tracking completely ineffective — all in a single, straightforward app that requires no technical knowledge to use.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--pia-light);">🔒</div>
+      <div>
+        <div class="feat-name">VPN Routing Active by Default — No Setup Required</div>
+        <div class="feat-desc">Most VPN tools require a deliberate decision to connect before privacy is active. PIA Browser is different: the VPN is on by default the moment the browser opens. A child does not need to understand how a VPN works, configure any settings, or take any additional steps — they simply open the browser and every page they visit is immediately encrypted and routed through PIA's server network. There is no window of unprotected browsing, no step that reveals what the child is doing, and no action required beyond opening the app.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🚧</div>
+      <div>
+        <div class="feat-name">Bypasses Network-Level Content Filters and Safe Search Systems</div>
+        <div class="feat-desc">Content filtering systems that operate at the network or DNS level — including router-based parental controls, ISP-level filtering, DNS-based safe search tools, and home network content blockers — work by inspecting or redirecting the DNS requests that a browser makes when navigating to a website. PIA Browser's encrypted VPN tunnel means none of these DNS requests are visible to the filtering system. The browser's traffic appears as a single encrypted stream to an external server — the filtering system cannot see the destination, cannot inspect the content, and cannot apply any block or redirect. Network-level filtering tools are completely blind to what PIA Browser is visiting.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">📋</div>
+      <div>
+        <div class="feat-name">Browsing History Is Not Visible to the Device's Standard History Tools</div>
+        <div class="feat-desc">PIA Browser maintains its own internal browsing history that is separate from the device's default browser history and from any third-party monitoring app that reads browsing history from the device's standard browser. A parent who reviews browsing history through the device's built-in browser, through a family account dashboard, or through a monitoring app that reads the default browser's history will see no record of anything visited through PIA Browser. The browsing history exists only within PIA Browser itself — and access to it requires opening the browser directly, which a child can clear at any time.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🌍</div>
+      <div>
+        <div class="feat-name">Routes Traffic Through Servers in Multiple Countries — Bypasses Geo-Restricted Content Blocks</div>
+        <div class="feat-desc">PIA Browser allows users to select the country through which their traffic is routed, from a range of server locations maintained by Private Internet Access globally. This enables a child to access content that is geo-restricted or blocked in their country, including platforms, streaming services, and websites that a parent's network or device controls may have blocked by region. A child can use PIA Browser to access content that is simply unavailable in their location as well as content that has been specifically blocked, bypassing both types of restriction with the same mechanism.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--green-bg);">🛡️</div>
+      <div>
+        <div class="feat-name">Built-In Ad and Tracker Blocking Further Reduces Monitoring Visibility</div>
+        <div class="feat-desc">In addition to its VPN routing, PIA Browser includes built-in ad blocking and tracker blocking features. While these have genuine privacy benefits for adult users, they also mean that parental monitoring tools that work through browser-embedded scripts, tracking pixels, or ad-network signals — a common mechanism in some family monitoring products — may be less effective against browsing conducted through PIA Browser. The combination of VPN encryption, separate browsing history, and tracker blocking makes PIA Browser one of the most comprehensively monitoring-resistant browsers available as a standard consumer product.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">PIA Browser's risk profile is almost entirely about what it prevents parents from seeing rather than what it contains itself. Its combination of default-on VPN, encrypted traffic, separate browsing history, and tracker blocking makes it one of the most effective single tools available for defeating the full range of parental browsing oversight.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🚧</span>
+      <div class="rc-name">Content Filters Completely Bypassed</div>
+      <div class="rc-desc">Network-level content filters, DNS safe search, router-based blocking, and ISP filtering are all rendered ineffective by PIA Browser's encrypted VPN tunnel — no destination is visible to the filtering system, so no block can be applied</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👁️‍🗨️</span>
+      <div class="rc-name">Browsing History Hidden From Parents</div>
+      <div class="rc-desc">No record of PIA Browser sessions appears in the device's default browser history or in any family account dashboard — a parent reviewing browsing history through official tools sees nothing visited through PIA Browser</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Geo-Blocked Content Becomes Accessible</div>
+      <div class="rc-desc">Country-level content blocks and geo-restrictions on platforms or websites a parent has blocked by region can be bypassed by routing traffic through a server in a different country — a child can access content blocked in their location</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📶</span>
+      <div class="rc-name">Works on Any Network — Including School Wi-Fi</div>
+      <div class="rc-desc">PIA Browser's VPN routing bypasses not only home network controls but also content filters on school networks, public Wi-Fi, and mobile data connections — the bypass is not limited to the home environment and operates wherever the child uses the device</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔧</span>
+      <div class="rc-name">Zero Technical Knowledge Required</div>
+      <div class="rc-desc">Unlike traditional VPN tools that require configuration, PIA Browser requires no setup — the VPN is active by default the moment the app opens, making its bypass capability available to any child who can download and open an app</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔗</span>
+      <div class="rc-name">Browser and VPN Combined in One Install</div>
+      <div class="rc-desc">By merging a full browser and a commercial-grade VPN into a single app, PIA Browser provides complete browsing privacy and content filter bypass with a single installation — a child does not need to find and configure separate tools</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>PIA Browser Carries the Highest Risk Rating for Parental Browsing Oversight</strong>
+      <span>No other single consumer app so comprehensively defeats the full range of parental browsing controls simultaneously. PIA Browser bypasses network filters, hides browsing history, masks internet traffic, circumvents geo-blocks, and requires no technical skill to use — all by default, from the moment it opens. Its presence on a child's device renders the majority of browser-based parental oversight tools ineffective.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🛡️</div>
+    <div>
+      <div class="control-title">VPN-Integrated Browsers Are the Single Most Effective Consumer Tool for Bypassing Parental Browsing Controls — Blocking Them at the App Level Is Essential</div>
+      <div class="control-body">Standard parental content filtering works on the assumption that a child's browser traffic is visible to the filtering system — either through DNS inspection, network monitoring, or device-level visibility. PIA Browser's default-on VPN encryption removes this assumption completely. Once PIA Browser is open, the filtering system is operating on a device where all browser traffic is encrypted and tunnelled externally — it is monitoring an empty pipe. No network-level or DNS-level content filter can be configured to work against encrypted VPN traffic in the way it works against normal browsing. The only reliable response is to prevent PIA Browser from being installed or opened on a child's device in the first place.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">PIA Browser Is Produced by a Major Commercial VPN Company — It Is a Professional-Grade Privacy Tool, Not a Simple App</div>
+        <div class="know-body">Private Internet Access is one of the most established commercial VPN providers in the world, with millions of paying subscribers and a reputation for robust privacy infrastructure. PIA Browser is the consumer-facing browser produced by the same company, incorporating the same VPN network and encryption standards used in PIA's paid VPN product. A child using PIA Browser is not using a crude bypass tool — they are using a professionally built, actively maintained privacy product backed by a company with significant technical resources. The VPN routing it provides is the same infrastructure used by journalists, privacy advocates, and security professionals for legitimate privacy purposes. This does not make it appropriate for children, but it does mean that the bypass it provides is robust, reliable, and resistant to the kinds of network-level countermeasures that might be effective against simpler tools.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Network-Level Controls — Including Router Parental Controls and DNS Filtering — Cannot See Inside a VPN Tunnel</div>
+        <div class="know-body">Many parents rely on router-level parental controls, DNS-based filtering services, or ISP-provided content filters as the primary mechanism for blocking inappropriate websites on their home network. These tools work by inspecting the DNS requests a device makes — the queries that translate a website name into an address. PIA Browser's VPN tunnel encrypts these queries before they leave the device and routes them through PIA's own DNS infrastructure, making them invisible to any inspection tool operating at the router or network level. A parent who has configured careful content filtering at the router level should be aware that this filtering is completely ineffective against a device running PIA Browser — the filtering system sees only an encrypted stream to an external VPN server, not the websites the child is visiting.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">PIA Browser Bypasses Filters on Every Network the Child Uses — Not Just at Home</div>
+        <div class="know-body">Unlike router-level content filters that apply only when a child is connected to the home network, PIA Browser's bypass capability travels with the device. It operates on home Wi-Fi, school Wi-Fi, public hotspots, and mobile data connections equally — wherever the device is connected and PIA Browser is open, all filters are bypassed. This means that parental controls configured on the home router provide no protection when a child uses PIA Browser on a mobile data connection or on a school or public network. The device-level restriction of the app itself is the only control that applies consistently across all networks the child uses.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The App's Legitimate Adult Uses Do Not Change Its Impact on a Child's Device</div>
+        <div class="know-body">PIA Browser has entirely legitimate uses for adults: journalists protecting source confidentiality, travellers accessing services in countries with internet restrictions, professionals protecting sensitive work browsing, and privacy-conscious individuals who do not wish to be tracked online. These are the uses the product is designed and marketed for. None of these legitimate uses are relevant to a child's use of the app, and the fact that the app has a legitimate adult purpose does not reduce the impact it has on parental oversight when installed on a child's device. The effect on a parent's ability to monitor browsing is identical regardless of why the child installed it — and a child is unlikely to have installed it for journalism or professional privacy reasons.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block VPN-integrated browsers like PIA Browser — closing the gap that renders network filters, DNS blocking, and browsing history tools ineffective at the device level, before the bypass is used.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block PIA Browser and VPN-integrated browsers with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar VPN browsers and privacy tools automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Ensures content filters and browsing oversight remain effective</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged privacy tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like PIA Browser as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits gives you the information to make an informed choice, and the tools to act on it immediately when you decide to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to address the specific challenge PIA Browser presents — combining a conversation about why privacy tools are adult tools, a check for other VPN and privacy browsers on the device, and layered technical controls that close the bypass at the app level since network controls cannot.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About Why Privacy Tools Designed for Adults Are Not Appropriate on Their Device</div>
+        <div class="tip-body">A productive conversation about PIA Browser acknowledges that privacy online is a genuine and legitimate concern — one that adults use dedicated tools to address — while explaining clearly why those tools are not appropriate on a child's device. The reason parental oversight exists is not to invade a child's privacy but to keep them safe from content and interactions that are harmful or age-inappropriate. A tool that removes all parental visibility into browsing removes the safety net alongside the oversight. For older teenagers in particular, a conversation that treats privacy as a topic worth discussing — rather than dismissing their interest in it — is more likely to result in a durable understanding of why the restriction exists than a simple prohibition without explanation.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check for Other VPN Apps and Privacy Browsers — PIA Browser Is One of Several Available Tools</div>
+        <div class="tip-body">PIA Browser is one of the most prominent VPN-integrated browsers, but it is not the only one. Other browsers with built-in VPN features — including Opera's built-in VPN mode, Brave Browser's optional VPN, and standalone VPN apps that can be used alongside any browser — provide similar bypass capability through different mechanisms. When reviewing a child's device for tools that defeat browsing oversight, check not only for PIA Browser specifically but for any browser that is not the device's default, any standalone VPN application, and any browser whose icon or name is unfamiliar. A child interested in bypassing content filters is unlikely to stop at a single tool if the first one is blocked — category-level restrictions applied through iLimits cover the broader class of tools rather than requiring app-by-app identification.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Device-Level App Restrictions — Network Controls Cannot Counter Encrypted VPN Traffic</div>
+        <div class="tip-body">Because PIA Browser's bypass operates at the encryption layer rather than the application layer, no network-level or DNS-level content filter can be configured to work against it. The only controls that are effective against a VPN-integrated browser are those that prevent the app from being installed or opened at the device level — before the encryption is active. Use iLimits to block PIA Browser and the broader category of VPN and privacy browsers across every device your child uses. On Android, complement iLimits restrictions with the unknown sources setting to reduce the risk of a VPN app being sideloaded. On iOS, review Screen Time settings to restrict VPN profile installation, which can prevent a child from installing configuration profiles that establish VPN connections. The combination of iLimits app-level restrictions and platform-native VPN controls provides the most complete protection available, because network-level filtering alone is not sufficient once a VPN is active.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Content Filters That Cannot See the Traffic Cannot Filter It</h3>
+    <p class="closing-body">
+      Every network-level content filter, DNS-based safe search tool, and router-based parental control relies on the same assumption: that the browser's traffic is visible. PIA Browser removes that assumption by design. The only reliable protection is a device-level block that prevents the app from opening — applied before the encryption is active, not after. iLimits gives you that control, so that the filters you rely on continue to do the job they were set up for across every device and every network your child uses.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
