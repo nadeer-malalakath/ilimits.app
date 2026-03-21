@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>App Hider – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* App Hider brand: deep forest-shadow green */
+    --ah:           #1E6B4A;
+    --ah-mid:       #155237;
+    --ah-deep:      #0B3324;
+    --ah-light:     #F0FDF8;
+    --ah-bdr:       #6EE7B7;
+    --ah-text:      #0B3324;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --green-bg:     #F0FDF8;
+    --green-bdr:    #6EE7B7;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #060F09 0%, #0D2016 50%, #142B1E 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(30,107,74,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(110,231,183,0.25) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(110,231,183,0.14);
+    border: 1px solid rgba(110,231,183,0.28);
+    color: #6EE7B7; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #060F09 0%, #1E6B4A 55%, #6EE7B7 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(30,107,74,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── App Hider callout ── */
+  .ah-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ah-light); border: 1.5px solid var(--ah-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .ah-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D1FAE5; border: 1.5px solid var(--ah-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .ah-title { font-size: 13px; font-weight: 700; color: var(--ah-text); line-height: 1.3; margin-bottom: 3px; }
+  .ah-body  { font-size: 12px; color: #134E38; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ah-light); border: 1.5px solid var(--ah-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D1FAE5; border: 1.5px solid var(--ah-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--ah-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #134E38; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #060F09 0%, #0D2016 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(110,231,183,0.22) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🫥</div>
+        <div>
+          <div class="app-name-text">App Hider</div>
+          <div class="app-sub">App Concealment &amp; Privacy Tool</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">App Hiding / Concealment</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows apps and files to be hidden from the device's home screen and app list, making them invisible to parents and monitoring tools</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block app hiding tools instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of App Hider — a tool designed to conceal selected apps, files and content from the device's home screen, app drawer and standard search results, making them effectively invisible to anyone other than the person who has deliberately hidden them.</p>
+  </div>
+
+  <div class="ah-callout">
+    <div class="ah-ico">🫥</div>
+    <div>
+      <div class="ah-title">App Hider Is a Concealment Tool — Its Core Purpose Is to Make Apps and Content Invisible on a Device</div>
+      <div class="ah-body">App Hider is a utility application that allows a user to select any installed app and hide it from the device's home screen and app list. Hidden apps do not appear in the device's standard app drawer, do not show up in recent app views and are not discoverable through the device's built-in search. They continue to run and retain all their data — they are simply invisible unless the user knows how to access the App Hider's private space to reveal them. For a parent reviewing their child's device, the hidden apps leave no visible trace in the places a parent would normally look.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1E6B4A;"></span> App Concealment</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Hidden Space</div>
+    <div class="mode-chip"><span class="cdot" style="background:#6EE7B7;"></span> Password Lock</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> File Vault</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Stealth Mode</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      App Hider is a privacy utility that provides a <strong>hidden, password-protected space</strong> on the device where selected apps, photos, videos and files can be stored entirely out of sight — invisible from the home screen, the app drawer, the device's built-in search, and any standard review of the device's installed applications.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--ah-light);">🙈</div>
+      <div>
+        <div class="feat-name">Removes Apps From the Home Screen and App Drawer</div>
+        <div class="feat-desc">App Hider can take any installed app on the device and remove it from the home screen and app drawer entirely. The app remains installed and fully functional — it simply becomes invisible in all the places a parent would ordinarily look when reviewing a child's phone. A messaging app, a social media platform, a browser or any other application can be hidden in this way, leaving no icon and no visible indication that it is present on the device.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔑</div>
+      <div>
+        <div class="feat-name">Creates a Password-Protected Private Space for Hidden Apps</div>
+        <div class="feat-desc">The hidden apps are stored within App Hider's own password-protected private space on the device. This space is accessed through a PIN, pattern or fingerprint set by the child — not the device's standard lock screen. A parent who knows the device's unlock code does not automatically have access to the hidden space inside App Hider. The separate password layer means that even a parent who is aware of the app's existence may not be able to access what has been concealed within it without the child's cooperation.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">📁</div>
+      <div>
+        <div class="feat-name">Hides Photos, Videos and Files From the Device's Gallery</div>
+        <div class="feat-desc">Beyond apps, App Hider can move photos, videos and other media files into its private vault, removing them from the device's standard gallery and file explorer. Images and videos stored in the hidden vault do not appear in the photo roll or gallery app that a parent might review. This allows a child to conceal media content — including images received through messaging apps or downloaded from the internet — from any standard inspection of the device's photo library.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🥷</div>
+      <div>
+        <div class="feat-name">Stealth Features Disguise the App Hider Itself</div>
+        <div class="feat-desc">Some versions of App Hider and similar tools include stealth features that allow the app itself to be disguised — appearing on the home screen under a different name and icon, such as a calculator, clock or utility app, so that a parent reviewing the device does not recognise it as a concealment tool. This layer of deception is designed specifically to prevent detection: even the tool used to hide other apps is hidden from view, making the entire concealment arrangement invisible to a parent conducting a straightforward review of the phone.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--green-bg);">📵</div>
+      <div>
+        <div class="feat-name">Hidden Apps May Not Appear in Notification Histories or Usage Reports</div>
+        <div class="feat-desc">Apps that are active within App Hider's private environment may generate notifications or usage that is attributed differently in the device's usage logs compared to standard app installations. In some configurations, the activity of hidden apps is recorded under App Hider's own process rather than the individual app, making it difficult for monitoring tools that report per-app usage to surface an accurate picture of how a child is spending time on the device and which platforms they are actively using.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">App Hider's risks for children stem directly from its design purpose — concealment. Every feature the tool offers reduces a parent's ability to know what apps a child is using, what content they are viewing and who they are communicating with on their device.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🙈</span>
+      <div class="rc-name">Parental Oversight Eliminated</div>
+      <div class="rc-desc">Hidden apps leave no trace on the home screen or app list — a parent reviewing the device sees only what the child has chosen to leave visible, with no indication of what has been concealed within the hidden space</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Unmonitored Messaging Apps</div>
+      <div class="rc-desc">Any messaging or social media app can be hidden inside App Hider, allowing a child to carry on conversations, share content and make connections through apps a parent is entirely unaware are present on the device</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🖼️</span>
+      <div class="rc-name">Hidden Photos and Videos</div>
+      <div class="rc-desc">Media files moved into App Hider's vault disappear from the device's gallery entirely — a parent reviewing the photo library sees a sanitised version of what is actually stored on the device, with no indication that a vault exists</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Separate Password Blocks Parental Access</div>
+      <div class="rc-desc">The private space inside App Hider is protected by a separate password the child sets — knowing the device's main unlock code does not give a parent access to the hidden space or any of the apps and files stored within it</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🥸</span>
+      <div class="rc-name">The Tool Itself May Be Disguised</div>
+      <div class="rc-desc">App Hider can disguise itself as an innocent utility — appearing as a calculator or clock — so that even the concealment tool is invisible to a parent scanning the home screen for unfamiliar apps</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📊</span>
+      <div class="rc-name">Distorts Screen Time Reports</div>
+      <div class="rc-desc">Usage data from hidden apps may be attributed to App Hider's own process rather than the individual applications, meaning screen time and usage reports shown to a parent may significantly undercount the time spent on hidden platforms</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>App Hider Carries the Highest Risk Rating for Parental Oversight</strong>
+      <span>Unlike apps that carry harmful content directly, App Hider's risk is structural — it is a tool whose sole purpose is to make other apps invisible. A child with access to App Hider can, at any time, conceal any app, any content and any communication entirely from parental view. This fundamentally undermines any monitoring arrangement a family has in place, regardless of what other controls are applied to the device.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🛡️</div>
+    <div>
+      <div class="control-title">App Hiding Tools Are Specifically Designed to Defeat Parental Oversight — Blocking the Tool Is the Only Reliable Protection</div>
+      <div class="control-body">App Hider's purpose is concealment. Once installed, it can be used to hide any app at any time — including the apps a parent is actively monitoring through other tools. Attempting to detect what has been hidden after the fact is extremely difficult, because the hidden space is password-protected and the concealed apps leave no visible trace. The most reliable and complete protection is preventing App Hider and tools like it from being installed on a child's device before they are used to establish a hidden environment that a parent cannot see into.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">App Hider Is Designed Specifically to Make Apps Invisible — Its Purpose Is Concealment, Not Privacy</div>
+        <div class="know-body">While app concealment tools are sometimes marketed as privacy utilities for adults managing sensitive work or personal content on a shared device, their core function — removing apps from the visible app list and placing them behind a separate password — has an obvious and significant application for a child who wishes to prevent a parent from knowing which apps they are using. A child who installs App Hider is, by definition, creating a space on their device that a parent cannot see into without the child's active cooperation. This is categorically different from ordinary privacy expectations and directly conflicts with the oversight that parental monitoring tools are designed to provide.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">A Standard Review of a Child's Home Screen Will Not Reveal Apps That Have Been Hidden</div>
+        <div class="know-body">Parents who periodically check their child's phone by looking at the home screen, the app drawer or the device's app list will not see any app that has been placed inside App Hider's hidden space. The concealed apps are completely absent from every location a parent would normally inspect. The only indication that App Hider is in use is the presence of the App Hider application itself — and even that may be disguised as an innocent utility. A thorough review of the device requires looking specifically for concealment tools, not just reviewing the visible app list.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Monitoring Tools That Track Visible Apps May Provide an Incomplete Picture of Device Usage</div>
+        <div class="know-body">Screen time controls, usage monitoring apps and parental dashboard tools that report on per-app usage work by identifying apps on the device by their standard installation. An app that has been moved into App Hider's hidden space may not be individually identified in these reports — its usage may appear under App Hider's own process, or may not be captured at all depending on how the monitoring tool accesses device data. Parents should be aware that usage reports showing low activity on a particular type of app do not confirm that the app is absent or unused — they confirm only what is visible to the monitoring tool.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Blocking App Hider Before It Is Installed Is Significantly More Effective Than Trying to Investigate After</div>
+        <div class="know-body">Once App Hider is installed and a child has established a hidden space with a separate password, the parental ability to investigate what has been concealed is severely limited. The separate password means access requires either the child's cooperation or a factory reset of the device — neither of which is a practical routine monitoring step. Preventing the concealment tool from being installed in the first place, through iLimits restrictions, is the most practical and effective approach. It removes the capability before it is used rather than attempting to reverse a concealment that has already been established.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block app hiding utilities like App Hider before they can be used to create a concealed, password-protected space that sits entirely outside parental view.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block app hiding and concealment tools like App Hider with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar vault and privacy tools</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps can be installed and run</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged concealment tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like App Hider as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits gives you the information to make an informed choice, and the control to act on it immediately when you decide to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps parents can take to address the specific challenge that concealment tools present — combining an open conversation about digital trust with a technical approach that prevents hidden spaces from being created on a child's device.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk Openly With Children About Why Transparency on Their Device Matters</div>
+        <div class="tip-body">A child who feels the need to install a tool specifically designed to hide apps from a parent is signalling that something in the digital trust arrangement in the family is not working — either the child feels over-monitored and is seeking privacy in an unhealthy way, or they are engaged in activity they know a parent would not approve of. Either scenario is worth a calm, open conversation. Explain that the goal of parental monitoring is safety — knowing what platforms a child is using and who they are communicating with — not control for its own sake. Children who feel that digital oversight is collaborative rather than punitive are significantly less likely to seek concealment tools as a way of creating space outside parental view.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Look for Concealment Tools Specifically When Reviewing Your Child's Device</div>
+        <div class="tip-body">When reviewing a child's device, look specifically for apps whose purpose is concealment — names like App Hider, Calculator+, Private Space, Vault, or Hide App are common indicators. Also look for calculator or utility apps that seem unusual or that you do not remember installing, as stealth-mode concealment apps frequently disguise themselves as everyday tools. If you find an unfamiliar app that does not have an obvious everyday purpose, search for its name to understand what it does before dismissing it. Routine spot-checks that go beyond the visible home screen — including reviewing the device's full installed app list through the device settings — are more likely to surface concealment tools than a casual look at the home screen alone.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use iLimits to Prevent App Hiding Tools From Being Installed in the First Place</div>
+        <div class="tip-body">Apply iLimits restrictions to block app hiding, vault and concealment utilities across every device your child has access to. Because the concealment established by these tools is protected by a separate password and leaves no visible trace, prevention is substantially more effective than detection after the fact. Ensure restrictions cover the full category of concealment tools rather than a single named app — new apps with the same functionality appear regularly under different names, and category-level restrictions provide more durable protection than app-by-app blocking. Combine technical restrictions with periodic full app-list reviews through the device's settings to maintain a complete picture of what is installed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Safest Device Is One With No Hidden Spaces</h3>
+    <p class="closing-body">
+      App hiding tools present one of the most direct challenges to parental oversight available on a smartphone — a child with access to one can, in minutes, create a concealed environment that renders standard monitoring tools incomplete. iLimits gives you the means to prevent that environment from being created, while the open, honest conversations you have with your child about digital trust give them the understanding to make responsible choices even when you are not able to check directly.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
