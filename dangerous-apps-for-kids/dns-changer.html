@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DNS Changer – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* DNS Changer brand: deep technical steel */
+    --dc:           #374151;
+    --dc-mid:       #1F2937;
+    --dc-deep:      #111827;
+    --dc-light:     #F9FAFB;
+    --dc-bdr:       #9CA3AF;
+    --dc-text:      #111827;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --steel-bg:     #F9FAFB;
+    --steel-bdr:    #9CA3AF;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --indigo-bg:    #EEF2FF;
+    --indigo-bdr:   #A5B4FC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #06080C 0%, #0E1117 50%, #161B24 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(55,65,81,0.60) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(156,163,175,0.22) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(55,65,81,0.30);
+    border: 1px solid rgba(156,163,175,0.35);
+    color: #9CA3AF; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #06080C 0%, #374151 58%, #6B7280 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(55,65,81,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FDBA74; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── DNS Changer callout ── */
+  .dc-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--steel-bg); border: 1.5px solid var(--steel-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .dc-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E5E7EB; border: 1.5px solid var(--steel-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .dc-title { font-size: 13px; font-weight: 700; color: var(--dc-text); line-height: 1.3; margin-bottom: 3px; }
+  .dc-body  { font-size: 12px; color: #1F2937; font-weight: 400; line-height: 1.55; }
+
+  /* ── Nuance badge ── */
+  .nuance-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--indigo-bg); border: 1.5px solid var(--indigo-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .nuance-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #E0E7FF; border: 1.5px solid var(--indigo-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .nuance-text strong { font-size: 12.5px; font-weight: 700; color: #1E1B4B; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .nuance-text span   { font-size: 11.5px; color: #3730A3; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFAF0; border: 1.5px solid #FBD38D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEEBCB; border: 1.5px solid #FBD38D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #744210; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5A3110; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--steel-bg); border: 1.5px solid var(--steel-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E5E7EB; border: 1.5px solid var(--steel-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--dc-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #1F2937; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #06080C 0%, #0E1117 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(55,65,81,0.30) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔧</div>
+        <div>
+          <div class="app-name-text">DNS Changer</div>
+          <div class="app-sub">DNS Server Configuration Tool</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Network Utility / DNS Tool</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium-high">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Replaces the device's DNS resolver with any server chosen by the user, silently and completely bypassing DNS-based parental content filters — the same class of bypass as the Cloudflare 1.1.1.1 app but applicable to any DNS server, including unrestricted public ones</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block DNS override tools from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of DNS Changer — a network utility app that allows users to replace the device's DNS resolver with any DNS server they choose, including unrestricted public DNS servers that bypass content filters, making it a targeted and silent tool for defeating exactly the DNS-based parental controls that most family routers and parental control services rely on.</p>
+  </div>
+
+  <div class="dc-callout">
+    <div class="dc-ico">🔧</div>
+    <div>
+      <div class="dc-title">DNS Changer Is a Network Utility That Replaces the Device's DNS Resolver — Silently Bypassing Every DNS-Based Parental Content Filter With No Visible Indicator</div>
+      <div class="dc-body">DNS Changer is an Android utility app that provides a simple interface for changing the DNS server the device uses to resolve website addresses. By replacing the device's default DNS resolver — typically the one provided by the home router or ISP, which applies content filtering rules — with any DNS server of the user's choice, the app silently removes every DNS-based content filter from the device's internet access. The change happens at the network configuration layer with no visible indicator on the device's surface — no VPN key icon, no status bar change — and applies to all browsers and apps on the device, not just a single browser. DNS-based safe search, DNS content blocking, router parental controls, and ISP family filters all become immediately ineffective for the device once the DNS server is changed.</div>
+    </div>
+  </div>
+
+  <div class="nuance-band">
+    <div class="nuance-icon">ℹ️</div>
+    <div class="nuance-text">
+      <strong>A Network Utility Whose Specific Purpose Is to Change the DNS Server — The Parental Control Bypass Is Its Core Function</strong>
+      <span>Unlike Cloudflare 1.1.1.1, which bypasses DNS filters as a side effect of its DNS performance features, DNS Changer's explicit purpose is to allow users to choose any DNS server — including unrestricted public ones that bypass content filtering entirely.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#374151;"></span> DNS Override</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Bypasses DNS Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#9CA3AF;"></span> No Visible Indicator</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Any DNS Server</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> All Apps Affected</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      DNS Changer is a <strong>network configuration utility</strong> whose explicit purpose is to replace the device's DNS resolver with any server the user selects. When pointed at an unrestricted public DNS server, it silently and completely bypasses every DNS-based content filter, safe search enforcement, and router parental control — applying to all browsers and all networked apps on the device with no visible indicator.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--steel-bg);">🔄</div>
+      <div>
+        <div class="feat-name">Replaces the Device's DNS Resolver With Any Server the User Chooses</div>
+        <div class="feat-desc">DNS Changer provides a simple interface for entering any DNS server address and applying it to the device's network configuration. A child can enter the address of any public DNS server — including well-known unrestricted resolvers like 8.8.8.8 (Google Public DNS) or 1.1.1.1 (Cloudflare) that do not apply content filtering — and the device will immediately route all DNS queries to that server rather than to the DNS infrastructure the home router or ISP provides. The app makes what is normally a technical network configuration step accessible to anyone through a simple input field and a single button press.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🚧</div>
+      <div>
+        <div name="feat-name" class="feat-name">Defeats Every DNS-Based Content Filter, Safe Search, and Router Parental Control</div>
+        <div class="feat-desc">The majority of home parental control systems — router manufacturer controls, DNS filtering services, ISP family filters, and many third-party parental control apps — operate by controlling which DNS server the device uses and applying content filtering rules at the DNS query level. When DNS Changer replaces the device's DNS resolver with an unrestricted public server, all of these filtering rules are bypassed simultaneously — DNS queries go to an unfiltered server that applies no content rules, and every website is accessible regardless of what the home network is configured to block. The bypass is total and immediate from the moment the new DNS server is applied.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🔕</div>
+      <div>
+        <div class="feat-name">No Visible Indicator — The DNS Change Is Silent and Invisible</div>
+        <div class="feat-desc">DNS Changer makes its change at the device's network configuration level — there is no VPN tunnel, no VPN status bar indicator, and no visible surface change on the device when the DNS server has been changed. A parent reviewing the device's home screen, checking the status bar for active connections, or looking for VPN indicators will see nothing that indicates the DNS configuration has been altered. The only way to detect the change through device inspection is to check the device's network settings directly — specifically the DNS configuration — rather than looking for any visual indicator that the change has been made.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">📱</div>
+      <div>
+        <div class="feat-name">Affects All Apps and Browsers on the Device — Not Just a Single Browser</div>
+        <div class="feat-desc">Because DNS Changer operates at the device's network configuration level rather than within a single browser or application, the DNS change applies to all DNS queries from every app on the device. Every browser, every app, every networked service on the device sends its DNS queries to the new DNS server rather than to the filtered DNS infrastructure of the home network. The bypass is device-wide in scope, affecting all browsing and all apps simultaneously from the moment the new server is applied — not limited to the browser used to make the change or to a specific application.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Can Be Pointed at Any DNS Server — Including Those Specifically Selected for Unrestricted Access</div>
+        <div class="feat-desc">Unlike the Cloudflare 1.1.1.1 app, which uses Cloudflare's specific DNS infrastructure by design, DNS Changer accepts any DNS server address the user enters. A child who knows or looks up the addresses of unrestricted public DNS servers — freely available through a basic internet search — can point the device's DNS configuration at a server specifically chosen because it applies no content filtering. The app provides no guidance on which servers to use and no warnings about the implications of changing the DNS configuration — it simply applies whatever server address the user provides, including servers selected specifically for their absence of content filtering.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">DNS Changer's risks are concentrated in a single area — the silent, complete, and device-wide bypass of DNS-based parental content filtering, which is the primary filtering mechanism most home parental control systems use — with no visible indicator that the bypass is active.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔕</span>
+      <div class="rc-name">Silent Bypass — No Visible Indicator</div>
+      <div class="rc-desc">The DNS change produces no VPN icon, no status bar change, and no visible surface indicator — a parent checking the device for signs of bypass activity will see nothing to suggest the DNS configuration has been changed</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏠</span>
+      <div class="rc-name">Router and Home Network Filters Completely Defeated</div>
+      <div class="rc-desc">Every DNS-based content filter configured on the home router, ISP, or network — the primary parental control mechanism for most families — is immediately and completely bypassed once a new DNS server is applied through DNS Changer</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📱</span>
+      <div class="rc-name">Device-Wide Effect — All Apps and Browsers</div>
+      <div class="rc-desc">The DNS change applies to every app and every browser on the device simultaneously — the bypass is not limited to a single browser or application, it affects the DNS resolution of every networked service the device uses</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔍</span>
+      <div class="rc-name">Safe Search Enforcement Bypassed</div>
+      <div class="rc-desc">DNS-based safe search enforcement — which works by redirecting DNS queries for major search engines to their safe search versions — is defeated when the DNS resolver changes to an unrestricted server that does not apply these redirections</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Any Unrestricted DNS Server Can Be Selected</div>
+      <div class="rc-desc">Unlike Cloudflare 1.1.1.1, DNS Changer accepts any DNS server address — including servers specifically chosen for their absence of content filtering, making the bypass potentially more targeted than a fixed-DNS app</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏫</span>
+      <div class="rc-name">Bypass Follows the Device to Every Network</div>
+      <div class="rc-desc">Once the DNS server is changed on the device, the change persists across all networks the device connects to — the bypass applies on home Wi-Fi, school networks, mobile data, and public hotspots equally until the DNS is changed back</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>DNS Changer Carries a Medium–High Risk Rating — Targeted, Silent DNS Filter Bypass With No Visible Indicator</strong>
+      <span>DNS Changer's medium–high rating reflects that its bypass is limited to DNS-based filtering tools — it does not provide a full encrypted VPN tunnel and does not bypass network-layer monitoring that goes beyond DNS inspection. However, DNS-based filtering is the primary parental control mechanism used by most home networks, meaning the bypass it provides affects the majority of families' primary content protection system. Its silence — no VPN indicator, no visible change — makes it one of the harder DNS bypass tools to detect through standard device inspection.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🔧</div>
+    <div>
+      <div class="control-title">DNS Changer's Explicit Purpose Is to Change the DNS Server — It Is Specifically Useful for Bypassing Exactly the Filtering System Most Home Parental Controls Rely On</div>
+      <div class="control-body">The Cloudflare 1.1.1.1 app bypasses DNS-based content filters as a consequence of its DNS performance features — its primary audience is adults who want faster, more private DNS resolution, and the bypass is incidental. DNS Changer's explicit function is to allow users to choose their DNS server, and the most common use case among children who install it is specifically to bypass the DNS-based filtering that parental controls apply. A child who installs DNS Changer has typically done so because they know their home network uses DNS filtering and they want to bypass it — the installation is targeted and deliberate rather than incidental. This makes DNS Changer a higher-priority restriction than tools whose bypass is an unintended side effect of another function.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍oudou👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">DNS Changer Is Specifically Useful for Bypassing DNS-Based Home Network Filters — Its Installation Is Almost Always Deliberate</div>
+        <div class="know-body">DNS Changer has limited uses outside of deliberately changing the DNS server — it is a utility with a single function, and that function is specifically applicable to bypassing the DNS-based filtering that home router parental controls apply. Unlike the Cloudflare 1.1.1.1 app, which has genuine performance and privacy benefits that adult users seek out independently of any desire to bypass content filtering, DNS Changer has no significant adult use case beyond network administration and deliberate DNS server selection. A child who has DNS Changer installed has sought out a tool specifically because it allows them to change the DNS server — and the primary motivation for a child to do this is to bypass DNS-based content controls. The installation can be treated as a deliberate and targeted attempt to defeat the specific filtering mechanism the child knows is in place on their home network.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The DNS Change Has No Visible Indicator — Detection Requires Checking the Device's Network Settings Directly</div>
+        <div class="know-body">DNS Changer's bypass is one of the most invisible among all the tools in this category. It produces no VPN icon, no status bar indicator, and no visible surface change. A parent who checks the device's home screen, reviews the status bar, or looks for active VPN connections will see no indication that the DNS configuration has been changed. The only reliable detection approach — other than finding the DNS Changer app in the installed app list — is to check the device's network settings directly for any manually configured DNS server. On Android, this is typically found in Wi-Fi settings under the connected network's advanced options, where any custom DNS server address will appear. If a non-default DNS server address is configured on a child's device with no explanation, DNS Changer or a similar tool has likely been used to apply it.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The DNS Change Persists After the App Is Closed or Even Deleted Until It Is Manually Reverted</div>
+        <div class="know-body">DNS Changer applies its change to the device's network configuration — once applied, the DNS server setting persists even after the DNS Changer app is closed. This means a child can use DNS Changer to apply an unrestricted DNS server, then close or even delete the app, and the DNS change remains in effect. A parent who finds and deletes DNS Changer from a child's device has not necessarily restored the DNS-based content filtering — the underlying DNS configuration change may still be in place. After deleting DNS Changer, also check the device's network settings to verify that the DNS configuration has returned to the default (typically automatic or the router's DNS) rather than remaining set to a custom server applied before the app was removed.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Blocking DNS Changer Complements But Does Not Replace Direct Network Configuration Checks</div>
+        <div class="know-body">Blocking the DNS Changer app through iLimits prevents the app from being used to change the DNS configuration going forward, but does not automatically reverse any DNS change that was applied before the restriction was put in place. If DNS Changer is found on a child's device, check the device's DNS settings and restore them to the default before applying the restriction — otherwise the content filtering the restriction is designed to preserve may already have been bypassed by a previous DNS change that persists independently of the app. After verifying that the DNS settings are correct and applying the iLimits restriction, also note that a technically capable child may be able to change the DNS server manually through the device's settings without using a dedicated app — checking the device's DNS configuration periodically remains a useful complement to the app-level restriction.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block DNS Changer and similar DNS override utilities — preventing the silent, targeted bypass of DNS-based parental content filtering that these tools enable with a single configuration change.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block DNS Changer and DNS override utilities with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar DNS configuration tools automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Preserves the effectiveness of DNS-based parental content filtering</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged DNS tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like DNS Changer as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. If DNS Changer is found on your child's device, <strong>also check the device's DNS settings</strong> to ensure any previously applied DNS change has been reversed before relying on DNS-based content filters.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for DNS Changer — reflecting its deliberately targeted nature, the persistence of DNS changes after the app is removed, and the specific network setting check that complements the app-level restriction.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Address the Deliberate Intent Directly — DNS Changer Has Almost No Use Case for a Child Other Than Bypassing Parental Controls</div>
+        <div class="tip-body">Unlike Cloudflare 1.1.1.1, which has legitimate performance and privacy benefits that a technically interested child might genuinely pursue, DNS Changer's specific function — changing the DNS server through a dedicated utility app — has very limited use cases outside of deliberately overriding the DNS configuration a network provides. A child who has DNS Changer installed and has changed the device's DNS server has done so with a specific purpose. A direct and calm conversation about why DNS-based filtering exists, what it protects against, and why deliberately bypassing it is different from simply having a faster or more private DNS resolver is more likely to be productive than a generalised conversation about online safety. The child likely knows exactly what the app does and why they installed it — a conversation that acknowledges this and engages with the specific action, rather than treating it as incidental, tends to be more effective.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Find DNS Changer in the App List — Then Check the Device's DNS Settings Before Removing the App</div>
+        <div class="tip-body">DNS Changer is identifiable in the installed app list by its name and typically by a standard wrench or settings-style icon. When found, check the device's current DNS configuration before removing the app — the DNS change persists after the app is deleted and needs to be manually reversed. On Android, the DNS setting is typically found by navigating to Settings, then Wi-Fi, then tapping the connected network and selecting the advanced or modify options — any custom DNS server address configured there indicates an active DNS override. Reset the DNS configuration to automatic or default (which uses the router's DNS) before or after deleting DNS Changer to ensure the content filtering infrastructure is restored. Also check the Private DNS setting in Android's network settings — some DNS Changer variants or manual DNS changes may use Android's Private DNS feature rather than the per-network DNS setting.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block DNS Changer Through iLimits — And Periodically Check the Device's DNS Settings as a Complement</div>
+        <div class="tip-body">Use iLimits to block DNS Changer and similar DNS override utilities at the device level. Note that a technically capable child may also be able to change the DNS server manually through Android's own network settings, without a dedicated app — the app-level restriction prevents the use of dedicated DNS tools but does not prevent a manual settings change. For families whose primary parental control mechanism is DNS-based filtering, considering a periodic check of the device's DNS settings as part of routine device review is a useful complement to the iLimits restriction. On Android, also consider reviewing the Private DNS setting under network and internet settings, which provides a system-level DNS override that persists across all Wi-Fi and mobile data connections. If a non-standard DNS server appears there, it should be cleared alongside any per-network DNS setting changes. The combination of iLimits app restriction and periodic DNS setting review provides the most reliable ongoing protection for DNS-based filtering systems.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The App That Targets DNS Filters Specifically Requires the DNS Settings to Be Checked After It Is Found</h3>
+    <p class="closing-body">
+      DNS Changer is distinct from most tools in this category because its change persists after the app is removed — a DNS override applied before the restriction was put in place may still be active on the device. iLimits blocks the app from being used again, but the most complete response combines the restriction with a direct check of the device's DNS settings to ensure the filtering infrastructure it was designed to bypass has been restored. Both steps together close the gap that DNS Changer was installed to create.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
