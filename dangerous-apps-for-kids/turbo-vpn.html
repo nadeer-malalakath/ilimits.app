@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Turbo VPN – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Turbo VPN: vivid lime-green speed */
+    --tv:           #65A30D;
+    --tv-mid:       #4D7C0F;
+    --tv-deep:      #1A2E05;
+    --tv-light:     #F7FEE7;
+    --tv-bdr:       #A3E635;
+    --tv-text:      #1A2E05;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+    --purple-bg:    #FAF5FF;
+    --purple-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0A1501 0%, #1A2E05 50%, #243D07 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(101,163,13,0.42) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 275px; height: 275px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(101,163,13,0.38) 0%, transparent 68%);
+    filter: blur(30px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(101,163,13,0.18);
+    border: 1px solid rgba(163,230,53,0.34);
+    color: #A3E635; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #1A2E05 0%, #65A30D 55%, #A3E635 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(101,163,13,0.50), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.13); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Turbo VPN callout ── */
+  .tv-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--tv-light); border: 1.5px solid var(--tv-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .tv-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #ECFCCB; border: 1.5px solid var(--tv-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .tv-title { font-size: 13px; font-weight: 700; color: var(--tv-text); line-height: 1.3; margin-bottom: 3px; }
+  .tv-body  { font-size: 12px; color: #365314; font-weight: 400; line-height: 1.55; }
+
+  /* ── Key difference vs Psiphon banner ── */
+  .diff-banner {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .db-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .db-title { font-size: 12.5px; font-weight: 700; color: #78350F; margin-bottom: 3px; line-height: 1.3; }
+  .db-body  { font-size: 11.5px; color: var(--amber-text); font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-lime::before   { background: #65A30D; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB; border: 1.5px solid #FCD34D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FCD34D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Privacy concern note ── */
+  .privacy-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--tv-light); border: 1.5px solid var(--tv-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .pn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #ECFCCB; border: 1.5px solid var(--tv-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pn-title { font-size: 13px; font-weight: 700; color: var(--tv-text); line-height: 1.3; margin-bottom: 3px; }
+  .pn-body  { font-size: 12px; color: #365314; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0A1501 0%, #243D07 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(101,163,13,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card          { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid     { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card       { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box      { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip    { animation: fadeUp 0.42s ease 0.05s both; }
+  .tv-callout    { animation: fadeUp 0.42s ease 0.03s both; }
+  .diff-banner   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip    { animation: fadeUp 0.42s ease 0.04s both; }
+  .privacy-note  { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing       { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">⚡</div>
+        <div>
+          <div class="app-name-text">Turbo VPN</div>
+          <div class="app-sub">Consumer VPN &amp; Proxy Service</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">VPN / Proxy Tool</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium-high">🟡 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Bypasses network-level parental controls and content filters, hides browsing activity from monitoring tools, and is marketed with consumer appeal that makes it easy for children to find and install without understanding the implications</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Turbo VPN — a widely marketed consumer VPN app that routes internet traffic through external servers, bypassing network-level parental controls and hiding browsing activity from monitoring tools, with a design and marketing approach aimed squarely at mainstream consumer appeal.</p>
+  </div>
+
+  <div class="tv-callout">
+    <div class="tv-ico">⚡</div>
+    <div>
+      <div class="tv-title">Turbo VPN Is a Consumer VPN App Marketed for Its Speed and Ease of Use — On a Child's Device It Bypasses Network-Level Parental Controls With a Single Tap</div>
+      <div class="tv-body">Turbo VPN is a commercially operated consumer VPN service with hundreds of millions of downloads, marketed primarily on speed, simplicity and a free tier with no account required. It works by routing internet traffic through Turbo VPN's servers in multiple countries, bypassing any network-level content filtering or monitoring a parent has in place. Unlike Psiphon — which was built for press freedom purposes — Turbo VPN is a mainstream consumer product with explicit mainstream appeal, a one-tap connect experience, and a design that makes bypassing network restrictions as frictionless as possible. On a child's device, this frictionless design is the primary concern.</div>
+    </div>
+  </div>
+
+  <div class="diff-banner">
+    <div class="db-ico">🔍</div>
+    <div>
+      <div class="db-title">How Turbo VPN Differs From Psiphon in Risk Profile</div>
+      <div class="db-body">Both Turbo VPN and Psiphon bypass network-level parental controls. The key difference is intent and accessibility: Psiphon was built for anti-censorship purposes with a deliberate user. Turbo VPN is a mainstream consumer app — marketed with a free tier, no signup required, one-tap connection, and hundreds of millions of downloads — that a child can find through ads, app store browse, or peer recommendation and have running in under a minute without any technical understanding. Its commercial design removes every friction point that might cause a child to pause before activating it.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#65A30D;"></span> Consumer VPN</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Bypasses Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> One-Tap Connect</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B82F6;"></span> Hides Traffic</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Free Tier</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">
+      Turbo VPN is a <strong>mainstream consumer VPN service</strong> that routes internet traffic through external servers to bypass network-level restrictions, hide browsing activity from monitoring tools, and access content blocked by household content filters — with a frictionless, one-tap design that requires no account or technical knowledge to activate.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--tv-light);">🌐</div>
+      <div>
+        <div class="feat-name">Routes Traffic Through External Servers — Bypassing All Network-Level Filters</div>
+        <div class="feat-desc">Like all VPN services, Turbo VPN works by creating an encrypted tunnel between the device and its external servers. Any network-level parental control — a DNS content filter, a router-based category block, a household monitoring system — operates on traffic before it leaves the local network. Traffic routed through Turbo VPN bypasses these controls, making every network-level filter a parent has configured ineffective for as long as Turbo VPN is connected. The bypass is total: all categories of restricted content become accessible simultaneously, not selectively.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">⚡</div>
+      <div>
+        <div class="feat-name">One-Tap Connection With No Account Required on the Free Tier</div>
+        <div class="feat-desc">Turbo VPN's free tier requires no account creation, no email address and no payment — a child who downloads the app can have a VPN connection active within seconds of opening it for the first time. The connect button is the first thing visible when the app opens. This zero-friction design is a deliberate product choice to maximise conversion from download to active user, and it removes every practical barrier between a child and an active network-level filter bypass. There is no moment of account setup, terms agreement, or configuration that might cause a child to reconsider.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">👁️</div>
+      <div>
+        <div class="feat-name">Encrypts Traffic — Hiding Browsing Activity From Network Monitoring</div>
+        <div class="feat-desc">Turbo VPN encrypts the traffic it carries, meaning network monitoring tools that log website visits or app connections cannot inspect traffic routed through the VPN. A parent reviewing router logs or a network monitoring tool will see only a connection to Turbo VPN's servers — not the websites visited, content accessed, or services used during the session. Any period when Turbo VPN is active is a period during which network-level monitoring provides no useful record of the child's actual browsing activity.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🌍</div>
+      <div>
+        <div class="feat-name">Connects to Servers in Multiple Countries — Including Regions With Different Content Standards</div>
+        <div class="feat-desc">Turbo VPN offers connections through servers in multiple countries, allowing users to route their traffic through a jurisdiction of their choice. Content that is unavailable in the child's home country — whether blocked by parental filters or restricted by regional availability — becomes accessible when routing through a server in a country with different content standards. This includes content on streaming platforms restricted to certain regions and content subject to different age classification standards in other jurisdictions.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">📲</div>
+      <div>
+        <div class="feat-name">Widely Advertised, Easy to Discover, and Available on Google Play</div>
+        <div class="feat-desc">Turbo VPN is one of the most downloaded VPN apps on Google Play and is actively marketed through digital advertising, social media and influencer channels. A child who searches for "how to bypass school filter", "how to unblock websites" or similar terms will encounter Turbo VPN immediately. It is available on Google Play with no sideloading required, making it installable on a managed device subject to Family Link approval. Its high visibility and consumer marketing budget mean discovery is frictionless — children encounter it through ads, peer recommendations and organic search without actively looking for a specific tool.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from Turbo VPN — the bypass of network parental controls, the removal of monitoring visibility, the frictionless access it provides to blocked content, concerns about data practices on a free commercial VPN, and its mainstream discoverability.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">Bypasses All Network-Level Parental Controls Instantly</div>
+      <div class="rc-desc">Every DNS filter, router content block and household network restriction is bypassed simultaneously the moment Turbo VPN connects — a single tap removes all network-level parental controls for the duration of the session</div>
+    </div>
+    <div class="risk-card c-lime">
+      <span class="rc-emoji">⚡</span>
+      <div class="rc-name">Zero-Friction Design — Active in Seconds, No Account Needed</div>
+      <div class="rc-desc">Turbo VPN's free tier requires no signup, no payment and no configuration — a child can download and activate a complete network filter bypass in under a minute, with no setup step that might prompt second thoughts</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">👁️</span>
+      <div class="rc-name">Encrypts Traffic — Network Monitoring Becomes Blind</div>
+      <div class="rc-desc">Network monitoring tools see only a connection to Turbo VPN's servers during active sessions — a parent reviewing browsing history via router logs or monitoring software finds no record of what their child actually accessed while the VPN was on</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">📊</span>
+      <div class="rc-name">Free Tier Raises Data Practice Concerns</div>
+      <div class="rc-desc">Free commercial VPN services generate revenue through advertising and, in some cases, data practices — a child's browsing activity routed through a commercial VPN may be subject to data collection practices that differ significantly from those of the services they are using directly</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Multi-Country Server Access Bypasses Regional Restrictions</div>
+      <div class="rc-desc">Routing through servers in other countries makes content unavailable in the child's home region accessible — including content on streaming platforms and content subject to different age classification standards in other jurisdictions</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">📲</span>
+      <div class="rc-name">Mainstream Discoverability — Encountered Without Searching</div>
+      <div class="rc-desc">Turbo VPN is actively advertised and appears in app store recommendations — children encounter it through ads and peer recommendations without actively looking for a VPN, lowering the deliberateness of installation compared to niche circumvention tools</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Turbo VPN Carries a Medium–High Risk Rating</strong>
+      <span>The risk from Turbo VPN on a child's device is the same structural risk as any VPN — total bypass of network-level parental controls, with traffic encryption removing monitoring visibility. What distinguishes it from more technical circumvention tools is its mainstream accessibility: zero-friction installation, no account required, and active consumer marketing that means a child can encounter and activate it without any deliberate search for bypass tools. Restriction is the appropriate default on children's devices.</span>
+    </div>
+  </div>
+
+  <div class="privacy-note">
+    <div class="pn-ico">📊</div>
+    <div>
+      <div class="pn-title">Free Commercial VPNs and Data Practices — What Parents Should Be Aware Of</div>
+      <div class="pn-body">Turbo VPN is a free commercial product. Free VPN services typically generate revenue through advertising targeting, data aggregation, or both. A child using Turbo VPN routes their browsing traffic through servers operated by a commercial entity whose data practices may differ from those of the websites and apps they are using directly. Parents considering whether to allow VPN use on a child's device should be aware of this as a secondary concern alongside the parental control bypass — the question of which entity can see the child's traffic matters even when the content restrictions aspect has been addressed.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Turbo VPN Is Different From Anti-Censorship Tools — It Is a Mainstream Consumer Product Designed to Be Used Without Thinking</div>
+        <div class="know-body">Unlike Psiphon, which has a specific technical user base and a genuine anti-censorship purpose, Turbo VPN is a mass-market consumer app with hundreds of millions of downloads and an active advertising presence. Children encounter it through mainstream channels — YouTube ads, app store recommendations, social media — and its zero-friction design means it can be installed and activated without any of the deliberate effort that characterises a child seeking out a specialised circumvention tool. A child using Turbo VPN may not have consciously decided to bypass parental controls — they may have simply tapped a prominent green button on an app they found through an ad, without fully understanding that doing so renders their household's network restrictions ineffective.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Risk Scales With How Much a Parent Relies on Network-Level Controls</div>
+        <div class="know-body">Turbo VPN's bypass of parental controls is specific to network-level filtering — DNS blocks, router category filters and household network monitoring. If a parent's safety setup relies primarily on these tools, Turbo VPN's impact is significant: every restriction is bypassed simultaneously for any session in which the VPN is active. If device-level controls are also in place — such as those iLimits provides — the risk profile is different, because device-level controls operate independently of network routing. Understanding which layer your current setup primarily relies on is useful for assessing how much of a priority blocking Turbo VPN specifically should be, and for identifying whether your layering is as complete as it could be.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">A Child Using Turbo VPN May Not Fully Understand What It Does — or That It Is Relevant to Your Household Rules</div>
+        <div class="know-body">Because Turbo VPN is marketed as a tool for "faster, more private browsing" and "unblocking content" rather than explicitly as a parental control bypass, a child who has installed it may not connect its use to a deliberate decision to circumvent household rules. The conversation about Turbo VPN is therefore different from the conversation about Psiphon — rather than addressing a deliberate circumvention attempt, it may involve clarifying what a VPN actually does in practical terms on their device and why the household rule about it exists. A child who understands the practical effect of routing traffic through an external server is better placed to make a genuinely informed choice than one who has only encountered the "faster and more private" marketing framing.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Family Link App Installation Approval Catches the Installation — But Peer Recommendations Mean It May Arrive Without a Search</div>
+        <div class="know-body">Turbo VPN is available on Google Play and will trigger a Family Link approval request on devices where approval is required for all installations. This is the most effective preventive measure — it addresses the installation before it happens rather than after the fact. However, parents should be aware that Turbo VPN's mainstream visibility means it may appear on a child's device through a much less deliberate route than a search for circumvention tools: a peer recommendation, a YouTube ad watched on the device, or an app store recommendation based on installed apps. The Family Link approval requirement is valuable specifically because it catches these passive discoveries before they become active bypasses.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block Turbo VPN and similar consumer VPN apps — preventing your network-level parental controls from being bypassed by a single tap and keeping your household's digital safety setup intact.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Turbo VPN and consumer VPN tools by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar VPN and proxy apps in a single action</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Runs quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Turbo VPN as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for addressing Turbo VPN — covering the conversation to have, how to layer controls effectively, and the value of Family Link approval as a catch-all for mainstream app discoveries.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Explain What a VPN Actually Does — Not Just That It Is Not Allowed</div>
+        <div class="tip-body">The most useful conversation about Turbo VPN explains, in plain terms, what a VPN does in practice on their device — not why it is against the household rules. Help your child understand that when they tap the connect button in Turbo VPN, all of their internet traffic is rerouted through a server operated by a company they know nothing about. The household's content filters stop working. The family's ability to see which websites were visited disappears. The actual destination of their browsing is visible to Turbo VPN's servers rather than their own home network. Framed this way — as a practical description of what happens, rather than a prohibition — the conversation gives your child a genuine understanding rather than a rule to look for ways around. Also discuss the data practice dimension: free services generate revenue somehow, and understanding that helps children develop a critical perspective on the "free and private" marketing claims of commercial VPN products.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--tv-light); border-color: var(--tv-bdr);">🔧</div>
+      <div>
+        <div class="tip-name">Combine Device-Level and Network-Level Controls for Layered Protection</div>
+        <div class="tip-body">Turbo VPN's bypass of network-level controls is a practical demonstration of why no single layer of parental control is complete on its own. Network-level filters are valuable and cover a wide range of risk, but any VPN app makes them ineffective while it is running. Device-level controls — such as those iLimits provides — operate independently of network routing and are not bypassed by VPN traffic, but have their own limitations if a child accesses a different device or network. Review your current setup with this layering in mind: iLimits at the device level to prevent circumvention tools from running, combined with network-level controls as a secondary layer, gives you the most resilient configuration available. If your setup currently relies primarily on one layer, adding the other significantly improves its overall robustness.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Enable Family Link App Approval, Block via iLimits, and Address VPNs as a Category</div>
+        <div class="tip-body">Apply iLimits restrictions to block Turbo VPN and similar consumer VPN apps across all of your child's devices. Ensure Google Family Link is configured to require parental approval for all Play Store app installations — this is the most direct way to catch an attempt to install Turbo VPN before it succeeds, and it covers the passive discovery routes (ads, recommendations) that are just as likely as deliberate searching for Turbo VPN specifically. When applying restrictions, consider addressing VPNs as a category rather than blocking individual apps: Turbo VPN is one of many consumer VPN products available on Google Play, and blocking the category through iLimits provides broader and more durable coverage than addressing each app individually as it appears.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Single Tap Should Not Undo Your Household's Digital Safety Setup</h3>
+    <p class="closing-body">
+      Turbo VPN's design goal — zero-friction access to a VPN connection — is exactly what makes it a concern on a child's device. It turns the bypass of every network-level parental control into a one-tap action that requires no account, no configuration, and no technical understanding. iLimits gives you the tools to block that tap from being available in the first place. The conversation about what a VPN actually does — practically and clearly — gives your child a reason to understand the restriction rather than simply encountering it.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
