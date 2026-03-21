@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>APKPure Lite – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* APKPure Lite accent: steel-cyan */
+    --al:           #0284C7;
+    --al-mid:       #0369A1;
+    --al-deep:      #0C2340;
+    --al-light:     #F0F9FF;
+    --al-bdr:       #7DD3FC;
+    --al-text:      #0C2340;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #071828 0%, #0C2340 50%, #103054 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(2,132,199,0.40) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 275px; height: 275px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(2,132,199,0.36) 0%, transparent 68%);
+    filter: blur(30px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(2,132,199,0.18);
+    border: 1px solid rgba(125,211,252,0.32);
+    color: #7DD3FC; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0C2340 0%, #0284C7 55%, #38BDF8 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(2,132,199,0.52), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.13); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ── Lite badge ── */
+  .lite-relation {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: rgba(2,132,199,0.12); border: 1px solid rgba(125,211,252,0.25);
+    border-radius: 11px; padding: 10px 14px; margin-top: 10px;
+  }
+  .lite-dot { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .lite-relation-text { font-size: 11.5px; color: #BAE6FD; font-weight: 400; line-height: 1.5; }
+  .lite-relation-text strong { font-weight: 700; color: #E0F2FE; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── APKPure Lite callout ── */
+  .al-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--al-light); border: 1.5px solid var(--al-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .al-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E0F2FE; border: 1.5px solid var(--al-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .al-title { font-size: 13px; font-weight: 700; color: var(--al-text); line-height: 1.3; margin-bottom: 3px; }
+  .al-body  { font-size: 12px; color: #075985; font-weight: 400; line-height: 1.55; }
+
+  /* ── Comparison banner ── */
+  .compare-banner {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    box-shadow: var(--shadow-xs);
+  }
+  .compare-title {
+    font-size: 11px; font-weight: 700; color: var(--ink-muted);
+    text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;
+  }
+  .compare-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid var(--border-soft);
+  }
+  .compare-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .compare-label { font-size: 12px; color: var(--ink-mid); font-weight: 500; flex: 1; }
+  .compare-both { display: flex; gap: 6px; }
+  .ctag {
+    font-size: 10px; font-weight: 700; padding: 2px 8px;
+    border-radius: 100px; white-space: nowrap;
+  }
+  .ctag.full  { background: #FFF0F4; color: var(--rose); border: 1px solid var(--rose-mid); }
+  .ctag.lite  { background: var(--al-light); color: var(--al); border: 1px solid var(--al-bdr); }
+  .ctag.same  { background: #F5F5F5; color: #555; border: 1px solid #E0E0E0; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-cyan::before   { background: #0284C7; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #7F1D1D; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #991B1B; font-weight: 400; line-height: 1.5; }
+
+  /* ── Device warning ── */
+  .device-warn {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .dw-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .dw-title { font-size: 13px; font-weight: 700; color: #7F1D1D; line-height: 1.3; margin-bottom: 3px; }
+  .dw-body  { font-size: 12px; color: #991B1B; font-weight: 400; line-height: 1.6; }
+  .dw-body code {
+    display: inline-block; background: #FFE4E4; border-radius: 5px;
+    padding: 1px 6px; font-size: 11px; font-family: monospace; color: #7F1D1D;
+    margin-top: 5px; line-height: 1.8;
+  }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #071828 0%, #103054 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(2,132,199,0.30) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card           { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid      { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card        { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box       { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip     { animation: fadeUp 0.42s ease 0.05s both; }
+  .al-callout     { animation: fadeUp 0.42s ease 0.03s both; }
+  .compare-banner { animation: fadeUp 0.42s ease 0.04s both; }
+  .mode-strip     { animation: fadeUp 0.42s ease 0.04s both; }
+  .device-warn    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing        { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📦</div>
+        <div>
+          <div class="app-name-text">APKPure Lite</div>
+          <div class="app-sub">Third-Party APK Installer · Lightweight Edition</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Third-Party App Store</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Installs apps outside official stores, bypassing age ratings, content filters, security screening and parental approval — identical risks to APKPure in a smaller package</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+      <div class="lite-relation">
+        <div class="lite-dot">🔗</div>
+        <div class="lite-relation-text"><strong>APKPure Lite is the lightweight version of APKPure.</strong> It shares the same core functionality and the same risk profile — a smaller download size does not reduce the risks it poses to children.</div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of APKPure Lite — a streamlined version of the APKPure third-party app store, designed for lower-end devices and slower connections, that retains every core function of the full app including the ability to install Android apps entirely outside Google Play.</p>
+  </div>
+
+  <div class="al-callout">
+    <div class="al-ico">📦</div>
+    <div>
+      <div class="al-title">APKPure Lite Is a Stripped-Down Version of APKPure — Smaller in Size, Identical in Risk</div>
+      <div class="al-body">APKPure Lite is the lightweight edition of APKPure, built for devices with limited storage, slower processors or restricted data connections. The "Lite" label refers only to the app's file size and interface weight — its ability to download and install APK files outside the Google Play Store is fully intact. All of the same safety concerns apply: age ratings are not enforced, Family Link parental approvals are bypassed entirely, Google's security scanning does not cover any app obtained through it, and apps banned or age-restricted on Google Play are accessible without restriction. Parents who are aware of APKPure should treat APKPure Lite with exactly the same level of concern.</div>
+    </div>
+  </div>
+
+  <!-- Comparison banner -->
+  <div class="compare-banner">
+    <div class="compare-title">APKPure vs APKPure Lite — What Actually Differs</div>
+    <div class="compare-row">
+      <div class="compare-label">Install apps outside Google Play</div>
+      <div class="compare-both">
+        <span class="ctag full">APKPure ✓</span>
+        <span class="ctag lite">Lite ✓</span>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">Bypasses Family Link approvals</div>
+      <div class="compare-both">
+        <span class="ctag full">APKPure ✓</span>
+        <span class="ctag lite">Lite ✓</span>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">No age rating enforcement</div>
+      <div class="compare-both">
+        <span class="ctag full">APKPure ✓</span>
+        <span class="ctag lite">Lite ✓</span>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">No malware / security screening</div>
+      <div class="compare-both">
+        <span class="ctag full">APKPure ✓</span>
+        <span class="ctag lite">Lite ✓</span>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">Enables "unknown sources" permission</div>
+      <div class="compare-both">
+        <span class="ctag full">APKPure ✓</span>
+        <span class="ctag lite">Lite ✓</span>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">Reduced app file size</div>
+      <div class="compare-both">
+        <span class="ctag same">APKPure —</span>
+        <span class="ctag lite">Lite ✓</span>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">Optimised for low-end devices</div>
+      <div class="compare-both">
+        <span class="ctag same">APKPure —</span>
+        <span class="ctag lite">Lite ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#0284C7;"></span> APK Downloads</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> App Sideloading</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> No Age Ratings</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> Bypasses Play Store</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Lightweight Build</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">
+      APKPure Lite is a <strong>trimmed-down version of the APKPure third-party app store</strong>, designed for devices with limited resources. It retains the full capability to download and install Android APK files outside Google Play — with all the same risks and none of the same safeguards as the full version.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--al-light);">📦</div>
+      <div>
+        <div class="feat-name">Downloads and Installs Android Apps Entirely Outside Google Play</div>
+        <div class="feat-desc">APKPure Lite's core function is identical to the full APKPure app — it retrieves APK files from the APKPure catalogue and installs them directly onto the device, bypassing the Google Play Store and all of its associated safety infrastructure. The lighter interface and smaller file size affect the look and performance of the app on low-end hardware, but they do not change what it is capable of doing or the access it grants to apps that official stores restrict.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🏎️</div>
+      <div>
+        <div class="feat-name">Built for Low-End Devices and Slow Connections — Making It Accessible on More Hardware</div>
+        <div class="feat-desc">APKPure Lite is specifically designed to run smoothly on older or lower-specification Android devices — budget phones, older tablets and devices running older versions of Android. This makes the APKPure catalogue accessible on hardware that might struggle with the full app, widening the range of devices on which the risks associated with APKPure apply. Parents should check not just primary phones but also older tablets and secondary devices a child has access to, as APKPure Lite is a natural fit for exactly that kind of hardware.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🚫</div>
+      <div>
+        <div class="feat-name">Provides Access to Apps Removed, Banned or Age-Restricted on Google Play</div>
+        <div class="feat-desc">APKPure Lite draws from the same catalogue as the full APKPure app — including apps removed from Google Play for content or policy violations, apps restricted to adult audiences only, and apps that have never been submitted for Google's review. A child using APKPure Lite has the same access to restricted and banned apps as they would using the full version, without any age check, content warning or parental notification standing between them and a download.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">👨‍👧</div>
+      <div>
+        <div class="feat-name">Completely Bypasses Google Family Link App Approval</div>
+        <div class="feat-desc">Apps installed through APKPure Lite generate no Family Link approval request, appear in no parental activity log, and are not subject to any of the age rating or content restriction rules Family Link enforces through the Play Store. The lightweight build of the app does not change this — a child installing an app through APKPure Lite on an older family tablet does so with no parental notification, even if Family Link is configured and active on the device.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">⚙️</div>
+      <div>
+        <div class="feat-name">Requires and Enables "Install Unknown Sources" — Weakening Device Security</div>
+        <div class="feat-desc">Like the full APKPure app, APKPure Lite requires the "install from unknown sources" device permission to function. Enabling this permission allows any app or website — not just APKPure Lite — to install software on the device outside the Play Store, and the permission remains active after APKPure Lite is removed unless a parent manually revokes it. On older or shared devices where children may have more unsupervised access, this persistent permission change is a particular concern.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">APKPure Lite carries exactly the same risk profile as the full APKPure app — with the additional concern that its lightweight design makes it more likely to be installed on older, shared or secondary devices that receive less parental scrutiny.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-red">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">Access to Apps Banned or Age-Restricted on Google Play</div>
+      <div class="rc-desc">APKPure Lite draws from the same catalogue as the full app — apps removed from Google Play for content violations, adult-only apps and unreviewed software are all accessible with no age check or parental notification</div>
+    </div>
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">👨‍👧</span>
+      <div class="rc-name">Bypasses Family Link Parental Approval Entirely</div>
+      <div class="rc-desc">The lightweight build changes nothing about how APKPure Lite interacts with Family Link — installations generate no approval request and appear in no activity log, even on devices where Family Link is fully configured and active</div>
+    </div>
+    <div class="risk-card c-cyan">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">No Security or Malware Screening on Any APK</div>
+      <div class="rc-desc">APK files obtained through APKPure Lite have not been through Google's Play Protect security scanning — apps may contain malware, spyware or data-harvesting tools that are invisible to the user but active on the device</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">⚙️</span>
+      <div class="rc-name">Leaves "Unknown Sources" Permission Active After Removal</div>
+      <div class="rc-desc">Installing APKPure Lite requires enabling a device-level permission that remains active after the app is deleted — allowing any other app or browser to install software outside the Play Store until a parent manually revokes it</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">📱</span>
+      <div class="rc-name">Designed for Older Devices That May Receive Less Oversight</div>
+      <div class="rc-desc">APKPure Lite's lightweight build makes it the natural choice for older tablets and hand-me-down phones — devices that are more likely to be used with less supervision and are less likely to have up-to-date parental controls applied</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Age Ratings Shown but Never Enforced</div>
+      <div class="rc-desc">Like the full app, APKPure Lite may display age ratings sourced from Google Play but does not enforce them — a child can download any app regardless of its age classification without any restriction, verification or confirmation</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>APKPure Lite Carries the Same High Risk Rating as APKPure</strong>
+      <span>The "Lite" label describes a smaller file size, not a safer or more restricted version of the app. APKPure Lite removes every protective layer Google Play provides — parental approval, age enforcement, content screening and malware vetting — and makes the full APKPure catalogue accessible on a wider range of devices, including older hardware that may receive less parental scrutiny.</span>
+    </div>
+  </div>
+
+  <div class="device-warn">
+    <div class="dw-ico">⚙️</div>
+    <div>
+      <div class="dw-title">The "Install Unknown Sources" Permission Persists After APKPure Lite Is Removed</div>
+      <div class="dw-body">
+        APKPure Lite requires a device-level permission to install apps outside the Play Store. This setting remains active even after the app is deleted — any other app or website can use it to sideload software until it is manually turned off. Check and revoke this permission on every device APKPure Lite was installed on.
+        <br><code>Settings → Apps → Special App Access → Install Unknown Apps</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">"Lite" Means a Smaller Download — Not a Safer or More Restricted App</div>
+        <div class="know-body">The word "Lite" in APKPure Lite refers exclusively to the app's file size and its optimisation for lower-specification hardware. It does not indicate a reduced feature set, a restricted catalogue, or any additional safety measures compared with the full APKPure app. Parents who are familiar with APKPure and understand its risks should apply exactly the same level of concern to APKPure Lite — the two apps are functionally equivalent from a child safety perspective, and restricting one without restricting the other leaves the same gap open.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">APKPure Lite Is Especially Worth Checking For on Older and Shared Devices</div>
+        <div class="know-body">APKPure Lite is designed for and marketed toward users of older, lower-specification Android devices — hand-me-down phones, budget tablets and older family devices. These are exactly the kinds of devices that are most likely to be given to younger children, used with less consistent oversight, and less likely to have up-to-date parental controls applied. Parents whose child uses an older tablet or a secondary phone should check those devices specifically for APKPure Lite, as it is a natural fit for the kind of hardware that often receives less scrutiny than a child's primary device.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Both APKPure and APKPure Lite Should Be Blocked — Restricting One Without the Other Is Incomplete</div>
+        <div class="know-body">APKPure and APKPure Lite are separate apps, listed separately in app stores and installed independently. Blocking or removing one does not affect the other. A child who has APKPure blocked on their device can install APKPure Lite to access the same catalogue, and vice versa. Parents applying restrictions should ensure both apps are addressed — iLimits allows category-level blocking of third-party app stores, which covers both the full and Lite versions alongside other similar tools in a single action.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Removing APKPure Lite Does Not Automatically Undo the Security Changes It Made</div>
+        <div class="know-body">As with the full APKPure app, deleting APKPure Lite from a device does not reverse the "install from unknown sources" permission it required. This permission must be manually revoked in the device's settings after the app is removed. On older devices that may not receive regular maintenance or settings reviews, this permission can remain active for an extended period after APKPure Lite is deleted. Any apps installed through APKPure Lite before it was removed will also remain on the device unless individually identified and uninstalled.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents direct tools to block APKPure Lite and the full APKPure app together — closing the gap that third-party app stores create in your parental oversight across every device your child uses.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block APKPure Lite and APKPure together with one category-level restriction</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Covers similar third-party app stores and sideloading tools in the same action</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Runs quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like APKPure Lite as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from third-party app stores across all their devices — including the older and secondary hardware where APKPure Lite is most likely to appear.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Explain to Your Child What Makes Official App Stores Different — and Why It Matters</div>
+        <div class="tip-body">Help your child understand in plain terms what the Google Play Store's review process actually does — it checks apps for harmful code, enforces age ratings, and gives parents oversight through Family Link. Explain that apps from outside the Play Store skip all of that, and that the risk goes beyond content: an app downloaded from a third-party store may work exactly as advertised while silently collecting account credentials, accessing the device's camera or location data, or downloading additional software in the background. Children who understand the practical reason behind these safety measures are better equipped to make thoughtful decisions than those who encounter restrictions without context.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--al-light); border-color: var(--al-bdr);">📱</div>
+      <div>
+        <div class="tip-name">Check All Devices — Not Just Your Child's Primary Phone</div>
+        <div class="tip-body">APKPure Lite is specifically built for older, lower-specification hardware — the kind of device most likely to be a hand-me-down tablet, a secondary phone or a shared family device. When reviewing the apps installed on your child's devices, include every device they have regular access to, not just the newest one. Also check the "install unknown sources" permission on each device under Settings → Apps → Special App Access → Install Unknown Apps, and revoke it for any app that should not have it. A thorough device audit once every few months is one of the most practical ways to catch sideloading tools that may have been installed without your knowledge.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Both APKPure and APKPure Lite Together for Complete Coverage</div>
+        <div class="tip-body">APKPure and APKPure Lite are separate apps that must be restricted independently — blocking one does not affect the other. Use iLimits to apply category-level restrictions that cover both apps, along with other third-party app stores and sideloading tools, in a single action. Also ensure Google Family Link is correctly configured on all Android devices your child uses, with app installation approval required — remembering that Family Link covers only Play Store installations, and iLimits addresses the gap created by tools like APKPure Lite that are designed to operate outside that system entirely.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Smaller App Does Not Mean a Smaller Risk</h3>
+    <p class="closing-body">
+      APKPure Lite carries the same risk as APKPure in a package that fits more devices and draws less attention. Blocking it alongside the full version — and checking the older, secondary devices where it is most likely to appear — closes one of the most significant gaps in a child's device security. iLimits gives you the tools to do that consistently across every device your family uses. Pairing that protection with open conversations about why official app stores exist and what they protect against gives your child the context to make safer choices independently.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
