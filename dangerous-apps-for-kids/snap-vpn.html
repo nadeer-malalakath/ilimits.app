@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Snap VPN – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Snap VPN brand: electric cyan-teal */
+    --sv:           #007E8A;
+    --sv-mid:       #005F6B;
+    --sv-deep:      #003840;
+    --sv-light:     #E0F7FA;
+    --sv-bdr:       #80DEEA;
+    --sv-text:      #002B32;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --cyan-bg:      #E0F7FA;
+    --cyan-bdr:     #80DEEA;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --mint-bg:      #F0FDF4;
+    --mint-bdr:     #86EFAC;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #000E10 0%, #001E22 50%, #002830 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(0,126,138,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(128,222,234,0.26) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(0,126,138,0.20);
+    border: 1px solid rgba(128,222,234,0.35);
+    color: #80DEEA; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #000E10 0%, #007E8A 58%, #4DD0E1 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(0,126,138,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Snap VPN callout ── */
+  .sv-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cyan-bg); border: 1.5px solid var(--cyan-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .sv-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #B2EBF2; border: 1.5px solid var(--cyan-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .sv-title { font-size: 13px; font-weight: 700; color: var(--sv-text); line-height: 1.3; margin-bottom: 3px; }
+  .sv-body  { font-size: 12px; color: #00454D; font-weight: 400; line-height: 1.55; }
+
+  /* ── Speed badge ── */
+  .speed-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--mint-bg); border: 1.5px solid var(--mint-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .speed-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #DCFCE7; border: 1.5px solid var(--mint-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .speed-text strong { font-size: 12.5px; font-weight: 700; color: #14532D; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .speed-text span   { font-size: 11.5px; color: #166534; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cyan-bg); border: 1.5px solid var(--cyan-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #B2EBF2; border: 1.5px solid var(--cyan-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--sv-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #00454D; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #000E10 0%, #001E22 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,126,138,0.30) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">⚡</div>
+        <div>
+          <div class="app-name-text">Snap VPN</div>
+          <div class="app-sub">Fast VPN Proxy &amp; Wi-Fi Security</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">VPN / Proxy Tool</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Routes all device internet traffic through an encrypted VPN proxy, bypassing every content filter, parental control, and network monitoring tool with a single connection — applied to any browser or app on the device</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block VPN and proxy tools like Snap VPN from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Snap VPN — a lightweight, fast-connect VPN proxy app that tunnels all traffic from the entire device through an encrypted connection, instantly bypassing every content filter, safe search system, and network monitoring tool — and doing so across every browser and app on the device simultaneously, not just within a dedicated browser.</p>
+  </div>
+
+  <div class="sv-callout">
+    <div class="sv-ico">⚡</div>
+    <div>
+      <div class="sv-title">Snap VPN Tunnels All Device Traffic — Not Just One Browser — Making Every App and Every Website Invisible to Parental Controls With a Single Connection</div>
+      <div class="sv-body">Snap VPN is a consumer-facing VPN proxy app marketed for its speed and simplicity, available free on both Android and iOS. Unlike VPN-integrated browsers, which only route traffic from within a single app, Snap VPN operates at the device network level — once connected, it tunnels all internet traffic from every app and every browser on the device through its encrypted proxy simultaneously. A single connection bypasses content filters, DNS monitoring, and network-level parental controls for everything the child does online — messaging apps, social platforms, streaming services, and all web browsing — not just activity in one particular browser. It connects in seconds, requires no configuration, and is marketed directly toward the appeal of unrestricted, fast internet access.</div>
+    </div>
+  </div>
+
+  <div class="speed-band">
+    <div class="speed-icon">⚡</div>
+    <div class="speed-text">
+      <strong>Device-Wide Bypass in One Tap — Every App, Every Browser, Simultaneously</strong>
+      <span>Unlike VPN browsers that protect only their own traffic, Snap VPN's device-level tunnel bypasses all parental controls across every app on the phone the moment it connects.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#007E8A;"></span> Device-Wide VPN</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Bypasses All Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#80DEEA;"></span> One-Tap Connect</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> All Apps Affected</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Free to Use</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Snap VPN is a <strong>device-wide VPN proxy</strong> that encrypts and tunnels all internet traffic from every app on the device — not just a single browser. One connection simultaneously bypasses every content filter, DNS block, and network monitoring tool applied to the device, across all browsing and all apps, instantly.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--cyan-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Device-Level Tunnel — Affects Every Browser and Every App Simultaneously</div>
+        <div class="feat-desc">Snap VPN's most significant characteristic — and its key difference from VPN-integrated browsers — is that it operates at the device's network layer rather than within a single application. When Snap VPN connects, every app on the device that accesses the internet does so through the VPN tunnel: the default browser, alternative browsers, messaging apps, social media platforms, video streaming apps, and any other networked application all have their traffic routed through the proxy simultaneously. A parent who has applied content filtering to the device's default browser, or who monitors traffic at the router level, finds that all of these measures are bypassed by a single Snap VPN connection — not just browsing in one specific app.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">⚡</div>
+      <div>
+        <div class="feat-name">One-Tap Connection With No Setup or Configuration</div>
+        <div class="feat-desc">Snap VPN is designed around the proposition of instant, effortless connection. A single tap on the app's main connect button establishes the VPN tunnel — there are no server settings to configure, no protocol choices to make, and no account required to use the free tier. A child can download Snap VPN, open it, tap connect, and have all device traffic routed through the VPN proxy within seconds of the first launch. The speed and simplicity of connection mean that a child can establish and drop the VPN connection quickly, making it practical to connect briefly for specific purposes and disconnect again — a behaviour pattern that makes detection through periodic device checks more difficult.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🚧</div>
+      <div>
+        <div class="feat-name">Defeats Network-Level Content Filters, Router Controls, and DNS Safe Search Across All Traffic</div>
+        <div class="feat-desc">All content filtering tools that operate at the DNS or network level — router-based parental controls, ISP filtering, DNS-based safe search, and home network content blockers — are rendered completely ineffective by Snap VPN's encrypted tunnel. Because Snap VPN routes all DNS queries through its own infrastructure rather than through the home network's DNS system, no filtering rule applied at the router or DNS level can inspect, redirect, or block any traffic from a connected device. The filtering system receives only a single encrypted stream bound for the VPN server — it cannot read the destinations within that stream or apply any rule to them.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">📱</div>
+      <div>
+        <div class="feat-name">Bypasses Parental Controls in Messaging and Social Media Apps — Not Just Web Browsing</div>
+        <div class="feat-desc">Because Snap VPN routes traffic at the device level rather than within a single browser, its bypass extends to parental controls applied to apps beyond the web browser. Parental control tools that monitor or restrict content within specific apps — or that rely on DNS-level blocking to prevent certain platforms from being accessible — may find those controls ineffective when Snap VPN is connected. A child who uses Snap VPN can access age-restricted content or blocked platforms not only through web browsing but through any app on the device that would otherwise be subject to those restrictions.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--mint-bg);">🌍</div>
+      <div>
+        <div class="feat-name">Server Selection Enables Access to Geo-Blocked Content Across All Apps</div>
+        <div class="feat-desc">Snap VPN offers a selection of server locations, allowing a child to route all device traffic through a server in a different country. Because this routing applies to the entire device rather than a single app, geo-restricted content on streaming platforms, social media services, and websites becomes accessible across every app on the device simultaneously. Content that is unavailable in the child's country — whether due to platform restrictions, parental geo-blocking, or network-level regional controls — can be accessed from any app with a single server selection in Snap VPN.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Snap VPN's risks exceed those of VPN-integrated browsers because its bypass applies to every app and every browser on the device simultaneously. A single connection renders the full range of parental controls — across browsing, messaging, social media, and streaming — simultaneously ineffective.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📱</span>
+      <div class="rc-name">All Apps Bypassed — Not Just One Browser</div>
+      <div class="rc-desc">Snap VPN's device-level tunnel means every app on the phone — messaging, social media, streaming, and all browsers — has its traffic routed through the VPN simultaneously, bypassing every content control applied to any app at once</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚧</span>
+      <div class="rc-name">All Network Filters Defeated Instantly</div>
+      <div class="rc-desc">Router parental controls, DNS safe search, ISP filtering, and home network content blockers are all defeated by a single Snap VPN connection — no destination is visible to any filtering system operating at the network or DNS level</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">⚡</span>
+      <div class="rc-name">Connects in Seconds With One Tap</div>
+      <div class="rc-desc">Snap VPN's instant one-tap connection means a child can establish and drop the device-wide bypass quickly — making it practical to use briefly for specific purposes and disconnect again, reducing the chance of a parent noticing an active connection</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👁️‍🗨️</span>
+      <div class="rc-name">Traffic From All Apps Hidden From Monitoring</div>
+      <div class="rc-desc">Network monitoring tools that log or inspect device traffic at the router or network level cannot read the contents of Snap VPN's encrypted tunnel — traffic from every app on the device becomes invisible to any monitoring system that depends on unencrypted traffic visibility</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🆓</span>
+      <div class="rc-name">Free, With No Account Required</div>
+      <div class="rc-desc">Snap VPN's free tier requires no registration, no payment, and no personal information — a child can download, connect, and use the full device-wide bypass without creating any account that a parent could review or identify</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📶</span>
+      <div class="rc-name">Works on Every Network — Home, School, Mobile</div>
+      <div class="rc-desc">Snap VPN's bypass travels with the device and operates identically on home Wi-Fi, school networks, public hotspots, and mobile data connections — no network-level control applied in any environment is effective against it</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Snap VPN Carries the Highest Risk Rating — Its Device-Wide Tunnel Extends the Bypass Beyond Browsing to Every App on the Device</strong>
+      <span>Snap VPN's device-level operation distinguishes it from VPN-integrated browsers: a single connection simultaneously defeats every content control applied to every app on the device. A child with Snap VPN active is not simply browsing without a filter — every platform, every messaging app, and every streaming service on the device is operating without any network-level oversight. The scope of the bypass is total, and it is established in one tap.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🛡️</div>
+    <div>
+      <div class="control-title">A Device-Wide VPN Cannot Be Countered by Network-Level Controls — Only App-Level Prevention Is Effective</div>
+      <div class="control-body">Every parental control that operates at the network or DNS level — router controls, ISP filtering, DNS safe search, home network blockers — becomes completely ineffective the moment Snap VPN connects. These tools see only an encrypted connection to a VPN server; they cannot read or filter any of the traffic inside it. The only control that remains effective regardless of whether Snap VPN is connected is a device-level restriction that prevents the app from opening in the first place. Because Snap VPN's bypass applies to all apps on the device rather than just one browser, the consequences of not having that device-level restriction in place are broader than for any single-app bypass tool.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Snap VPN Is a Standalone VPN App, Not a Browser — Its Effect on Parental Controls Is Broader Than Any VPN Browser</div>
+        <div class="know-body">Parents who are aware of VPN-integrated browsers as a bypass risk may not immediately recognise a standalone VPN app like Snap VPN as carrying a more significant concern. Because Snap VPN operates at the device's network layer rather than within a single browser, its bypass is substantially broader: a VPN browser affects only the traffic generated within that one app, while Snap VPN affects every app on the device simultaneously. A child who uses Snap VPN while communicating through a messaging app, browsing through the default browser, and watching content through a streaming app has all three streams bypassing parental controls at the same time — with a single connection. This device-wide scope makes standalone VPN apps a higher-priority restriction than VPN browsers for families whose parental controls operate at the network or DNS level.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Quick-Connect, Quick-Disconnect Pattern Makes Snap VPN Hard to Detect Through Periodic Device Checks</div>
+        <div class="know-body">Snap VPN's one-tap connection and disconnection design makes it practical for a child to use briefly for a specific purpose and then disconnect before a parent might notice the VPN is active. A child who wants to access a blocked platform for a short period can connect Snap VPN, access the content, and disconnect within a few minutes — leaving no running VPN connection visible in the device's status bar when a parent looks at the device. This quick-use pattern is substantially more practical with a fast-connect app like Snap VPN than with more complex VPN tools that require configuration time. Periodic inspection of the device for the presence of the app itself — rather than checking for an active VPN connection — is the only detection approach that is not susceptible to this pattern.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Snap VPN Is Marketed on Speed and Simplicity — Its Core Consumer Appeal Is Accessible to Children With No Technical Interest</div>
+        <div class="know-body">Unlike some VPN tools that appeal to users with a specific interest in technical privacy, Snap VPN's marketing and design are built around instant gratification — fast connection, one button, no setup. This positions it as accessible to children who have no interest in privacy technology but have heard from peers that a VPN allows them to bypass filters or access blocked content. The app's simplicity means a child can be pointed to it by a friend, install it, and use it effectively without any prior understanding of how VPNs work. The lower technical bar compared to more complex VPN tools means its potential user base among children is broader — any child with a smartphone and the motivation to bypass a content restriction can use it immediately.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Snap VPN Appears in Both the Google Play Store and Apple App Store — It Can Be Installed Without Any Third-Party Source</div>
+        <div class="know-body">Snap VPN is available through both major official app stores and can be installed on Android and iOS devices through the same standard channel as any other app. A parent who relies on monitoring third-party app installations or sideloaded APKs as the primary mechanism for detecting bypass tools will not have visibility into a Snap VPN installation obtained through the Play Store or App Store. On Android, a Google Family Link installation notification will show it as a standard app download — with no indication from the store listing of its function as a bypass tool. Identifying Snap VPN requires recognising the app by name or icon in the device's app list and understanding its function, rather than identifying it through any unusual installation route.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Snap VPN and the broader category of standalone VPN and proxy tools — preventing the device-wide bypass that renders all network-level parental controls simultaneously ineffective.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Snap VPN and standalone VPN proxy apps with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Category-level restrictions cover similar VPN tools and proxy apps automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Preserves the effectiveness of all network and DNS-level content controls</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged VPN tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Snap VPN as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits gives you the information to make an informed choice, and the tools to act on it immediately when you decide to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to address the specific challenge Snap VPN presents — focusing on the device-wide scope of its bypass, how to identify VPN apps on a device, and the combination of device-level and platform-native controls that remain effective against a device-wide VPN tunnel.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About the Difference Between Privacy and Bypassing Safety Protections</div>
+        <div class="tip-body">Older children and teenagers who seek out VPN tools often frame it as a privacy issue — a desire not to be monitored. Acknowledging this framing while explaining the distinction between legitimate privacy and the removal of parental safety protections tends to be more effective than dismissing the concern. Explain that parental content filters are not surveillance tools designed to monitor a child's every action — they are safety layers that operate in the background and are most valuable in situations the child doesn't anticipate. A VPN that bypasses a content filter doesn't just remove the specific restriction the child was trying to avoid — it removes the entire safety layer for every app on the device, including situations where that protection might genuinely matter. The conversation is most effective when it treats the child's privacy interest as legitimate while being clear that the tool they are using removes protection they may not realise they have.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check for VPN Apps in Your Child's App List — Look for the VPN Icon in the Device's Status Bar as a Live Detection Signal</div>
+        <div class="tip-body">When reviewing a child's device for VPN tools, check the full installed app list for any app whose name or icon includes "VPN", "proxy", "shield", "secure", or "private". Snap VPN uses its own recognisable icon and name, making it identifiable in the app list. As an additional real-time detection signal, most Android and iOS devices display a small key icon or VPN label in the status bar at the top of the screen whenever a VPN is actively connected. A parent who glances at a child's phone screen and notices the VPN status icon should understand that all of the device's traffic is currently being routed through an external server. This status bar indicator is only present when the VPN is actively connected — the app may be installed without a live connection — so checking the app list directly is a more reliable detection approach than relying on the status bar alone.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Snap VPN at the App Level and Restrict VPN Profile Installation Through Platform-Native Settings</div>
+        <div class="tip-body">Use iLimits to block Snap VPN and the broader category of standalone VPN and proxy apps across every device your child uses. Because network-level controls are completely ineffective against an active VPN tunnel, the only reliable protection is preventing the VPN app from operating at the device level — before the connection is established. On iOS, use Screen Time to restrict the installation of VPN configuration profiles, which prevents both VPN apps that install profiles and manual profile-based VPN configurations from establishing tunnels on the device. On Android, pair iLimits app-level restrictions with the unknown sources setting to prevent sideloaded VPN APKs from being installed as an alternative to the blocked Play Store version. The combination of iLimits category-level restrictions and platform-native VPN controls provides overlapping protection that closes both the standard installation route and the configuration profile route simultaneously.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">One Connection. Every App. Every Control Bypassed.</h3>
+    <p class="closing-body">
+      Snap VPN's device-wide tunnel is what makes it uniquely impactful among bypass tools — a single tap doesn't just open one unfiltered window, it removes every layer of network-based parental protection across everything the child does online simultaneously. The only answer to a device-wide bypass is a device-level restriction. iLimits gives you that control — across the full category of VPN tools, not just individual app names — so that the safety systems you have put in place continue to work as you intended them to.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
