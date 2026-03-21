@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TutuApp – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* TutuApp brand: vivid magenta-violet */
+    --tu:           #9B1FD4;
+    --tu-mid:       #7B18A8;
+    --tu-deep:      #4A0E66;
+    --tu-light:     #FAF5FF;
+    --tu-bdr:       #D8B4FE;
+    --tu-text:      #2E0052;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --violet-bg:    #FAF5FF;
+    --violet-bdr:   #D8B4FE;
+    --pink-bg:      #FDF2F8;
+    --pink-bdr:     #F9A8D4;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0E0018 0%, #1C0033 50%, #280048 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(155,31,212,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.24) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 290px; height: 290px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(216,180,254,0.30) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.26) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(155,31,212,0.20);
+    border: 1px solid rgba(216,180,254,0.38);
+    color: #D8B4FE; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0E0018 0%, #9B1FD4 55%, #D8B4FE 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(155,31,212,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.13); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── TutuApp callout ── */
+  .tu-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--tu-light); border: 1.5px solid var(--tu-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .tu-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE9FE; border: 1.5px solid var(--tu-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .tu-title { font-size: 13px; font-weight: 700; color: var(--tu-text); line-height: 1.3; margin-bottom: 3px; }
+  .tu-body  { font-size: 12px; color: #3B0066; font-weight: 400; line-height: 1.55; }
+
+  /* ── Dual-platform badge ── */
+  .dual-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--pink-bg); border: 1.5px solid var(--pink-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .dual-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FCE7F3; border: 1.5px solid var(--pink-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .dual-text strong { font-size: 12.5px; font-weight: 700; color: #831843; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .dual-text span   { font-size: 11.5px; color: #9D174D; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--tu-light); border: 1.5px solid var(--tu-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE9FE; border: 1.5px solid var(--tu-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--tu-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #3B0066; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0E0018 0%, #1C0033 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(155,31,212,0.32) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🪄</div>
+        <div>
+          <div class="app-name-text">TutuApp</div>
+          <div class="app-sub">Third-Party App Store · iOS &amp; Android</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Alternative App Marketplace</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Distributes modified, cracked, and unofficial apps on both iOS and Android, bypassing App Store and Play Store parental controls, security reviews, and age restrictions entirely</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block TutuApp and similar third-party stores from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of TutuApp — a third-party app store targeting both iOS and Android devices that specialises in distributing modified, cracked, and unofficial versions of popular apps, bypassing both Apple's App Store and Google's Play Store security and parental control systems simultaneously.</p>
+  </div>
+
+  <div class="tu-callout">
+    <div class="tu-ico">🪄</div>
+    <div>
+      <div class="tu-title">TutuApp Distributes Modified and Cracked Apps on Both iOS and Android — Bypassing Every Official Store Safety System on Both Platforms</div>
+      <div class="tu-body">TutuApp is a third-party app marketplace that operates across both iOS and Android devices, making it unusual among alternative app stores in targeting users on Apple devices as well as Android. Its catalogue is built primarily around modified versions of popular apps — including games with unlocked features, social media apps with restrictions removed, and paid apps made available for free — distributed without the knowledge or consent of the original developers. Because it operates entirely outside both the Apple App Store and Google Play Store ecosystems, none of the parental controls, age restrictions, content policies, or security reviews built into either official platform apply to anything installed through TutuApp.</div>
+    </div>
+  </div>
+
+  <div class="dual-band">
+    <div class="dual-icon">📱</div>
+    <div class="dual-text">
+      <strong>Works on Both iOS and Android — A Rare Cross-Platform Bypass</strong>
+      <span>Unlike most third-party stores that target only Android, TutuApp actively targets iPhone and iPad users too — making it a risk for families on any device platform.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#9B1FD4;"></span> Modified Apps</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> iOS &amp; Android</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D8B4FE;"></span> Cracked Games</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Bypasses App Store</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0068FF;"></span> No Age Filtering</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      TutuApp is a cross-platform third-party app marketplace specialising in <strong>modified, cracked, and unofficial app versions</strong> for both iOS and Android. It bypasses both the Apple App Store and Google Play Store entirely, with no parental approval process, no content review, and no age filtering of any kind across its full catalogue.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--tu-light);">🍎</div>
+      <div>
+        <div class="feat-name">Targets iOS Devices Without a Jailbreak — Rare Among Third-Party Stores</div>
+        <div class="feat-desc">Most third-party app stores target Android exclusively, because Android's architecture is more permissive toward third-party installation. TutuApp specifically targets iOS users — including iPhone and iPad owners — and is capable of installing unofficial apps on non-jailbroken iOS devices by exploiting Apple's enterprise certificate provisioning system or similar mechanisms. This makes TutuApp a relevant concern for families on Apple devices who may assume that the closed nature of iOS provides complete protection against third-party app installation. It does not — and TutuApp is one of the most widely known tools that demonstrates this.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🎮</div>
+      <div>
+        <div class="feat-name">Specialises in Modified Apps — Games With Unlocked Features and Paid Apps Made Free</div>
+        <div class="feat-desc">TutuApp's primary appeal — and the core of its catalogue — is modified versions of popular apps and games. These include games with unlimited in-game currency, lives or premium items unlocked without payment; social media apps with restrictions removed or additional features added; and paid apps made available for free download. The modified nature of these apps means they contain code changes that the original developer did not authorise, did not review for security, and did not test for safety. The behaviour of a modified app can differ significantly from the official version in ways that are not immediately visible to the person installing it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🛡️</div>
+      <div>
+        <div class="feat-name">Bypasses Both Apple App Store and Google Play Store Controls Simultaneously</div>
+        <div class="feat-desc">Because TutuApp operates across both platforms, it bypasses two separate sets of parental control systems in a single tool. On Android, it circumvents Google Family Link, Play Store age restrictions, and parental approval requirements. On iOS, it bypasses Apple's Screen Time controls, App Store age ratings, parental purchase approval, and the closed-platform protection that iOS is generally assumed to provide. A family that has carefully configured parental controls on both an iPhone and an Android device can have both sets of controls bypassed by the same application.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🦠</div>
+      <div>
+        <div class="feat-name">Modified APKs and IPA Files Carry Elevated Security and Privacy Risks</div>
+        <div class="feat-desc">Every app distributed through TutuApp has been modified from its original form by a third party whose identity and intentions are unknown to the person installing it. Modified apps may contain added code that collects personal data, displays intrusive advertising, tracks location without consent, or performs actions on the device that the original app's developer never included. The security risk associated with modified apps is materially higher than with official versions — particularly for apps that request access to contacts, messages, camera or location, where the added code in a modified version may use these permissions in ways the original developer did not intend.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--violet-bg);">🔞</div>
+      <div>
+        <div class="feat-name">Age-Restricted and Removed Apps Available Without Any Age Check</div>
+        <div class="feat-desc">TutuApp's catalogue includes apps and games that are age-rated for mature audiences on official stores, as well as apps that have been removed from official stores entirely. None of these age ratings carry any enforcement within TutuApp — there is no age gate, no parental approval step, and no mechanism that prevents a child from downloading a mature-rated game or app through TutuApp that they would be prevented from accessing through the official App Store or Play Store. The age restrictions and content policies of official platforms simply do not exist within TutuApp's installation pathway.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">TutuApp carries a high risk rating because it combines the structural bypass of official store parental controls — across both iOS and Android simultaneously — with the specific additional risks of modified apps: elevated security exposure, removed app access, and age-restricted content available without any check.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📱</span>
+      <div class="rc-name">Bypasses iOS and Android Controls at Once</div>
+      <div class="rc-desc">TutuApp circumvents Apple's App Store parental controls and Google's Play Store family systems simultaneously — a single tool that makes both platforms' official safety measures incomplete for any family using it on either device type</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔧</span>
+      <div class="rc-name">Modified Apps With Unknown Added Code</div>
+      <div class="rc-desc">Every app in TutuApp's catalogue has been altered by an unknown third party — modified apps may contain code that tracks personal data, shows intrusive ads, or accesses device permissions in ways the original developer never intended and the user cannot verify</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎮</span>
+      <div class="rc-name">Cracked Games Normalise Bypassing Restrictions</div>
+      <div class="rc-desc">Unlocked games and apps with removed restrictions introduce children to the habit of bypassing the rules built into digital products — a behaviour pattern that extends naturally to bypassing parental controls and age restrictions elsewhere</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Age-Restricted Content Without Any Age Check</div>
+      <div class="rc-desc">Apps and games rated for mature audiences on official stores are available through TutuApp without any age verification, parental approval requirement, or content filter — a child can access mature-rated content that official stores would restrict</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">Removed Apps Available After Official Deletion</div>
+      <div class="rc-desc">Apps removed from the App Store or Play Store for policy violations, safety concerns or inappropriate content often remain available through TutuApp — a child can install an app specifically because it failed the official stores' review processes</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📊</span>
+      <div class="rc-name">No Record in Official Monitoring Dashboards</div>
+      <div class="rc-desc">Apps installed via TutuApp leave no trace in Apple's Screen Time reports, Google Family Link dashboards, or any official family account monitoring tool — a parent reviewing their child's app activity through official channels will have no record of TutuApp installations</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>TutuApp Carries the Highest Risk Rating Among Third-Party App Stores</strong>
+      <span>TutuApp's cross-platform reach — targeting both iOS and Android simultaneously — combined with its catalogue of modified apps, age-restricted content, and removed apps, and its complete bypass of both Apple and Google parental control systems, makes it the most comprehensive single threat to family app oversight among the alternative stores in common use. Its presence on either platform warrants immediate restriction.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">⚡</div>
+    <div>
+      <div class="control-title">TutuApp's iOS Capability Closes the Gap That Parents May Assume iOS Provides — The Closed App Store Is Not an Absolute Protection</div>
+      <div class="control-body">Many parents with children on iPhones or iPads reasonably assume that iOS's closed App Store architecture provides a more complete protection against third-party app installation than Android. TutuApp is one of the clearest demonstrations that this assumption is not reliable. By exploiting iOS certificate mechanisms or configuration profiles, TutuApp has repeatedly demonstrated an ability to install unofficial apps on non-jailbroken iPhones and iPads. Parents who rely on iOS's closed platform as their sole protection against third-party apps should be aware that this protection has documented and publicly known bypass routes, and that TutuApp is one of the most prominent tools that uses them.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">TutuApp Is Primarily Known Among Children and Teenagers for Providing Modified Game Versions — Its Appeal Is Broad and Deliberate</div>
+        <div class="know-body">TutuApp's primary audience and its primary appeal is the gaming community — specifically, children and teenagers who want access to modified versions of popular mobile games with unlimited in-game currency, unlocked levels, or premium features made free. This is a directly and deliberately child-facing appeal: the games targeted by TutuApp's modified catalogue are predominantly the games that children and teenagers play most heavily. Unlike some third-party stores that attract users primarily for access to niche or adult-oriented content, TutuApp's appeal is mainstream and its audience skews young. Parents should be aware that TutuApp is likely to be known among their child's peer group specifically because of its game modification catalogue, not because of any sophisticated technical interest in alternative app distribution.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">iPhone and iPad Users Are Not Protected by iOS's Closed Architecture Alone — TutuApp Specifically Targets Apple Devices</div>
+        <div class="know-body">iOS's reputation as a more secure, closed platform than Android leads many parents with children on Apple devices to assume that third-party app installation is not a practical concern. TutuApp directly challenges this assumption. By using Apple's enterprise certificate provisioning system — a mechanism designed for businesses to distribute internal apps — or similar configuration profile techniques, TutuApp has repeatedly enabled unofficial app installation on non-jailbroken iPhones and iPads. Apple periodically revokes the certificates used by TutuApp, causing temporary disruption, but TutuApp consistently obtains new certificates and resumes operation. Parents with children on iOS devices should not treat the absence of a jailbreak as a guarantee that third-party app installation cannot occur.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Modified Apps Carry Risks That Go Beyond the Content of the App Itself</div>
+        <div class="know-body">A child installing a modified game through TutuApp is not simply getting the official game with extra features unlocked — they are installing software whose code has been altered by a third party with unknown intentions. The modification process that unlocks game features can also add functionality that the child and their parents have no awareness of, including data collection, advertising injection, or access to device permissions that the original game did not use. A modified game that asks for access to contacts, location, or the camera is using those permissions under code that has not been reviewed by the original developer or any official review process. The risk is not just what the app does on screen — it is what the modified code does in the background.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">TutuApp Must Be Blocked on Every Device — Android and iOS — Across the Household</div>
+        <div class="know-body">Because TutuApp operates across both iOS and Android, a family that blocks it on a child's Android device but not their iPhone or iPad has not fully addressed the risk. Similarly, a family that relies on iOS's closed platform protection for one device while addressing Android separately through parental controls may find that TutuApp is accessible on the iOS device through the same mechanisms it uses to circumvent the App Store on any other non-jailbroken phone. Effective restriction of TutuApp requires applying controls across every device the child uses, regardless of operating system, and should be treated as a cross-platform concern rather than a platform-specific one.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block TutuApp and similar cross-platform third-party stores — closing the gap that bypasses both Apple and Google parental control systems at once, across every device your child uses.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block TutuApp and cross-platform third-party stores with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar alternative marketplaces automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Protects both iOS and Android devices in the same family account</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged app stores are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like TutuApp as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits gives you the information to make an informed choice, and the tools to act on it immediately when you decide to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to address TutuApp's specific risks — focusing on the cross-platform reach, the modified app safety conversation, and the technical controls needed across every device in the household regardless of operating system.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About Why Modified Apps Are Not the Same as Official Ones</div>
+        <div class="tip-body">The appeal of TutuApp to children is almost always the game modification catalogue — unlimited lives, unlocked levels, free premium items. A conversation that acknowledges this appeal while explaining the genuine risk associated with modified apps is more likely to land than a straightforward prohibition. Explain that a modified app has been changed by a person or team the child has never heard of, whose motivations are unknown, and whose modifications extend beyond the visible features the app advertises. The unlocked game features are real — but so is the code added alongside them that the child cannot see, cannot review, and cannot control. For a child who uses their phone for messaging, social media and gaming, the idea that an app they installed through an unofficial store could be quietly accessing their contacts or location in the background is a concrete and understandable risk, rather than an abstract safety concern.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check Both iOS and Android Devices for Unfamiliar Apps — TutuApp Affects Both Platforms</div>
+        <div class="tip-body">When reviewing a child's devices for apps installed outside official channels, check both iOS and Android devices. On Android, compare the full installed app list in Settings against the Play Store's installation history. On iOS, look for apps installed through configuration profiles — these can be reviewed through Settings under General and then VPN &amp; Device Management, where any enterprise certificates or configuration profiles installed by a third party will appear. A configuration profile that the child installed without a parent's knowledge is a strong indicator that a tool like TutuApp has been used to install unofficial apps. Remove any unfamiliar profiles and review the apps installed around the time the profile was added. On both platforms, unfamiliar apps that cannot be found in the official store's library warrant investigation before being dismissed.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Restrictions Across All Devices and Platforms — TutuApp Is a Cross-Platform Concern</div>
+        <div class="tip-body">Use iLimits to block TutuApp and similar cross-platform app stores across every device your child has access to — Android phones, iPhones, iPads, and tablets. On iOS devices, also review the Screen Time settings to ensure that installing apps requires Face ID or a parental passcode, and check that the option to allow apps from unknown sources — if it appears in any Settings configuration — is disabled. On Android, enable the unknown sources restriction alongside iLimits app-level controls. Because TutuApp operates through browser-based distribution as well as an app, consider pairing device-level controls with a domain-level block on the TutuApp website at the home network level. The combination of iLimits restrictions, platform-native controls, and network-level domain blocks provides the most comprehensive and durable protection across a household with multiple device types.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Same Tool Can Bypass Controls on Every Device Your Child Uses</h3>
+    <p class="closing-body">
+      TutuApp's cross-platform reach is what makes it distinctly more concerning than any single-platform third-party store. A single tool that bypasses Apple and Google parental controls simultaneously requires a response that covers both platforms with equal thoroughness. iLimits gives you the tools to close that gap across every device in your household — so that the controls you have configured on each platform remain the complete and reliable protection they were designed to be.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
