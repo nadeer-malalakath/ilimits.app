@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Kiwi Browser – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Kiwi Browser: fresh lime-green */
+    --kw:           #3B7A2A;
+    --kw-mid:       #2D5E20;
+    --kw-deep:      #1A3A10;
+    --kw-light:     #F2FBF0;
+    --kw-bdr:       #86EFAC;
+    --kw-text:      #14300A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --green-bg:     #F2FBF0;
+    --green-bdr:    #86EFAC;
+    --lime-bg:      #F7FEE7;
+    --lime-bdr:     #BEF264;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #060E04 0%, #0E1E0A 50%, #162814 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(59,122,42,0.48) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(134,239,172,0.24) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(59,122,42,0.20);
+    border: 1px solid rgba(134,239,172,0.34);
+    color: #86EFAC; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #060E04 0%, #3B7A2A 58%, #86EFAC 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(59,122,42,0.56), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FDBA74; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Kiwi callout ── */
+  .kw-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--green-bg); border: 1.5px solid var(--green-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .kw-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DCFCE7; border: 1.5px solid var(--green-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .kw-title { font-size: 13px; font-weight: 700; color: var(--kw-text); line-height: 1.3; margin-bottom: 3px; }
+  .kw-body  { font-size: 12px; color: #1A3A10; font-weight: 400; line-height: 1.55; }
+
+  /* ── Extension badge ── */
+  .ext-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--lime-bg); border: 1.5px solid var(--lime-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .ext-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #ECFCCB; border: 1.5px solid var(--lime-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .ext-text strong { font-size: 12.5px; font-weight: 700; color: #365314; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .ext-text span   { font-size: 11.5px; color: #3F6212; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFAF0; border: 1.5px solid #FBD38D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEEBCB; border: 1.5px solid #FBD38D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #744210; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5A3110; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--green-bg); border: 1.5px solid var(--green-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DCFCE7; border: 1.5px solid var(--green-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--kw-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #1A3A10; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #060E04 0%, #0E1E0A 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,122,42,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🥝</div>
+        <div>
+          <div class="app-name-text">Kiwi Browser</div>
+          <div class="app-sub">Chromium Browser with Extension Support</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Alternative Browser</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium-high">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">An Android browser that supports full Chrome desktop extensions — including ad blockers that suppress monitoring signals, VPN extensions that bypass content filters, and content extensions that bypass age restrictions — all invisible to browser-history monitoring tools</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Kiwi Browser and extension-capable browsers from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Kiwi Browser — an Android web browser built on Chromium that uniquely supports the full Chrome extension ecosystem on mobile, enabling a child to install desktop-grade ad blockers, VPN extensions, content unblocking tools, and other browser extensions that are not available or permitted in standard mobile browsers.</p>
+  </div>
+
+  <div class="kw-callout">
+    <div class="kw-ico">🥝</div>
+    <div>
+      <div class="kw-title">Kiwi Browser Brings the Full Chrome Desktop Extension Library to Android — Including Extensions That Bypass Content Filters, Block Monitoring, and Unblock Restricted Content</div>
+      <div class="kw-body">Kiwi Browser is a Chromium-based Android web browser that supports the full Chrome Web Store extension library on a mobile device — a capability that standard Android browsers, including Chrome for Android itself, do not provide. This means a child can install any Chrome extension from the Web Store directly onto their mobile browser, including ad blockers that suppress monitoring signals, VPN extensions that route browser traffic through a proxy bypassing content filters, content unblocking extensions that circumvent age and geography restrictions, and proxy extensions that mask browsing destinations. Kiwi Browser's extension support introduces a category of browser-based bypass tools that is not available through any standard mobile browser, and that standard browser-history monitoring tools may not surface.</div>
+    </div>
+  </div>
+
+  <div class="ext-band">
+    <div class="ext-icon">🧩</div>
+    <div class="ext-text">
+      <strong>Full Chrome Extension Support on Android — Unique Among Mobile Browsers</strong>
+      <span>Kiwi Browser is one of the very few Android browsers that supports the complete Chrome Web Store extension library — bringing desktop-grade bypass and unblocking tools to a child's phone browser.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#3B7A2A;"></span> Chrome Extensions</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> VPN Extensions</div>
+    <div class="mode-chip"><span class="cdot" style="background:#86EFAC;"></span> Ad Blockers</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Content Unblocking</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Proxy Extensions</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Kiwi Browser is a <strong>Chromium-based Android browser with full Chrome extension support</strong>. Its ability to run desktop Chrome extensions on a mobile device is what sets it apart — enabling a child to install VPN, ad blocking, proxy, and content unblocking extensions that bypass parental content filters and suppress monitoring signals from within the browser itself.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--green-bg);">🧩</div>
+      <div>
+        <div class="feat-name">Supports the Full Chrome Web Store Extension Library on Android</div>
+        <div class="feat-desc">Kiwi Browser's defining feature is its support for Chrome extensions on Android — a capability that the standard Chrome for Android browser deliberately withholds. Any extension available in the Chrome Web Store can be installed in Kiwi Browser on an Android phone or tablet. The Chrome Web Store contains hundreds of thousands of extensions, including ad blockers, VPN and proxy tools, content unblocking extensions, script injectors, and many other tools whose function in a desktop context is well understood — but which become available to children on mobile specifically through Kiwi Browser's extension support.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔒</div>
+      <div>
+        <div class="feat-name">VPN and Proxy Extensions Route Browser Traffic Through External Servers</div>
+        <div class="feat-desc">The Chrome Web Store includes numerous VPN and proxy extensions — browser-level tools that route browsing traffic through external servers, bypassing DNS-based content filters and network-level parental controls in the same way that standalone VPN apps do, but operating entirely within the browser rather than requiring a separate application. A child can install a VPN extension in Kiwi Browser and bypass every network-level content filter for all browser-based activity, without installing any separate VPN app on the device. The VPN extension operates within Kiwi Browser's process — it does not create a device-wide VPN tunnel and does not show a VPN status bar indicator on the device.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🛡️</div>
+      <div>
+        <div class="feat-name">Ad Blocker Extensions Suppress Monitoring and Tracking Signals</div>
+        <div class="feat-desc">Ad blocking extensions installed in Kiwi Browser block the advertising, analytics, and tracking scripts that many third-party monitoring tools and some parental control products use to identify browsing activity and app usage patterns. A child using Kiwi Browser with an ad blocker installed may generate significantly less monitoring-visible browsing activity than one using a standard browser — the tracking signals that monitoring tools depend on are blocked at the browser extension layer before they can be transmitted to any monitoring system.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🔓</div>
+      <div>
+        <div class="feat-name">Content Unblocking Extensions Bypass Age Restrictions and Geo-Blocks</div>
+        <div class="feat-desc">The Chrome Web Store contains extensions specifically designed to unblock age-restricted content, circumvent geographic content restrictions, and access platforms or content that is not available in a user's country. Installed in Kiwi Browser on a mobile device, these extensions give a child access to content that would be restricted or unavailable through a standard mobile browser — including age-gated platforms, region-locked content libraries, and websites that implement access controls based on user location or device type.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">📋</div>
+      <div>
+        <div class="feat-name">Browsing Through Kiwi Is Separate From the Device's Default Browser History</div>
+        <div class="feat-desc">Kiwi Browser maintains its own browsing history entirely separate from the device's default browser. A parent reviewing browsing history through the device's default Chrome installation, through Google Family Link's browsing activity reports, or through a monitoring app that reads from the default browser will find no record of any browsing conducted through Kiwi Browser. The browser's own history can be cleared by the child at any time, and extensions running within Kiwi — including ad blockers and VPN tools — may further reduce the visibility of browsing activity to any monitoring system that operates outside the browser's own process.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Kiwi Browser's risk is structural — it introduces a class of bypass tools (Chrome extensions) that are not available on standard mobile browsers, enabling browser-level VPN, ad blocking, content unblocking, and proxy capabilities that bypass parental controls without creating the device-wide indicators that standalone VPN apps produce.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🧩</span>
+      <div class="rc-name">Chrome Extensions on Mobile — Not Available Elsewhere</div>
+      <div class="rc-desc">Kiwi Browser provides access to the full Chrome extension library on Android — including VPN, proxy, and content unblocking tools not available through any standard mobile browser, including Chrome for Android itself</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Browser-Level VPN Without a Device-Wide Indicator</div>
+      <div class="rc-desc">VPN extensions installed in Kiwi Browser bypass DNS-based content filters for all browser traffic without creating a device-wide VPN tunnel or displaying the VPN key icon in the status bar — making the bypass less visible than a standalone VPN app</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👁️‍🗨️</span>
+      <div class="rc-name">Browsing Invisible to Default Browser Monitoring</div>
+      <div class="rc-desc">All browsing conducted through Kiwi Browser is absent from the device's default browser history and from Google Family Link browsing activity reports — a parent monitoring through official tools has no visibility into Kiwi Browser sessions</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">Ad Blockers Suppress Monitoring Signals</div>
+      <div class="rc-desc">Ad blocking extensions installed in Kiwi can suppress tracking and analytics signals that monitoring tools use to identify browsing patterns — reducing the visibility of browsing activity to parental monitoring products that rely on those signals</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">Age Restrictions and Geo-Blocks Bypassed</div>
+      <div class="rc-desc">Content unblocking extensions available in the Chrome Web Store can bypass age restrictions, geographic content controls, and access restrictions on platforms that standard mobile browsers enforce — giving access to content not otherwise reachable on a mobile device</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏪</span>
+      <div class="rc-name">Available in the Play Store — No Sideloading Required</div>
+      <div class="rc-desc">Kiwi Browser is available in the Google Play Store and can be installed like any standard app — a child does not need to use a third-party source or sideload an APK to obtain a browser with full Chrome extension support on Android</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>Kiwi Browser Carries a Medium–High Risk Rating — Unique Extension Capability Without Device-Wide Bypass Indicators</strong>
+      <span>Kiwi Browser's medium–high rating reflects that its bypass capability is browser-scoped rather than device-wide — it does not route all app traffic through a VPN tunnel, and its bypass applies primarily to browsing rather than to messaging apps, social platforms, or other networked applications. However, the browser-level VPN extensions it enables bypass DNS content filters for all browser activity without producing the status bar indicator that device-wide VPN tools create — making the bypass less detectable by the signal parents most commonly look for.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🧩</div>
+    <div>
+      <div class="control-title">Chrome Extensions Are Not Available on Standard Mobile Browsers — Kiwi's Unique Value Proposition Is Precisely What Makes It a Parental Control Concern</div>
+      <div class="control-body">Google has deliberately withheld extension support from Chrome for Android — in part because unvetted extensions introduce security and privacy risks in a mobile context. Kiwi Browser removes this limitation and opens the entire Chrome Web Store to mobile users. For technically curious children and teenagers who are aware of the Chrome extension ecosystem from desktop use, Kiwi Browser is the direct route to running those same tools — including VPN, proxy, ad blocking, and content unblocking extensions — on their Android phone. The browser's technical merit as a Chromium implementation is not in question; the concern is specifically about what its extension support enables in a child's hands.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Kiwi Browser's Extension Support Is What Makes It Distinctive — And What Creates the Parental Control Risk</div>
+        <div class="know-body">Kiwi Browser is a well-built, technically capable Chromium browser that is restricted not because it is poorly made or inherently harmful, but because its defining feature — Chrome extension support on Android — specifically enables a class of bypass and unblocking tools that standard mobile browsers do not permit. A child who has installed Kiwi Browser has likely done so because they are aware of Chrome extensions and understand that Kiwi Browser provides access to them on their phone. The installation is therefore likely deliberate and purposeful rather than incidental — a child installing Kiwi Browser has sought out the specific capability it offers rather than simply selecting an alternative browser for aesthetic reasons.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Browser-Level VPN Extensions Do Not Show a Device-Wide VPN Status Bar Indicator</div>
+        <div class="know-body">A parent who knows to look for the VPN key icon in the device's status bar as a signal that a VPN is active will not see that indicator when a VPN extension is running inside Kiwi Browser rather than a standalone VPN app. Browser-level VPN extensions operate as extensions within the browser's process — they do not create an OS-level VPN configuration and do not produce the status bar indicator that device-wide VPN tools generate. The only reliable detection approach for browser-level VPN extensions is identifying Kiwi Browser in the installed app list and understanding what its extension support enables, rather than looking for VPN-active indicators on the device surface.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Google Family Link's Browsing History Does Not Capture Activity in Kiwi Browser</div>
+        <div class="know-body">Google Family Link provides parents with visibility into browsing activity conducted through Chrome on Android — the default browser on most Android devices. This visibility is specific to Chrome and does not extend to third-party browsers including Kiwi Browser. A parent who reviews their child's browsing activity through Google Family Link and sees what appears to be limited or normal browsing may not be aware that a substantial portion of the child's browsing is occurring through Kiwi Browser, where it is invisible to Family Link's activity reports. Parents who rely on Family Link's browsing history feature as a monitoring tool should be aware that its coverage is limited to the default Chrome browser and does not cover alternative browsers installed on the device.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Identifying Kiwi Browser Is Straightforward — It Appears in the App List by Name and Distinctive Green Kiwi Icon</div>
+        <div class="know-body">Kiwi Browser is easily identifiable in the device's installed app list — it uses a distinctive green kiwi fruit icon and appears under its own name. Unlike some bypass tools that use generic names or disguise themselves as other apps, Kiwi Browser is straightforwardly recognisable to any parent who checks the installed app list. The detection challenge is not identification — it is knowing what the app enables once identified. A parent who finds Kiwi Browser installed should check within the browser itself for any installed extensions — accessible through the browser's extension menu, typically found in the three-dot overflow menu. The extensions installed in the browser indicate what bypass or unblocking tools the child has been using within it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Kiwi Browser and similar extension-capable browsers — preventing the installation of a browser that enables desktop-grade VPN, ad blocking, and content unblocking tools on a child's Android device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Kiwi Browser and extension-capable browsers with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar alternative browsers with extension support</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Ensures browsing oversight tools remain accurate and complete</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged alternative browsers are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Kiwi Browser as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits gives you the information to make an informed choice, and the tools to act on it immediately when you decide to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect the nature of Kiwi Browser's risk — identifying the extensions installed within it, understanding why the absence of a VPN status bar indicator does not mean no bypass is active, and applying restrictions that address the browser and the extension capability together.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About Why Extension Capabilities on Mobile Are Not Appropriate Without Parental Awareness</div>
+        <div class="tip-body">A child who has installed Kiwi Browser has likely done so because they want access to Chrome extensions — a sophisticated enough motivation that suggests a degree of technical awareness worth engaging with directly. The conversation can acknowledge that Chrome extensions are powerful and genuinely useful tools for adults, while explaining that extensions that bypass content filters or suppress monitoring signals — even when presented as ad blockers or privacy tools — have the same effect on parental oversight as other bypass methods, just through a different mechanism. A child who understands that the technical approach is different but the outcome is the same — parental content oversight is removed — is better equipped to understand why the restriction exists rather than simply that it does.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">If Kiwi Browser Is Found, Check the Extensions Installed Within It Directly</div>
+        <div class="tip-body">When reviewing a child's device and finding Kiwi Browser installed, open the browser and navigate to its extension menu — typically found within the three-dot overflow menu, labelled "Extensions" — to see which extensions are installed. The installed extensions reveal what bypass, unblocking, or monitoring-suppression tools the child has been using within the browser. Common bypass-relevant extensions to look for include those with names referencing VPN, proxy, unblock, ad blocker, or privacy. Also check Kiwi Browser's own browsing history — accessible within the browser — before clearing it, as it may reveal browsing activity not captured in any other monitoring tool. Kiwi Browser is easy to find by name and its distinctive green kiwi icon in the installed app list.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Kiwi Browser at the App Level — And Consider Restricting the Broader Category of Alternative Browsers on Android</div>
+        <div class="tip-body">Use iLimits to block Kiwi Browser and the category of alternative browsers with extension support on your child's Android device. Because Kiwi Browser is available in the Play Store, it can be re-installed through normal channels if deleted without an app-level restriction in place — a restriction through iLimits prevents reinstallation even if the child finds the app and attempts to re-download it. Also consider whether the default Chrome browser on the child's device is subject to appropriate monitoring through Google Family Link, and review Family Link's browsing activity settings to ensure they are active and covering the default browser. Because Family Link's coverage is limited to Chrome, the combination of iLimits restrictions on alternative browsers and active Family Link browsing monitoring of the default browser together provide the most complete browsing oversight available on Android.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Browser That Enables Desktop Extensions Brings Desktop-Grade Bypass Tools to a Child's Phone</h3>
+    <p class="closing-body">
+      Kiwi Browser's Chrome extension support is what makes it a parental control concern — a feature that no standard mobile browser provides, that opens the full Chrome Web Store to a child's phone, and that includes tools specifically designed to bypass content filters, suppress monitoring signals, and unblock restricted content. iLimits gives you the tools to prevent this extension capability from reaching a child's device — so that the browsing oversight you rely on remains accurate, complete, and not invisibly circumvented through a browser the child chose specifically for what it enables.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
