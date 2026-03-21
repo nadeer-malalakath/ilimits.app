@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Tor Browser Alpha – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Tor Browser: deep violet-black */
+    --tb:           #7E22CE;
+    --tb-mid:       #6B21A8;
+    --tb-deep:      #1E0A3C;
+    --tb-light:     #FAF5FF;
+    --tb-bdr:       #D8B4FE;
+    --tb-text:      #1E0A3C;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #080315 0%, #1E0A3C 50%, #2A1050 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(126,34,206,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(126,34,206,0.40) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(126,34,206,0.20);
+    border: 1px solid rgba(216,180,254,0.36);
+    color: #D8B4FE; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #1E0A3C 0%, #7E22CE 55%, #C084FC 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(126,34,206,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ── Alpha badge ── */
+  .alpha-badge {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.12); border: 1px solid rgba(240,67,106,0.22);
+    border-radius: 11px; padding: 10px 14px; margin-top: 10px;
+  }
+  .ab-dot { font-size: 14px; flex-shrink: 0; }
+  .ab-text { font-size: 11.5px; color: #FFB3CE; font-weight: 400; line-height: 1.5; }
+  .ab-text strong { font-weight: 700; color: #FF9DB5; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .tb-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--tb-light); border: 1.5px solid var(--tb-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .tb-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE9FE; border: 1.5px solid var(--tb-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .tb-title { font-size: 13px; font-weight: 700; color: var(--tb-text); line-height: 1.3; margin-bottom: 3px; }
+  .tb-body  { font-size: 12px; color: #581C87; font-weight: 400; line-height: 1.55; }
+
+  .orbot-diff {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .od-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .od-title { font-size: 12.5px; font-weight: 700; color: #78350F; margin-bottom: 3px; line-height: 1.3; }
+  .od-body  { font-size: 11.5px; color: var(--amber-text); font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 0 0;
+  }
+  .risk-card::before { border-radius: 3px 3px 0 0; }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-purple::before { background: #7E22CE; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB; border: 1.5px solid #FCD34D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FCD34D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Alpha stability note ── */
+  .alpha-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .an-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E4; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .an-title { font-size: 13px; font-weight: 700; color: #7F1D1D; line-height: 1.3; margin-bottom: 3px; }
+  .an-body  { font-size: 12px; color: #991B1B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #080315 0%, #2A1050 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(126,34,206,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .tb-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .orbot-diff   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .alpha-note   { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🧅</div>
+        <div>
+          <div class="app-name-text">Tor Browser Alpha</div>
+          <div class="app-sub">Tor Network Browser · Pre-Release Build</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Privacy Browser / Tor</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val medium-high">🟡 Medium–High</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Provides full Tor network access and dark web browsing in a pre-release build — carrying the same risks as the stable Tor Browser with the additional concern of unfinished privacy and security protections</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+      <div class="alpha-badge">
+        <div class="ab-dot">⚠️</div>
+        <div class="ab-text"><strong>Alpha build:</strong> This is a pre-release version of Tor Browser — its privacy and security features may be incomplete, making it riskier than the stable release for the same underlying reasons.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Tor Browser Alpha — a pre-release build of the official Tor Project browser for Android that provides full Tor network access and dark web .onion browsing, with the same core risks as the stable release and the additional concern of unfinished security and privacy protections inherent to alpha software.</p>
+  </div>
+
+  <div class="tb-callout">
+    <div class="tb-ico">🧅</div>
+    <div>
+      <div class="tb-title">Tor Browser Alpha Is a Pre-Release Tor Browser — It Has the Same Dark Web Access and Network Bypass as the Stable Version, With Less Complete Privacy Protections</div>
+      <div class="tb-body">Tor Browser Alpha is the official pre-release (alpha) build of the Tor Browser for Android, published by the Tor Project for testing purposes. It provides full access to the Tor anonymity network, bypasses all network-level parental controls, and enables browsing of .onion dark web sites — the same capabilities as the stable Tor Browser. What distinguishes the Alpha build is that it is pre-release software: security hardening, privacy protections and bug fixes that are present in the stable release may be incomplete or absent. This means a child using Tor Browser Alpha has the full risk profile of Tor network access with potentially weaker privacy protections than the tool's own developers intend.</div>
+    </div>
+  </div>
+
+  <div class="orbot-diff">
+    <div class="od-ico">🔄</div>
+    <div>
+      <div class="od-title">Tor Browser Alpha vs Orbot — Both Use Tor, But They Work Differently</div>
+      <div class="od-body">Orbot is a proxy that routes all device traffic through Tor — including traffic from other apps. Tor Browser Alpha is a dedicated browser that routes only its own browsing traffic through Tor. Both provide Tor network access and dark web .onion browsing. The key difference in practice: Tor Browser Alpha is a complete self-contained browser with a familiar interface, making it more accessible to a broader range of users than Orbot, which requires more technical configuration. On a child's device, both tools carry the same core concern — Tor access and dark web capability — with Tor Browser Alpha being the more immediately usable of the two.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#7E22CE;"></span> Tor Browser</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Dark Web Access</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> Pre-Release Build</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Bypasses Controls</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Tor Project</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">Tor Browser Alpha is a <strong>pre-release Tor Browser for Android</strong> from the Tor Project, providing full Tor network access, dark web .onion browsing, and bypassing all network-level parental controls — with the additional concern that alpha software may have incomplete security and privacy protections.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--tb-light);">🌐</div>
+      <div>
+        <div class="feat-name">Full Tor Network Access — Bypasses All Network-Level Parental Controls</div>
+        <div class="feat-desc">Tor Browser Alpha routes all browsing traffic through the Tor network, bypassing DNS-based content filters, router category blocks and household network monitoring tools. Every network-level parental control a parent has configured becomes ineffective for browsing sessions in Tor Browser Alpha. The Tor multi-relay routing architecture makes the traffic significantly harder to monitor or trace than standard VPN traffic, and the destination of each connection is not visible to network-level monitoring tools.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🧅</div>
+      <div>
+        <div class="feat-name">Dark Web .onion Site Access</div>
+        <div class="feat-desc">Tor Browser Alpha enables browsing of .onion sites on the Tor dark web — hidden services that are not accessible through any standard browser, VPN tool, or other available app. .onion sites include legitimate privacy services alongside content that cannot exist on the standard internet. A child using Tor Browser Alpha can reach this layer of the internet with no content filtering of any kind applied — the same concern that applies to Orbot, but through a more accessible browser interface.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">⚠️</div>
+      <div>
+        <div class="feat-name">Pre-Release Alpha Software — Security and Privacy Protections May Be Incomplete</div>
+        <div class="feat-desc">The "Alpha" designation indicates that this is pre-release software published by the Tor Project for testing purposes. Alpha builds are not intended for general use — they may contain known bugs, incomplete features, and security or privacy protections that have not yet been fully implemented or tested. A child using Tor Browser Alpha for privacy purposes is using a tool whose own developers consider unsuitable for regular use. The privacy properties that make Tor network access meaningful in repressive contexts may be less reliably present in an alpha build.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">🛡️</div>
+      <div>
+        <div class="feat-name">Published by the Tor Project — the Same Organisation Behind Orbot's Network</div>
+        <div class="feat-desc">Tor Browser Alpha is the official Android browser published by the Tor Project — the non-profit organisation that maintains the Tor anonymity network and whose work supporting press freedom, whistleblowers and activists in repressive contexts is widely respected. The Alpha build is the testing release that precedes the stable Tor Browser for Android. The Tor Project's global mission is genuine; the concern on a child's device is the specific capabilities the technology provides, not the intentions of the organisation that built it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">🎓</div>
+      <div>
+        <div class="feat-name">Requires Active Seeking — Finding the Alpha Build Is More Deliberate Than the Stable Release</div>
+        <div class="feat-desc">Tor Browser Alpha is not prominently featured in standard app store searches in the same way as consumer VPN tools — finding it requires some familiarity with the Tor Project's release cycle and a specific interest in pre-release software. A child who has installed Tor Browser Alpha has gone further than one who installed the stable Tor Browser, which is itself already a deliberate choice. The presence of the Alpha build on a device is a stronger signal of technical engagement and specific intent than most other tools in this category.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Tor Browser Alpha carries the full risk profile of Tor network access — parental control bypass, dark web browsing, strong anonymity — with the additional layer of pre-release software instability and potentially incomplete privacy protections.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">Bypasses All Network-Level Parental Controls</div>
+      <div class="rc-desc">All DNS filters, router content blocks and household network monitoring tools are bypassed for all browsing through Tor Browser Alpha — the same bypass that applies to Orbot and any Tor-connected tool</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">🧅</span>
+      <div class="rc-name">Full Dark Web .onion Access</div>
+      <div class="rc-desc">Tor Browser Alpha enables browsing of .onion sites with a familiar browser interface — dark web access that is not possible through any standard browser or VPN tool, with no content filtering applied</div>
+    </div>
+    <div class="risk-card c-purple">
+      <span class="rc-emoji">⚠️</span>
+      <div class="rc-name">Pre-Release Software With Potentially Incomplete Protections</div>
+      <div class="rc-desc">Alpha software may have incomplete security hardening, unresolved bugs and privacy protections that are not yet fully implemented — a child using it for privacy purposes may have weaker protections than they expect</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">🔍</span>
+      <div class="rc-name">Stronger Anonymity Than VPNs — Tor Multi-Relay Architecture</div>
+      <div class="rc-desc">Tor's multi-relay routing makes traffic significantly harder to monitor or trace than standard VPN connections — network monitoring tools see only encrypted connections to Tor relays with no information about actual destinations</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">🎓</span>
+      <div class="rc-name">Presence Signals Significant Technical Deliberateness</div>
+      <div class="rc-desc">Finding and installing an Alpha build requires specific knowledge of the Tor Project's release cycle — its presence on a device is a stronger signal of deliberate intent and technical engagement than most other tools in this category</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Complete Browser Interface — More Accessible Than Orbot</div>
+      <div class="rc-desc">Unlike Orbot, which requires proxy configuration, Tor Browser Alpha is a complete browser that a user can open and start browsing through immediately — making Tor network access and dark web browsing more immediately accessible than the proxy-based approach</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Tor Browser Alpha Carries a Medium–High Risk Rating</strong>
+      <span>Tor Browser Alpha carries the same risk profile as Orbot — Tor network bypass, dark web access, strong anonymity — with the additional concern of pre-release software instability and potentially incomplete privacy protections. Its presence on a device signals a more deliberate technical choice than almost any other tool in this category.</span>
+    </div>
+  </div>
+
+  <div class="alpha-note">
+    <div class="an-ico">⚠️</div>
+    <div>
+      <div class="an-title">Alpha Software Is Not Intended for Regular Use — Even by the Tor Project's Own Standards</div>
+      <div class="an-body">The Tor Project publishes Alpha builds for testing and developer use — they explicitly recommend the stable release for regular users. Alpha software may have known security vulnerabilities, incomplete privacy protections, and features that are not yet fully functional. A child using Tor Browser Alpha for privacy purposes is using software that its own developers consider unsuitable for regular use. This is a separate concern from the network bypass and dark web access risks — it means even the tool's intended privacy properties may not be reliably present.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Tor Browser Alpha Has the Same Core Concerns as Orbot — Plus the Additional Issue of Pre-Release Instability</div>
+        <div class="know-body">The concerns that apply to Tor Browser Alpha are the same as those that apply to Orbot: Tor network access bypasses all network-level parental controls, dark web .onion browsing is enabled with no content filtering, and the strong anonymity of the Tor multi-relay architecture makes network-level monitoring much less effective than for standard internet traffic. Tor Browser Alpha adds one additional concern on top of this: it is pre-release software that its own developers publish for testing purposes rather than regular use. Security protections and privacy features that are present in the stable Tor Browser release may be incomplete in the Alpha build. A parent finding Tor Browser Alpha on a child's device is dealing with the same situation as finding Orbot, with an extra layer of software instability added.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Finding an Alpha Build Specifically Is a Stronger Signal of Deliberate Technical Intent Than Most Other Tools</div>
+        <div class="know-body">Consumer VPN tools like Turbo VPN can be discovered through advertisements and app store recommendations with no deliberate searching. The stable Tor Browser requires some knowledge of what Tor is. Tor Browser Alpha requires knowing about the Tor Project's release cycle and specifically seeking out a pre-release build — a level of technical engagement that goes further than most other tools in this category. A child who has installed Tor Browser Alpha has invested more deliberate effort in finding it than one who encountered any other tool discussed here. This does not immediately indicate harmful intent — it may indicate a sophisticated interest in privacy technology — but it is worth approaching with genuine curiosity about what they were specifically looking for in a pre-release build.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Conversation Should Cover the Same Ground as the Orbot Conversation — With the Addition of the Alpha Build Issue</div>
+        <div class="know-body">The most productive conversation about Tor Browser Alpha covers the same territory as the conversation about Orbot: acknowledge the Tor Project's genuine global importance, be direct about the two specific concerns on their device (network bypass and dark web access), and explain why those concerns apply in a family home context even though the same technology serves important purposes elsewhere. The additional element for Tor Browser Alpha is the question of the Alpha build specifically — asking why they chose an Alpha release rather than the stable version gives useful information about their level of technical engagement and may reveal whether they were specifically seeking out incomplete or less-monitored software.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Both Orbot and Tor Browser Alpha Should Be Blocked — They Are Separate Apps With the Same Core Risks</div>
+        <div class="know-body">Orbot and Tor Browser Alpha are separate apps that provide Tor access through different mechanisms. Orbot routes all device traffic through Tor; Tor Browser Alpha is a dedicated browser. Both must be restricted independently — blocking one does not prevent a child from using the other. The stable Tor Browser for Android is a separate app from the Alpha build and should also be considered for restriction on the same basis. Parents applying category-level restrictions through iLimits to cover Tor-based tools address all three in a single action, which is the most complete and durable approach.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block Tor Browser Alpha alongside Orbot and related Tor-based tools — covering Tor network access and dark web browsing through all available routes in a single category-level restriction.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block Tor Browser Alpha and Tor-based tools by category with one tap</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Category restriction covers Orbot, stable Tor Browser and Alpha together</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Tor Browser Alpha as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for Tor Browser Alpha — building on the same conversation framework as Orbot while addressing the specific question of why a pre-release build rather than the stable release.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Use the Same Conversation as Orbot — and Ask Specifically Why the Alpha Build</div>
+        <div class="tip-body">The conversation about Tor Browser Alpha follows the same structure as the Orbot conversation: acknowledge the Tor Project's genuine global importance, explain clearly why the same technology raises specific concerns on their device (network bypass and dark web access), and be direct that those concerns apply regardless of the technology's legitimate global context. The specific additional question for Tor Browser Alpha is worth asking directly: why the Alpha build rather than the stable release? The answer will reveal something meaningful about the level of technical engagement involved. A child who chose the Alpha build specifically to get access to features not yet in the stable release, or because the Alpha is less likely to be recognised by monitoring tools, is demonstrating a degree of deliberateness that is worth understanding clearly before responding.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--tb-light); border-color: var(--tb-bdr);">🔄</div>
+      <div>
+        <div class="tip-name">Block Both Orbot and Tor Browser Alpha — They Are Separate Apps That Must Be Restricted Independently</div>
+        <div class="tip-body">Orbot and Tor Browser Alpha (and the stable Tor Browser for Android) are separate apps that provide Tor access through different mechanisms. Blocking one does not prevent use of the others. If Orbot is already restricted and Tor Browser Alpha is present, the child has found a separate route to the same capability. Apply category-level iLimits restrictions to cover all Tor-based tools in a single action — this is the most complete and durable approach and avoids the need to individually block each variant as it appears. Also note that Tor Browser Alpha may be available through F-Droid as well as Google Play, and that restricting third-party app stores alongside Tor tools closes an additional potential installation route.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Category-Level Restrictions, Enable Family Link Approval, and Review Whether Other Tor Access Routes Are Also Present</div>
+        <div class="tip-body">Apply iLimits category-level restrictions to block Tor-based tools across all of your child's devices. Enable Family Link's app installation approval requirement to generate an alert before any future Tor browser installation succeeds. When reviewing the device, check for the presence of both Orbot and Tor browser variants — stable and Alpha — as separate apps. Also review whether third-party app stores like F-Droid are installed, which may provide an additional installation route for Tor tools beyond the Google Play Store. The combination of iLimits device-level restrictions, Family Link installation approval, and network-level controls gives the most complete coverage of the Tor access concern.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Alpha Label Adds Instability to Risks That Were Already Present in Full</h3>
+    <p class="closing-body">
+      Tor Browser Alpha carries the complete risk profile of Tor network access — dark web browsing, strong anonymity, parental control bypass — in software that its own developers consider unsuitable for regular use. The Tor Project's global mission is genuine, and the technology behind the browser is important. On a child's device, the same capabilities create specific concerns that apply to the stable release and the pre-release Alpha equally. iLimits gives you the tools to restrict both. The question of why an Alpha build specifically — asked with genuine curiosity — is one of the most informative conversations this category of tools can prompt.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
