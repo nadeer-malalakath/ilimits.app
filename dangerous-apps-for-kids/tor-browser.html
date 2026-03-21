@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Tor Browser – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Tor Browser brand: deep purple-onion */
+    --tor:          #7D4698;
+    --tor-mid:      #5E3572;
+    --tor-deep:     #2D1540;
+    --tor-light:    #FAF5FF;
+    --tor-bdr:      #D8B4FE;
+    --tor-text:     #1E0A30;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --purple-bg:    #FAF5FF;
+    --purple-bdr:   #D8B4FE;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --dark-bg:      #F3F0F7;
+    --dark-bdr:     #C4B5FD;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0A0514 0%, #180A28 50%, #220E38 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(125,70,152,0.52) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 290px; height: 290px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(216,180,254,0.26) 0%, transparent 68%);
+    filter: blur(36px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.24) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(125,70,152,0.22);
+    border: 1px solid rgba(216,180,254,0.36);
+    color: #D8B4FE; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0A0514 0%, #7D4698 58%, #C084FC 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(125,70,152,0.62), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Tor callout ── */
+  .tor-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--purple-bg); border: 1.5px solid var(--purple-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .tor-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE9FE; border: 1.5px solid var(--purple-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .tor-title { font-size: 13px; font-weight: 700; color: var(--tor-text); line-height: 1.3; margin-bottom: 3px; }
+  .tor-body  { font-size: 12px; color: #2D1540; font-weight: 400; line-height: 1.55; }
+
+  /* ── Dark web badge ── */
+  .dark-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .dark-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E8; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .dark-text strong { font-size: 12.5px; font-weight: 700; color: #881337; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .dark-text span   { font-size: 11.5px; color: #9F1239; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--purple-bg); border: 1.5px solid var(--purple-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE9FE; border: 1.5px solid var(--purple-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--tor-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #2D1540; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0A0514 0%, #180A28 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(125,70,152,0.32) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🧅</div>
+        <div>
+          <div class="app-name-text">Tor Browser</div>
+          <div class="app-sub">Onion Routing Privacy Browser</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Anonymity / Dark Web Browser</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Routes all traffic through the Tor anonymity network, bypassing every content filter and making browsing completely untraceable — and provides access to the dark web, where content includes material that is illegal, deeply harmful, and entirely unsuitable for children of any age</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Tor Browser and anonymity tools from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Tor Browser — a privacy browser that routes all traffic through the Tor anonymity network, making every connection completely untraceable, bypassing every content filter and monitoring tool with a level of anonymity that far exceeds any standard VPN, and providing direct access to the dark web — a part of the internet that hosts content including illegal material and deeply harmful content entirely unsuitable for children.</p>
+  </div>
+
+  <div class="tor-callout">
+    <div class="tor-ico">🧅</div>
+    <div>
+      <div class="tor-title">Tor Browser Provides Absolute Browsing Anonymity and Direct Dark Web Access — It Is in a Different Category of Risk From Every Other Browser and VPN Tool</div>
+      <div class="tor-body">Tor Browser is a purpose-built anonymity browser that routes all traffic through the Tor network — a distributed network of volunteer-operated relays that encrypts traffic in multiple layers and bounces it through at least three separate nodes before it reaches its destination. This multi-layered routing makes it functionally impossible to trace browsing back to the device or user, far beyond what any standard VPN provides. Every content filter and monitoring tool is bypassed completely. Critically, Tor Browser also provides direct access to .onion sites — the dark web — where content includes illegal marketplaces, exploitation material, extremist content, and deeply harmful material that exists on no other part of the internet. This access to the dark web places Tor Browser in a categorically different risk position from every other browser and VPN tool in this category.</div>
+    </div>
+  </div>
+
+  <div class="dark-band">
+    <div class="dark-icon">🌑</div>
+    <div class="dark-text">
+      <strong>Provides Direct Access to the Dark Web — A Categorically Different Risk</strong>
+      <span>Tor Browser is the only widely available consumer tool that provides direct access to .onion sites on the dark web — where illegal, exploitative, and deeply harmful content exists that is unavailable on the open internet.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#7D4698;"></span> Tor Anonymity Network</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Dark Web Access</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D8B4FE;"></span> Multi-Layer Encryption</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Bypasses All Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#DC2626;"></span> Untraceable Browsing</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Tor Browser routes all traffic through the <strong>Tor anonymity network</strong>, providing complete, untraceable anonymity that far exceeds any VPN — bypassing every content filter and monitoring tool simultaneously — and gives direct access to .onion addresses on the dark web, where illegal and deeply harmful content that does not exist on the open internet is hosted.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--purple-bg);">🔄</div>
+      <div>
+        <div class="feat-name">Multi-Layer Onion Routing — Anonymity Far Beyond Any Standard VPN</div>
+        <div class="feat-desc">Tor Browser routes all traffic through the Tor network — a distributed system of thousands of volunteer-operated relay nodes worldwide. Traffic is encrypted in multiple layers (hence "onion" routing — like the layers of an onion) and passes through at least three separate relay nodes before reaching its destination, with each node knowing only the previous and next hop, not the origin or the full route. This architecture makes it functionally impossible to trace a browsing session back to the originating device — a level of anonymity that is qualitatively different from a standard VPN, where the VPN provider can see both the user's real IP address and the destination. No monitoring tool, no network inspection system, and no parental control infrastructure can identify where Tor traffic comes from or where it is going.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--red-bg);">🌑</div>
+      <div>
+        <div class="feat-name">Direct Access to Dark Web .onion Sites</div>
+        <div class="feat-desc">Tor Browser provides direct access to .onion addresses — the dark web — a portion of the internet that is only accessible through the Tor network and is not reachable through any standard browser or VPN. The dark web hosts content that cannot legally or safely exist on the open internet, including illegal marketplaces, exploitation material of the most serious kind, extremist and radicalisation content, detailed instructions for harmful acts, and deeply disturbing content across a range of categories. A child with Tor Browser installed has direct access to all of this material. This dark web access is the single factor that places Tor Browser in a categorically different risk position from every other tool in this document.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🚧</div>
+      <div>
+        <div class="feat-name">All Content Filters, Monitoring Tools, and Parental Controls Completely Defeated</div>
+        <div class="feat-desc">Tor Browser's routing through multiple encrypted relays bypasses every content filtering and monitoring system that operates at the network, DNS, or traffic inspection layer simultaneously. No router parental control, DNS safe search, ISP filter, network monitoring tool, or parental control product that relies on seeing network traffic can read or act on traffic routed through the Tor network. The anonymity is complete — the device's IP address is hidden, the destination is hidden, and the content of the traffic is encrypted across multiple layers. There is no network-level countermeasure that is effective against Tor routing.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">⚖️</div>
+      <div>
+        <div class="feat-name">A Legitimate Tool With Important Adult Uses — Entirely Inappropriate for Children</div>
+        <div class="feat-desc">Tor Browser is a legitimate, important tool for adults with genuine privacy needs — including journalists protecting sources, activists in authoritarian countries, whistleblowers, privacy researchers, and anyone who needs to communicate or browse in an environment where surveillance poses a genuine risk to their safety or freedom. The Tor Project is a respected non-profit organisation with a serious commitment to internet freedom. None of these legitimate adult uses change what Tor Browser provides access to when installed on a child's device — the dark web is accessible regardless of who is using the browser or why, and the anonymity it provides removes every layer of parental oversight simultaneously.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🧑‍💻</div>
+      <div>
+        <div class="feat-name">Known and Accessible to Technically Aware Teenagers</div>
+        <div class="feat-desc">Tor Browser is widely known in online communities where internet privacy and anonymity are discussed — communities that technically aware teenagers frequently participate in. The browser is freely available for download from the Tor Project's official website and is discussed in technology, privacy, and digital rights communities that older teenagers with technical interests are likely to encounter. A teenager who has heard about Tor in the context of online privacy, anonymity, or digital freedom can find and install it with minimal effort — and the browser's legitimate reputation in adult privacy communities may make it seem more defensible than it is in a child's hands.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Tor Browser carries a categorically higher risk than every other tool in this category — not only because it provides the most complete and untraceable bypass of parental controls available, but because it gives a child direct access to the dark web, where the most harmful content that exists on the internet is hosted.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🌑</span>
+      <div class="rc-name">Direct Dark Web Access</div>
+      <div class="rc-desc">Tor Browser is the only widely available consumer tool that provides direct access to dark web .onion sites — where illegal marketplaces, exploitation material, extremist content, and deeply harmful material are hosted, entirely inaccessible through any standard browser or VPN</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👁️‍🗨️</span>
+      <div class="rc-name">Completely Untraceable — No Monitoring System Can See Traffic</div>
+      <div class="rc-desc">Tor's multi-layer routing makes browsing completely untraceable — no parental control, network monitor, or traffic inspection system can identify the origin, destination, or content of any traffic routed through the Tor network</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚧</span>
+      <div class="rc-name">All Content Filters Simultaneously Defeated</div>
+      <div class="rc-desc">Every DNS filter, router parental control, ISP block, and network-level monitoring tool is completely bypassed by Tor routing — there is no network-level countermeasure that is effective against multi-layer onion routing</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">⚠️</span>
+      <div class="rc-name">Exposure to Deeply Harmful Dark Web Content</div>
+      <div class="rc-desc">The dark web hosts content of the most harmful categories — material that cannot legally exist on the open internet, with no content filters, age verification, or safeguards of any kind. A child who navigates to dark web content may encounter deeply traumatising material without warning</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧅</span>
+      <div class="rc-name">Anonymity Enables Interactions Without Any Identity Trail</div>
+      <div class="rc-desc">Tor's anonymity means that any interaction a child undertakes through the browser — visiting sites, communicating with individuals, accessing content — leaves no traceable identity record, making it impossible to retrospectively identify what a child accessed or who they interacted with</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧑‍💻</span>
+      <div class="rc-name">Known to Technically Aware Teenagers</div>
+      <div class="rc-desc">Tor Browser is well known in the online privacy and digital rights communities that technically curious teenagers frequently engage with — discovery is predictable, and the browser's legitimate adult reputation may reduce a teenager's perception of why it is restricted</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Tor Browser Carries the Highest Risk Rating in This Category — Dark Web Access Places It Beyond Every Other Bypass Tool</strong>
+      <span>Tor Browser's dark web access is the single factor that places it in a fundamentally different risk category from every other tool described in this document. Every VPN bypasses content filters — Tor does this and additionally provides a child with a direct route to the most harmful content that exists anywhere on the internet, with complete anonymity, no parental visibility, and no content filter that can intervene. No other widely available consumer app carries this combination of risks simultaneously.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🧅</div>
+    <div>
+      <div class="control-title">Tor's Anonymity Architecture Is Specifically Designed to Be Undetectable and Uncounterable at the Network Level — Device-Level Prevention Is the Only Effective Approach</div>
+      <div class="control-body">The Tor network was designed specifically to be resistant to traffic analysis and network-level detection — its multi-layer encryption and distributed routing architecture makes it effectively impossible to identify Tor traffic at the network level in a way that distinguishes it from ordinary HTTPS traffic in many configurations. Network-level VPN blocking, protocol inspection, and traffic analysis tools that are effective against standard VPN protocols are not reliably effective against Tor routing. The only reliable and complete protection is device-level prevention — blocking the Tor Browser application from being installed or run on a child's device before any connection to the Tor network is established. Once Tor Browser connects, no network-level response can recover the parental oversight that the connection removes.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">The Dark Web Access Is the Factor That Sets Tor Browser Apart From Every Other Tool in This Category</div>
+        <div class="know-body">Every tool described in this category bypasses content filters to some degree — that is the risk shared by VPN apps, VPN browsers, and privacy browsers collectively. Tor Browser carries this risk in its most complete form, but also carries a second risk that no other consumer tool in this category shares: direct access to the dark web. The dark web is not simply an unfiltered version of the open internet — it is a distinct part of the internet that hosts content including child exploitation material, detailed instructions for serious harm, illegal marketplaces, and extremist content that cannot legally exist in any other accessible location. A child who accesses the dark web through Tor Browser may encounter deeply traumatising material without any warning, any content filter, or any prior indication of what they are about to see. This risk is categorically different from the bypass risk and warrants a specific and serious conversation with any child in whose hands Tor Browser is found.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Tor Browser Has Entirely Legitimate and Important Uses for Adults — These Do Not Make It Appropriate for Children</div>
+        <div class="know-body">Tor Browser is produced by the Tor Project, a respected non-profit organisation, and is used by journalists, activists, whistleblowers, and privacy-conscious individuals for legitimate and sometimes critical purposes. A child who has encountered Tor through online privacy communities may present it as simply a privacy tool for people who care about internet freedom — a framing that is not inaccurate in an adult context. Parents should approach the conversation with full awareness of this framing: acknowledging that Tor has legitimate adult uses does not change what it provides access to on a child's device, and a child's interest in internet privacy is a topic worth engaging with seriously rather than dismissing. The response to Tor Browser's presence on a child's device can acknowledge the legitimate adult use case while being clear about the specific risks it creates in a child's hands — primarily the dark web access — and why those risks are not mitigated by the tool's legitimate reputation.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">A Child Who Has Installed Tor Browser Has Made a Deliberate and Technically Informed Decision</div>
+        <div class="know-body">Tor Browser is not a casually discovered consumer app — it is not prominently featured in mainstream app store searches, and finding and installing it requires a degree of deliberate research into anonymity tools or the Tor network specifically. A child who has Tor Browser installed has actively researched and sought out an anonymity tool — suggesting either a genuine technical interest in privacy and internet architecture, a specific motivation to bypass parental oversight with the highest available level of anonymity, or exposure to communities where Tor is discussed and recommended. Each of these contexts warrants a different but equally serious response: the first calls for a direct conversation about why the specific risks of dark web access make Tor inappropriate regardless of technical interest; the second calls for a broader conversation about what the child is seeking to access or do that requires this level of anonymity; and the third calls for understanding which communities the child is engaging with and what they are being exposed to there.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">No Network-Level Control Is Reliably Effective Against Tor — Device-Level Prevention Is the Only Complete Response</div>
+        <div class="know-body">Parents who have configured advanced network-level controls — including VPN protocol blocking, deep packet inspection, or traffic analysis systems that are effective against standard VPN tools — should be aware that these measures are not reliably effective against Tor traffic. Tor's design specifically targets traffic analysis and network-level identification as threats it was built to resist, and its routing architecture makes it substantially harder to detect and block at the network level than standard VPN protocols. Some network configurations can block access to known Tor relay entry points, but the Tor Project specifically maintains bridge relays to circumvent this blocking. The only fully reliable protective approach is preventing Tor Browser from being installed or run on the device itself — before any Tor connection is established — through iLimits device-level restrictions.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Tor Browser and similar anonymity tools — preventing a child from accessing the dark web and removing the most technically complete parental oversight bypass available through a consumer application.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Tor Browser and onion routing tools with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar anonymity and dark web browsers</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Device-level prevention works where network-level blocking cannot be relied on</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged anonymity tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Tor Browser as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines. Given Tor Browser's dark web access, this is one of the highest-priority restrictions available — iLimits gives you the information and the tools to act on it immediately.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect the specific and serious nature of Tor Browser — acknowledging its legitimate adult purpose while being direct about the dark web risk, understanding what a child's deliberate choice to install it may indicate, and applying the device-level restriction that is the only reliable countermeasure against Tor's network architecture.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Have a Direct and Serious Conversation About the Dark Web — Not Just About Parental Controls</div>
+        <div class="tip-body">The conversation about Tor Browser on a child's device is one of the most significant in this entire category — and it needs to address the dark web directly, not only the bypass of parental controls. A child who has installed Tor Browser has access to a part of the internet where deeply harmful, illegal, and traumatising content is hosted. This should be explained clearly, calmly, and specifically — not to frighten, but to ensure the child understands what the dark web is and why it is genuinely dangerous rather than simply restricted by a parent's rule. The child's motivation for installing Tor matters enormously — a teenager with a genuine interest in internet privacy and the Tor Project's mission deserves an honest engagement with their interest alongside a clear explanation of the specific risks; a child who installed it to access something specific requires a different kind of conversation entirely. Either way, Tor Browser's presence on a child's device is one of the situations where a direct and serious parental response is genuinely warranted.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check the Browsing History Within Tor Before Deleting — Then Delete the App and Apply the Restriction</div>
+        <div class="tip-body">Tor Browser maintains its own browsing history within the app, separate from any other browser history. If Tor Browser is found on a child's device, review the browser's own history before deleting the app — this is the only opportunity to understand what the child has accessed through it, as deleting the app removes the history along with it. Be prepared for the possibility that the history shows access to dark web .onion addresses, and approach what you find with composure and a readiness for a serious conversation rather than an immediate reactive response. After reviewing, delete the app and apply the iLimits restriction to prevent reinstallation. The restriction is the last step, not the first — understanding what occurred before enforcing the restriction allows for a more informed and productive response.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply the Device-Level Block — Network Controls Are Not Sufficient Against Tor's Design</div>
+        <div class="tip-body">Use iLimits to block Tor Browser and the category of anonymity tools at the device level across every device your child uses. Do not rely on network-level VPN blocking or traffic analysis tools as primary protection against Tor — Tor's architecture was specifically designed to resist these approaches, and the Tor Project maintains bridge relays specifically to circumvent entry-point blocking. The only complete and reliable protection is preventing Tor Browser from operating on the device before any connection to the Tor network is established. On iOS, pair iLimits restrictions with Screen Time settings restricting VPN and configuration profile installation. Ensure Tor Browser is blocked not only on the child's primary device but on any secondary device, shared family computer, or tablet the child has access to, as the motivation to reinstall may be high given the level of anonymity the browser provides.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Dark Web Access Is Not a Filter Bypass — It Is a Different Internet Entirely</h3>
+    <p class="closing-body">
+      Tor Browser is not simply the most powerful bypass tool in this category — it provides access to a part of the internet where the most harmful content that exists anywhere online is hosted, with complete anonymity, no parental visibility, and no content filter that can reach inside the Tor network. iLimits gives you the device-level restriction that is the only reliable protection — applied before any Tor connection is established, so that the dark web remains inaccessible to your child and the oversight you have put in place remains intact.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
