@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Cloudflare 1.1.1.1 – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Cloudflare brand: signature deep orange */
+    --cf:           #F38020;
+    --cf-mid:       #C96A10;
+    --cf-deep:      #7A3D00;
+    --cf-light:     #FFF8F2;
+    --cf-bdr:       #FDBA74;
+    --cf-text:      #4A1F00;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --orange-bg:    #FFF8F2;
+    --orange-bdr:   #FDBA74;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #100800 0%, #1E1000 50%, #2C1800 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(243,128,32,0.46) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(253,186,116,0.28) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(243,128,32,0.20);
+    border: 1px solid rgba(253,186,116,0.36);
+    color: #FDBA74; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #100800 0%, #F38020 58%, #FDBA74 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(243,128,32,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FDBA74; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Cloudflare callout ── */
+  .cf-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cf-light); border: 1.5px solid var(--cf-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .cf-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE0C0; border: 1.5px solid var(--cf-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .cf-title { font-size: 13px; font-weight: 700; color: var(--cf-text); line-height: 1.3; margin-bottom: 3px; }
+  .cf-body  { font-size: 12px; color: #5C2800; font-weight: 400; line-height: 1.55; }
+
+  /* ── Nuance badge ── */
+  .nuance-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--blue-bg); border: 1.5px solid var(--blue-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .nuance-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #DBEAFE; border: 1.5px solid var(--blue-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .nuance-text strong { font-size: 12.5px; font-weight: 700; color: #1E3A8A; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .nuance-text span   { font-size: 11.5px; color: #1D4ED8; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFAF0; border: 1.5px solid #FBD38D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEEBCB; border: 1.5px solid #FBD38D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #744210; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5A3110; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cf-light); border: 1.5px solid var(--cf-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE0C0; border: 1.5px solid var(--cf-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--cf-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #5C2800; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #100800 0%, #1E1000 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(243,128,32,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">☁️</div>
+        <div>
+          <div class="app-name-text">Cloudflare 1.1.1.1</div>
+          <div class="app-sub">DNS Resolver &amp; WARP VPN</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">DNS Tool / VPN Proxy</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium-high">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Replaces the device's DNS resolver and optionally activates a device-wide VPN tunnel (WARP), bypassing DNS-based content filters, safe search tools, and network-level parental controls silently and technically</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block DNS override tools and VPN apps from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Cloudflare 1.1.1.1 — a legitimate, highly reputable DNS resolver and optional VPN app from one of the world's most trusted internet infrastructure companies, whose core function — replacing the device's DNS resolver — silently bypasses DNS-based parental content filters regardless of whether the user understands or intends that effect.</p>
+  </div>
+
+  <div class="cf-callout">
+    <div class="cf-ico">☁️</div>
+    <div>
+      <div class="cf-title">Cloudflare 1.1.1.1 Is a Legitimate Technical Tool That Silently Bypasses DNS-Based Parental Controls — Its Risk Is Unintentional by Design, But Real in Practice</div>
+      <div class="cf-body">Cloudflare 1.1.1.1 is the consumer app produced by Cloudflare, one of the world's most respected internet infrastructure companies. The app's primary function is to replace the device's default DNS resolver with Cloudflare's 1.1.1.1 DNS service — one of the fastest and most privacy-focused DNS resolvers available. It is a legitimate, widely used tool with genuine benefits for adult users. However, because DNS-based parental content filters work by intercepting DNS requests at the network or device level, and because the 1.1.1.1 app routes DNS queries directly to Cloudflare's own infrastructure, those filters are bypassed — not through any malicious intent, but as a direct consequence of how the app works. The app's optional WARP feature additionally provides a device-wide VPN tunnel that further extends the bypass to all traffic.</div>
+    </div>
+  </div>
+
+  <div class="nuance-band">
+    <div class="nuance-icon">ℹ️</div>
+    <div class="nuance-text">
+      <strong>A Legitimate App Whose Technical Function Bypasses Parental Controls</strong>
+      <span>Unlike most restricted apps, 1.1.1.1 is a trusted, reputable product with genuine adult uses. It is restricted because of what it does technically — not because it is harmful in itself.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#F38020;"></span> DNS Override</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Bypasses DNS Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FDBA74;"></span> WARP VPN Option</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0068FF;"></span> Cloudflare Infra</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Device-Wide Effect</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Cloudflare 1.1.1.1 is a <strong>DNS resolver replacement and optional VPN app</strong> from Cloudflare. Its primary effect on parental controls is technical rather than intentional — by routing DNS queries to Cloudflare's own infrastructure, it silently bypasses any content filtering that operates at the DNS level, including the majority of parental control systems used in homes and on school networks.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--cf-light);">🔄</div>
+      <div>
+        <div class="feat-name">Replaces the Device's DNS Resolver — The Foundation of Most Parental Content Filters</div>
+        <div class="feat-desc">When Cloudflare 1.1.1.1 is active, it replaces the device's default DNS resolver — the component that translates website names into addresses — with Cloudflare's own 1.1.1.1 service. This is the single change that bypasses the majority of DNS-based parental controls. Most home router parental controls, DNS filtering services like family-safe DNS, and ISP-provided content filtering work by controlling the DNS resolver the device uses. When 1.1.1.1 replaces that resolver with its own, the filtering infrastructure the parent has configured is no longer in the loop — DNS requests go to Cloudflare, not to the filtering system, and no block is applied.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🌐</div>
+      <div>
+        <div class="feat-name">WARP Mode Adds a Full Device-Wide VPN Tunnel on Top of the DNS Override</div>
+        <div class="feat-desc">Beyond the DNS resolver replacement, Cloudflare 1.1.1.1 includes an optional WARP feature that activates a full device-wide VPN tunnel routing all internet traffic through Cloudflare's network. When WARP is enabled, the bypass extends from DNS-level filtering to all network-level traffic inspection — router controls, network monitoring tools, and any inspection system that relies on seeing the device's traffic at the network layer are all rendered ineffective simultaneously. WARP is available at no cost in its basic form and can be enabled within the same app with a single toggle.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">⚡</div>
+      <div>
+        <div class="feat-name">A Trusted, Reputable Product — Its Bypass Effect Is Incidental, Not Intentional</div>
+        <div class="feat-desc">Cloudflare is one of the most widely respected internet infrastructure companies in the world. The 1.1.1.1 app is a genuine, well-designed tool for improving DNS speed and privacy, used by millions of adult users for entirely legitimate purposes. Its bypass of parental controls is not a feature that Cloudflare designed for the purpose of circumventing family safety measures — it is a consequence of how DNS filtering works and how the app replaces the DNS resolver. This is an important distinction: the app is not in the category of bypass tools designed for the purpose of defeating parental controls. Its effect on those controls is nonetheless real and complete.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🧑‍💻</div>
+      <div>
+        <div class="feat-name">Likely to Be Installed by Technically Curious Children and Teenagers</div>
+        <div class="feat-desc">Unlike consumer-facing bypass tools marketed on the promise of unrestricted internet access, Cloudflare 1.1.1.1 is typically discovered by children and teenagers with a genuine technical interest in internet performance and privacy — or, in some cases, by those who have specifically researched DNS-based methods for bypassing content filters. The app's technical legitimacy and its association with a major, reputable company can make it appear to a child as a more defensible choice than an explicit bypass tool, and to a parent as a more ambiguous one. Its effect on parental controls is identical regardless of the motivation for installing it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🔕</div>
+      <div>
+        <div class="feat-name">The DNS Override Operates Silently — No Visible Indicator Shows That Filtering Has Been Bypassed</div>
+        <div class="feat-desc">When Cloudflare 1.1.1.1 is active in DNS-only mode — without WARP — there is no VPN icon in the device's status bar and no visible indication that the DNS resolver has been changed. A parent reviewing the device's network settings or checking for active VPN connections will not see any indicator that filtering has been bypassed in standard DNS mode. The bypass is invisible to casual inspection, operating at a technical layer below the surface of the device's standard network interface. Only WARP mode — the full VPN tunnel — produces a visible status bar indicator on most devices.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Cloudflare 1.1.1.1's risks for children are primarily about the silent, invisible bypass of DNS-based parental filtering — the type of filtering that the majority of family routers and parental control services rely on — combined with an optional full VPN that extends the bypass to all traffic with a single toggle.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔕</span>
+      <div class="rc-name">Silent DNS Bypass — No Visible Indicator</div>
+      <div class="rc-desc">In standard DNS mode, 1.1.1.1 bypasses DNS-based content filtering with no visible status bar indicator — unlike a VPN, there is nothing on the device's surface that shows a parent that filtering has been overridden</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏠</span>
+      <div class="rc-name">Home Router Parental Controls Defeated</div>
+      <div class="rc-desc">Router-level parental controls and DNS filtering services configured on the home network — the primary parental control mechanism for many families — rely on the device using the network's DNS resolver, which 1.1.1.1 directly replaces</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔍</span>
+      <div class="rc-name">Safe Search DNS Enforcement Bypassed</div>
+      <div class="rc-desc">Safe search enforcement tools that work by redirecting DNS queries for major search engines to their safe search versions — a common mechanism in family routers and DNS services — are defeated when 1.1.1.1 replaces the DNS resolver</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">WARP Adds Full Device-Wide VPN at One Toggle</div>
+      <div class="rc-desc">The optional WARP feature extends the bypass from DNS-level filtering to all network traffic — a single toggle within the app activates a device-wide VPN tunnel that defeats every network-level parental control simultaneously</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏫</span>
+      <div class="rc-name">Bypasses School Network Filters Too</div>
+      <div class="rc-desc">Because 1.1.1.1 replaces the DNS resolver at the device level rather than just on the home network, its bypass of DNS-based filtering applies on every network the child uses — including school networks and public Wi-Fi with content filtering in place</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧑‍💻</span>
+      <div class="rc-name">Legitimacy May Reduce Perceived Risk</div>
+      <div class="rc-desc">The app's association with Cloudflare — a highly respected infrastructure company — may lead both children and parents to underestimate its impact on content filtering, treating it as a neutral technical tool rather than a mechanism that defeats parental controls</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>Cloudflare 1.1.1.1 Carries a Medium–High Risk Rating — Lower Intent Risk, But Complete DNS Filter Bypass</strong>
+      <span>The medium–high rating reflects the distinction between this app and tools designed specifically to bypass parental controls. Cloudflare 1.1.1.1 is a legitimate product from a trusted company, and its installation does not always indicate an intent to circumvent parental oversight. However, its technical effect — a complete and silent bypass of DNS-based content filtering, with an optional full VPN — makes it as functionally disruptive to parental controls as many tools designed explicitly for that purpose. The risk is real regardless of the intent behind the installation.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🌐</div>
+    <div>
+      <div class="control-title">DNS-Based Parental Controls Are the Most Widely Used Family Content Filtering Method — And Cloudflare 1.1.1.1 Silently Bypasses Them All</div>
+      <div class="control-body">The majority of home parental control systems — router manufacturer parental controls, DNS filtering services, ISP family filters, and many third-party parental control apps — operate by controlling the DNS resolver the device uses. This is the standard, widely deployed mechanism for content filtering at home and at school. Cloudflare 1.1.1.1's core function is precisely to replace the DNS resolver, making it uniquely disruptive to this entire class of parental controls. A family whose content filtering relies on DNS-based mechanisms should treat the presence of 1.1.1.1 on a child's device as a complete bypass of that filtering — not a partial one — even if the child never activates WARP.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">The App Is Legitimate — Its Risk Comes From What It Does Technically, Not From Its Intent</div>
+        <div class="know-body">Cloudflare 1.1.1.1 is not a bypass tool created for the purpose of defeating parental controls, and parents should understand this distinction before approaching a conversation with their child about why it is restricted. The app is produced by a respected company, performs a genuine technical function, and is used by millions of adults worldwide for entirely reasonable purposes including improved DNS performance and enhanced browsing privacy. Its restriction in iLimits reflects what it does to DNS-based content filtering as a technical consequence of its core function — not a judgment that the app itself or the company that made it has malicious intent. This distinction matters for the conversation a parent has with a child, because the child who installed it may have done so with no intent to bypass parental controls at all.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">If Your Parental Controls Rely on DNS Filtering, the App's Bypass Is Complete — Not Partial</div>
+        <div class="know-body">Parents who use router-based parental controls, DNS filtering services, or ISP-provided family filters as their primary content control mechanism should understand that Cloudflare 1.1.1.1's DNS override completely removes those controls from the equation for any device running the app. The bypass is not selective — it does not affect only some DNS lookups while leaving others in the filtering system's reach. All DNS queries from the device are routed to Cloudflare's infrastructure, and none of them pass through the filtering system that the parent has configured. If content filtering is the primary parental protection in place, the presence of 1.1.1.1 on a child's device means that protection is entirely absent for that device while the app is active.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The DNS Bypass Is Invisible — There Is No Status Bar Indicator in Standard Mode</div>
+        <div class="know-body">In its standard DNS resolver mode — without the WARP VPN feature enabled — Cloudflare 1.1.1.1 operates without any visible indicator on the device's status bar or home screen. Unlike a VPN connection, which typically shows a key icon at the top of the screen, the DNS resolver replacement happens at a network layer that produces no surface-level visual change on the device. A parent glancing at a child's phone and checking for active VPN connections or unusual status bar icons will see nothing that indicates the DNS resolver has been changed and content filtering has been bypassed. The only reliable detection approach is checking whether the app is installed, rather than checking for visible signs that it is active.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Cloudflare Offers a Family-Safe DNS Mode — But It Is Not Enabled by Default in the Standard App</div>
+        <div class="know-body">Cloudflare provides a separate family-safe DNS option — available at the address 1.1.1.3 — that includes content filtering for adult material and malware. This is a distinct service from the standard 1.1.1.1 resolver the app uses by default, and it is not enabled automatically when a child installs the app. The existence of a family-safe option within Cloudflare's DNS infrastructure does not mean the standard 1.1.1.1 app provides content filtering — it does not. A parent who is aware of Cloudflare's family-safe DNS service should not assume that a child's use of the 1.1.1.1 app means they are using that service. The standard app bypasses content filtering; only the specific family-safe DNS configuration provides it, and that configuration is not the default.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Cloudflare 1.1.1.1 and similar DNS override tools — ensuring that DNS-based parental content filtering remains intact and effective on every device your child uses.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Cloudflare 1.1.1.1 and DNS override tools with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar DNS resolver and VPN apps automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Preserves the effectiveness of DNS-based parental content filtering</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged DNS or VPN tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Cloudflare 1.1.1.1 as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. For a technically curious child with genuine interest in internet infrastructure, a conversation about why this app is restricted may be more appropriate than an immediate block — iLimits gives you the information to make that call.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect the nuanced nature of this app — acknowledging its legitimacy while addressing its technical effect on content filtering, and explaining how to have a conversation that is appropriately calibrated to why the child installed it.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Approach the Conversation With the Nuance the App Deserves — Understand Why It Was Installed Before Responding</div>
+        <div class="tip-body">A child who has installed Cloudflare 1.1.1.1 may have done so for any of several reasons — a genuine interest in internet performance and privacy, a recommendation from a technically minded peer or online community, or a deliberate attempt to bypass DNS-based content filters. The appropriate response differs meaningfully depending on which of these is true. A child who installed a reputable DNS resolver because they read about internet privacy deserves a different conversation than a child who installed it specifically to bypass a content filter they were frustrated by. Ask directly and calmly why the app was installed before framing a response — and be prepared for the possibility that the child did not know or fully understand that the app had any effect on content filtering. The technical effect is real regardless of the intent, but the conversation is substantially more productive when it starts with understanding rather than assumption.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check Whether WARP Is Enabled — The Full VPN Produces a Visible Status Bar Indicator</div>
+        <div class="tip-body">When reviewing a child's device for 1.1.1.1, check two separate things. First, whether the app is installed at all — searchable by name in the installed app list. Second, whether WARP is active — this can be identified by a key icon in the status bar at the top of the device screen, which appears whenever a VPN or WARP tunnel is active. Standard DNS-only mode produces no visible indicator; WARP mode does. The distinction matters because WARP represents a significantly broader bypass than DNS-only mode — it defeats not just DNS-based filtering but all network-level monitoring simultaneously. If WARP is active, the bypass scope is total; if only DNS mode is active, the bypass is limited to DNS-based filtering tools, which is still the majority of home parental control systems but not all of them.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block the App at the Device Level — DNS Filtering Alone Cannot Counter a DNS Override Tool</div>
+        <div class="tip-body">The fundamental challenge Cloudflare 1.1.1.1 presents for parental controls is that DNS-based filtering — the mechanism most home parental control systems use — cannot be applied to a device that is routing its DNS queries to a different DNS resolver. A DNS filter that cannot intercept the query cannot act on it. The only reliable countermeasure is preventing the DNS override app from operating on the device in the first place, through iLimits device-level restrictions. On iOS, also restrict VPN and DNS configuration profile installation through Screen Time to prevent manual DNS configuration profiles from being installed as an alternative to the app. On Android, pair iLimits restrictions with monitoring the device's network settings periodically to ensure the DNS configuration has not been manually changed through the system settings rather than through an app. The combination of app-level restriction and configuration control provides the most complete and durable protection against DNS override tools.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Legitimate Tool That Bypasses Parental Controls Still Needs to Be Restricted</h3>
+    <p class="closing-body">
+      Cloudflare 1.1.1.1 is unique in this category — it is a genuinely reputable, technically excellent product that was not designed to defeat parental controls and is used by millions of adults with entirely legitimate intentions. None of that changes its technical effect on a child's device: DNS-based content filtering is silently and completely bypassed the moment the app is active. iLimits gives you the tools to prevent that effect, and the information to have a conversation with your child that reflects the genuine nuance of this particular app rather than treating it as simply another bypass tool.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
