@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Firefox Focus – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    --ff:           #C542A0;
+    --ff-mid:       #A0348A;
+    --ff-deep:      #3D0A2F;
+    --ff-light:     #FDF4FF;
+    --ff-bdr:       #E879F9;
+    --ff-text:      #3D0A2F;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0315 0%, #3D0A2F 50%, #521040 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(197,66,160,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 275px; height: 275px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(197,66,160,0.40) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(197,66,160,0.20);
+    border: 1px solid rgba(232,121,249,0.36);
+    color: #E879F9; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #3D0A2F 0%, #C542A0 55%, #E879F9 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(197,66,160,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.13); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: 0 2px 14px rgba(240,67,106,0.10);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .ff-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ff-light); border: 1.5px solid var(--ff-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .ff-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FAE8FF; border: 1.5px solid var(--ff-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .ff-title { font-size: 13px; font-weight: 700; color: var(--ff-text); line-height: 1.3; margin-bottom: 3px; }
+  .ff-body  { font-size: 12px; color: #701A75; font-weight: 400; line-height: 1.55; }
+
+  .nuance-banner {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--blue-bg); border: 1.5px solid var(--blue-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .nb-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #DBEAFE; border: 1.5px solid var(--blue-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .nb-title { font-size: 12.5px; font-weight: 700; color: #1E3A8A; margin-bottom: 3px; line-height: 1.3; }
+  .nb-body  { font-size: 11.5px; color: #1E40AF; font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-magenta::before{ background: #C542A0; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+  .risk-card.c-teal::before   { background: #0D9488; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB; border: 1.5px solid #FCD34D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FCD34D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Browser note ── */
+  .browser-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ff-light); border: 1.5px solid var(--ff-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .bn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FAE8FF; border: 1.5px solid var(--ff-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .bn-title { font-size: 13px; font-weight: 700; color: var(--ff-text); line-height: 1.3; margin-bottom: 3px; }
+  .bn-body  { font-size: 12px; color: #701A75; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0315 0%, #521040 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(197,66,160,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: 0 2px 14px rgba(240,67,106,0.10); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card          { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid     { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card       { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box      { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip    { animation: fadeUp 0.42s ease 0.05s both; }
+  .ff-callout    { animation: fadeUp 0.42s ease 0.03s both; }
+  .nuance-banner { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip    { animation: fadeUp 0.42s ease 0.04s both; }
+  .browser-note  { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing       { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🦊</div>
+        <div>
+          <div class="app-name-text">Firefox Focus</div>
+          <div class="app-sub">Privacy Browser &amp; Ad Blocker</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Privacy Browser</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val medium">🟡 Medium</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Automatically erases all browsing history after every session and blocks tracking tools — removing the browser-history visibility that parents rely on to understand what a child has been accessing</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear and fair picture of Firefox Focus — a legitimate, Mozilla-built privacy browser that automatically erases all browsing history after every session and blocks tracking tools, whose privacy design features become a specific concern on a child's device where parental visibility into browsing activity matters.</p>
+  </div>
+
+  <div class="ff-callout">
+    <div class="ff-ico">🦊</div>
+    <div>
+      <div class="ff-title">Firefox Focus Is a Legitimate Privacy Browser From Mozilla — Its Automatic History Erasure Removes the Oversight That Normal Browsers Provide on a Child's Device</div>
+      <div class="ff-body">Firefox Focus is a free, open-source privacy browser developed by Mozilla — the non-profit behind the mainstream Firefox browser. It is designed to block trackers, erase all browsing history automatically when the session ends, and leave no stored data on the device. For adults these are valuable privacy features. On a child's device, the same design removes the browsing history visibility that parents use to understand what their child is accessing — not because Firefox Focus is harmful itself, but because its core feature eliminates one of the most basic parental oversight tools.</div>
+    </div>
+  </div>
+
+  <div class="nuance-banner">
+    <div class="nb-ico">⚖️</div>
+    <div>
+      <div class="nb-title">Firefox Focus Is Flagged for What It Removes — Not for Any Harmful Content or Data Practice</div>
+      <div class="nb-body">Unlike most apps flagged in iLimits, Firefox Focus has no adult content, no data practice concerns and no problematic corporate identity. It is a well-regarded product from a trusted non-profit. It carries a Medium risk rating — the lowest in iLimits — because the sole concern is the automatic erasure of browsing history. The browser itself is not harmful; the design feature that makes it useful for adults is the feature that creates the concern on a child's device.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#C542A0;"></span> Privacy Browser</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Auto-Erase History</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0D9488;"></span> Tracker Blocking</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B82F6;"></span> No Browsing Log</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Mozilla / Open Source</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">Firefox Focus is a <strong>privacy-focused browser from Mozilla</strong> that automatically erases browsing history, cookies and cached data when the browser is closed, and blocks trackers by default. Its privacy design is legitimate and well-implemented — the concern on a child's device is the removal of browsing visibility that the history erasure causes.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--ff-light);">🗑️</div>
+      <div>
+        <div class="feat-name">Automatically Erases All Browsing History When the Browser Is Closed</div>
+        <div class="feat-desc">Firefox Focus erases browsing history, cookies and site data automatically when the session ends — either when the app is closed or when the user taps its erase button. There is no browsing history to review after the session. A parent checking browser history after any Firefox Focus session finds nothing, regardless of what was accessed. This is the single feature that creates the concern for parental oversight on a child's device.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🚫</div>
+      <div>
+        <div class="feat-name">Blocks Trackers and Monitoring Scripts by Default</div>
+        <div class="feat-desc">Firefox Focus blocks a wide range of tracking scripts, analytics tools and monitoring code by default. Some browser-level parental monitoring tools work by injecting scripts into web pages — Firefox Focus's tracker blocking may prevent these from functioning correctly, reducing their visibility into what a child accesses through the browser. This is a secondary concern compared with the history erasure, but relevant for parents who use browser-level monitoring as part of their oversight approach.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">✅</div>
+      <div>
+        <div class="feat-name">Open Source, Developed by Mozilla — a Trusted Non-Profit</div>
+        <div class="feat-desc">Firefox Focus is developed and maintained by Mozilla, which has built and maintained Firefox for over two decades with a consistent commitment to privacy and user rights. The app is fully open source and has no data practice concerns — Mozilla's privacy claims are among the most credibly substantiated in the browser market. The restriction is entirely about the automatic history erasure design feature, not about Mozilla's own practices or intentions.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">🎯</div>
+      <div>
+        <div class="feat-name">Minimal Footprint — No Account, No Sync, No Stored Data</div>
+        <div class="feat-desc">Firefox Focus requires no account and stores nothing persistently between sessions. Unlike Chrome or the standard Firefox browser, there is no cloud-stored history a parent could review through an account dashboard, and no local data to examine after a session. This means there are fewer secondary routes available to a parent trying to understand what was accessed — browser history, account history, and device-stored data are all absent after a Firefox Focus session.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Available on Google Play — No Sideloading Required</div>
+        <div class="feat-desc">Firefox Focus is available on Google Play and can be installed without sideloading. A Family Link approval request will be triggered on devices where installation approval is active. The browser is visible in the device's app list and does not attempt to hide its presence — the concern is not concealment of the browser itself, but the absence of browsing history once it has been used.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Firefox Focus's risks are entirely about what it removes — browsing history visibility — rather than what it adds. The automatic erasure of all session data and the blocking of monitoring tools are the specific concerns for parental oversight.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🗑️</span>
+      <div class="rc-name">Browsing History Is Automatically Erased After Every Session</div>
+      <div class="rc-desc">A parent reviewing the device after any Firefox Focus session finds no browsing history — the browser erases all records automatically when closed, removing the most basic tool parents use to understand what their child has been accessing</div>
+    </div>
+    <div class="risk-card c-magenta">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">Tracker Blocking May Affect Browser-Level Monitoring Tools</div>
+      <div class="rc-desc">Firefox Focus's tracker blocking may prevent some browser-level parental monitoring scripts from operating correctly — reducing the effectiveness of monitoring tools that work by injecting tracking code into web pages</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">🎯</span>
+      <div class="rc-name">No Account, No Sync — No Secondary Record of Activity</div>
+      <div class="rc-desc">There is no account and no cloud-stored history — unlike Chrome or standard Firefox, there is no account dashboard a parent can check, and no device data to examine after a Firefox Focus session ends</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Unrestricted Content Access — No Built-In Content Filter</div>
+      <div class="rc-desc">Firefox Focus provides access to all websites without built-in content filtering — though network-level DNS filters remain effective for traffic from Firefox Focus, unlike VPN tools which bypass network controls</div>
+    </div>
+    <div class="risk-card c-teal">
+      <span class="rc-emoji">🔍</span>
+      <div class="rc-name">May Not Be Immediately Recognised as a Privacy Browser</div>
+      <div class="rc-desc">Firefox Focus looks like a standard browser app — its history-erasure features are not visible to a casual review of the device, and their implications may only become apparent when a missing browsing history is noticed</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">📲</span>
+      <div class="rc-name">Easily Discoverable Through App Stores and Tech Content</div>
+      <div class="rc-desc">Firefox Focus is available on Google Play and is frequently recommended in tech and privacy-focused content — a child interested in privacy or following tech content will encounter it readily through standard discovery routes</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Firefox Focus Carries a Medium Risk Rating</strong>
+      <span>Firefox Focus has no content risks, no data practice concerns and no problematic corporate identity — it is a well-regarded product from a trusted non-profit. Its Medium rating reflects the specific and targeted concern of automatic browsing history erasure, which removes a basic parental oversight tool. Network-level content filters remain effective, and the concern is specifically about browser-level history visibility.</span>
+    </div>
+  </div>
+
+  <div class="browser-note">
+    <div class="bn-ico">🌐</div>
+    <div>
+      <div class="bn-title">Network-Level Content Filters Remain Effective — Browser-History Review Does Not</div>
+      <div class="bn-body">Firefox Focus does not bypass network-level parental controls the way VPN tools do. DNS-based content filters and router category blocks still apply to traffic from Firefox Focus. The specific gap is at the browser level: the browsing history that would be reviewable in Chrome or standard Firefox is not available after a Firefox Focus session. Parents who rely primarily on network-level controls are less affected than those who use browser history review as a primary oversight tool.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Firefox Focus Is a Legitimate Product From a Trusted Developer — the Concern Is the History Erasure Feature, Not the App Itself</div>
+        <div class="know-body">Firefox Focus is made by Mozilla — the organisation that has built Firefox for over two decades with a consistent commitment to privacy and user rights. Parents who find it on a child's device are not dealing with a harmful or deceptive app. The concern is that its core design feature — automatic history erasure — removes one of the basic tools parents use to maintain oversight of browser activity. The conversation with a child should reflect this accurately: Firefox Focus is a legitimate product with a legitimate purpose that is specifically not appropriate on a device where parental oversight of browsing matters.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Firefox Focus Does Not Bypass Network-Level Controls — It Removes Browser-History Visibility Specifically</div>
+        <div class="know-body">Unlike VPN tools, Firefox Focus does not bypass DNS-based content filters or router-level restrictions — network-level parental controls remain effective for traffic from Firefox Focus. The gap it creates is specifically at the browser level: browsing history review is unavailable after sessions. Parents who rely primarily on network-level filtering and do not regularly review browser history may find this a less significant concern. Understanding which layer your oversight primarily relies on helps calibrate the appropriate response.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">A Child Installing Firefox Focus May Have a Genuine Privacy Interest — or May Have Been Looking for a Browser Without a History</div>
+        <div class="know-body">Firefox Focus can arrive on a device through two routes: a genuine interest in privacy tools, or a deliberate search for a browser that does not leave a history. Both are possible and a parent cannot immediately know which applies. A conversation that begins with genuine curiosity — asking what they know about Firefox Focus and why they installed it — is more likely to produce useful information than an immediate assumption of the second scenario. The nature of the response will quickly make the motivation clear.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">For Older Teenagers With a Genuine Privacy Interest, a Supervised Arrangement May Be More Appropriate Than Blanket Restriction</div>
+        <div class="know-body">Firefox Focus is one of the few restricted apps where a supervised exception is genuinely worth considering for older teenagers — its purpose is legitimate, its developer is trusted, and an interest in browser privacy is reasonable. For parents of older teenagers who are interested in privacy, a conversation that acknowledges the legitimate interest while addressing the specific concern about browsing oversight may lead to a more durable arrangement than blanket restriction. This is a judgement that depends on the child's age, maturity and the specific household approach to digital oversight.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block Firefox Focus and similar history-erasing browsers — preserving browser-history visibility as an oversight tool and ensuring browsing activity leaves a reviewable record.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block Firefox Focus and privacy browsers by category with one tap</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Restricted categories cover similar history-erasing and private browsers</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which browsers are accessible on the device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Firefox Focus as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs. For Firefox Focus specifically, some parents of older teenagers may decide a supervised arrangement is more appropriate than a blanket block.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps tailored to Firefox Focus — including how to approach the conversation accurately, how to check what browsing information is still accessible, and how to maintain oversight without eliminating all browser privacy for a child.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Have an Honest Conversation About Privacy Versus Oversight — Not a Prohibition Without Context</div>
+        <div class="tip-body">Firefox Focus gives parents one of the cleaner conversations in the restricted apps category because the legitimate interest it serves is real and the concern is specifically about one feature. Acknowledge that browser privacy is a genuine and reasonable interest — nobody wants every search recorded indefinitely — while being direct about why automatic history erasure is specifically a problem where a parent's ability to understand browsing activity is part of maintaining a child's safety. Help your child understand that browsing history visibility is one of the tools a parent uses to notice if something has gone wrong, if a child has encountered something distressing, or if there is a pattern of access worth discussing. An honest conversation about the difference between adult browser privacy and the transparency that matters on a child's device is more durable than a rule without explanation — and one a privacy-interested teenager is capable of taking seriously.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--ff-light); border-color: var(--ff-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Check the Standard Browser's History and Router Logs for Context</div>
+        <div class="tip-body">If Firefox Focus is found on a child's device, reviewing the standard browser's history — Chrome, standard Firefox, or the device's default browser — gives a picture of activity outside Firefox Focus sessions. Comparing what appears in the standard history with overall device usage patterns can help establish whether Firefox Focus has been the primary browser or a supplement. Network-level monitoring tools that log DNS queries or connection destinations may also show traffic from Firefox Focus sessions even when the browser itself has erased its history — checking router-level activity logs can provide a useful secondary source of information about what was accessed and when.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply iLimits Restrictions and Enable Family Link Approval — Then Consider What Oversight Layer Matters Most to You</div>
+        <div class="tip-body">Apply iLimits restrictions to block Firefox Focus and similar history-erasing browsers across your child's devices. Enable Google Family Link's app installation approval so any future attempt to install Firefox Focus generates an alert before the browser is active. Separately, consider which layer of oversight matters most in your household — network-level DNS filters address content access regardless of which browser is used, and router activity logs may give traffic-level visibility even when browser history is not available. Understanding this helps calibrate how significant Firefox Focus's specific gap is for your setup. For parents whose primary oversight relies on browser history review, the restriction is important; for those who rely primarily on network-level tools, the impact is more contained.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Browser Privacy Is Legitimate — and Browser Oversight Matters Too</h3>
+    <p class="closing-body">
+      Firefox Focus is one of the more thoughtfully built apps in the restricted category — Mozilla's privacy mission is genuine, the product is open source, and browser privacy is a legitimate interest. The reason it is restricted on children's devices is specific: the automatic erasure of browsing history removes a basic tool parents use to maintain oversight of what a child is accessing. iLimits gives you the tools to address that. The conversation about the difference between adult browser privacy and the kind of transparency that matters on a child's device is one of the more honest ones available — and one a privacy-interested child is capable of engaging with seriously.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
