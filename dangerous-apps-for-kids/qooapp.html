@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>QooApp – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* QooApp accent: vivid tangerine-orange */
+    --qa:           #EA580C;
+    --qa-mid:       #C2410C;
+    --qa-deep:      #431407;
+    --qa-light:     #FFF7ED;
+    --qa-bdr:       #FDBA74;
+    --qa-text:      #431407;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+    --purple-bg:    #FAF5FF;
+    --purple-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0800 0%, #2D0F02 50%, #3D1504 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(234,88,12,0.42) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 275px; height: 275px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(234,88,12,0.40) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(234,88,12,0.18);
+    border: 1px solid rgba(253,186,116,0.34);
+    color: #FDBA74; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #431407 0%, #EA580C 55%, #FB923C 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(234,88,12,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.13); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── QooApp callout ── */
+  .qa-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--qa-light); border: 1.5px solid var(--qa-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .qa-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FED7AA; border: 1.5px solid var(--qa-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .qa-title { font-size: 13px; font-weight: 700; color: var(--qa-text); line-height: 1.3; margin-bottom: 3px; }
+  .qa-body  { font-size: 12px; color: #7C2D12; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-orange::before { background: #EA580C; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-purple::before { background: #8B5CF6; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-high risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB; border: 1.5px solid #FCD34D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FCD34D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Sideload note ── */
+  .sideload-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--qa-light); border: 1.5px solid var(--qa-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .sl-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FED7AA; border: 1.5px solid var(--qa-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .sl-title { font-size: 13px; font-weight: 700; color: var(--qa-text); line-height: 1.3; margin-bottom: 3px; }
+  .sl-body  { font-size: 12px; color: #7C2D12; font-weight: 400; line-height: 1.55; }
+  .sl-body code {
+    display: inline-block; background: #FED7AA; border-radius: 5px;
+    padding: 1px 6px; font-size: 11px; font-family: monospace; color: #431407;
+    margin-top: 5px; line-height: 1.8;
+  }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0800 0%, #3D1504 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(234,88,12,0.30) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card          { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid     { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card       { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box      { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip    { animation: fadeUp 0.42s ease 0.05s both; }
+  .qa-callout    { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip    { animation: fadeUp 0.42s ease 0.04s both; }
+  .sideload-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing       { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🎮</div>
+        <div>
+          <div class="app-name-text">QooApp</div>
+          <div class="app-sub">Asian Game Store &amp; APK Installer</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Third-Party Game Store</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium-high">🟡 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Distributes games and apps outside Google Play, bypassing age ratings, parental approvals and security screening — with a catalogue that includes titles with mature content not available in Western markets</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of QooApp — a third-party app store focused on Asian mobile games, particularly Japanese and Korean titles, that distributes APK files for games unavailable in Western app stores and bypasses the protective infrastructure of the Google Play Store in the process.</p>
+  </div>
+
+  <div class="qa-callout">
+    <div class="qa-ico">🎮</div>
+    <div>
+      <div class="qa-title">QooApp Is a Third-Party Game Store That Installs Apps Outside Google Play — Including Titles With Mature Content Not Available in Western Markets</div>
+      <div class="qa-body">QooApp is a Hong Kong-based third-party app store designed primarily for distributing Asian mobile games — particularly Japanese and Korean titles — that are not available through the Google Play Store in Western regions. Like other third-party APK stores, it operates entirely outside Google's ecosystem: age ratings are displayed but not enforced, Google Family Link parental approvals are bypassed entirely, and apps are not subject to Google's security scanning. What makes QooApp distinct is its catalogue's content profile — it includes a significant number of games with mature themes, including games with explicit or suggestive content that is standard in certain Japanese mobile game genres, which would not pass Google Play's content policies for Western markets.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#EA580C;"></span> Asian Game Store</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> APK Sideloading</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Bypasses Play Store</div>
+    <div class="mode-chip"><span class="cdot" style="background:#8B5CF6;"></span> Mature Game Content</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B82F6;"></span> Region-Locked Titles</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">
+      QooApp is a third-party Android game store focused on <strong>Asian mobile games</strong> — particularly Japanese and Korean titles — that distributes APK installation files outside of the Google Play Store, removing Google's age enforcement, parental approval and security screening from the installation process.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--qa-light);">🏪</div>
+      <div>
+        <div class="feat-name">Operates as a Dedicated Third-Party Store for Asian Mobile Games</div>
+        <div class="feat-desc">QooApp presents itself as a curated destination for Asian mobile gaming — particularly games from Japanese and Korean developers — with a searchable catalogue, game-specific community features, user reviews, and a download manager. Its focus on gaming gives it a more legitimate-seeming surface than general APK stores, and its community features make it appealing to gaming-interested children and teenagers who may encounter it through game-related content online, in forums, or through peers.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📥</div>
+      <div>
+        <div class="feat-name">Downloads and Installs APK Files Directly — Bypassing Google Play Entirely</div>
+        <div class="feat-desc">QooApp functions as a sideloading tool — it retrieves APK files and installs them on the device without involving the Google Play Store or any of its associated safety systems. This requires enabling the "install from unknown sources" device permission, which QooApp guides users through activating. Once enabled, this permission remains active after QooApp is removed unless manually revoked, allowing any other app or website to install software on the device outside the Play Store.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🔞</div>
+      <div>
+        <div class="feat-name">Hosts Games With Mature Content Unavailable on Google Play in Western Markets</div>
+        <div class="feat-desc">A significant portion of QooApp's catalogue consists of Japanese and Korean mobile games that include mature or sexually suggestive content — character designs, storylines and imagery that would not pass Google Play's content policies for Western markets. These games are specifically the reason many users seek out QooApp rather than the Play Store. While QooApp applies its own age ratings to content, it does not enforce them — a child can download any game in the catalogue regardless of the rating displayed.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🎲</div>
+      <div>
+        <div class="feat-name">Includes Games With Gacha Mechanics Targeting Younger Players</div>
+        <div class="feat-desc">Many games in QooApp's catalogue use gacha mechanics — randomised reward systems that require repeated purchases or in-game currency spending to obtain characters, items or progression unlocks. These mechanics are particularly prevalent in Japanese mobile games and are designed to encourage repeated spending. Children and teenagers are especially susceptible to the psychological patterns these systems exploit, and games accessed through QooApp may use real-money gacha mechanics that are not subject to the in-app purchase oversight that Google Play's parental controls provide.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">👨‍👧</div>
+      <div>
+        <div class="feat-name">Completely Bypasses Google Family Link App Approval</div>
+        <div class="feat-desc">Apps and games installed through QooApp do not trigger Family Link approval requests, do not appear in parental activity logs, and are not subject to the age rating enforcement that Family Link applies to Play Store downloads. A child installing a game through QooApp does so without any notification to a linked parent account, regardless of the game's content rating or the age restrictions set up on the device. In-app purchases made within games installed via QooApp may also fall outside Family Link's purchase approval controls.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">💬</div>
+      <div>
+        <div class="feat-name">Community Features Including Reviews, Forums and Social Interaction</div>
+        <div class="feat-desc">Beyond its app distribution function, QooApp includes community features — user reviews, game-specific discussion boards and social interactions. These features give children a space to interact with other users within the QooApp environment, including adults, in forums centred on games that may themselves contain mature content. The community dimension extends QooApp's risks beyond the content of individual games into the broader interactions the platform facilitates.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from QooApp — spanning mature game content bypassing Play Store policies, circumvented parental approvals, unvetted security, exploitative in-game spending mechanics, and unsupervised community interaction within a platform designed for adult gaming audiences.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Mature Game Content That Bypasses Google Play's Policies</div>
+      <div class="rc-desc">QooApp's catalogue includes games with sexually suggestive content, mature themes and imagery that do not meet Google Play's Western content standards — accessible to children without restriction or age verification</div>
+    </div>
+    <div class="risk-card c-orange">
+      <span class="rc-emoji">👨‍👧</span>
+      <div class="rc-name">Bypasses Family Link App Approval Entirely</div>
+      <div class="rc-desc">Games installed through QooApp generate no Family Link approval request and appear in no parental activity log — a child can install any game in QooApp's catalogue without a parent being notified, on any device where Family Link is configured</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">🎲</span>
+      <div class="rc-name">Gacha Mechanics and Unmonitored In-App Spending</div>
+      <div class="rc-desc">Many games in QooApp's catalogue use gacha randomised reward systems designed to encourage repeated spending — and purchases within these games may fall outside Family Link's parental spending controls, removing a key financial safeguard</div>
+    </div>
+    <div class="risk-card c-purple">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Community Interaction Around Mature Content</div>
+      <div class="rc-desc">QooApp's community features — reviews, forums and social interactions — place children in contact with adult users in spaces centred on games that may contain explicit or suggestive content, with no age verification or moderation barrier</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">No Google Security Screening on Installed Apps</div>
+      <div class="rc-desc">APK files distributed through QooApp have not been subject to Google's Play Protect security scanning — games may contain malicious code, data-harvesting tools or unwanted background processes that are invisible to the user</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">⚙️</span>
+      <div class="rc-name">Enables "Unknown Sources" — Permanently Weakening Device Security</div>
+      <div class="rc-desc">Installing QooApp requires enabling the "install from unknown sources" permission, which remains active after the app is removed and allows any other app or website to sideload software on the device until a parent manually revokes it</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>QooApp Carries a Medium–High Risk Rating</strong>
+      <span>QooApp's gaming focus and community features give it more legitimate surface appeal than general APK stores, but its core risks are significant: it bypasses all of Google Play's protective infrastructure, its catalogue contains mature content designed for adult audiences, and its gacha-heavy game library creates financial risk alongside content risk. It warrants restriction on all devices accessible to children.</span>
+    </div>
+  </div>
+
+  <div class="sideload-note">
+    <div class="sl-ico">⚙️</div>
+    <div>
+      <div class="sl-title">Installing QooApp Requires "Unknown Sources" — a Permission That Persists After Removal</div>
+      <div class="sl-body">
+        QooApp requires the device permission to install apps outside the Google Play Store. This setting remains active after QooApp is deleted — any app or website can use it to install software on the device until a parent manually turns it off. If you find QooApp on your child's device, check and revoke this permission after removing the app.
+        <br><code>Settings → Apps → Special App Access → Install Unknown Apps</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">QooApp's Gaming Focus Makes It More Appealing to Children Than General APK Stores — and Easier to Overlook</div>
+        <div class="know-body">Unlike general-purpose third-party app stores whose purpose is immediately obvious, QooApp is positioned as a legitimate gaming platform — a destination for a specific genre of games that genuinely are not available through Google Play in Western markets. This legitimate surface appeal means children and teenagers may encounter it through entirely mainstream routes — gaming YouTube channels, Discord servers, anime and gaming communities online — and may not perceive it as a tool for bypassing safety measures. Parents should be aware that a child using QooApp may genuinely believe they are simply accessing games through an alternative legitimate store, without understanding the risks its use introduces.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Games in QooApp's Catalogue Often Contain Content That Would Not Pass Google Play's Policies in Western Markets</div>
+        <div class="know-body">A substantial portion of QooApp's most popular titles are Japanese mobile games that feature anime-style character designs, storylines and imagery with mature or explicitly sexual content — content that Google Play's policies for Western markets do not permit. These games are specifically sought through stores like QooApp because they cannot be accessed through Google Play. While QooApp assigns age ratings to its content, it does not enforce them: a child can download any game in the catalogue without any verification, and the games themselves may contain content that escalates in maturity as a child progresses further into the game.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Gacha Mechanics in Many QooApp Games Create Financial Risk Alongside Content Risk</div>
+        <div class="know-body">A large proportion of the Japanese and Korean mobile games in QooApp's catalogue use gacha mechanics — systems in which players spend in-game currency, often purchased with real money, on randomised draws for characters, items or other content. These mechanics are deliberately designed to be compelling and are particularly effective on younger players who may not yet have the perspective to recognise their psychological design. Purchases within games installed through QooApp may not be subject to Family Link's parental purchase approval controls, removing a key safeguard against unwanted spending. Parents should be alert to in-app purchases as a distinct concern from the content risks QooApp presents.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">QooApp's Community Features Create an Additional Layer of Risk Beyond the Games Themselves</div>
+        <div class="know-body">QooApp is not just an app store — it includes community features that allow users to review games, participate in game-specific forums and interact socially within the platform. These features place children in contact with adult users in an environment centred on games that may contain mature content, and with no meaningful age verification or moderation system separating younger and older users. The community dimension is not visible to parents monitoring the device from the outside: it is contained within the QooApp app itself and leaves no trace in the device's standard usage logs.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents clear tools to block QooApp and similar third-party game stores instantly — preventing sideloaded games and their associated content, spending and community risks from reaching your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block third-party game stores and APK installers by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar sideloading tools</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are accessible on the device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Runs quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like QooApp as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to help protect your child from the specific risks of third-party game stores — including the mature content and gacha spending concerns that make QooApp distinct from general-purpose APK installers.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk About Both the Content and the Spending Risks in Mobile Games</div>
+        <div class="tip-body">A conversation about QooApp with your child is most useful when it addresses both the specific risks at once. Explain that the games on QooApp include content that Google Play's safety policies are specifically designed to keep away from younger audiences — not because the games are necessarily wrong for everyone, but because they are made for adult audiences and contain content that is not age-appropriate. Separately, talk about gacha mechanics in plain terms: how they work, why they are designed to be compelling, and what real-money spending on randomised rewards actually looks like in practice. Children and teenagers who understand how gacha systems are designed — as systems intended to extract repeated spending — are significantly better placed to resist them than those who encounter them without any prior framing.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--qa-light); border-color: var(--qa-bdr);">🎮</div>
+      <div>
+        <div class="tip-name">Acknowledge the Legitimate Interest in Asian Games While Explaining the Safety Concerns</div>
+        <div class="tip-body">Many children and teenagers who use QooApp are genuinely interested in Japanese and Korean games — a legitimate interest that is widely shared among young people who follow anime, manga and gaming culture. Acknowledging this interest rather than dismissing it makes the conversation about QooApp more productive. Help your child understand that the issue is not the genre of games itself but the fact that QooApp bypasses the safety infrastructure that protects them from content and spending risks — and that some of those games are specifically unavailable through Google Play because they contain content Google's policies do not permit for Western audiences. If your child is interested in Japanese or Korean games available through the Play Store, explore those options together as a constructive alternative.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block QooApp, Check the "Unknown Sources" Permission, and Review In-App Purchase Settings</div>
+        <div class="tip-body">Apply iLimits restrictions to block QooApp across all of your child's devices. After removing the app, check the "install unknown sources" permission on each device under Settings → Apps → Special App Access → Install Unknown Apps, and revoke it for any app that should not have it. Also review any in-app purchase settings across the games your child plays — particularly any games you do not recognise or that were not installed through the Google Play Store. Consider enabling Google Family Link's purchase approval requirement across all apps on the device to ensure in-app spending requires parental confirmation, regardless of where the app was originally installed from.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Gaming Platform Is Still an App Store — and the Same Risks Apply</h3>
+    <p class="closing-body">
+      QooApp's identity as a gaming platform rather than a generic APK store gives it a surface legitimacy that makes it easier to overlook — but the protective infrastructure it bypasses is the same, and the content it provides access to is a specific concern beyond simply unlisted apps. iLimits gives you the tools to block it reliably. Pairing that with a direct conversation about both the content and spending risks in the games themselves gives your child a complete picture of why the restriction is there — and the understanding to make safer choices when you are not there to step in.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
