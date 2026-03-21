@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>APKPure – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* APKPure brand: deep cobalt-blue */
+    --ap:           #1A56DB;
+    --ap-mid:       #1341B0;
+    --ap-deep:      #0B2878;
+    --ap-light:     #EFF6FF;
+    --ap-bdr:       #93C5FD;
+    --ap-text:      #0B2878;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #93C5FD;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --orange-bg:    #FFF7ED;
+    --orange-bdr:   #FED7AA;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #040D1F 0%, #091535 50%, #0F2050 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(26,86,219,0.42) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(147,197,253,0.28) 0%, transparent 68%);
+    filter: blur(30px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(147,197,253,0.15);
+    border: 1px solid rgba(147,197,253,0.30);
+    color: #93C5FD; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #040D1F 0%, #1A56DB 55%, #60A5FA 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(26,86,219,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.13); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FDBA74; }
+  .meta-full {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.30);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── APKPure callout ── */
+  .ap-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ap-light); border: 1.5px solid var(--ap-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .ap-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--ap-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .ap-title { font-size: 13px; font-weight: 700; color: var(--ap-text); line-height: 1.3; margin-bottom: 3px; }
+  .ap-body  { font-size: 12px; color: #1E3A8A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--orange-bg); border: 1.5px solid var(--orange-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFEDD5; border: 1.5px solid var(--orange-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #7C2D12; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #9A3412; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ap-light); border: 1.5px solid var(--ap-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--ap-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--ap-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #1E3A8A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #040D1F 0%, #091535 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(147,197,253,0.22) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App or Platform<br>Is Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps or platforms may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📦</div>
+        <div>
+          <div class="app-name-text">APKPure</div>
+          <div class="app-sub">Third-Party App Store</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Third-Party App Store</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium-high">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows downloading apps outside official app stores, which may bypass parental controls and safety checks</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block third-party app stores instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of APKPure — a third-party app store that allows Android users to download and install applications directly on their device, entirely outside of the official Google Play Store and the safety review process it applies to every app it distributes.</p>
+  </div>
+
+  <div class="ap-callout">
+    <div class="ap-ico">📦</div>
+    <div>
+      <div class="ap-title">APKPure Is a Third-Party App Store — It Distributes Android Apps Outside of Official Channels and Without Standard Safety Review</div>
+      <div class="ap-body">APKPure is an alternative app distribution platform that provides direct downloads of Android application package files — APKs — allowing users to install apps on their device without going through the Google Play Store. The platform hosts a large catalogue of apps, including apps removed from official stores, apps restricted to certain regions, older versions of apps, and apps that have never been submitted to official review at all. Because APKPure operates outside the official app store ecosystem, the safety, age-rating and content review processes that Google applies to Play Store apps do not apply to apps distributed through APKPure.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1A56DB;"></span> APK Downloads</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> App Sideloading</div>
+    <div class="mode-chip"><span class="cdot" style="background:#60A5FA;"></span> Region Bypass</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Removed Apps</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Unverified Sources</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      APKPure is a third-party platform for <strong>downloading and installing Android apps</strong> outside of the official Google Play Store. It provides direct APK file downloads that users install manually on their device — a process known as sideloading — bypassing the standard app store review, age-rating and parental control systems that official distribution channels apply.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--ap-light);">🏪</div>
+      <div>
+        <div class="feat-name">Distributes Android Apps Outside the Official Google Play Store</div>
+        <div class="feat-desc">APKPure acts as an alternative marketplace for Android apps, hosting APK files that users can download directly to their device without using the Play Store. This means apps can be installed on a child's device through a completely separate channel from the one a parent may be monitoring or restricting — Google Family Link, Play Store parental controls and purchase approvals are all bypassed when an app is installed through APKPure rather than the official store.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🌍</div>
+      <div>
+        <div class="feat-name">Provides Access to Apps Restricted by Region or Removed From Official Stores</div>
+        <div class="feat-desc">APKPure hosts apps that are unavailable in a user's country due to regional restrictions, as well as apps that have been removed from the Google Play Store — including apps removed for policy violations, content concerns or safety issues. A child using APKPure can access apps that Google has specifically decided should not be available through its official store, including apps removed for violating content or safety guidelines that protect younger users.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">📂</div>
+      <div>
+        <div class="feat-name">Offers Older Versions of Apps That May Lack Current Safety Features</div>
+        <div class="feat-desc">APKPure is widely used to download older, specific versions of apps — a feature particularly valued by users who want to avoid updates that removed functionality they preferred. For children, this means a specific version of a social media app, messaging platform or game can be installed that predates safety features, content moderation improvements or parental control integrations added in more recent updates — potentially exposing them to a less protected experience than the current official version would provide.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">⚠️</div>
+      <div>
+        <div class="feat-name">Apps Are Not Subject to the Same Verification as Official Store Listings</div>
+        <div class="feat-desc">Every app distributed through the Google Play Store is subject to Google's review process, which includes automated scanning for malware, policy compliance checks and enforcement of age-rating requirements. Apps distributed through APKPure do not go through this same process. While APKPure does perform some scanning, the level of verification is not equivalent to official store review — and the absence of mandatory age-rating enforcement means that apps with mature content are not systematically restricted to adult users in the way that official stores attempt to enforce.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--orange-bg);">🔓</div>
+      <div>
+        <div class="feat-name">Installation Requires Disabling a Key Android Safety Setting</div>
+        <div class="feat-desc">To install apps from APKPure, a child must enable the "Install from unknown sources" setting on their Android device — a security setting that Android has in place specifically to warn users against installing apps from outside official channels. Enabling this setting on a child's device is itself a significant action that removes a default protection Android provides. A child who has enabled this setting may subsequently install any APK from any source, not just APKPure, leaving the device more broadly exposed to unverified software.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">The risks APKPure presents for children centre on its ability to circumvent the safety and oversight systems built into the official Android app ecosystem — allowing apps that parents have restricted, removed or never approved to be installed on a child's device through an alternative channel.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🚧</span>
+      <div class="rc-name">Bypasses Parental Controls</div>
+      <div class="rc-desc">Apps installed through APKPure are not subject to Play Store parental controls or Google Family Link app approval — a child can install any app available on the platform without a parent's knowledge or permission</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Access to Age-Inappropriate Apps</div>
+      <div class="rc-desc">Age-rating restrictions enforced by official app stores do not apply to APKPure downloads — apps with mature content ratings can be downloaded by a child without any age verification or parental approval prompt</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🗑️</span>
+      <div class="rc-name">Apps Removed for Safety Reasons</div>
+      <div class="rc-desc">APKPure hosts apps that have been removed from official stores, potentially including apps removed specifically for safety, content or policy violations — content that official stores have actively decided should not remain available</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🦠</span>
+      <div class="rc-name">Reduced Security and Verification</div>
+      <div class="rc-desc">Without the full scope of official store security review, apps on APKPure carry a higher risk of containing malware, spyware or other malicious code — posing a direct security risk to the device and any accounts or data on it</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔧</span>
+      <div class="rc-name">Weakens Device Security Settings</div>
+      <div class="rc-desc">Installing from APKPure requires enabling "Install from unknown sources" — a security setting whose activation leaves the device more broadly vulnerable to malicious software from any unverified source, not just this platform</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👻</span>
+      <div class="rc-name">Invisible to Standard App Monitoring</div>
+      <div class="rc-desc">Apps sideloaded through APKPure may not appear in parental dashboards or usage reports generated through the Play Store ecosystem, creating blind spots in any monitoring arrangement that relies on official store data</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>APKPure Carries a Medium–High Risk Rating</strong>
+      <span>The platform's core risk is structural — it provides a working alternative to the official app installation channel through which parental controls, age ratings and app approvals operate. A child with access to APKPure can, in practice, install any app available on the platform regardless of what restrictions a parent has applied to the official Play Store on the same device.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">📲</div>
+    <div>
+      <div class="control-title">Third-Party App Stores Operate Entirely Outside the Parental Control Systems Built Into Android — Blocking the Store Itself Is the Most Effective Protection</div>
+      <div class="control-body">The parental controls available through Google Family Link, the Play Store's content filters and app purchase approval systems all operate exclusively on apps installed through the official Play Store. An app installed through APKPure is invisible to these systems from the moment of installation — it does not go through an approval step, is not subject to age-rating filters and may not appear in the app activity visible to a parent through Google Family Link. Restricting access to APKPure and similar third-party app stores at the source is the only reliable way to ensure that a child's app installation activity stays within the supervised official channel.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Third-Party App Stores Allow Apps to Be Installed Without Going Through Standard Review or Parental Approval</div>
+        <div class="know-body">When a child installs an app through the Google Play Store on a device managed by Google Family Link, the installation can require parental approval, is subject to content filters set by the parent and is logged in the parent's Family Link dashboard. None of this applies to an app installed through APKPure. A third-party app store is a parallel installation channel that bypasses the review, rating and approval infrastructure of the official store entirely — which is precisely why children who are aware of these platforms may use them to install apps a parent has restricted or would not approve.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Use Third-Party Stores to Access Apps That Have Been Removed From or Restricted on Official Platforms</div>
+        <div class="know-body">A child who has been told that a particular app is not available on the Play Store — whether because a parent has restricted it, because it is not available in the country or because it has been removed — may discover through peer information or web searching that the same app is available through a third-party store. APKPure's reputation as a source for apps that are hard to find elsewhere is widely known among teenagers, making it a natural discovery path for older children who are motivated to access specific apps outside of the channels a parent is supervising.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Security Risks of Third-Party App Installation Extend Beyond Content — They Also Include Device Security</div>
+        <div class="know-body">Beyond the content and oversight risks, apps installed from outside the official Play Store carry a meaningfully higher risk of containing malicious code. Official store review catches the majority of apps carrying malware before they reach users — third-party stores, including APKPure, cannot provide the same level of assurance. A child installing apps from APKPure may inadvertently install an app that harvests personal data, accesses contacts, intercepts messages or performs other harmful actions in the background — risks that apply to the whole household if the device is connected to a shared home network or is used to access family accounts.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Enabling "Install From Unknown Sources" Is a Warning Sign That Should Prompt a Conversation</div>
+        <div class="know-body">If a parent finds that the "Install from unknown sources" setting is enabled on a child's device — accessible through the device's security or app settings — it is a clear indicator that the child has either already used or is intending to use a third-party app source. This setting is not enabled by default on Android devices and serves no purpose in a child's normal use of the device through official channels. Finding it enabled warrants a direct conversation about what the child has installed, why they felt they needed to use a source outside the official store and whether any apps installed through third-party sources should be reviewed or removed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block third-party app stores like APKPure, ensuring that a child's app installation activity remains within the official, supervised channels where parental controls actually apply.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block third-party app stores like APKPure with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar sideloading platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which sources and apps are accessible</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged third-party platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Platforms Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like APKPure as restricted — but <strong>no app or platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits provides the information to help you decide, and the controls to act immediately once you have.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to address the risks that third-party app stores present — from establishing clear household expectations around trusted app sources through to technical controls that keep a child's device within the supervised official ecosystem.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Encourage Downloading Apps Only From Trusted, Official Sources</div>
+        <div class="tip-body">Establish a clear household expectation that apps should only be downloaded from the official Google Play Store — and explain the reasoning behind that expectation in terms a child can understand. The Play Store is not simply a convenience; it is the system through which apps are reviewed for safety, given age ratings that reflect their content, and made subject to parental approval processes. Downloading from unofficial sources bypasses all of that. Children who understand why official sources exist — not just that they are required — are better equipped to make responsible choices when they encounter third-party app stores through peer recommendations or online searching.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">⚠️</div>
+      <div>
+        <div class="tip-name">Discuss the Risks of Installing Apps From Unknown Platforms</div>
+        <div class="tip-body">Talk with your child specifically about why apps from outside official stores carry security risks — not just content risks. Explain in straightforward terms that apps from unofficial sources have not been through the same checking process as Play Store apps, and that this means a seemingly harmless app could contain software designed to access their personal information, intercept their messages or affect the performance of their device. Children who understand that the risk is not just about content — it is also about the security of their own data and the family's devices — tend to be more receptive to the expectation that unofficial sources are off-limits, rather than viewing it simply as a parental restriction on content.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use iLimits to Restrict Access to Third-Party App Stores</div>
+        <div class="tip-body">Apply iLimits restrictions to block APKPure and similar third-party app distribution platforms across all devices your child uses. Also check periodically whether the "Install from unknown sources" setting is enabled on any device your child has access to — this setting can be found in the device's security settings and should be disabled on any device used by a child. Consider setting up Google Family Link if you have not already, which requires parental approval for Play Store app installations and provides a complementary layer of oversight alongside iLimits. Combining official store controls with restrictions on alternative installation channels gives you the most complete coverage of your child's app installation activity.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🛡️</span>
+    <h3 class="closing-title">Keeping App Installations Within Trusted Channels Keeps Your Child's Device Safe</h3>
+    <p class="closing-body">
+      The official app store ecosystem exists as a layer of safety for every Android user — and parental controls are built on top of that layer. Third-party app stores like APKPure sit outside it entirely, bypassing both the safety review and the parental oversight that official channels provide. iLimits helps you keep your child's app activity within the supervised official ecosystem — and the clear expectations you set at home give your child the understanding to make responsible choices about where they install apps from, even when you are not there to check directly.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
