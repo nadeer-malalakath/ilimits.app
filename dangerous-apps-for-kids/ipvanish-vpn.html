@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>IPVanish VPN – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* IPVanish: vivid electric-cyan */
+    --ip:           #0891B2;
+    --ip-mid:       #0E7490;
+    --ip-deep:      #052836;
+    --ip-light:     #ECFEFF;
+    --ip-bdr:       #67E8F9;
+    --ip-text:      #052836;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+    --purple-bg:    #FAF5FF;
+    --purple-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #010C10 0%, #052836 50%, #073648 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(8,145,178,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 275px; height: 275px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(8,145,178,0.40) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(8,145,178,0.20);
+    border: 1px solid rgba(103,232,249,0.36);
+    color: #67E8F9; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #052836 0%, #0891B2 55%, #22D3EE 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(8,145,178,0.52), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── IPVanish callout ── */
+  .ip-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ip-light); border: 1.5px solid var(--ip-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .ip-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CFFAFE; border: 1.5px solid var(--ip-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .ip-title { font-size: 13px; font-weight: 700; color: var(--ip-text); line-height: 1.3; margin-bottom: 3px; }
+  .ip-body  { font-size: 12px; color: #0E7490; font-weight: 400; line-height: 1.55; }
+
+  /* ── History banner ── */
+  .history-banner {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .hb-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .hb-title { font-size: 12.5px; font-weight: 700; color: #78350F; margin-bottom: 3px; line-height: 1.3; }
+  .hb-body  { font-size: 11.5px; color: var(--amber-text); font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-cyan::before   { background: #0891B2; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB; border: 1.5px solid #FCD34D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FCD34D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Ownership note ── */
+  .ownership-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ip-light); border: 1.5px solid var(--ip-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .on-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CFFAFE; border: 1.5px solid var(--ip-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .on-title { font-size: 13px; font-weight: 700; color: var(--ip-text); line-height: 1.3; margin-bottom: 3px; }
+  .on-body  { font-size: 12px; color: #0E7490; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #010C10 0%, #073648 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(8,145,178,0.30) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .ip-callout      { animation: fadeUp 0.42s ease 0.03s both; }
+  .history-banner  { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .ownership-note  { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🌊</div>
+        <div>
+          <div class="app-name-text">IPVanish VPN</div>
+          <div class="app-sub">Consumer VPN Service</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">VPN / Proxy Tool</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium-high">🟡 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Bypasses network-level parental controls, and carries a documented history of cooperating with law enforcement data requests that contradicts its no-logs policy claims — relevant context for parents assessing the full risk profile</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of IPVanish VPN — a long-running consumer VPN service that bypasses network-level parental controls, and which has a documented history of providing user data to law enforcement despite claiming a no-logs policy, making it a less trustworthy product than its marketing suggests.</p>
+  </div>
+
+  <div class="ip-callout">
+    <div class="ip-ico">🌊</div>
+    <div>
+      <div class="ip-title">IPVanish Bypasses Network-Level Parental Controls — and Has a Documented History of User Data Disclosure That Contradicts Its Privacy Claims</div>
+      <div class="ip-body">IPVanish is a US-based consumer VPN service that routes internet traffic through external servers, bypassing any network-level content filter or monitoring tool a parent has configured. Like all VPN tools, it makes network-level parental controls ineffective for any active session. What distinguishes IPVanish within the VPN category is a documented episode in which the company provided user logs to US law enforcement in 2016, despite publicly claiming a no-logs policy — information that only became public through court documents. IPVanish has since changed ownership and updated its policies, but the historical incident is relevant context for parents assessing how much to trust the service's privacy claims on a child's device.</div>
+    </div>
+  </div>
+
+  <div class="history-banner">
+    <div class="hb-ico">📋</div>
+    <div>
+      <div class="hb-title">IPVanish's 2016 Data Disclosure — What Happened and What Changed</div>
+      <div class="hb-body">In 2016, IPVanish was revealed by court documents to have provided detailed user logs to the US Department of Homeland Security, including timestamps and connection data, despite marketing itself as a no-logs service. The company was at that time owned by Highwinds Network Group. IPVanish has since changed ownership multiple times and claims its privacy practices have been updated. No independent audit of its current logging practices has been published. The incident is documented public record and is the primary reason IPVanish sits at Medium–High rather than Medium in the iLimits risk assessment.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#0891B2;"></span> Consumer VPN</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Bypasses Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> Data History</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> No Audit</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> US Jurisdiction</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">
+      IPVanish is a <strong>US-based consumer VPN service</strong> that routes internet traffic through external servers, bypassing network-level parental controls and content filters. It has a documented history of user data disclosure that contradicts its no-logs marketing claims and that has not been independently audited since ownership changes.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--ip-light);">🌐</div>
+      <div>
+        <div class="feat-name">Routes All Traffic Through External Servers — Bypassing Network-Level Filters</div>
+        <div class="feat-desc">IPVanish works by creating an encrypted tunnel between the device and its servers, routing all internet traffic through that tunnel. Every network-level parental control — DNS content filters, router category blocks, household monitoring systems — is bypassed for any session in which IPVanish is connected. The bypass is total: all categories of restricted content become accessible simultaneously. This structural effect applies to all VPN technology and is the primary concern for child safety on any device where a VPN is active.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔐</div>
+      <div>
+        <div class="feat-name">Encrypts Traffic — Network Monitoring Becomes Ineffective</div>
+        <div class="feat-desc">IPVanish encrypts all tunnelled traffic, meaning network monitoring tools that log website visits or connections see only a connection to IPVanish's servers — not the actual destinations visited or content accessed during the session. A parent using router-level monitoring or a household activity log finds no useful record of what their child accessed during any period IPVanish was active. This removal of monitoring visibility is a structural feature of all VPN technology.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">📋</div>
+      <div>
+        <div class="feat-name">Documented History of User Data Disclosure Despite No-Logs Claims</div>
+        <div class="feat-desc">In 2016, court documents revealed that IPVanish — while actively marketing itself as a no-logs VPN — provided detailed user connection logs to US law enforcement, including timestamps, IP addresses and connection data. This was not disclosed by IPVanish but became public through the court filing. The company was subsequently acquired by new owners who claim to have updated practices, but no independently verified audit of current logging behaviour has been published. For parents assessing which VPN services are safer for a child's device, the absence of independent verification and the documented historical practice are relevant considerations.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">🏢</div>
+      <div>
+        <div class="feat-name">US-Based and Subject to US Jurisdiction — Including Data Requests</div>
+        <div class="feat-desc">IPVanish is operated from the United States, placing it under US legal jurisdiction. The US does not have strong statutory protections for VPN user data in the way that Switzerland (ProtonVPN) does — a US VPN provider can be compelled to provide data under a range of legal instruments, and the 2016 episode demonstrates that IPVanish has complied with such requests in the past. This is a consideration for parents who are evaluating the data practice dimension of any VPN product, separate from the network bypass concern.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">📲</div>
+      <div>
+        <div class="feat-name">Widely Advertised and Available on Google Play — Easy to Discover</div>
+        <div class="feat-desc">IPVanish is a well-established consumer product with an active advertising presence and a Google Play listing. It will trigger a Family Link approval request on devices where installation approval is required. Its mainstream advertising presence means a child may encounter it through standard digital channels without specifically searching for a bypass tool — the same discoverability concern that applies to other consumer VPN products in its category.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">IPVanish carries the standard consumer VPN risk of bypassing network parental controls and removing monitoring visibility, with the additional concern of its documented data disclosure history and the absence of independent audit verification for its current privacy claims.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">Bypasses All Network-Level Parental Controls</div>
+      <div class="rc-desc">Every DNS filter, router content block and household network restriction is bypassed when IPVanish is connected — all network-level parental controls become ineffective simultaneously for the duration of each active session</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">📋</span>
+      <div class="rc-name">Documented Data Disclosure History</div>
+      <div class="rc-desc">IPVanish was revealed by court documents to have provided user logs to US law enforcement in 2016 despite no-logs claims — this documented episode places it at a higher risk level than VPN products with clean transparency records</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">👁️</span>
+      <div class="rc-name">Encrypts Traffic — Network Monitoring Is Blind</div>
+      <div class="rc-desc">Network monitoring tools see only an IPVanish server connection — no record of actual websites visited or content accessed is available through router logs or monitoring software while IPVanish is active</div>
+    </div>
+    <div class="risk-card c-cyan">
+      <span class="rc-emoji">🔍</span>
+      <div class="rc-name">No Independent Audit Published Since Ownership Changes</div>
+      <div class="rc-desc">Unlike NordVPN, TunnelBear or ProtonVPN, IPVanish has not published results from an independent third-party security audit of its current logging practices — the updated policy claims following ownership changes are unverified by external review</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Multi-Country Servers Bypass Regional Restrictions</div>
+      <div class="rc-desc">IPVanish's server network across multiple countries makes regionally unavailable content accessible — including streaming content restricted by licensing and content subject to different age standards in other jurisdictions</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">📲</span>
+      <div class="rc-name">Mainstream Advertising Makes It Easily Discoverable</div>
+      <div class="rc-desc">IPVanish is actively marketed through digital advertising and has a Google Play listing — a child can encounter and install it through standard channels without specifically searching for a bypass tool</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>IPVanish Carries a Medium–High Risk Rating</strong>
+      <span>IPVanish carries a Medium–High rating — higher than NordVPN, TunnelBear or ProtonVPN — because of its documented 2016 data disclosure episode and the absence of independent audit verification for its current practices. Both the network bypass risk and the data practice concern apply when a child uses IPVanish on their device.</span>
+    </div>
+  </div>
+
+  <div class="ownership-note">
+    <div class="on-ico">🏢</div>
+    <div>
+      <div class="on-title">IPVanish Has Changed Ownership Multiple Times — Current Practices Are Claimed But Not Independently Verified</div>
+      <div class="on-body">IPVanish has been owned by multiple companies since the 2016 data disclosure incident, and its current operator claims to have implemented genuine no-logs practices. These claims have not been verified by an independent third-party audit with published results — unlike NordVPN, TunnelBear and ProtonVPN, which publish audit findings. Parents who encounter IPVanish on a child's device should be aware that the privacy claims it makes in its current marketing have less independent substantiation than those of the more transparently audited competitors in the same category.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">IPVanish Carries Two Distinct Concerns — the Network Bypass and the Data Practice History</div>
+        <div class="know-body">Unlike the more reputable VPN products in this series, IPVanish carries two separate concerns that warrant attention: the structural network bypass that applies to all VPN tools, and the data practice history that distinguishes it from products with cleaner transparency records. The network bypass is the primary concern from a child safety perspective — it is the reason iLimits flags all VPN tools. The data practice history is relevant secondary context that explains why IPVanish sits at Medium–High rather than Medium. Parents evaluating whether to allow any VPN use on a child's device — a question addressed more fully in the NordVPN and ProtonVPN pages — should treat IPVanish as a less suitable choice than audited alternatives even if a supervised exception arrangement were being considered.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The 2016 Disclosure Is Documented Public Record — It Is Worth Understanding Before Dismissing</div>
+        <div class="know-body">The 2016 IPVanish data disclosure became public through court documents — it was not a company admission or a transparent disclosure but a revelation through legal proceedings. The incident documented that IPVanish collected and retained detailed user connection logs and provided them to US authorities while publicly marketing itself as a no-logs service. The company's response at the time did not dispute the disclosure but attributed it to a previous owner's practices. Subsequent ownership changes and policy updates have not been independently audited. For parents, the practical implication is that a child using IPVanish on their device is routing their traffic through a service whose privacy claims have been contradicted by documented behaviour, regardless of what the current marketing materials state.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">IPVanish Is Significantly Less Trustworthy Than Audited Alternatives in the Same Category</div>
+        <div class="know-body">For the purposes of child safety, the comparison that matters most is between IPVanish and the other consumer VPN products that appear in iLimits — NordVPN, ProtonVPN, TunnelBear. All of these carry a lower risk rating than IPVanish because they have independent audit results that verify their current practices. A parent who is considering whether to allow supervised VPN use on a child's device, or who is having a conversation with a teenager about which VPN products are more or less trustworthy, should be clear that IPVanish occupies a different position in that assessment than products with published audit results — not because its current practices are definitively known to be problematic, but because they are not independently verified and the historical record gives no particular reason to take the unverified claims on trust.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The Network Bypass Remains the Primary Concern on a Child's Device — the Data History Is Context, Not a Replacement</div>
+        <div class="know-body">The data practice history of IPVanish is relevant and worth understanding, but it should not displace the primary concern for child safety purposes: the network bypass. A child using IPVanish has every network-level parental control rendered ineffective for any active session, and all browsing traffic is hidden from household monitoring tools. This is the concern that makes VPN tools appropriate to restrict on children's devices across the board, regardless of which specific provider is used. The data history makes IPVanish a worse choice than its competitors even for adults who want a VPN — but the network bypass is the reason any VPN is restricted on a child's device in iLimits.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block IPVanish and the broader consumer VPN category — protecting your network-level controls from bypass and ensuring the restriction covers all equivalent tools, not just this one app.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block IPVanish and consumer VPN tools by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Category-level restriction covers IPVanish and all equivalent alternatives together</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Runs quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like IPVanish as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for IPVanish — including how to address both the network bypass and the data practice history in conversation, why category-level blocking is essential, and how to layer controls effectively.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Address Both the Network Bypass and the Data History — They Are Separate Conversations</div>
+        <div class="tip-body">A conversation about IPVanish with a child or teenager has two distinct parts. The first is the same as for any VPN: explain what VPN technology does to the household's network controls and why that matters. The second is specific to IPVanish: explain that IPVanish's privacy claims have been contradicted by documented behaviour, and that the updated claims have not been independently verified. For a teenager who has chosen IPVanish specifically — rather than encountering it passively — this second part is worth addressing directly. Many teenagers who are interested in privacy tools care about the distinction between audited and unaudited providers, and a straightforward explanation of the 2016 disclosure and what it means about the reliability of IPVanish's marketing is likely to land better than a blanket prohibition. The combination — network bypass on their device, plus a less trustworthy product than available alternatives — is an accurate and complete basis for the restriction.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--ip-light); border-color: var(--ip-bdr);">🗂️</div>
+      <div>
+        <div class="tip-name">Block the VPN Category — IPVanish Is One of Many Alternatives a Child Can Switch To</div>
+        <div class="tip-body">IPVanish is one of dozens of consumer VPN apps available on Google Play with the same functional effect on network-level parental controls. Blocking it individually without addressing the category leaves the entire rest of the category accessible — including products that are more trustworthy than IPVanish and therefore easier to justify to a privacy-interested teenager. Apply iLimits restrictions at the VPN and proxy category level to cover IPVanish alongside all equivalent alternatives in a single action. Category-level blocking is particularly important in the VPN context because the category is large, well-populated, and actively marketed to the demographic most likely to be on managed devices.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Category-Level Restrictions, Enable Family Link Approval, and Layer Device With Network Controls</div>
+        <div class="tip-body">Apply iLimits restrictions at the VPN category level to block IPVanish and equivalent alternatives. Enable Google Family Link's app installation approval requirement to catch any new VPN installation before it succeeds — this is the most direct preventive measure and generates a useful alert that opens the conversation before bypass is in place. Combine device-level controls with your existing network-level filtering: iLimits at the device level prevents VPN apps from running, while network-level controls address traffic from devices and contexts not under direct device-level management. The combination gives you the most resilient configuration available, and the conversation about IPVanish specifically — addressing both its bypass capability and its data practice history — is the most honest and complete basis for explaining the restriction.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A VPN That Has Broken Its Privacy Promise Once Is Not One to Have on a Child's Device</h3>
+    <p class="closing-body">
+      IPVanish bypasses network-level parental controls in the same way as every other VPN — that is the primary concern for a child's device. The documented data disclosure history adds a second, separate reason to treat it with particular caution: its privacy claims have been contradicted by documented behaviour, and its current practices are unaudited. iLimits gives you the tools to restrict it at the device level. The conversation that addresses both dimensions honestly gives the restriction its most complete foundation.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
