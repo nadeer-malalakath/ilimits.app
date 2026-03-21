@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GetJar – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* GetJar brand: deep teal-jade */
+    --gj:           #00796B;
+    --gj-mid:       #00594E;
+    --gj-deep:      #003A34;
+    --gj-light:     #F0FDFA;
+    --gj-bdr:       #5EEAD4;
+    --gj-text:      #00302A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFA;
+    --teal-bdr:     #5EEAD4;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #000F0D 0%, #001A16 50%, #002520 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(0,121,107,0.48) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(94,234,212,0.28) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(94,234,212,0.14);
+    border: 1px solid rgba(94,234,212,0.30);
+    color: #5EEAD4; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #000F0D 0%, #00796B 58%, #5EEAD4 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(0,121,107,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium { color: #FDE68A; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── GetJar callout ── */
+  .gj-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--gj-light); border: 1.5px solid var(--gj-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .gj-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CCFBF1; border: 1.5px solid var(--gj-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .gj-title { font-size: 13px; font-weight: 700; color: var(--gj-text); line-height: 1.3; margin-bottom: 3px; }
+  .gj-body  { font-size: 12px; color: #00403A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Heritage badge ── */
+  .heritage-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--slate-bg); border: 1.5px solid var(--slate-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .heritage-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #E2E8F0; border: 1.5px solid var(--slate-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .heritage-text strong { font-size: 12.5px; font-weight: 700; color: #334155; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .heritage-text span   { font-size: 11.5px; color: #64748B; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk summary strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFAF0; border: 1.5px solid #FBD38D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEEBCB; border: 1.5px solid #FBD38D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #744210; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5A3110; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--gj-light); border: 1.5px solid var(--gj-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CCFBF1; border: 1.5px solid var(--gj-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--gj-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #00403A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #000F0D 0%, #001A16 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(94,234,212,0.22) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📥</div>
+        <div>
+          <div class="app-name-text">GetJar</div>
+          <div class="app-sub">Third-Party App Store</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Alternative App Marketplace</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟡 Medium</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Provides access to apps outside the official Google Play Store, bypassing parental approval systems, age restrictions, and Play Store content moderation entirely</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block third-party app stores like GetJar from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of GetJar — one of the world's oldest independent app stores, originally built for feature phones and now operating as an Android APK marketplace, distributing apps outside the Google Play Store with no connection to Google's parental control or age-verification systems.</p>
+  </div>
+
+  <div class="gj-callout">
+    <div class="gj-ico">📥</div>
+    <div>
+      <div class="gj-title">GetJar Is One of the World's Oldest Independent App Stores — Operating Entirely Outside Google Play's Safety and Parental Control Systems</div>
+      <div class="gj-body">GetJar was founded in 2004 — predating both the Apple App Store and Google Play — making it one of the longest-standing independent app marketplaces in existence. Originally built to distribute apps for Nokia, BlackBerry and early Java-based mobile phones, GetJar pivoted to Android as smartphones became dominant and continues to operate as a free, independent APK marketplace. Because GetJar has always operated outside the Google ecosystem, none of Google Play's content policies, age ratings, parental approval requirements or family account controls apply to anything downloaded and installed through it. A child with access to GetJar can install Android apps directly onto their device with no parental notification and no age check.</div>
+    </div>
+  </div>
+
+  <div class="heritage-band">
+    <div class="heritage-icon">🕰️</div>
+    <div class="heritage-text">
+      <strong>One of the Internet's Oldest App Stores — Founded in 2004</strong>
+      <span>GetJar predates Google Play by six years, making it widely known among older and technically-aware users — including older teenagers.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#00796B;"></span> APK Downloads</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Bypasses Play Store</div>
+    <div class="mode-chip"><span class="cdot" style="background:#5EEAD4;"></span> Free Apps</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> No Age Filtering</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> No Account Needed</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      GetJar is a long-established, independent Android app marketplace that hosts <strong>free APK files for direct installation</strong> on Android devices. It operates entirely outside the Google Play Store, meaning none of Google's content review, age restrictions, parental approval integrations, or family account monitoring systems apply to anything installed through it.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--gj-light);">🏪</div>
+      <div>
+        <div class="feat-name">An Independent App Marketplace With No Google Play Integration Whatsoever</div>
+        <div class="feat-desc">GetJar operates as a fully independent app store with no connection to the Google Play ecosystem. It has its own catalogue, its own download infrastructure, and its own relationship with developers — entirely separate from Google's platform. This means that every safety system Google has built into the Play Store for families — content ratings, age restrictions, parental approval requirements, purchase notifications, and family account monitoring — is absent from the GetJar installation pathway. A child installing an app through GetJar is operating in a space that Google's family controls cannot reach.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">⬇️</div>
+      <div>
+        <div class="feat-name">Distributes Apps Entirely Free of Charge — Including Apps That Are Paid on the Play Store</div>
+        <div class="feat-desc">GetJar's founding model was built around distributing apps for free — a model that attracted developers looking for broad distribution and users looking for no-cost software. This continues today, with GetJar hosting free versions of apps that may carry a cost on the Play Store. For children, the appeal of accessing paid apps or premium features without any purchase notification reaching a parent is a direct incentive to use GetJar specifically as a route to obtain things that would otherwise require a parental approval or purchase conversation.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">👤</div>
+      <div>
+        <div class="feat-name">No Account Required to Browse and Download</div>
+        <div class="feat-desc">GetJar does not require a user account to access its catalogue, browse apps or download APK files. There is no login, no age declaration, no parental approval step and no purchase confirmation of any kind. A child can open GetJar, find any app in the catalogue, download the APK and install it without leaving any record in any monitored account. The absence of any account requirement means there is no login history, no download record and no activity trail associated with a child's profile that a parent could review.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Accessible Through Both an App and a Web Browser</div>
+        <div class="feat-desc">Like several third-party app stores, GetJar is accessible both as an installed Android application and as a website through which APK files can be browsed and downloaded directly via a mobile browser. This dual accessibility means that blocking the GetJar app alone does not prevent a child from accessing the platform's catalogue — browser-based access to the GetJar website provides an alternative route to downloading APKs that remains open even when the app itself is not installed on the device.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🕰️</div>
+      <div>
+        <div class="feat-name">A Long Operational History Makes It Known and Discoverable Among Older Teenagers</div>
+        <div class="feat-desc">GetJar's twenty-year operational history means it is one of the most established names in independent app distribution. Older teenagers with an interest in accessing apps outside official channels are more likely to be aware of GetJar than newer, less well-established alternatives. Its age and continued operation give it a degree of recognition among technically curious users that newer third-party stores may not have — meaning it is more likely to be sought out deliberately rather than discovered incidentally.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">GetJar's risks for children centre on its complete bypass of Play Store parental controls, its account-free access model that leaves no monitoring trail, and the availability of paid apps for free — removing the purchase notifications that parents rely on as a signal of what a child is installing.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">Bypasses All Play Store Parental Controls</div>
+      <div class="rc-desc">Google Family Link, Play Store age restrictions and parental approval requirements apply only to Play Store installations — apps downloaded via GetJar bypass every one of these controls with no parental notification of any kind</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">No Account — No Monitoring Trail</div>
+      <div class="rc-desc">GetJar requires no account to download apps, meaning there is no login history, no download record and no activity trail associated with a child's identity — nothing for a parent to review, and no record that the platform was used at all</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💸</span>
+      <div class="rc-name">Free Paid Apps Remove Purchase Alerts</div>
+      <div class="rc-desc">GetJar hosts paid apps for free, allowing children to access premium features without triggering a purchase notification to a parent's family account — eliminating a key visibility signal parents rely on to know what their child is installing</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">Apps Unavailable on Play Store May Be Present</div>
+      <div class="rc-desc">Apps absent from the Play Store — whether removed for policy reasons, never submitted for review, or restricted for age-appropriateness — may be available through GetJar's catalogue without any indication of why they are absent from official channels</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Browser Access Bypasses App-Level Blocks</div>
+      <div class="rc-desc">GetJar's catalogue is accessible through a web browser as well as through its app — blocking the app alone does not close the browser-based download route, meaning both the app and the website must be restricted for effective protection</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📊</span>
+      <div class="rc-name">No Record in Play Store Installation History</div>
+      <div class="rc-desc">Apps installed via GetJar do not appear in the Google Play Store's installation log or the Google Family account dashboard — a parent reviewing recent installs through official tools will have no record of anything obtained through GetJar</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>GetJar Carries a Medium Risk Rating — Lower Content Risk, But a Complete Bypass of Parental Controls</strong>
+      <span>GetJar's catalogue is less expansive than Aptoide's and it does not operate a community-upload model that introduces the same adult content risks. Its risk is primarily structural: it bypasses Play Store parental controls entirely, leaves no account-based monitoring trail, and makes paid apps freely available without purchase notifications. For families relying on Play Store-based oversight, GetJar represents a gap that should be closed.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🛡️</div>
+    <div>
+      <div class="control-title">GetJar's Account-Free Model Is Its Most Distinctive Risk for Parental Monitoring — There Is No Login History to Review After the Fact</div>
+      <div class="control-body">Most third-party app stores at least require a user account that creates some form of activity record — a login, a download history, a registered email address. GetJar requires none of these. A child can use GetJar completely anonymously, with no record of having used the platform remaining on any account associated with their identity. This makes GetJar harder than most alternatives to detect through after-the-fact account review, and makes prevention — blocking access to the platform before it is used — the only reliable monitoring approach available to parents.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">GetJar Is One of the Internet's Oldest App Stores — Its Long History Makes It a Known Resource Among Older Children and Teenagers</div>
+        <div class="know-body">GetJar has been operating continuously since 2004 — longer than the App Store, longer than Google Play, and longer than most of the digital services that children use today. Its age means it has accumulated a degree of recognition and reputation among users interested in independent app distribution that newer alternatives lack. Older teenagers, in particular, are more likely to be aware of GetJar as a named alternative to the Play Store than younger children, and its long track record may give it an air of legitimacy that makes it seem like a less concerning choice than a newer, less established third-party store. Its operational history does not, however, change the fact that it bypasses all Play Store parental controls completely.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Absence of an Account Requirement Means GetJar Use Leaves No Trace in Any Monitored Account</div>
+        <div class="know-body">One of the most significant practical differences between GetJar and many other third-party app stores is that it requires no account whatsoever to download and install apps. A child can visit GetJar, download an APK, install an app, and leave no record of having done so in any account-based monitoring system a parent might review. There is no GetJar login history, no registered email address, and no download record associated with any identity. The only evidence that GetJar has been used is the presence of apps on the device that do not appear in the Play Store's installation history — making periodic manual comparison of the device's full app list against Play Store records the only practical detection method.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">GetJar's Free-App Model Removes a Key Parental Visibility Signal</div>
+        <div class="know-body">On the Google Play Store, even small purchases — including free app downloads that require account confirmation — generate notifications or activity records in family account dashboards. GetJar's model is entirely free, meaning that apps obtained through it generate no purchase event and no financial notification of any kind. For parents who use purchase alerts or spending notifications as a signal to ask children what they are installing, GetJar entirely removes this mechanism. A child can obtain apps through GetJar repeatedly without any financially triggered prompt that would cause a parent to ask what has been installed.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Blocking GetJar Requires Restricting Both the App and the Website</div>
+        <div class="know-body">GetJar is accessible through both a dedicated Android app and a website from which APK files can be browsed and downloaded directly through a mobile browser. Blocking the GetJar app alone on a child's device does not prevent a child from visiting the GetJar website through a browser and downloading APKs directly from there. Effective restriction requires both an app-level block through iLimits and a browser-level domain restriction that prevents the GetJar website from being accessed on the device. Without both controls in place, a child who finds the app blocked may simply switch to the web route to achieve the same outcome.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block GetJar and similar third-party app stores — closing the gap that allows Play Store parental controls and family account monitoring to be bypassed without leaving any trace.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block GetJar and third-party app stores with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar alternative marketplaces automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Ensures the Play Store remains the sole pathway for app installation</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged app stores are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like GetJar as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs. iLimits gives you the information to make an informed choice, and the tools to act on it immediately when you decide to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps parents can take to close the gap that GetJar creates in Play Store-based parental controls — combining conversation, manual device review, and layered technical restrictions that address both the app and the browser-based access route.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About Why Using Official App Stores Matters for Their Safety</div>
+        <div class="tip-body">A conversation that focuses on safety rather than restriction tends to be more effective with older children and teenagers, who are the most likely age group to be aware of and seek out a platform like GetJar. Explain that official app stores conduct security and content reviews that reduce — though do not eliminate — the risk of installing an app that behaves in unexpected ways, collects data without consent, or contains functionality that the developer has not disclosed. GetJar's long history does not mean that every app in its catalogue has been reviewed to the same standard as a Play Store listing, and the absence of a centralised review process means the responsibility for assessing app safety sits more heavily on the person installing the app. For a child or teenager, that responsibility is one they are unlikely to exercise in the same way an adult would.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Compare Your Child's Full Installed App List Against Play Store History to Spot Sideloaded Apps</div>
+        <div class="tip-body">Because GetJar requires no account and leaves no download record, the only reliable way to identify apps installed through it is to manually compare the full list of installed apps on the device — accessible through Settings — against the record of apps installed through the Google Play Store for that account. Any app appearing in the device's Settings list but absent from the Play Store's installation history was installed through a route other than the Play Store. This comparison is the only method available for detecting GetJar-sourced installations after the fact. Making this check a periodic part of your family's device review — perhaps monthly, or whenever you notice unfamiliar apps on the device's home screen — is the most practical approach to maintaining visibility when other detection methods are unavailable.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Both App-Level and Browser-Level Restrictions, and Enable Android's Unknown Sources Block</div>
+        <div class="tip-body">Restricting GetJar effectively requires closing both the app-based and the browser-based access routes simultaneously. Use iLimits to block the GetJar application, and pair this with a browser-level domain restriction on the GetJar website to prevent APK downloads through a mobile browser on the same device. Additionally, enable Android's built-in restriction on installing apps from unknown sources through the device's Settings — this device-level control prevents APK files from being installed regardless of where they were downloaded from, and provides a last-line-of-defence safeguard that operates independently of iLimits. The combination of all three — iLimits app restriction, browser domain block, and Android's unknown sources setting — provides overlapping protection that is substantially more robust than any single layer alone.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">An App Store That Leaves No Trace Requires Prevention, Not Detection</h3>
+    <p class="closing-body">
+      GetJar's account-free model is what sets it apart from most other third-party app stores — and makes it uniquely resistant to after-the-fact monitoring. There is no account to review, no login history to check, and no download record to audit. The only reliable protection is preventing access before it is used. iLimits gives you the tools to put that prevention in place across every device your child uses, so that the Play Store controls you rely on remain the complete and effective gateway they were designed to be.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
