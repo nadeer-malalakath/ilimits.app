@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mobilism – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Mobilism accent: deep crimson-wine */
+    --mb:           #BE123C;
+    --mb-mid:       #9F1239;
+    --mb-deep:      #4C0519;
+    --mb-light:     #FFF1F2;
+    --mb-bdr:       #FDA4AF;
+    --mb-text:      #4C0519;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0008 0%, #2D0012 50%, #400019 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(190,18,60,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(190,18,60,0.40) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(190,18,60,0.20);
+    border: 1px solid rgba(253,164,175,0.36);
+    color: #FDA4AF; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #4C0519 0%, #BE123C 55%, #F43F5E 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(190,18,60,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.13); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Mobilism callout ── */
+  .mb-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--mb-light); border: 1.5px solid var(--mb-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .mb-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E8; border: 1.5px solid var(--mb-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .mb-title { font-size: 13px; font-weight: 700; color: var(--mb-text); line-height: 1.3; margin-bottom: 3px; }
+  .mb-body  { font-size: 12px; color: #881337; font-weight: 400; line-height: 1.55; }
+
+  /* ── Piracy flag ── */
+  .piracy-flag {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .pf-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pf-title { font-size: 13px; font-weight: 700; color: #7F1D1D; line-height: 1.3; margin-bottom: 3px; }
+  .pf-body  { font-size: 12px; color: #991B1B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-wine::before   { background: #BE123C; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #7F1D1D; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #991B1B; font-weight: 400; line-height: 1.5; }
+
+  /* ── Device warning ── */
+  .device-warn {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .dw-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .dw-title { font-size: 13px; font-weight: 700; color: #7F1D1D; line-height: 1.3; margin-bottom: 3px; }
+  .dw-body  { font-size: 12px; color: #991B1B; font-weight: 400; line-height: 1.6; }
+  .dw-body code {
+    display: inline-block; background: #FFE4E4; border-radius: 5px;
+    padding: 1px 6px; font-size: 11px; font-family: monospace; color: #7F1D1D;
+    margin-top: 5px; line-height: 1.8;
+  }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0008 0%, #400019 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(190,18,60,0.30) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card          { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid     { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card       { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box      { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip    { animation: fadeUp 0.42s ease 0.05s both; }
+  .mb-callout    { animation: fadeUp 0.42s ease 0.03s both; }
+  .piracy-flag   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip    { animation: fadeUp 0.42s ease 0.04s both; }
+  .device-warn   { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing       { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🏴‍☠️</div>
+        <div>
+          <div class="app-name-text">Mobilism</div>
+          <div class="app-sub">Piracy Forum &amp; APK Distribution Site</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Piracy / APK Distribution</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Distributes pirated, cracked and modified apps and games for free, with no security screening, no age enforcement and direct forum-based community access to adult and harmful content</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Mobilism — a long-running online forum and APK distribution platform primarily dedicated to the sharing of pirated, cracked and modified Android apps and games, accessible through both a website and a companion Android app.</p>
+  </div>
+
+  <div class="mb-callout">
+    <div class="mb-ico">🏴‍☠️</div>
+    <div>
+      <div class="mb-title">Mobilism Is a Piracy Forum That Distributes Cracked, Paid and Modified Apps for Free — With an Active Community That Includes Adult Content Sections</div>
+      <div class="mb-body">Mobilism is one of the most widely known Android piracy forums, operating as both a web-based community and a dedicated Android app. Its primary function is the distribution of paid Android apps and games without payment — cracked APK files that strip the purchase requirement from commercial software. Its catalogue includes apps and games that have been modified to unlock premium features, remove ads, bypass in-app purchases, and circumvent licensing checks. Beyond its APK distribution function, Mobilism operates as an active online community with forum sections covering a wide range of content, including sections dedicated to adult material, accessible to any registered user without meaningful age verification.</div>
+    </div>
+  </div>
+
+  <div class="piracy-flag">
+    <div class="pf-ico">⚖️</div>
+    <div>
+      <div class="pf-title">Mobilism Distributes Copyrighted Software Without Authorisation — Use of Cracked APKs Is Copyright Infringement</div>
+      <div class="pf-body">Downloading and installing paid apps through Mobilism without purchasing them is copyright infringement. Beyond the legal issue, cracked APKs are modified by unknown parties — the modifications that remove licensing checks may also introduce malicious code, data harvesting tools or unwanted background processes that the original developer did not include. Neither the source nor the safety of any APK distributed through Mobilism can be verified.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#BE123C;"></span> Piracy Forum</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Cracked APKs</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> No Age Controls</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Adult Content</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Forum Community</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">
+      Mobilism is an online forum and Android app that distributes <strong>pirated, cracked and modified APK files</strong> — paid apps and games made available for free by stripping their licensing and payment requirements — alongside an active community forum that includes adult content sections accessible without meaningful age verification.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--mb-light);">📲</div>
+      <div>
+        <div class="feat-name">Distributes Paid Apps and Games for Free via Cracked APKs</div>
+        <div class="feat-desc">Mobilism's primary function is making paid Android software available without payment by distributing cracked versions — APK files that have been modified to remove licensing checks, purchase requirements and subscription barriers. Users can search for any paid app or game, find a cracked version posted by other community members, and download and install it directly onto their device. The library covers a very wide range of software from games and productivity apps to premium utility tools, with new cracks posted regularly by an active community of contributors.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔓</div>
+      <div>
+        <div class="feat-name">Provides Modded Apps With Unlocked Features, Removed Ads and Bypassed In-App Purchases</div>
+        <div class="feat-desc">Beyond cracked paid apps, Mobilism distributes modified versions of free apps — versions that unlock premium features, remove advertising, provide unlimited in-game currency or bypass paywalls, without requiring any payment. These modded APKs are among the most actively sought content on the platform, particularly for games and popular apps with free-to-play models. Each modded APK has been altered by an unknown third party, and the changes made go beyond the stated modifications — the original code has been opened and rewritten by someone outside the original development team.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">💬</div>
+      <div>
+        <div class="feat-name">Operates as an Active Community Forum With Adult Content Sections</div>
+        <div class="feat-desc">Mobilism is not simply an APK download directory — it is an active forum community with discussion sections covering a wide range of topics. The forum includes sections dedicated to adult content, including explicit material, that are accessible to any registered user. Registration on Mobilism does not involve meaningful age verification — a child can create an account and access the forum's full content with no barrier beyond a username and email address. The forum community dimension means that a child using Mobilism is not only accessing pirated software but also participating in an online community with adult members and adult content sections.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">📱</div>
+      <div>
+        <div class="feat-name">Available as a Dedicated Android App as Well as a Website</div>
+        <div class="feat-desc">Mobilism offers a dedicated Android app that provides mobile access to its forum and APK download library. The app is not available through the Google Play Store — it is distributed through Mobilism's own platform and installed via APK sideloading, which requires enabling the "install from unknown sources" device permission. This means a child accessing Mobilism through the app has already enabled a device-level permission that weakens its security posture, and the Mobilism app itself is an unvetted APK from a piracy platform installed directly on the device.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">🛡️</div>
+      <div>
+        <div class="feat-name">No Security Screening, No Age Verification, No Parental Controls</div>
+        <div class="feat-desc">Mobilism applies no security screening to the APK files shared on its platform — every file is user-submitted and may have been modified in ways beyond those stated by the person who posted it. There is no age verification for account creation or for access to the platform's adult content sections. Google Family Link parental approvals are entirely bypassed for any app installed through Mobilism. No element of Mobilism's design or operation includes any child safety consideration — the platform was built for adult users seeking free software, and children accessing it encounter an environment with no protective infrastructure of any kind.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from Mobilism — spanning pirated software with embedded security risks, adult forum content accessible without age checks, complete bypass of parental controls, and the legal implications of using cracked software that children may not fully understand.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-red">
+      <span class="rc-emoji">💣</span>
+      <div class="rc-name">Cracked APKs Carry Significant Hidden Security Risks</div>
+      <div class="rc-desc">Every cracked and modded APK on Mobilism has been modified by an unknown person — the code changes that bypass licensing may also include malware, credential-stealing tools, spyware or ad injection software invisible to the user installing it</div>
+    </div>
+    <div class="risk-card c-wine">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Adult Forum Sections Accessible Without Age Verification</div>
+      <div class="rc-desc">Mobilism's forum includes sections with explicit adult content accessible to any registered user — account creation requires no age verification, and a child can access the platform's full content range with a username and email address alone</div>
+    </div>
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">👨‍👧</span>
+      <div class="rc-name">Completely Bypasses Family Link and All Parental Approvals</div>
+      <div class="rc-desc">Apps installed through Mobilism generate no Family Link approval request and appear in no parental activity log — a child can install any cracked or modded app without a parent being notified, on any device where Family Link is configured and active</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">⚖️</span>
+      <div class="rc-name">Exposes Children to Copyright Infringement Without Their Understanding</div>
+      <div class="rc-desc">Children who download paid apps for free through Mobilism are engaging in copyright infringement — a legal issue they may not fully understand, and one that can have real consequences for the account, device or household associated with the download</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Open Forum Community With Adult Members and Unmoderated Content</div>
+      <div class="rc-desc">Mobilism's forum is an active community in which children can interact with adult members without any age separation — in discussion threads, request posts and community spaces that sit alongside the platform's adult content sections with no visible boundary</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">⚙️</span>
+      <div class="rc-name">Installing the Mobilism App Requires Enabling "Unknown Sources"</div>
+      <div class="rc-desc">The Mobilism Android app is itself an unvetted APK from a piracy platform — installing it requires the "install unknown sources" permission, which persists after the app is removed and enables any other app or website to sideload software on the device</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Mobilism Carries the Highest Risk Rating</strong>
+      <span>Mobilism is a piracy platform with no child safety infrastructure of any kind — its cracked APKs carry embedded security risks, its forum includes adult content accessible without age verification, it bypasses all parental controls, and its use constitutes copyright infringement. It should be blocked on all devices accessible to children and addressed directly in conversation if discovered on a child's device.</span>
+    </div>
+  </div>
+
+  <div class="device-warn">
+    <div class="dw-ico">⚙️</div>
+    <div>
+      <div class="dw-title">If the Mobilism App Was Installed, "Unknown Sources" Is Active — and Cracked Apps May Still Be on the Device</div>
+      <div class="dw-body">
+        Installing the Mobilism app required enabling "install from unknown sources" — which persists after removal. Any cracked or modded APKs installed through Mobilism also remain on the device until individually removed. Check and revoke this permission, then audit installed apps against the Play Store history.
+        <br><code>Settings → Apps → Special App Access → Install Unknown Apps</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Mobilism Is a Piracy Platform — Not Simply a Third-Party App Store</div>
+        <div class="know-body">Unlike APKPure, Aptoide or F-Droid, Mobilism is not positioned as an alternative app distribution platform with any legitimate use case — its explicit purpose is the distribution of paid software without payment. Every cracked APK on Mobilism represents an app whose licensing system has been deliberately broken by an unknown person. The motivation for children to use Mobilism is almost always to get paid games or apps for free, and the risks that come with doing so — security risks from modified code, legal risks from copyright infringement, and content risks from the platform's forum — are entirely specific to the piracy context. This places Mobilism in a different category from the technical sideloading tools covered elsewhere in iLimits, and the conversation parents have about it should reflect that distinction.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Every Cracked APK Has Been Modified by an Unknown Person Whose Full Changes Cannot Be Verified</div>
+        <div class="know-body">When a cracked or modded APK is distributed through Mobilism, the version a child downloads is not the original software made by the developer — it is a version that has been opened, modified and repackaged by a person whose identity and intentions are unknown. The stated modification may be simply removing a licensing check or unlocking a feature, but the act of modifying the APK requires full access to the app's code, and nothing prevents additional changes from being made at the same time. Security researchers have repeatedly documented malware, adware and credential-harvesting tools embedded in cracked APKs distributed through platforms like Mobilism. The risk is not theoretical — it is a documented and ongoing feature of the piracy APK ecosystem.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children Using Mobilism May Not Understand That Downloading Paid Apps for Free Is Illegal</div>
+        <div class="know-body">Many children and teenagers who use platforms like Mobilism to get paid apps for free have a limited understanding of copyright law and do not think of their actions as illegal. From their perspective, they are simply finding a free version of something that costs money — a distinction that feels minor in the moment. Parents should address this directly and clearly: downloading paid software without paying for it is copyright infringement, it is illegal, and it can have real consequences. This is not primarily a moral lecture about piracy — it is important context for why the risk associated with cracked APKs is real. The people who crack and distribute paid software through platforms like Mobilism are not doing so as a public service; understanding their actual motivations helps children make a more informed assessment of whether installing their software is a reasonable thing to do.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The Forum Community Dimension Means a Child on Mobilism Is in an Unmoderated Adult Space</div>
+        <div class="know-body">Mobilism's forum is not just a download index — it is an active community in which users request apps, post cracked versions, discuss modifications and interact socially in a wide range of discussion threads. This community is not age-separated, is not meaningfully moderated for age-appropriate content, and includes sections with explicit adult material. A child who registers on Mobilism to download a cracked game is also registering for an account on an adult forum community. The social dimension of the platform means a child's interaction with Mobilism may extend beyond individual app downloads into ongoing participation in an adult online space, which carries its own set of risks separate from those associated with the software itself.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents direct tools to block Mobilism and similar piracy platforms instantly — preventing access to cracked software, adult forum content and the security risks that come with unvetted, user-modified APKs.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Mobilism and piracy platforms by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar APK piracy sites and forums</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps or sites are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Runs quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Mobilism as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to address Mobilism — covering the security audit needed after removal, the direct conversation about piracy and cracked software, and the broader controls to reinforce.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Have a Direct Conversation About Why Cracked Apps Are Not Just "Free" Apps</div>
+        <div class="tip-body">The most important conversation to have is one that directly addresses the piracy aspect — not just as a rule violation but as a practical risk that your child can understand. Explain that every cracked APK on Mobilism was modified by an unknown person, and that the modification goes into the app's code to break its licensing system. Nothing prevents that person from including other changes at the same time — changes that may collect account passwords, access the device's camera or microphone, or run background processes that drain data or battery. This is not a hypothetical concern: documented cases of malware in cracked APKs are not rare. Help your child understand that "free" in this context means trusting a stranger's modified code on their personal device — and that the actual cost of that trust can be significantly higher than paying for the app. Also address the copyright issue clearly: it is illegal, not simply against the rules, and understanding that distinction matters.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--mb-light); border-color: var(--mb-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Audit the Device Thoroughly — Cracked Apps Remain After Mobilism Is Removed</div>
+        <div class="tip-body">Removing Mobilism from a device does not remove any apps that were installed through it. Conduct a thorough audit: cross-reference every app on the device against the child's Google Play installation history — any app present that does not appear in the Play Store history was installed from another source, and any app installed from Mobilism should be considered potentially compromised. Pay particular attention to games and apps with modified names suggesting premium unlocks (words like "Pro", "Premium", "Unlocked", "Mod", "Cracked" or "Patched" in an app's name are signals). Also revoke the "install unknown sources" permission under Settings → Apps → Special App Access → Install Unknown Apps, and consider running a Play Protect scan across the device after cleaning up sideloaded apps.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Mobilism via iLimits, Reinforce Family Link, and Address the Motivation Behind It</div>
+        <div class="tip-body">Apply iLimits restrictions to block Mobilism across all of your child's devices, including browser-based access to the Mobilism website. Ensure Google Family Link is active and configured to require parental approval for all Play Store app installations, which removes the most obvious path to paid apps without asking. Then address the underlying motivation directly: if your child is using Mobilism because they want access to paid games or apps they cannot afford, that is a conversation worth having on its own terms — whether that means adjusting a spending allowance, exploring free alternatives, or discussing the value of paid software with them. Removing the tool without addressing the motivation is unlikely to be the complete solution.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Free Is Not Free When the Cost Is Your Child's Device Security</h3>
+    <p class="closing-body">
+      Mobilism presents paid software as free — but every cracked APK on the platform is modified software from an unknown source, installed on a device that holds your child's personal accounts, messages and potentially payment credentials. iLimits gives you the tools to block it reliably. The conversation about why cracked apps carry real risks — beyond simply being against the rules — gives your child the understanding to make a more informed choice about what they install, even when you are not there to step in directly.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
