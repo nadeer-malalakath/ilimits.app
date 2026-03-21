@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NordVPN – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* NordVPN: deep navy-midnight */
+    --nv:           #1B3A6B;
+    --nv-mid:       #163160;
+    --nv-deep:      #060D1E;
+    --nv-light:     #EFF4FF;
+    --nv-bdr:       #93ABDB;
+    --nv-text:      #060D1E;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+    --purple-bg:    #FAF5FF;
+    --purple-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #020509 0%, #060D1E 50%, #0D1A35 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(27,58,107,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(27,58,107,0.44) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(27,58,107,0.30);
+    border: 1px solid rgba(147,171,219,0.38);
+    color: #93ABDB; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #060D1E 0%, #1B3A6B 55%, #3B6CC5 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(27,58,107,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.10); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── NordVPN callout ── */
+  .nv-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--nv-light); border: 1.5px solid var(--nv-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .nv-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D6E4FF; border: 1.5px solid var(--nv-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .nv-title { font-size: 13px; font-weight: 700; color: var(--nv-text); line-height: 1.3; margin-bottom: 3px; }
+  .nv-body  { font-size: 12px; color: #1B3A6B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Premium nuance banner ── */
+  .premium-banner {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .pb-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .pb-title { font-size: 12.5px; font-weight: 700; color: #78350F; margin-bottom: 3px; line-height: 1.3; }
+  .pb-body  { font-size: 11.5px; color: var(--amber-text); font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-navy::before   { background: #1B3A6B; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+  .risk-card.c-teal::before   { background: #0D9488; }
+
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB; border: 1.5px solid #FCD34D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FCD34D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Payment alert ── */
+  .payment-alert {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .pa-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E4; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pa-title { font-size: 13px; font-weight: 700; color: #7F1D1D; line-height: 1.3; margin-bottom: 3px; }
+  .pa-body  { font-size: 12px; color: #991B1B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #020509 0%, #0D1A35 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(27,58,107,0.34) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .nv-callout      { animation: fadeUp 0.42s ease 0.03s both; }
+  .premium-banner  { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .payment-alert   { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🛡️</div>
+        <div>
+          <div class="app-name-text">NordVPN</div>
+          <div class="app-sub">Premium Consumer VPN Service</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">VPN / Proxy Tool</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟡 Medium</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Bypasses network-level parental controls regardless of the provider's own transparency — with an additional concern that NordVPN's premium status may mask its presence on a family subscription shared with a child</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear and fair picture of NordVPN — one of the world's most widely used and reputable paid VPN services, which bypasses network-level parental controls by the nature of VPN technology, and which raises a specific concern when a parent's own subscription is accessible to a child on a shared device or family plan.</p>
+  </div>
+
+  <div class="nv-callout">
+    <div class="nv-ico">🛡️</div>
+    <div>
+      <div class="nv-title">NordVPN Is One of the Most Reputable Paid VPN Services — and It Still Bypasses Every Network-Level Parental Control on a Child's Device</div>
+      <div class="nv-body">NordVPN is a premium, paid consumer VPN service operated by Nord Security, with independent security audits, a verified no-logs policy and a strong reputation for transparency within the VPN industry. It is, by any reasonable measure, among the most trustworthy VPN providers available. The reason it is flagged in iLimits is not about NordVPN's own practices — it is about what all VPN technology does on a child's device. When active, NordVPN routes all internet traffic through external servers, bypassing every network-level content filter and monitoring tool a parent has configured. Additionally, NordVPN's premium nature introduces a specific concern: a child in a household where a parent subscribes to NordVPN may have access to it through a shared plan, a saved login, or a parent's device — without the parent connecting this access to a bypass risk.</div>
+    </div>
+  </div>
+
+  <div class="premium-banner">
+    <div class="pb-ico">💳</div>
+    <div>
+      <div class="pb-title">NordVPN Is a Paid Premium Service — Shared Family Plans and Saved Logins Create a Specific Access Risk</div>
+      <div class="pb-body">Unlike free consumer VPN apps, NordVPN requires a paid subscription. This creates a distinct concern not present with free tools: a parent who subscribes to NordVPN and shares a device with a child, or whose login credentials are saved on a household computer, may inadvertently give a child access to a fully functional premium VPN without realising it. The paid status of the app does not make the network bypass any less effective — it simply means access may come through a legitimate household subscription rather than a downloaded free app.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1B3A6B;"></span> Premium VPN</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Bypasses Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#0D9488;"></span> Audited Provider</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Shared Plan Risk</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Paid Service</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">
+      NordVPN is a <strong>premium paid VPN service</strong> that encrypts and routes internet traffic through external servers, bypassing network-level parental controls and content filters. It is widely regarded as one of the most reputable VPN providers — the restriction reflects the structural effect of VPN technology on household controls, not NordVPN's own practices.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--nv-light);">🌐</div>
+      <div>
+        <div class="feat-name">Routes All Traffic Through External Servers — Bypassing Every Network-Level Filter</div>
+        <div class="feat-desc">NordVPN creates an encrypted tunnel between the device and its servers, routing all internet traffic through that tunnel before it reaches its destination. Every network-level parental control — DNS content filters, router category blocks, household monitoring systems — operates on traffic before it leaves the local network. Traffic routed through NordVPN bypasses all of these controls. The bypass is total and simultaneous: every category of restricted content becomes accessible for any session in which NordVPN is connected. This is the structural effect of all VPN technology, applying equally regardless of the provider.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔐</div>
+      <div>
+        <div class="feat-name">Encrypts Traffic — Browsing Activity Is Hidden From Network Monitoring</div>
+        <div class="feat-desc">NordVPN encrypts all tunnelled traffic, meaning network monitoring tools that log website visits or app connections see only a connection to NordVPN's servers — not the actual destinations visited or content accessed during the session. A parent using a router-level monitoring tool or a household activity log will find no useful record of what their child accessed during any period when NordVPN was active. This removal of monitoring visibility applies to all encrypted VPN services regardless of the provider's own practices.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">✅</div>
+      <div>
+        <div class="feat-name">Independent Audits and Verified No-Logs Policy</div>
+        <div class="feat-desc">NordVPN undergoes independent third-party security audits and has a verified no-logs policy — commitments that place it among the most transparent and reputable providers in the consumer VPN market. These characteristics are relevant context when assessing the data practice dimension of VPN risk: NordVPN is a meaningfully more trustworthy product from a privacy perspective than free consumer VPN alternatives. This does not affect the network bypass, but it is accurate context for any parent reviewing NordVPN's profile.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">💳</div>
+      <div>
+        <div class="feat-name">Paid Subscription — May Be Accessible to a Child Through a Parent's Account</div>
+        <div class="feat-desc">NordVPN is a paid subscription service. A parent who subscribes to NordVPN for their own use may, without realising it, give a child access to the service through a family plan, shared login credentials, or a saved account on a shared device. This is a distinct risk not present with free consumer VPN apps that require individual installation: access can come through an existing household subscription rather than through a new deliberate installation. NordVPN's multi-device plans allow simultaneous connections across several devices, which means a single parent subscription may cover a child's device.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--teal-bg);">🌍</div>
+      <div>
+        <div class="feat-name">Extensive Server Network Across 60+ Countries</div>
+        <div class="feat-desc">NordVPN offers connections through servers in over sixty countries, giving users a wide choice of exit points. Content unavailable in the child's home country — whether blocked by parental filters or restricted by regional availability — becomes accessible when routing through an appropriate server. NordVPN's large server network and consistently fast connections make it a more capable bypass tool than most free alternatives, in the same way that its reputation makes it more trustworthy from a privacy perspective.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">NordVPN's risks on a child's device mirror those of any VPN — bypass of network controls, removal of monitoring visibility — with the distinctive addition that access may come through a parent's own subscription rather than a separate installation, making it harder to detect.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">Bypasses All Network-Level Parental Controls</div>
+      <div class="rc-desc">Every DNS filter, router content block and household network restriction is bypassed when NordVPN is connected — the structural bypass applies to all VPN tools regardless of provider reputation, and NordVPN's premium quality makes it a particularly effective bypass tool</div>
+    </div>
+    <div class="risk-card c-navy">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Shared Parent Subscription Creates Hidden Access Risk</div>
+      <div class="rc-desc">A parent who subscribes to NordVPN may give a child access through shared login credentials, a family plan, or a saved account on a shared device — without ever installing a separate app or receiving a Family Link installation alert</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">👁️</span>
+      <div class="rc-name">Encrypts Traffic — Network Monitoring Becomes Ineffective</div>
+      <div class="rc-desc">Network monitoring tools see only a NordVPN connection during active sessions — no record of actual websites visited or content accessed is available through router logs or network monitoring tools during any period NordVPN is active</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Extensive Server Network Bypasses Regional Restrictions</div>
+      <div class="rc-desc">NordVPN's 60+ country server network makes regionally unavailable content accessible — including streaming content restricted by licensing and content subject to different age standards in other jurisdictions — with consistently fast connection speeds</div>
+    </div>
+    <div class="risk-card c-teal">
+      <span class="rc-emoji">🔄</span>
+      <div class="rc-name">Multi-Device Plans Cover Multiple Household Devices Simultaneously</div>
+      <div class="rc-desc">NordVPN's standard plan allows simultaneous connections across multiple devices — a single parent subscription may cover a child's phone or tablet as well as the parent's own devices, making the child's access to the VPN an automatic consequence of the subscription</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">📲</span>
+      <div class="rc-name">Mainstream Visibility — Widely Known and Easily Discovered</div>
+      <div class="rc-desc">NordVPN is one of the most advertised VPN products in the world — a child who searches for a VPN or encounters VPN recommendations through tech content will find NordVPN immediately, and its premium reputation may give it greater apparent legitimacy than free alternatives</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>NordVPN Carries a Medium Risk Rating</strong>
+      <span>NordVPN's independent audits, verified no-logs policy and premium reputation place it among the most trustworthy VPN providers — it carries a Medium risk rating reflecting that distinction. The bypass of network-level parental controls is the same as for any VPN. The specific additional concern with NordVPN is the shared subscription risk: a parent who subscribes to NordVPN may unintentionally provide their child with access to a fully functional premium VPN through their own account.</span>
+    </div>
+  </div>
+
+  <div class="payment-alert">
+    <div class="pa-ico">💳</div>
+    <div>
+      <div class="pa-title">If You Subscribe to NordVPN, Check Whether Your Child Has Access Through Your Account</div>
+      <div class="pa-body">NordVPN's multi-device plans allow simultaneous connections across several devices. If you subscribe to NordVPN for your own use, check whether your login credentials are saved on any device your child uses, and whether any child's devices are covered by your plan. A child logging in to a parent's NordVPN account — or accessing it through a saved login on a shared device — does not trigger a Family Link installation alert, because no new installation is required. Review your NordVPN account's connected devices and, if necessary, change your password on devices accessible to your child.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">NordVPN Is a Reputable Product — the Restriction Reflects VPN Technology, Not Any Specific Concern About NordVPN Itself</div>
+        <div class="know-body">Parents who find NordVPN on a child's device, or who discover their child has used a parent's NordVPN account, are dealing with a meaningfully different situation from finding VPN Master or an unvetted free VPN. NordVPN is one of the most reputable services in its category, with independent audits and a track record of transparency. The restriction in iLimits reflects the structural effect of VPN technology on network-level parental controls — not a judgement on NordVPN's own practices. Treating NordVPN with the same level of concern as a product with documented red flags would be inaccurate, and any conversation with a child about it should reflect that distinction.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Shared Subscription Risk Is Specific to Paid VPNs — and Worth Checking If You Are a NordVPN Subscriber</div>
+        <div class="know-body">Free consumer VPN apps create risk through installation — a child finds, downloads and installs the app, triggering a Family Link alert if that setting is active. NordVPN creates an additional risk path through access to an existing subscription. A parent who subscribes to NordVPN and uses it on a household device that a child also uses, or whose login is saved anywhere a child can access it, may have inadvertently provided their child with a fully functional premium VPN without any installation taking place. This path is invisible to Family Link because it does not involve a new installation. Parents who subscribe to NordVPN should specifically check which devices are connected to their account and whether their login credentials are accessible to their child.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">NordVPN's Premium Quality Makes It a More Capable Bypass Tool — Fast, Reliable and Widely Trusted</div>
+        <div class="know-body">NordVPN's reputation for fast, reliable connections and its extensive server network mean that a child using NordVPN — whether through their own downloaded copy or through a parent's subscription — has access to a more capable and consistent bypass tool than most free alternatives. Free consumer VPNs may have slow connections, data limits or unstable services that reduce their practical usefulness as bypass tools. NordVPN does not have these limitations. The premium quality of the product is a positive distinction for its intended use case and a more significant bypass capability from a child safety perspective.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">For Older Teenagers Who Already Know About NordVPN, an Honest Conversation Is More Productive Than Restriction Alone</div>
+        <div class="know-body">NordVPN is one of the most widely advertised and recognised VPN brands in the world. A teenager who has encountered VPN advertising online — which is targeted broadly at young adult audiences — is likely to know what NordVPN is and what it does. A conversation that acknowledges NordVPN's positive reputation while being clear about why VPN use on their device undermines household safety controls is more likely to be received seriously than a blanket prohibition without context. Framing the issue accurately — NordVPN itself is a trustworthy product; the concern is what any VPN does to the household's network filtering — gives a teenager a reason to understand the restriction rather than simply looking for ways to work around it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents tools to block NordVPN and the broader consumer VPN category — preventing network-level controls from being bypassed whether the access comes from a new installation or from an existing household account.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block NordVPN and consumer VPN tools by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Category-level restriction covers NordVPN and equivalent alternatives together</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Runs quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like NordVPN as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs. For NordVPN specifically, parents who subscribe to the service for their own use should review their account's connected devices separately from any iLimits restriction they apply.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for NordVPN — including the account access check that is specific to paid VPN subscribers, how to approach the conversation accurately, and why category-level blocking remains the most durable approach.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💳</div>
+      <div>
+        <div class="tip-name">If You Subscribe to NordVPN, Audit Your Account's Connected Devices and Saved Logins</div>
+        <div class="tip-body">If you are a NordVPN subscriber, the first practical step is not installing a restriction — it is reviewing your account. Log in to your NordVPN account and check the list of devices currently connected or recently active. If any device your child uses appears, the bypass path exists whether or not the NordVPN app appears on the device's app list. Also consider whether your NordVPN login credentials are saved on any browser, password manager or device your child has access to — if they are, your child has access to your subscription with no additional installation required. Changing your NordVPN password on devices accessible to your child, and removing the app from any device they use, addresses this specific access path. Applying iLimits restrictions in parallel prevents a new installation from being the next route.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--nv-light); border-color: var(--nv-bdr);">💬</div>
+      <div>
+        <div class="tip-name">Be Accurate — Acknowledge NordVPN's Reputation While Explaining the Network Control Bypass</div>
+        <div class="tip-body">A teenager who knows about NordVPN — and many do, given its extensive advertising presence — will likely know it is a reputable, paid service used by many adults for legitimate privacy purposes. A conversation that accurately reflects this is more likely to land than one that treats NordVPN as if it were a suspect free app. The honest framing: NordVPN is a trustworthy product for its intended purpose; the concern on their device is entirely about what any VPN does to the household's network controls, not about what NordVPN itself does with traffic. Separating these two questions — provider trustworthiness and network bypass effect — gives the conversation clarity and gives a teenager a reason to take it seriously rather than dismissing it as an uninformed prohibition.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block the VPN Category, Enable Family Link Approval, and Layer Device Controls With Network Filtering</div>
+        <div class="tip-body">Apply iLimits restrictions at the VPN and proxy category level — this covers NordVPN alongside all equivalent alternatives in a single action, and remains effective as the category evolves. Enable Google Family Link's app installation approval requirement to catch any new VPN installation before it succeeds, giving you an alert and the opportunity for a conversation before the bypass is in place. Combine device-level controls with your existing network-level filtering: device-level controls block VPN apps from running regardless of network routing, while network-level filters cover content risks from devices and traffic not under direct device-level management. The combination gives you the most complete and resilient configuration for a household where you use a premium VPN service yourself while maintaining controls on your child's devices.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Tool You Trust for Yourself Can Still Bypass the Controls You Set for Your Child</h3>
+    <p class="closing-body">
+      NordVPN is a product many parents use with good reason — its privacy credentials are genuine and its reputation is well-earned. None of that changes what happens to network-level parental controls when it is active on a child's device. iLimits gives you the tools to restrict it at the device level consistently. The account audit — checking which devices are connected to your subscription and where your login is saved — is the step most specific to NordVPN, and the one most easily overlooked.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
