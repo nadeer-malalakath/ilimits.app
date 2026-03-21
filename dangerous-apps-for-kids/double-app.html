@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Double App – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Double App accent: teal-emerald */
+    --da:           #059669;
+    --da-mid:       #047857;
+    --da-deep:      #064E3B;
+    --da-light:     #ECFDF5;
+    --da-bdr:       #6EE7B7;
+    --da-text:      #064E3B;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --purple-bg:    #FAF5FF;
+    --purple-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #021C12 0%, #052E1C 50%, #073D25 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(5,150,105,0.38) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(5,150,105,0.36) 0%, transparent 68%);
+    filter: blur(30px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(5,150,105,0.18);
+    border: 1px solid rgba(110,231,183,0.32);
+    color: #6EE7B7; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #064E3B 0%, #059669 55%, #34D399 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(5,150,105,0.50), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Double App callout ── */
+  .da-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--da-light); border: 1.5px solid var(--da-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .da-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D1FAE5; border: 1.5px solid var(--da-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .da-title { font-size: 13px; font-weight: 700; color: var(--da-text); line-height: 1.3; margin-bottom: 3px; }
+  .da-body  { font-size: 12px; color: #065F46; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-teal::before   { background: #059669; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-purple::before { background: #8B5CF6; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-pink::before   { background: #EC4899; }
+
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB; border: 1.5px solid #FCD34D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FCD34D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--da-light); border: 1.5px solid var(--da-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D1FAE5; border: 1.5px solid var(--da-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--da-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #065F46; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #021C12 0%, #052E1C 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(5,150,105,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .da-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">♊</div>
+        <div>
+          <div class="app-name-text">Double App</div>
+          <div class="app-sub">App Cloning &amp; Multiple Accounts Tool</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">App Cloning / Utilities</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium-high">🟡 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows apps to be duplicated and run independently, which may reduce visibility of usage and enable unmonitored accounts</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Double App — a utility tool that enables users to duplicate installed apps and run multiple accounts of the same application side by side in completely independent, sandboxed environments on a single device.</p>
+  </div>
+
+  <div class="da-callout">
+    <div class="da-ico">♊</div>
+    <div>
+      <div class="da-title">Double App Creates Independent Duplicate Copies of Apps — Including Messaging, Social Media and Gaming Apps</div>
+      <div class="da-body">Double App is a mobile utility that allows users to create a second, fully functional duplicate of any installed app, running it as an independent instance with its own login session, data and notifications. While adults may use it to manage two separate work profiles or SIM-linked accounts, the same capability gives children a simple way to maintain a secondary hidden account on any app — completely invisible to standard parental monitoring tools that track only the original installation.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#059669;"></span> App Duplication</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Multi-Account</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B82F6;"></span> Isolated Space</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Parallel Run</div>
+    <div class="mode-chip"><span class="cdot" style="background:#8B5CF6;"></span> Hidden Data</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">
+      Double App is a mobile application that allows users to create <strong>duplicate copies of installed apps</strong>, enabling multiple accounts of the same app — such as messaging platforms, social networks or games — to run simultaneously in fully independent, isolated environments on one device.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--da-light);">📋</div>
+      <div>
+        <div class="feat-name">Creates a Complete, Functional Duplicate of Any Installed App</div>
+        <div class="feat-desc">Double App scans a device's installed applications and creates a mirrored, fully operational copy of any selected app. The duplicate version behaves identically to the original — it can be logged in with a completely different account, stores its own independent data, and sends and receives its own notifications. To the user, the duplicated app is indistinguishable from a separately downloaded application, appearing on the home screen like any other installed app.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">👤</div>
+      <div>
+        <div class="feat-name">Runs Two Separate Accounts of the Same App at the Same Time</div>
+        <div class="feat-desc">The core purpose of Double App is to allow two different accounts of the same application to be active simultaneously on one device. For messaging apps and social platforms, this means a child can maintain their primary account — the one parents are aware of — alongside a secondary account in the duplicated environment. Both accounts are independently active, receiving messages and notifications at the same time, but only one is visible to any monitoring tool pointed at the original app.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🧱</div>
+      <div>
+        <div class="feat-name">Each Duplicate Operates in a Fully Sandboxed, Isolated Environment</div>
+        <div class="feat-desc">Duplicated apps run inside a sandboxed container created and managed by Double App. All data — messages, media, contacts, browsing history and account credentials — is stored in this isolated environment, completely separate from the device's standard app storage. Standard parental control apps and device monitoring tools that inspect app data or track usage by app identity may not correctly detect activity occurring inside the duplicated environment, potentially logging it under an unfamiliar process name or not logging it at all.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🔔</div>
+      <div>
+        <div class="feat-name">Duplicate Apps Receive Their Own Independent Notifications</div>
+        <div class="feat-desc">Each duplicated app instance maintains its own notification channel, separate from the original. A child using a duplicated messaging app receives notifications for the hidden account independently — and can choose whether to display those notifications on the lock screen or silence them entirely, making the secondary account undetectable to a casual review of the device. A parent reviewing notification history will only see activity from the original account unless they specifically look for the duplicated instance.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Works Across Messaging, Social Media, Games and Most Major Apps</div>
+        <div class="feat-desc">Double App supports duplication of a wide range of applications — messaging platforms, social networks, video apps, gaming titles and most other mainstream apps a child is likely to use. The tool is not limited to any particular category and can duplicate most apps available through standard app stores without requiring any special device permissions or technical configuration. A child can set up a secondary account on any supported platform within a few minutes of installing Double App.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks arising from app duplication tools — including the creation of hidden secondary accounts, reduced parental oversight, the potential to circumvent monitoring systems, and the ease with which these tools can undermine a carefully managed digital environment.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🕵️</span>
+      <div class="rc-name">Hidden Secondary Accounts Outside a Parent's View</div>
+      <div class="rc-desc">Double App gives children a direct path to maintaining a second, fully active account on any messaging or social platform — one that operates entirely independently and leaves no trace in the original app's history or data</div>
+    </div>
+    <div class="risk-card c-teal">
+      <span class="rc-emoji">👁️</span>
+      <div class="rc-name">Reduced Visibility Into How Apps Are Really Used</div>
+      <div class="rc-desc">Screen time and usage monitoring tools typically track app activity by the original app's identity — a duplicated instance may register differently, causing time and activity in the secondary account to go unlogged or misattributed</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">May Bypass Parental Monitoring Systems</div>
+      <div class="rc-desc">Content filters, usage limits and activity alerts applied to the original app may not extend to its duplicated counterpart — a child using the duplicate version may be able to exceed screen time limits or access content blocked in the original</div>
+    </div>
+    <div class="risk-card c-purple">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Unmonitored Private Communication Channels</div>
+      <div class="rc-desc">A duplicated messaging app provides a fully functioning communication channel on a different account — all messages, contacts and media in the duplicated environment are completely invisible in the original app's history</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">📲</span>
+      <div class="rc-name">Accessible Without Any Technical Knowledge</div>
+      <div class="rc-desc">Double App is available through standard app stores and requires no rooting, sideloading or advanced configuration — any child capable of installing and opening an app can duplicate their social or messaging apps within minutes</div>
+    </div>
+    <div class="risk-card c-pink">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">Undermines Established Digital Boundaries</div>
+      <div class="rc-desc">Screen time limits, app restrictions and content filters applied to the original version of an app may not carry over to the duplicated instance — a child can use the duplicate to work around controls already in place on the primary app</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Double App Carries a Medium–High Risk Rating</strong>
+      <span>Though the tool has practical uses for adults managing multiple accounts, its core function — creating isolated, independent duplicate app environments — directly enables children to maintain hidden secondary accounts and circumvent parental visibility. It warrants careful consideration as part of any family's approach to digital safety.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🔎</div>
+    <div>
+      <div class="control-title">App Duplication Tools Install Like Any Other App and Do Not Require Special Device Access to Operate</div>
+      <div class="control-body">Double App installs through standard app stores with no elevated permissions, no root access and no sideloading. A child can find, download and configure it in a matter of minutes. Once installed, the tool may not be immediately recognisable among other apps — cloning utilities are often categorised as general productivity or utility tools and can easily blend into a device's app list. Parents carrying out regular reviews of their child's installed apps should be alert to unfamiliar utility apps whose function is not immediately obvious from their name or icon alone.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">App Duplication Tools Allow Multiple Independent Versions of the Same App to Run on One Device</div>
+        <div class="know-body">Double App creates a fully operational duplicate of any app that works as its own independent installation — with its own login, its own stored data and its own notification stream. A parent monitoring a child's primary account on a messaging platform sees only what happens in that account; activity in the duplicated environment is entirely separate. Both instances can be running simultaneously, and the child controls exactly which one is used and when — making standard account-level monitoring incomplete without awareness of the duplicate.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Use Duplication Tools to Maintain Additional Accounts That Parents Cannot Easily Track</div>
+        <div class="know-body">While Double App has legitimate convenience uses for adults, the same functionality provides a child who knows their primary account is being monitored with a direct way to maintain a secondary, hidden account that sits entirely outside that monitoring. The secondary account is fully functional — it can send and receive messages, post content and interact with other users exactly like the primary account, but without any of those activities being visible through oversight of the original app. Parents who have set up monitoring for specific accounts should be aware that a duplication tool renders single-account monitoring incomplete.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Finding a Duplication Tool on Your Child's Device Is a Starting Point for a Conversation, Not Just a Technical Fix</div>
+        <div class="know-body">If you discover Double App installed on your child's device, the most effective first step alongside applying restrictions is an open, calm conversation about which apps have been duplicated and why. Children are more likely to be honest when approached without immediate punishment. Understanding the motivation — whether peer influence, a desire for privacy or curiosity — will give you far more useful information than reviewing the device alone. Removing the tool without addressing the underlying reason is unlikely to be the end of the situation, as alternative tools or approaches may be found.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Technical Restrictions Work Best When Combined With Open, Ongoing Communication</div>
+        <div class="know-body">Blocking Double App removes one specific tool for creating hidden accounts, but a motivated child may look for other approaches — including other duplication utilities, secondary devices or accounts created on shared hardware. The most durable protection pairs consistent technical controls with a relationship in which children feel able to be open about their digital life. iLimits can help you apply and maintain those technical controls reliably; building the trust and communication that supports them is an equally important part of your family's long-term digital safety strategy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents clear, straightforward tools to block app duplication tools like Double App instantly — keeping your family's digital environment secure without needing any technical expertise.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block app duplication and multi-account tools by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar cloning utilities</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents remain fully in control of which apps are accessible on the device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Runs quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Double App as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to help protect your child from the risks of app duplication tools and hidden accounts, while fostering an open, honest approach to digital life that gives children the resilience to make good choices independently.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Encourage Open Discussions About Responsible Online Behaviour</div>
+        <div class="tip-body">Rather than simply applying restrictions without explanation, talk with your child about why transparency in their digital life matters and what the risks of hidden accounts actually look like in practice — not as abstract concerns, but as real situations involving privacy, safety and trust. Children who understand the reasoning behind restrictions are significantly more likely to make thoughtful choices independently than those who encounter rules without context. Create a household norm in which talking about what they encounter online is normal and welcome, not something that only happens after something has gone wrong. Make it clear that they can come to you with anything they have seen or experienced online without fear of immediate consequences.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🧠</div>
+      <div>
+        <div class="tip-name">Explain the Specific Risks of Hidden or Multiple Accounts in a Way That Resonates</div>
+        <div class="tip-body">Help your child understand in concrete terms what the risks of a hidden secondary account actually are — including the difficulty of getting help if something goes wrong on an account no trusted adult knows about, the way that online spaces without any adult awareness can become environments where peer pressure escalates quickly, and the longer-term consequences of things shared under an account no one knew they had. Older children and teenagers respond better to honest, direct explanations that treat them as capable of understanding risks than to broad prohibitions without detail. Explain that the goal of oversight is their safety and wellbeing, not surveillance for its own sake.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Control Tools to Manage Access to App Duplication Utilities</div>
+        <div class="tip-body">Apply iLimits restrictions to block Double App and similar duplication tools across every device your child uses, including shared family devices and tablets. Periodically audit your child's installed apps for utilities whose purpose is not immediately obvious — app cloning tools are often listed under generic categories and can look like ordinary productivity apps. Also review the primary social and messaging accounts your child uses to ensure you are aware of all the accounts on platforms they access regularly. Technical controls form the foundation of a well-managed digital environment; pairing them with the ongoing conversations described above gives your family the most complete and sustainable protection available.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Safe Digital Habits Begin With the Boundaries You Build Together</h3>
+    <p class="closing-body">
+      Protecting children from the risks that come with hidden accounts and unmonitored digital spaces is one of the most practical steps a parent can take as part of a thoughtful approach to family digital safety. iLimits gives you the tools to apply that protection technically and consistently — and the open, honest conversations you have with your child about why those boundaries exist give them the understanding and resilience to make good choices even when you are not there to intervene directly.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
