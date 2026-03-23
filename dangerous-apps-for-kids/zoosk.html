@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Zoosk – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Zoosk: cobalt-sapphire blue */
+    --zk:           #1D6EDB;
+    --zk-mid:       #1558B0;
+    --zk-deep:      #0A1F4A;
+    --zk-light:     #EFF6FF;
+    --zk-bdr:       #93C5FD;
+    --zk-text:      #0A1F4A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #020814 0%, #0A1F4A 50%, #0E2860 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(29,110,219,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,110,219,0.40) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(29,110,219,0.20);
+    border: 1px solid rgba(147,197,253,0.36);
+    color: #93C5FD; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0A1F4A 0%, #1D6EDB 55%, #60A5FA 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(29,110,219,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .zk-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--zk-light); border: 1.5px solid var(--zk-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .zk-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--zk-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .zk-title { font-size: 13px; font-weight: 700; color: var(--zk-text); line-height: 1.3; margin-bottom: 3px; }
+  .zk-body  { font-size: 12px; color: #1E40AF; font-weight: 400; line-height: 1.55; }
+
+  .mainstream-banner {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .mb-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .mb-title { font-size: 12.5px; font-weight: 700; color: #78350F; margin-bottom: 3px; line-height: 1.3; }
+  .mb-body  { font-size: 11.5px; color: var(--amber-text); font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before  { background: var(--rose); }
+  .risk-card.c-blue::before  { background: #1D6EDB; }
+  .risk-card.c-amber::before { background: #F59E0B; }
+  .risk-card.c-red::before   { background: #EF4444; }
+  .risk-card.c-sky::before   { background: #0EA5E9; }
+  .risk-card.c-slate::before { background: #64748B; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Mainstream note ── */
+  .mainstream-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--zk-light); border: 1.5px solid var(--zk-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .mn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--zk-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .mn-title { font-size: 13px; font-weight: 700; color: var(--zk-text); line-height: 1.3; margin-bottom: 3px; }
+  .mn-body  { font-size: 12px; color: #1E40AF; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #020814 0%, #0E2860 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,110,219,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: 0 2px 14px rgba(240,67,106,0.10); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card               { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid          { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card            { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box           { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip         { animation: fadeUp 0.42s ease 0.05s both; }
+  .zk-callout         { animation: fadeUp 0.42s ease 0.03s both; }
+  .mainstream-banner  { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip         { animation: fadeUp 0.42s ease 0.04s both; }
+  .mainstream-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing            { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">💙</div>
+        <div>
+          <div class="app-name-text">Zoosk</div>
+          <div class="app-sub">Adult Dating &amp; Matchmaking App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Adult Dating</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val high">🔴 High</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">A mainstream adult dating platform with no meaningful age verification — children who access it are placed in a pool of adults seeking romantic and sexual partners who have no reason to expect they are speaking with a minor</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Zoosk — one of the world's most widely used adult dating platforms, with tens of millions of registered users, a sophisticated matchmaking algorithm, and no meaningful age verification preventing a child from creating an account and being placed in a pool of adults seeking romantic and sexual partners.</p>
+  </div>
+
+  <div class="zk-callout">
+    <div class="zk-ico">💙</div>
+    <div>
+      <div class="zk-title">Zoosk Is a Major Adult Dating Platform — Children Who Create an Account Are Placed Among Adults Seeking Romantic and Sexual Partners With No Warning to Those Adults</div>
+      <div class="zk-body">Zoosk is one of the most established and widely used online dating platforms, with a large global user base of adults seeking romantic relationships and dates. A child who creates a Zoosk account by declaring a false age enters this adult dating pool directly — visible to and able to be matched with the platform's adult users. Those adults have joined Zoosk expecting to interact with other adults, and have no indication that any user they encounter may be a minor. The platform's mainstream status and large scale mean a child who creates an account is immediately reachable by a very large adult dating population.</div>
+    </div>
+  </div>
+
+  <div class="mainstream-banner">
+    <div class="mb-ico">⚠️</div>
+    <div>
+      <div class="mb-title">Mainstream Dating Platforms Are Not Safer for Children Than Niche Ones — Scale and Brand Recognition Do Not Reduce the Adult Contact Risk</div>
+      <div class="mb-body">Zoosk's mainstream reputation and large scale may make it appear less concerning than smaller or more niche dating platforms. This impression is incorrect from a child safety perspective: the same absence of meaningful age verification, the same adult user population seeking romantic and sexual partners, and the same matching and messaging features that create adult contact risk on niche dating apps are present on Zoosk at larger scale. The mainstream status of a dating platform does not make it appropriate for children.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1D6EDB;"></span> Adult Dating</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Matchmaking Algorithm</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> No Age Verification</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Large Adult User Pool</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Global Platform</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">Zoosk is a <strong>major adult dating platform</strong> with a large global user base, a behavioural matchmaking algorithm, and no meaningful age verification — placing children who create accounts in a pool of adults seeking romantic partners who have no reason to expect any user they encounter is a minor.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--zk-light);">❤️</div>
+      <div>
+        <div class="feat-name">Adult Dating Platform With Tens of Millions of Users</div>
+        <div class="feat-desc">Zoosk is one of the world's largest dating platforms, with a global user base of adults seeking romantic connections and dates. A child who creates a Zoosk account enters this adult dating pool at scale — their profile is visible to and matchable with the platform's entire adult user base. The platform's size means that a child is immediately reachable by a very large number of adults seeking romantic and sexual partners, making the adult contact risk proportionally larger than on smaller platforms.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🧠</div>
+      <div>
+        <div class="feat-name">Behavioural Matchmaking Algorithm — Actively Suggests Compatible Adults</div>
+        <div class="feat-desc">Zoosk uses a behavioural matchmaking algorithm — "SmartPick" — that learns from users' browsing and interaction behaviour to suggest increasingly compatible matches. For a child on the platform, this means the algorithm actively works to surface adult users who are likely to be interested in them based on their browsing patterns and profile. The algorithm is designed to improve matching over time, meaning a child who uses the platform for longer becomes increasingly embedded in match suggestions for adult users the algorithm identifies as interested.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">🚫</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification</div>
+        <div class="feat-desc">Zoosk has no meaningful age verification — a child can create an account by self-declaring their age as 18 or over, with no verification of that declaration. The platform requires email registration, which provides minimal accountability and is trivially satisfied with any email address. There is no identity check, no document verification, and no mechanism that prevents a minor from creating a Zoosk account and being placed in the adult dating matching pool.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">💬</div>
+      <div>
+        <div class="feat-name">Messaging Between Matched Users</div>
+        <div class="feat-desc">Zoosk enables direct messaging between users who have matched or shown mutual interest. For a child who has matched with adult users, this creates direct messaging channels with adults who are on a dating platform specifically seeking romantic partners. Adults who message a child through Zoosk have joined the platform expecting to communicate with other adults seeking relationships — they have no indication that any particular user may be a minor.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">📱</div>
+      <div>
+        <div class="feat-name">Social Features — Profile Visibility, Likes and Interactions</div>
+        <div class="feat-desc">Beyond direct messaging, Zoosk includes social interaction features — users can like profiles, send virtual gifts, and interact in various ways before or without formal matching. These features mean a child's profile is visible and interactive for the platform's adult user population, and that adults can express interest in a child's profile through platform features before any direct messaging begins. A child's presence on Zoosk is not passive — their profile is actively visible to the adult dating population.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Zoosk's risks for children are the same as for any adult dating platform — no meaningful age verification places them in a pool of adults seeking romantic partners — amplified by the platform's large scale and the active matchmaking algorithm that works to surface them to compatible adult users.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">❤️</span>
+      <div class="rc-name">Placed in Adult Dating Pool With No Age Check</div>
+      <div class="rc-desc">A child who creates a Zoosk account is immediately placed among tens of millions of adults seeking romantic partners — the platform's matchmaking algorithm actively works to surface them to adults it identifies as potentially compatible</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Meaningful Age Verification</div>
+      <div class="rc-desc">Self-declared age with no verification is Zoosk's only barrier to underage access — a child can join and be matched with adult users with a single false date-of-birth entry and any email address</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Active Algorithm Surfaces Child to Compatible Adults</div>
+      <div class="rc-desc">Zoosk's behavioural matchmaking algorithm actively works to find adults who are likely to be interested in the child's profile — the platform is not passive but actively facilitates adult-to-child connections based on compatibility signals</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Direct Messaging in an Adult Romantic Context</div>
+      <div class="rc-desc">Any message a child receives from a matched adult on Zoosk is in the framework of an adult seeking a romantic or dating relationship — adults have no indication they may be speaking with a minor</div>
+    </div>
+    <div class="risk-card c-sky">
+      <span class="rc-emoji">📈</span>
+      <div class="rc-name">Large Scale Amplifies the Adult Contact Risk</div>
+      <div class="rc-desc">Zoosk's tens of millions of users means a child's profile is potentially visible to and matchable with a very large adult population — the scale of the platform proportionally increases the likelihood of contact with adults</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Developmental Harm From Adult Romantic Context</div>
+      <div class="rc-desc">Exposure to an adult romantic dating context and adult users seeking partners is developmentally inappropriate for children regardless of whether direct harmful contact follows — the context itself is unsuitable at any age below adulthood</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Zoosk Carries a High Risk Rating</strong>
+      <span>Zoosk is a mainstream adult dating platform with no meaningful age verification — children who create accounts are placed in a large pool of adults seeking romantic and sexual partners who have no reason to expect they are interacting with a minor, with an active matchmaking algorithm working to surface them to compatible adults. It should be blocked on all devices accessible to children.</span>
+    </div>
+  </div>
+
+  <div class="mainstream-note">
+    <div class="mn-ico">⚠️</div>
+    <div>
+      <div class="mn-title">Zoosk's Mainstream Status Is Not a Safety Signal — Every Major Dating Platform Carries the Same Core Risk for Children</div>
+      <div class="mn-body">Tinder, Bumble, Hinge, Zoosk and other mainstream dating platforms all carry the same fundamental risk for children: adult users seeking romantic partners, no meaningful age verification, and a matching and messaging system that connects users whose intent is romantic or sexual. The mainstream profile of a dating app does not reduce this risk — it amplifies it through the larger scale of the adult user pool. All mainstream adult dating apps should be blocked on children's devices through category-level restrictions, not assessed individually based on brand recognition.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Mainstream Dating Platforms Carry the Same Risk as Niche Ones — Scale Makes It Larger, Not Smaller</div>
+        <div class="know-body">Parents who are familiar with concerns about specialist or niche dating apps may be less alert to the same risks on mainstream platforms like Zoosk. The core concern is identical: an adult dating pool, no meaningful age verification, and a matching system that connects a child with adults who are seeking romantic partners and believe they are interacting with other adults. Zoosk's mainstream status, large scale and established brand do not provide any additional protection for a child who creates an account — they simply mean the child is placed among a larger pool of adults, and that Zoosk's sophisticated matching algorithm works to surface them to adults it identifies as potentially interested. Mainstream dating apps deserve exactly the same level of concern as less well-known ones.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">A Child Who Found Zoosk Was Probably Curious About Online Dating — Address the App Specifically, Not Dating in General</div>
+        <div class="know-body">An older teenager who found their way to Zoosk was most likely motivated by curiosity about online dating — a normal developmental interest in relationships and how adults navigate them. The restriction of Zoosk is not a restriction on that interest, which is understandable and age-appropriate in general terms. The specific concern is being on an adult dating platform: a context where every adult they encounter is seeking a romantic or sexual partner, believes they are interacting with another adult, and is being actively matched with them by an algorithm. Keeping the conversation focused on why adult dating platforms specifically are not appropriate — rather than treating it as a general conversation about whether the child is allowed to date — produces the most useful outcome and avoids conflating two separate questions.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Check Whether an Account Was Created and Whether Any Contact Occurred Before Removing the App</div>
+        <div class="know-body">If Zoosk is found on a child's device, determine whether they have created an account and, if so, how active it has been — whether any profile was completed, whether any matches or interactions occurred, and whether any messages were exchanged. Review visible message history before removing the app. Adults who have matched and messaged the child on Zoosk have done so in the context of seeking a romantic partner, believing they were communicating with another adult. Approach the review calmly and the subsequent conversation in the same way as for other adult dating platforms: the child has accessed an adult context they should not have, and the conversation is about what the platform is for and why that context is not appropriate for them.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Category-Level Blocking Is the Right Approach — There Are Many Equivalent Adult Dating Platforms</div>
+        <div class="know-body">Zoosk is one of dozens of mainstream adult dating platforms a child could access — Tinder, Bumble, Hinge, Match, OkCupid and many others carry the same core risk. Blocking Zoosk individually without addressing the adult dating category leaves a child able to immediately access any of a large number of equivalent platforms. iLimits category-level blocking for adult dating apps addresses this comprehensively in a single restriction, covering Zoosk alongside all equivalent mainstream and specialist dating platforms without requiring each to be individually identified and blocked.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block Zoosk and the full adult dating app category — covering Zoosk alongside Tinder, Bumble, Feeld and equivalent platforms in a single category-level restriction.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block Zoosk and the adult dating app category with one tap</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Category restriction covers Zoosk, Tinder, Bumble, Feeld and equivalents together</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Zoosk as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for Zoosk — checking for account activity, having a calm direct conversation that addresses the adult dating context specifically, and applying category-level blocking that covers Zoosk alongside all equivalent platforms.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🔍</div>
+      <div>
+        <div class="tip-name">Check Whether an Account Was Created and Review Any Visible Activity</div>
+        <div class="tip-body">If Zoosk is found on a child's device, check whether they have created an account and, if so, whether the profile was completed and whether any matching or messaging has taken place. Review any visible message history in the app before removing it. Adults who have matched with or messaged the child have done so in the context of seeking a romantic partner on a dating platform, believing they were communicating with another adult. If any adult has made explicit, inappropriate or concerning contact, treat this with appropriate seriousness — in serious cases, platform reporting and, if warranted, law enforcement involvement may be appropriate. For most cases where a curious teenager created an account, the discovery warrants a calm conversation and restriction rather than alarm.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--zk-light); border-color: var(--zk-bdr);">💬</div>
+      <div>
+        <div class="tip-name">Have a Direct Conversation That Focuses on the Adult Dating Context — Not Dating in General</div>
+        <div class="tip-body">The conversation about Zoosk is most productive when it focuses specifically on what adult dating platforms are and why that context is not appropriate for children — rather than becoming a general conversation about whether the child is old enough to date. Explain clearly what Zoosk is for: adults seeking romantic and sexual partners. Explain that adults on the platform believe everyone they interact with is another adult seeking the same thing — and that a child on Zoosk is in a context where that assumption applies to everyone they encounter. This is a straightforward factual explanation that most teenagers can understand and engage with seriously. Keep the conversation calm and matter-of-fact — curiosity about dating and relationships is normal, and a child who found their way to Zoosk out of curiosity is not in a serious disciplinary situation, but the context they were accessing is one they should understand clearly.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Category-Level Blocking — Adult Dating Platforms Are Numerous and Interchangeable</div>
+        <div class="tip-body">Apply iLimits category-level restrictions to block the adult dating app category — this covers Zoosk alongside Tinder, Bumble, Hinge, Feeld, Match, OkCupid and equivalent platforms in a single restriction. A child who is blocked from Zoosk specifically can immediately access any of the many equivalent mainstream dating platforms without a category-level restriction in place. Enable Family Link's app installation approval to generate an alert before any adult dating app is installed in future. The adult dating category is large, well-established and unlikely to disappear — category-level blocking is the only approach that provides comprehensive and durable coverage without requiring each platform to be individually identified as it is encountered.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Mainstream Dating App Is Still an Adult Dating App — Scale and Brand Recognition Don't Change That</h3>
+    <p class="closing-body">
+      Zoosk is one of the world's most widely used dating platforms. That mainstream status does not make it appropriate for children — it means a child who creates an account is placed among a very large pool of adults seeking romantic partners, with an active algorithm working to surface them to compatible adult users. iLimits gives you the tools to block it and the entire adult dating category in one action. The conversation that explains clearly what Zoosk is for — calmly and without conflating it with a general conversation about dating — is the most useful response to finding it on a child's device.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
