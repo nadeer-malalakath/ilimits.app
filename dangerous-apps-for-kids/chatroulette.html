@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ChatRoulette – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* ChatRoulette: electric teal-turquoise */
+    --cr:           #0891B2;
+    --cr-mid:       #0E7490;
+    --cr-deep:      #083344;
+    --cr-light:     #ECFEFF;
+    --cr-bdr:       #67E8F9;
+    --cr-text:      #083344;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #010D10 0%, #083344 50%, #0A3D52 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(8,145,178,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(8,145,178,0.40) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(8,145,178,0.20);
+    border: 1px solid rgba(103,232,249,0.36);
+    color: #67E8F9; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #083344 0%, #0891B2 55%, #22D3EE 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(8,145,178,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .cr-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cr-light); border: 1.5px solid var(--cr-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .cr-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CFFAFE; border: 1.5px solid var(--cr-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .cr-title { font-size: 13px; font-weight: 700; color: var(--cr-text); line-height: 1.3; margin-bottom: 3px; }
+  .cr-body  { font-size: 12px; color: #0E7490; font-weight: 400; line-height: 1.55; }
+
+  .explicit-banner {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .eb-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E4; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .eb-title { font-size: 12.5px; font-weight: 700; color: #7F1D1D; margin-bottom: 3px; line-height: 1.3; }
+  .eb-body  { font-size: 11.5px; color: #991B1B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before  { background: var(--rose); }
+  .risk-card.c-cyan::before  { background: #0891B2; }
+  .risk-card.c-amber::before { background: #F59E0B; }
+  .risk-card.c-red::before   { background: #EF4444; }
+  .risk-card.c-blue::before  { background: #3B82F6; }
+  .risk-card.c-slate::before { background: #64748B; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Unpredictability note ── */
+  .unpredictable-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cr-light); border: 1.5px solid var(--cr-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .un-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CFFAFE; border: 1.5px solid var(--cr-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .un-title { font-size: 13px; font-weight: 700; color: var(--cr-text); line-height: 1.3; margin-bottom: 3px; }
+  .un-body  { font-size: 12px; color: #0E7490; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #010D10 0%, #0A3D52 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(8,145,178,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: 0 2px 14px rgba(240,67,106,0.10); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card               { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid          { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card            { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box           { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip         { animation: fadeUp 0.42s ease 0.05s both; }
+  .cr-callout         { animation: fadeUp 0.42s ease 0.03s both; }
+  .explicit-banner    { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip         { animation: fadeUp 0.42s ease 0.04s both; }
+  .unpredictable-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing            { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🎲</div>
+        <div>
+          <div class="app-name-text">ChatRoulette</div>
+          <div class="app-sub">Random Stranger Video Chat Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Random Video Chat</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val high">🔴 High</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Connects children with completely random anonymous strangers via live video — with no age verification, no identity checks, and a documented history of explicit and inappropriate content exposure on every session</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of ChatRoulette — a random video chat platform that connects users face-to-face with completely random anonymous strangers via live video, with no age verification, no identity checks, no content moderation before connection, and a well-documented history of explicit content exposure from its earliest days to the present.</p>
+  </div>
+
+  <div class="cr-callout">
+    <div class="cr-ico">🎲</div>
+    <div>
+      <div class="cr-title">ChatRoulette Connects Your Child Via Live Video to a Completely Random Anonymous Stranger — With No Way to Control or Predict Who That Stranger Is</div>
+      <div class="cr-body">ChatRoulette's entire function is connecting users to random strangers via live two-way video. A child who opens ChatRoulette is immediately placed in a live video call with an unknown person — no profile, no introduction, no screening. They see that person's live camera feed and that person sees theirs. The "roulette" design is that neither party has any information about or control over who they will be connected to next. The platform has no age verification, no identity checks, and no content filtering before connection — a child can be connected to any adult anywhere in the world within seconds of opening the platform.</div>
+    </div>
+  </div>
+
+  <div class="explicit-banner">
+    <div class="eb-ico">⚠️</div>
+    <div>
+      <div class="eb-title">ChatRoulette Has Been Associated With Explicit Content Exposure Since Its Launch in 2009 — This Is a Structural Feature of Random Video Chat, Not an Intermittent Problem</div>
+      <div class="eb-body">From its earliest days, ChatRoulette attracted widespread media attention for the frequency of explicit and inappropriate content — adults exposing themselves on camera to other users, including to users who were minors. This problem has been documented since 2010 and has persisted through various moderation attempts over more than fifteen years. The structural reason is that random anonymous video chat attracts users who specifically want the anonymity to display explicit content to strangers — this is not a side effect of the platform's use but a documented consequence of its design. A child using ChatRoulette faces a significant probability of being exposed to explicit content from an adult.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#0891B2;"></span> Random Video Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Anonymous Strangers</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> No Age Verification</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Explicit Content Risk</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Since 2009</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">ChatRoulette is a <strong>random anonymous video chat platform</strong> that connects users via live two-way video to completely random strangers — with no age verification, no identity checks, no pre-connection content filtering, and a documented history spanning over fifteen years of explicit content exposure affecting minors.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--cr-light);">🎲</div>
+      <div>
+        <div class="feat-name">Immediate Live Video Connection to a Random Anonymous Stranger</div>
+        <div class="feat-desc">ChatRoulette's core mechanism connects users via live two-way video to a random person from anywhere in the world — instantly, with no introduction, no profile, no identity verification. A child opening ChatRoulette is immediately in a live video call with an unknown adult. If they "skip" — disconnecting from one stranger — they are immediately connected to another random person. The platform is designed around the unpredictability of who will appear next, and that unpredictability means a child has no way to avoid connecting with adults who may display explicit content or attempt inappropriate contact.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🚫</div>
+      <div>
+        <div class="feat-name">No Age Verification — Any Child Can Access the Platform Immediately</div>
+        <div class="feat-desc">ChatRoulette has no age verification. Any child who navigates to the platform through a browser or opens the app is immediately on the platform and available for random video connections. There is no account, no registration, no date of birth entry, and no check of any kind. A child has full access to every feature of ChatRoulette — including being matched with any adult user on the platform — from the moment they open it, with no barrier of any kind.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">📷</div>
+      <div>
+        <div class="feat-name">Child's Own Camera Feed Is Visible to Strangers During Every Connection</div>
+        <div class="feat-desc">ChatRoulette is a two-way video platform — a child who connects is not just exposed to the stranger's video feed; their own camera feed is also live and visible to the stranger. This means that every random adult a child is connected to can see the child's face, environment, and anything visible through their camera in real time. An adult user who sees a child on ChatRoulette has the child's live camera feed visible and can screenshot or record it. The child's presence on the platform is not passive — they are visible to strangers throughout every session.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">⚠️</div>
+      <div>
+        <div class="feat-name">Documented History of Explicit Content Exposure Since 2009</div>
+        <div class="feat-desc">ChatRoulette's association with adults displaying explicit content to random strangers — including minors — has been documented since the platform launched in 2009. Multiple studies and media investigations have found high rates of explicit content in random connections. The platform has implemented moderation measures over the years, but the documented problem has persisted precisely because random anonymous video chat structurally attracts users who want to display explicit content to strangers under cover of anonymity. Moderation after the fact does not prevent a child from being exposed in the moment of connection.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Accessible Through a Browser — No App Required, No Account Needed</div>
+        <div class="feat-desc">ChatRoulette is primarily a web platform accessible through any browser — no app download, no account creation, no email address. A child can access it through a phone browser, a shared household computer, or a tablet in seconds, with no footprint that would indicate they have done so. Browser-based restrictions and network-level controls are necessary alongside app-level controls, because there is no installation trigger for Family Link to detect.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">ChatRoulette's risks centre on immediate exposure to random anonymous adults via live video — including explicit content, grooming attempts, and the child's own camera feed being visible to every stranger they connect with — with no age verification, no content filtering, and no barrier of any kind.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🎲</span>
+      <div class="rc-name">Immediate Live Video With Random Adults — No Screening</div>
+      <div class="rc-desc">Opening ChatRoulette places a child in immediate live two-way video with a random adult stranger — there is no introduction, no profile, no screening, and the child has no control over who they are connected to before the connection is live</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">⚠️</span>
+      <div class="rc-name">Documented High Rate of Explicit Content Exposure</div>
+      <div class="rc-desc">ChatRoulette's association with explicit content — adults displaying themselves on camera to random strangers including minors — has been documented for over fifteen years and persists through moderation attempts due to the platform's structural design</div>
+    </div>
+    <div class="risk-card c-cyan">
+      <span class="rc-emoji">📷</span>
+      <div class="rc-name">Child's Live Camera Feed Is Visible to Every Stranger</div>
+      <div class="rc-desc">ChatRoulette is two-way — a child's own camera feed is live and visible to every random adult they connect with, who can see their face and environment and may screenshot or record the feed without the child's knowledge</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Age Verification — Immediate Access for Any Child</div>
+      <div class="rc-desc">There is no age check of any kind — a child can access ChatRoulette through a browser immediately with no account, no registration, and no barrier, making it one of the most accessible harmful platforms available</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">Grooming Risk — Adults Can Attempt Contact With a Visible Child</div>
+      <div class="rc-desc">An adult user who sees a child on ChatRoulette has their live camera feed, can direct conversation at them, and — if the child does not immediately skip — can attempt to establish a rapport or extract personal information before connection is ended</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Browser-Based — No Installation Trigger, No Account Footprint</div>
+      <div class="rc-desc">ChatRoulette is primarily web-based — accessible through any browser with no app installation, no account, and no notification to Family Link — making it accessible via shared household devices and school networks without any visible footprint</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>ChatRoulette Carries a High Risk Rating</strong>
+      <span>ChatRoulette is one of the most directly harmful platforms for children in any category — it places a child in immediate live two-way video with random anonymous adults, exposes them to a documented high rate of explicit content, makes their own camera feed visible to every adult they encounter, and does so with no age verification, no content filtering, and no barrier of any kind. It should be blocked on all devices accessible to children and addressed through browser-level controls as well as app restrictions.</span>
+    </div>
+  </div>
+
+  <div class="unpredictable-note">
+    <div class="un-ico">🎲</div>
+    <div>
+      <div class="un-title">The "Roulette" Design Is Not Incidental — Unpredictability Is the Feature That Creates the Risk</div>
+      <div class="un-body">ChatRoulette's name reflects its design philosophy: random, unpredictable connections are the point. The same unpredictability that makes the platform novel is exactly what makes it dangerous for children — a child cannot screen, select, or avoid any particular type of user before the live video connection is already live. The inability to know who will appear next means there is no moment of informed consent before a child is face-to-face with an adult displaying explicit content, and no way to avoid it without being exposed first. Moderation that acts after a reported connection does not protect a child from being exposed in real time.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">ChatRoulette Is Different in Kind From Other Platforms in This Category — The Risk Is Immediate, Live, and Involves the Child's Own Camera</div>
+        <div class="know-body">Most platforms in this section carry risks that require time to materialise — a contact that develops over days, content that accumulates, a gradual process of exposure or grooming. ChatRoulette is different: the risk is immediate and present from the first second of use. A child who opens ChatRoulette is already in a live two-way video with an unknown adult before they have time to make any decision. They are visible to that adult in real time. If that adult displays explicit content, the exposure has already occurred before the child can skip. This immediacy makes ChatRoulette one of the most directly risky platforms a child can encounter — there is no gradual escalation to watch for, because the potential harm is present from the moment of first access.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">If Your Child Has Used ChatRoulette, Approach the Conversation About What They Experienced With Care</div>
+        <div class="know-body">A child who has used ChatRoulette may have been exposed to explicit content from an adult stranger — potentially in a single session. The appropriate response to this discovery is not alarm or blame but a calm, supportive conversation. Ask, gently and without judgement, what they encountered and how they felt about it. A child who encountered explicit content from a stranger through ChatRoulette may feel confused, embarrassed, or distressed — and may be reluctant to describe what they saw. Make clear immediately that they are not in trouble, that what happened was not their fault, and that you are asking because you want to make sure they are okay. If they describe being exposed to explicit content from an adult, validate their response and address any distress directly. The experience of being exposed to explicit content through a platform does not require elaborate follow-up action in most cases — but a child who appears significantly distressed about what they encountered may benefit from talking to a trusted professional.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">A Child Who Was Curious About ChatRoulette Was Probably Responding to Peer Awareness or Online Content About the Platform</div>
+        <div class="know-body">ChatRoulette has been referenced in online culture — YouTube videos, social media discussions, peer conversations — in a way that makes it known to teenagers who have never used it. A child who sought out ChatRoulette was probably responding to curiosity generated by hearing about the platform from peers or encountering references to it in content they watch. This motivation is understandable — the "random stranger" concept has an obvious novelty appeal — and the conversation about why ChatRoulette is specifically not appropriate for children is more useful than treating the curiosity as evidence of poor judgement. The explanation is straightforward: the novelty appeal is real, but the platform connects them with adults who include people specifically using it to display explicit content to whoever appears, and that exposure is immediate and unavoidable.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Browser-Level Controls Are Essential — ChatRoulette Is Accessible Without Installing Anything</div>
+        <div class="know-body">Because ChatRoulette is primarily a web platform, a child can access it through any browser on any device — including shared family computers, school devices, or a friend's phone — without installing an app or creating an account. Blocking the ChatRoulette app addresses the app store installation route, but not the browser access route. Parents who want to address ChatRoulette comprehensively should apply DNS-based web filtering that blocks the platform's domain, in addition to app-level restrictions through iLimits. Network-level DNS filtering on the home router extends this coverage to all devices on the household network, including shared computers and guest devices.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block ChatRoulette and similar random video chat platforms — protecting children from one of the most immediately harmful platforms available and complementing browser-level controls for comprehensive coverage.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block ChatRoulette and random stranger video chat apps by category</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Category restrictions cover ChatRoulette and equivalent random chat platforms</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which apps and platforms are accessible</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically — and Browser-Level Controls Are Also Needed</div>
+      <div class="note-body">iLimits identifies and flags apps like ChatRoulette as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines. Because ChatRoulette is primarily browser-based, applying iLimits restrictions alongside DNS-based web filtering at the router or device level provides the most complete coverage.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for ChatRoulette — including how to respond if a child has used the platform, how to apply both app-level and browser-level controls, and how to have a direct conversation about the specific and immediate nature of the risk.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Be Direct and Calm — Explain the Specific Immediate Risk in Plain Terms</div>
+        <div class="tip-body">The conversation about ChatRoulette does not require extensive context or nuanced framing — the risk is immediate and concrete and can be explained plainly. ChatRoulette connects whoever opens it to a random adult stranger via live video, immediately, with no screening. The platform has been documented for years to include users who specifically use it to display explicit content to whoever appears — including children. A child who uses ChatRoulette faces a significant probability of being shown explicit content by an adult before they have time to end the connection. Their own camera is also live throughout, meaning they are visible to every adult they connect with. This is a complete and accurate description of the risk, and most children and teenagers who understand it clearly will understand why the restriction is not arbitrary. If your child has already used ChatRoulette and encountered distressing content, address their emotional response first — ask how they are, make clear they are not in trouble, and validate whatever they experienced before discussing the restriction.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--cr-light); border-color: var(--cr-bdr);">🌐</div>
+      <div>
+        <div class="tip-name">Apply Both App-Level and Browser-Level Controls — ChatRoulette Is Primarily Web-Based</div>
+        <div class="tip-body">Apply iLimits restrictions to block ChatRoulette and similar random video chat apps on all of your child's devices. Also apply DNS-based web filtering to block the ChatRoulette domain at the network or device level — this addresses the browser-based access route that app restrictions alone do not cover. DNS filtering can be applied at the household router level, which extends coverage to all devices on the home network including shared computers, smart TVs and any device that connects to the household Wi-Fi. For a child who primarily uses a mobile device, device-level DNS filtering through a content filtering app or through the device's own DNS settings provides coverage on cellular networks as well as Wi-Fi. Enable Family Link's app installation approval as a complementary measure to catch any future installation of related apps before they succeed.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Address the Curiosity Directly — Help Your Child Understand What the Platform Actually Contains</div>
+        <div class="tip-body">A child who was curious about ChatRoulette was probably motivated by the novelty of random stranger connections — a concept that has obvious appeal before its implications are understood. The most useful part of the restriction conversation is explaining clearly what the platform actually contains in practice: not just random strangers in general, but a documented population of adult users who specifically use it to display explicit content to anonymous random viewers. The curiosity about random stranger connections is understandable; the specific reality of what ChatRoulette's random connections include is not — and the distinction between what the concept sounds like and what the platform delivers in practice is the most honest and useful explanation a parent can give. Help your child develop the habit of asking "what does this platform actually contain in practice?" before using a new platform — rather than accepting the concept at face value.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Risk on ChatRoulette Is Not Gradual — It Is There From the First Second</h3>
+    <p class="closing-body">
+      Most online risks develop over time — contact that builds, content that accumulates, patterns that emerge gradually. ChatRoulette is different: the exposure to random adults and the potential for explicit content is present from the moment a child opens the platform. There is no warning, no escalation, and no opportunity to make an informed decision before the live connection is already active. iLimits gives you the tools to block it at the app level; browser-level controls address the web access route. The conversation that explains clearly what ChatRoulette actually contains in practice — not the abstract concept of random video chat, but the documented reality of who uses it and what they do — gives your child the most complete understanding of why the restriction is appropriate.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
