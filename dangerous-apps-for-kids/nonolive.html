@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Nonolive – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Nonolive brand: vivid teal-blue */
+    --nn:           #1A6FC4;
+    --nn-mid:       #155BA0;
+    --nn-deep:      #0D3B6E;
+    --nn-light:     #F0F6FF;
+    --nn-bdr:       #93C5FD;
+    --nn-text:      #0D2E5A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #020D1C 0%, #061829 50%, #0A2240 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(26,111,196,0.42) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,111,196,0.38) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(26,111,196,0.18);
+    border: 1px solid rgba(26,111,196,0.32);
+    color: #93C5FD; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #020D1C 0%, #1A6FC4 55%, #60A5FA 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(26,111,196,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Nonolive callout ── */
+  .nn-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--nn-light); border: 1.5px solid var(--nn-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .nn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--nn-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .nn-title { font-size: 13px; font-weight: 700; color: var(--nn-text); line-height: 1.3; margin-bottom: 3px; }
+  .nn-body  { font-size: 12px; color: #0D3B6E; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--nn-light); border: 1.5px solid var(--nn-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--nn-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--nn-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #0D3B6E; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #020D1C 0%, #061829 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,111,196,0.32) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .nn-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain platforms may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📡</div>
+        <div>
+          <div class="app-name-text">Nonolive</div>
+          <div class="app-sub">Live Streaming Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Live Streaming &amp; Social</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Unmoderated live video, real-time stranger contact, sexually suggestive content and virtual gifting targeted at young users</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this platform instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Nonolive — a global live streaming application that allows any user to broadcast live video to a public audience and to receive real-time messages, virtual gifts and payments from viewers around the world, with content spanning gaming, entertainment and broadly sexualised "beauty" streams.</p>
+  </div>
+
+  <div class="nn-callout">
+    <div class="nn-ico">📡</div>
+    <div>
+      <div class="nn-title">Nonolive Combines Unmoderated Live Video, Real-Time Stranger Interaction and a Monetisation System Designed to Encourage Prolonged Engagement — None of Which Is Safe for Children Without Active Supervision</div>
+      <div class="nn-body">Nonolive is a global live streaming platform developed by DOYU HONGKONG LIMITED that brings together gaming streams, entertainment broadcasts and "beauty anchor" streams — a category the platform actively promotes and that is explicitly oriented around sexualised presentation of female broadcasters. The platform carries a High Maturity content rating on Google Play and is rated 17+ on the Apple App Store, yet provides no meaningful mechanism to prevent younger users from creating accounts, accessing content or interacting with adult broadcasters in real time. Virtual gifting features, unmoderated chat, and the ability for any user to broadcast live to a global audience create a layered set of risks that no self-declaration of age can adequately address.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1A6FC4;"></span> Gaming Streams</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Beauty Anchors</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D4AF37;"></span> Virtual Gifting</div>
+    <div class="mode-chip"><span class="cdot" style="background:#718096;"></span> Live Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Co-Streaming</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Nonolive is a <strong>live streaming and social broadcasting platform</strong> available as a free app on iOS and Android and accessible via any web browser. Its content spans gaming livestreams, entertainment shows and a prominent category of "beauty anchor" streams that the platform actively curates and promotes — featuring broadcasters described in the platform's own marketing as "exclusive star-show beauties" and "amateur beauties." The platform allows any registered user to broadcast live to a global public audience, to receive real-time messages from viewers, and to accept virtual gifts that translate into real monetary earnings for the broadcaster.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--nn-light);">🎮</div>
+      <div>
+        <div class="feat-name">Gaming Livestreams With Public Chat and No Pre-Moderation</div>
+        <div class="feat-desc">Nonolive was originally positioned primarily as a gaming livestream platform, hosting live broadcasts of games including League of Legends, PUBG, Arena of Valor and Minecraft. Gaming streams are open to the public and accompanied by unmoderated live chat rooms in which any registered viewer can post messages, share images and interact directly with the broadcaster and other viewers in real time. Because content goes out live without any pre-moderation, harmful content — including inappropriate comments, links and imagery — can appear in a child's view before any moderation action is taken.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💄</div>
+      <div>
+        <div class="feat-name">Prominently Promoted "Beauty Anchor" Category With Sexually Suggestive Content</div>
+        <div class="feat-desc">Alongside gaming, Nonolive prominently promotes a "beauty anchor" category of streams featuring female broadcasters in sexually suggestive presentations. The platform's own marketing materials describe this content using language that frames the broadcasters' attractiveness and availability for real-time interaction as the core product. This category is surfaced to users on the platform's main browse interface and is not separated from gaming content behind any age-verification or parental-control barrier. A child navigating the platform will encounter this content through normal browsing.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFFBF0;">🎁</div>
+      <div>
+        <div class="feat-name">Virtual Gift System That Enables Children to Send Real Money to Strangers</div>
+        <div class="feat-desc">Nonolive operates a virtual gifting system in which viewers purchase virtual coins and use them to send digital gifts to broadcasters during live streams. These gifts have real monetary value — broadcasters can convert accumulated gifts into cash. The system is designed to gamify financial interaction with broadcasters and to encourage viewers to spend money to gain recognition from their favourite streamers. Children with access to a parent's stored payment credentials, or with access to gift cards or digital payment methods, can send real money to adult strangers on the platform without any additional verification being required.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Real-Time Chat Rooms Connecting Children With Unknown Adults Globally</div>
+        <div class="feat-desc">Every Nonolive stream is accompanied by a live public chat room in which any registered user can communicate with the broadcaster and with other viewers in real time. Chat is global, entirely public and unmoderated before publication — meaning any comment, including inappropriate, sexual, predatory or harmful content, can reach a child viewer instantly. The platform also supports private messaging features that allow individual users to communicate one-to-one outside the broadcast context. Both the public chat room and private messaging represent direct channels through which unknown adults worldwide can contact a child using the platform.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">📲</div>
+      <div>
+        <div class="feat-name">One-Click Mobile Broadcasting to a Global Public Audience</div>
+        <div class="feat-desc">Nonolive supports one-click mobile broadcasting, meaning any user — including a child — can begin streaming live video of themselves to a global public audience in seconds from a smartphone. A child who creates an account on Nonolive can broadcast their face, their location, their home environment and their personal details to an unlimited number of unknown viewers worldwide, with no parental oversight, no broadcast delay and no moderation check before the stream goes live.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🔓</div>
+      <div>
+        <div class="feat-name">Age Gate Reliant on Self-Declaration With No Meaningful Verification</div>
+        <div class="feat-desc">Despite carrying a 17+ age rating on the Apple App Store and a High Maturity content rating on Google Play, Nonolive's account creation process relies on a self-declaration of birth date that any child can falsify in seconds. No identity verification, device verification or parental consent mechanism is required to create an account, access all categories of content or begin broadcasting live to a global audience. The platform's official age rating represents the minimum age it is considered suitable for — not a barrier that prevents younger users from accessing it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from unmoderated real-time interaction with strangers, exposure to sexually suggestive broadcast content, the absence of meaningful age verification, live broadcasting features that expose children to global audiences, and a monetisation system designed to encourage ongoing financial engagement.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🎥</span>
+      <div class="rc-name">Unmoderated Live Content Viewable in Real Time</div>
+      <div class="rc-desc">Live broadcasts cannot be reviewed before they reach viewers — harmful, sexual or violent content can appear on screen before any moderation action is taken, with no editing or delay between broadcast and reception by a child viewer</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Real-Time Contact With Unknown Adults Worldwide</div>
+      <div class="rc-desc">Public chat rooms and private messaging on every stream create direct communication channels between children and unknown adult users globally, including individuals who may seek to exploit or groom young viewers</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💄</span>
+      <div class="rc-name">Sexually Suggestive Content in Mainline Browse</div>
+      <div class="rc-desc">The platform's prominently promoted "beauty anchor" category features sexually suggestive presentations that are displayed on the platform's main browse interface alongside gaming content, accessible to any user without any age barrier</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎁</span>
+      <div class="rc-name">Virtual Gifting Enables Real Money Transfers to Strangers</div>
+      <div class="rc-desc">The platform's coin-and-gift monetisation system is designed to encourage viewers to spend real money sending virtual gifts to broadcasters, with no additional verification required when using stored payment credentials on a device</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Broadcasting Exposes Children to Global Audiences</div>
+      <div class="rc-desc">Children can begin broadcasting live video of themselves to unlimited global audiences in seconds with one tap, inadvertently sharing their face, location, home environment and personal details with unknown viewers</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">No Meaningful Age Verification on Account Creation</div>
+      <div class="rc-desc">Account creation requires only a falsifiable birth date, with no identity verification, parental consent or device check — a child can create an account and access all content categories in minutes regardless of the platform's stated 17+ age rating</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Nonolive Carries a High Risk Rating Across Multiple Dimensions</strong>
+      <span>The combination of unmoderated live content, real-time stranger interaction, sexually suggestive broadcasts displayed in mainline browse, one-tap child broadcasting to global audiences, and a monetisation system that facilitates real financial transfers to unknown adults makes Nonolive unsuitable for children at any age without active parental supervision. The platform's own 17+ rating reflects this — but does not prevent access by younger users.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🌐</div>
+    <div>
+      <div class="control-title">Nonolive Is Accessible Both as an App and Through Any Web Browser — App Removal Alone Does Not Block Access</div>
+      <div class="control-body">Nonolive can be accessed through its website on any browser on any internet-connected device, in addition to its iOS and Android apps. Removing the app from a child's phone does not prevent the child from accessing the platform through a phone browser, a tablet browser or a shared family computer. Effective restriction requires controls applied at both the app level and the browser and network level across every device a child can use. iLimits provides controls that address this broader access vector — not just individual app installations.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Gaming Platforms Are Not Safe by Default — Content and Interaction Features Create Significant Risks Regardless of the Gaming Context</div>
+        <div class="know-body">Parents may associate Nonolive primarily with gaming — a category they may perceive as lower risk than explicit entertainment platforms — but the platform's gaming content exists alongside and on the same interface as explicitly sexualised "beauty anchor" streams, with no separation between them. The real-time interaction features that accompany every stream, including public chat rooms, private messaging and virtual gifting, create risk regardless of the category of content a child is watching. A child accessing Nonolive to watch a gaming stream is simultaneously exposed to the platform's other content categories and to its full range of interaction features.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Platform's Virtual Gifting System Is Designed to Encourage Ongoing Financial Engagement — Stored Payment Credentials on Shared Devices Create Direct Financial Risk</div>
+        <div class="know-body">Nonolive's coin and virtual gift system is a core part of the platform's design, and it is specifically engineered to make sending money to broadcasters feel like a social and status-conferring activity rather than a financial transaction. Children who become engaged with the platform's community may feel social pressure to send gifts to broadcasters they follow. Any stored payment method on a shared device — including saved card details, Apple Pay, Google Pay or stored app store credentials — provides a child with the means to make real financial transfers through the platform without requiring any additional authentication that would notify a parent.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Live Broadcasting Features Mean Children Can Expose Themselves to Global Audiences Without Realising the Full Implications</div>
+        <div class="know-body">Nonolive's one-click mobile broadcasting feature enables any user to begin streaming live video to a global public audience instantly. Children and teenagers may not fully appreciate that going live on the platform means their face, voice, location environment and any identifying information visible in their room or their stream is immediately available to an unlimited number of unknown viewers worldwide, including individuals who may record the stream for distribution on other platforms. Anything broadcast live cannot be retracted once it has been viewed or recorded by others. Parents should ensure children understand that Nonolive's broadcasting feature is not equivalent to a private video call.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Comprehensive Restriction Across All Devices and Browsers Is More Effective Than Removing the App From a Single Device</div>
+        <div class="know-body">Because Nonolive is accessible through any web browser as well as through its dedicated apps, removing the app from a child's phone provides only partial protection. Children can reach the platform through a phone browser, a tablet, a shared family computer or any other internet-connected device. Effective restriction requires controls applied consistently at the browser and network level across all of a child's devices — not only on the device from which the app was removed. Parents who have removed the app may believe access is blocked when in fact the platform remains fully reachable through a browser on the same device. iLimits provides the controls necessary to address this.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block live streaming platforms like Nonolive instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block live streaming platforms and related websites by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar live streaming and social platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which apps or platforms are accessible on every device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like Nonolive as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from the risks of unmoderated live streaming platforms and build a foundation of open conversation about safe online interaction, the permanence of live broadcast content, and responsible digital habits.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk Openly With Children About the Risks of Real-Time Interaction With Strangers Online</div>
+        <div class="tip-body">Children who use live streaming platforms need to understand that the people they are interacting with in real-time chat rooms are unknown adults, not peers, and that the apparent friendliness of a chat interaction does not make it safe. Age-appropriate conversation about why unknown adults might seek out contact with children online — including direct discussion of online grooming — equips children to recognise warning signs and to come to a parent if something feels wrong. Equally important is ensuring children understand that anything they broadcast live can be recorded by viewers and shared anywhere on the internet, permanently, without their knowledge or consent. These conversations do not need to be alarming — they should be calm, honest, and framed around giving the child the knowledge they need to stay safe.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🌱</div>
+      <div>
+        <div class="tip-name">Establish Clear Household Rules About Live Streaming, Broadcasting and Online Financial Transactions</div>
+        <div class="tip-body">Set explicit household norms around live streaming: which platforms are permitted, whether broadcasting live is something your child is allowed to do, and what kinds of chat interaction are appropriate. The virtual gifting features on platforms like Nonolive deserve specific conversation — children should understand that sending gifts sends real money to strangers, and that the platform is designed to make this feel normal and desirable. Review all payment methods stored on devices your child uses and consider removing or password-protecting them to prevent unauthorised purchases. Children who are given a clear understanding of the financial reality behind virtual gifting are significantly less likely to make uninformed purchases through these systems.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Control Tools to Restrict Access to Live Streaming Platforms Across All Devices and Browsers</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child can access — including tablets, secondary phones and shared family computers — and ensure that browser-level restrictions are in place on all of these devices, not only app-level controls. Because Nonolive is accessible through any web browser, app removal alone is not sufficient. Review stored payment credentials on all shared devices and consider enabling password requirements on any payment method accessible through an app store. Combine technical controls with the open conversations described above — restriction and communication together provide the most complete and durable protection available to your family.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Safe Digital Environment Begins With the Boundaries You Set at Home</h3>
+    <p class="closing-body">
+      Protecting children from the risks of unmoderated live streaming and real-time stranger interaction is one of the most important and achievable steps any parent can take as part of their family's approach to digital safety. iLimits gives you the tools to enforce that protection technically — and the open, honest conversations you have with your child about why those boundaries exist give them the understanding and resilience to stay safe even when you are not there to intervene directly.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
