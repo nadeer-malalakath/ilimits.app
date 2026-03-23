@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Hot or Not – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Hot or Not: vivid hot-pink magenta */
+    --hn:           #DB2777;
+    --hn-mid:       #BE185D;
+    --hn-deep:      #500724;
+    --hn-light:     #FDF2F8;
+    --hn-bdr:       #F9A8D4;
+    --hn-text:      #500724;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0209 0%, #3D0618 50%, #500724 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(219,39,119,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(219,39,119,0.42) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(219,39,119,0.20);
+    border: 1px solid rgba(249,168,212,0.36);
+    color: #F9A8D4; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #500724 0%, #DB2777 55%, #F472B6 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(219,39,119,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .hn-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--hn-light); border: 1.5px solid var(--hn-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .hn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FCE7F3; border: 1.5px solid var(--hn-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .hn-title { font-size: 13px; font-weight: 700; color: var(--hn-text); line-height: 1.3; margin-bottom: 3px; }
+  .hn-body  { font-size: 12px; color: #831843; font-weight: 400; line-height: 1.55; }
+
+  .rating-banner {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .rb-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E4; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .rb-title { font-size: 12.5px; font-weight: 700; color: #7F1D1D; margin-bottom: 3px; line-height: 1.3; }
+  .rb-body  { font-size: 11.5px; color: #991B1B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before  { background: var(--rose); }
+  .risk-card.c-pink::before  { background: #DB2777; }
+  .risk-card.c-amber::before { background: #F59E0B; }
+  .risk-card.c-red::before   { background: #EF4444; }
+  .risk-card.c-blue::before  { background: #3B82F6; }
+  .risk-card.c-slate::before { background: #64748B; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Appearance rating note ── */
+  .appearance-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--hn-light); border: 1.5px solid var(--hn-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .an-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FCE7F3; border: 1.5px solid var(--hn-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .an-title { font-size: 13px; font-weight: 700; color: var(--hn-text); line-height: 1.3; margin-bottom: 3px; }
+  .an-body  { font-size: 12px; color: #831843; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0209 0%, #500724 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(219,39,119,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: 0 2px 14px rgba(240,67,106,0.10); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card             { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid        { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card          { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box         { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip       { animation: fadeUp 0.42s ease 0.05s both; }
+  .hn-callout       { animation: fadeUp 0.42s ease 0.03s both; }
+  .rating-banner    { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip       { animation: fadeUp 0.42s ease 0.04s both; }
+  .appearance-note  { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing          { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔥</div>
+        <div>
+          <div class="app-name-text">Hot or Not</div>
+          <div class="app-sub">Appearance Rating &amp; Dating App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Social / Dating</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val high">🔴 High</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">An appearance-rating and dating app where strangers rate photos of children based on physical attractiveness, and where adult strangers can initiate contact — combining body image harm from public appearance scoring with adult stranger contact risk</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Hot or Not — a social and dating app built around appearance rating, where users rate strangers' photos as attractive or not, and where the ratings engine is paired with dating and messaging features that connect children with unknown adults who have seen and rated their photos.</p>
+  </div>
+
+  <div class="hn-callout">
+    <div class="hn-ico">🔥</div>
+    <div>
+      <div class="hn-title">Hot or Not Asks Strangers to Rate a Child's Physical Appearance — and Then Connects Them With Adults Who Found Them Attractive</div>
+      <div class="hn-body">Hot or Not's core mechanism is appearance rating: users swipe or vote on photos of other users to indicate whether they find them physically attractive. For a child on the platform, this means their photo is being rated by unknown adults based on physical attractiveness. The dating and social features then surface matches — people who rated each other positively — creating a mechanism by which an adult who rated a child's photo as attractive is surfaced as a potential connection. This combination of public appearance scoring and adult-to-child attraction-based matching is the specific concern the platform creates for children.</div>
+    </div>
+  </div>
+
+  <div class="rating-banner">
+    <div class="rb-ico">⭐</div>
+    <div>
+      <div class="rb-title">Hot or Not Has Been Identified as Inappropriate for Children in Multiple Child Safety Reports — Its Design Is Adult-Oriented but Accessible to Minors</div>
+      <div class="rb-body">Hot or Not's appearance-rating and dating design is intended for adult use, and the platform has been specifically identified in child safety contexts as inappropriate for minors due to the combination of adult stranger contact, appearance-based rating of photographs, and minimal age verification. Children who use the platform have their appearance rated by the adult user population and are exposed to the same dating-oriented contact features that the adult population uses.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#DB2777;"></span> Appearance Rating</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Dating Features</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> Adult Stranger Contact</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Body Image Harm</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> No Age Verification</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">Hot or Not is an <strong>appearance-rating and dating social app</strong> where strangers rate photos based on physical attractiveness and dating-oriented features connect users who rated each other positively — designed for adults but accessible to children, with no meaningful age verification and a core mechanism that invites unknown adults to publicly evaluate a child's physical appearance.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--hn-light);">⭐</div>
+      <div>
+        <div class="feat-name">Appearance Rating — Strangers Score Photos on Physical Attractiveness</div>
+        <div class="feat-desc">Hot or Not's defining feature is asking users to rate other users' photos as physically attractive or not — the original "hot or not" concept. For a child who creates a profile, their photos are submitted to this rating mechanism and evaluated by the platform's adult user population based on physical attractiveness. The rating is public within the platform and quantified as a score. This places a child's physical appearance under systematic evaluation by unknown adults who are explicitly assessing them as sexually attractive or not.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💑</div>
+      <div>
+        <div class="feat-name">Dating and Matching Features — Adults Who Rated a Child Positively Are Connected as Potential Matches</div>
+        <div class="feat-desc">Hot or Not's dating layer connects users who rated each other positively — surfacing them as matches and enabling messaging between them. For a child on the platform, this means adults who evaluated their photo as physically attractive are surfaced as potential connections. The matching mechanism specifically creates a pathway from an adult rating a child's appearance positively to being connected with that child as a dating match. This is the specific grooming pathway the platform creates: adult attraction to a child's photo, followed by a platform-facilitated connection with that child.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">🚫</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification — Adults and Children Mixed in the Same Rating Pool</div>
+        <div class="feat-desc">Hot or Not has no meaningful age verification. A child can create a profile with self-declared age and be immediately placed in the same rating pool as the adult user population. Adults rating photos have no reliable indication of which users are minors and which are adults. A child's photo is rated by the general adult population of the platform, and the matching features that follow operate regardless of the age gap between the child and the adults who rated them positively.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">🧠</div>
+      <div>
+        <div class="feat-name">Body Image and Self-Worth Impact — Quantified Appearance Scoring by Strangers</div>
+        <div class="feat-desc">Beyond the adult contact risk, Hot or Not's core rating mechanism creates a specific and documented body image harm pathway: submitting one's physical appearance for public numerical scoring by strangers. For adolescents — who are at a developmental stage where identity and self-image are particularly vulnerable — receiving quantified ratings of physical attractiveness from unknown adults has been associated with significant body image distress, increased self-consciousness about appearance, and harm to self-esteem. This harm pathway is present regardless of whether any direct adult contact follows.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">💬</div>
+      <div>
+        <div class="feat-name">Direct Messaging Between Matched Users</div>
+        <div class="feat-desc">Hot or Not enables direct messaging between users who have been matched through mutual positive ratings. For a child who has been rated positively by an adult and has reciprocated — whether deliberately or incidentally through the platform's swiping mechanism — this creates a private messaging channel with that adult. The messaging feature completes the pathway from appearance rating to direct private contact between an adult who found a child attractive and the child themselves.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Hot or Not carries two distinct risk pathways: the body image and self-worth harm from public appearance rating by unknown adults, and the adult grooming contact risk from the dating features that connect children with adults who found their photo attractive.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">⭐</span>
+      <div class="rc-name">Public Appearance Rating by Unknown Adults</div>
+      <div class="rc-desc">A child's photos are rated on physical attractiveness by the adult user population — placing their appearance under systematic public evaluation by unknown adults who are explicitly assessing them as sexually attractive or not</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">💑</span>
+      <div class="rc-name">Adult Grooming Pathway — Attraction-Based Matching</div>
+      <div class="rc-desc">Hot or Not's matching mechanism connects adults who rated a child's photo positively with that child as a potential dating match — creating a platform-facilitated pathway from adult attraction to a child's appearance to direct private contact with that child</div>
+    </div>
+    <div class="risk-card c-pink">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Body Image and Self-Esteem Harm</div>
+      <div class="rc-desc">Quantified appearance scoring by strangers is specifically associated with body image distress and harm to self-esteem in adolescents — this harm pathway is present regardless of whether direct adult contact follows the rating</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Meaningful Age Verification</div>
+      <div class="rc-desc">Children are placed in the same rating pool and matching system as the adult user population with no effective age check — adults rating photos have no reliable indication of which users are minors</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Direct Messaging With Adults Who Rated the Child</div>
+      <div class="rc-desc">Matching creates a private messaging channel between the child and adults who evaluated their appearance positively — completing the pathway from public appearance rating to private adult-to-child contact</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">📸</span>
+      <div class="rc-name">Photos Submitted to Unknown Adults for Evaluation</div>
+      <div class="rc-desc">Creating a Hot or Not profile means submitting a child's photos to be viewed and rated by an unknown pool of adults — the photos are visible to and evaluated by the platform's general adult user population before any contact is initiated</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Hot or Not Carries a High Risk Rating</strong>
+      <span>Hot or Not presents two distinct and serious risks for children — a body image harm pathway from public appearance rating by unknown adults, and a grooming contact pathway from the dating features that connect adults attracted to a child's photo with that child. The combination of these two risks, with no meaningful age verification, makes it one of the most directly harmful social apps for adolescents.</span>
+    </div>
+  </div>
+
+  <div class="appearance-note">
+    <div class="an-ico">🧠</div>
+    <div>
+      <div class="an-title">The Body Image Risk Is Separate From the Adult Contact Risk — Both Are Present Simultaneously</div>
+      <div class="an-body">Most apps in this section carry a single primary risk type. Hot or Not carries two simultaneously: the harm that comes from having one's physical appearance publicly rated by unknown adults (documented body image and self-esteem impacts, particularly in adolescents), and the harm that comes from those same adults being connected as potential dating matches. A child who never receives an explicit message from an adult has still had their appearance scored by adult strangers in a sexual attractiveness context. Both dimensions of the risk warrant addressing in any conversation about the app.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Hot or Not Has Two Distinct Harm Pathways — Address Both in the Conversation</div>
+        <div class="know-body">Hot or Not is different from most other platforms in this section because its risk is not only about who contacts the child but about what the platform does to a child's self-perception before any contact occurs. The appearance-rating mechanism specifically invites unknown adults to publicly evaluate a child's physical attractiveness in a sexual context — submitting to this rating is harmful to body image and self-esteem regardless of what happens next. The dating features then add the adult contact risk on top. Both dimensions are real and both are worth addressing in conversation. A child who used Hot or Not has experienced having their appearance rated by adult strangers as sexually attractive or not — that experience deserves to be addressed directly and supportively, separate from the conversation about the adult contact risk.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">A Child Who Used Hot or Not Was Probably Seeking Validation of Their Appearance — the Motivation Is Normal, the Platform Is the Problem</div>
+        <div class="know-body">The appeal of Hot or Not is direct: it offers the possibility of finding out whether strangers find you physically attractive. This desire — to know how one's appearance is perceived — is completely normal and understandable in adolescence. The problem is that the platform delivers this in a way that is specifically designed for adult sexual evaluation, administered by an adult dating population, and connected to dating-oriented features that can lead to adult contact. A child who used Hot or Not was responding to a normal developmental desire in a context that exploits that desire in a harmful way. Understanding this motivation is important for having a conversation that is empathetic rather than punitive, and that addresses the underlying need (validation of appearance and social acceptance) while explaining why this specific platform is not a safe way to meet it.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Be Aware of the Body Image Impact — Ask How the Experience Affected Your Child</div>
+        <div class="know-body">If a child has been using Hot or Not, the quantified appearance ratings they received — high or low — may have had a significant emotional impact. A child who received low ratings may have experienced significant distress about their appearance; a child who received high ratings may have experienced a kind of attention from adults that felt flattering but is inappropriate. Either outcome has implications for how the child is processing the experience, and both deserve a supportive, direct conversation. Ask how the ratings made them feel, whether the experience changed how they think about their appearance, and whether any contact with other users has taken place. The conversation should be supportive and curiosity-led rather than interrogative.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Check for Any Contacts Made Through the App Before Removing It</div>
+        <div class="know-body">If Hot or Not is found on a child's device and has been actively used, review the app for any messaging contacts before removing it. The matching and messaging features may have led to direct contact with adult users — review any conversation history visible in the app and check who the child is connected to. Adults who made contact through Hot or Not based on appearance ratings may have also requested to continue contact through other platforms — check the child's other messaging apps and social accounts for any contacts that don't belong to their known social circle and that may have originated through Hot or Not. Approach this review calmly and the subsequent conversation supportively.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block Hot or Not and similar appearance-rating and dating social apps — protecting children from both the body image harm of public appearance scoring and the adult contact risk of dating-oriented matching.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block Hot or Not and appearance-rating dating apps by category</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Restricted categories cover similar rating and adult dating platforms</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Hot or Not as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for Hot or Not — addressing both risk dimensions in conversation, how to approach the body image impact specifically, and how to check for adult contacts before applying restrictions.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Address Both Risk Dimensions — Body Image First, Adult Contact Second</div>
+        <div class="tip-body">The most important conversation about Hot or Not has two distinct parts, and starting with body image rather than adult contact is more likely to be productive. Begin by asking directly and supportively how the experience of having their appearance rated made them feel — whether the ratings were high, low or mixed, this is the emotional experience the child has had, and it deserves to be addressed on its own terms. Validate whatever they felt without amplifying or dismissing it. Then move to the adult contact dimension: explain that the rating feature is used by an adult dating population assessing people as potential romantic or sexual contacts, that the platform connects adults who rated them positively as potential matches, and that an adult who chose to contact them through a dating app built around physical attractiveness did so in a context that is specifically not appropriate for children. Both parts of the conversation should be calm, supportive and treat the child as capable of understanding the implications.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--hn-light); border-color: var(--hn-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Review Contacts and Messages in the App Before Removing It — Then Check Other Platforms</div>
+        <div class="tip-body">Before removing Hot or Not from the device, review any visible message history and contact connections in the app. Adults who matched with the child based on appearance ratings may have initiated contact — check the conversations and note any usernames or contact information for adults who made inappropriate advances or who requested contact through other platforms. After reviewing Hot or Not, check the child's other messaging apps and social accounts for contacts that do not belong to their known social circle and that may have been introduced through Hot or Not. An adult who used Hot or Not's dating features to make contact with a child may have requested to continue the relationship through a different messaging platform — follow the contact trail across all platforms before concluding the investigation.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply iLimits Restrictions and Address the Underlying Desire for Appearance Validation Directly</div>
+        <div class="tip-body">Apply iLimits restrictions to block Hot or Not and similar appearance-rating and dating apps across all of your child's devices. Enable Family Link's app installation approval to generate alerts for future installation attempts. Separately, the most durable protection after the restriction is addressing the underlying desire that led to Hot or Not — the completely normal adolescent need to understand how one's appearance is perceived. Help your child understand that ratings from unknown adults in a dating context are not a meaningful reflection of their worth or attractiveness, and that the people most qualified to offer genuine feedback about their character and appearance are people who actually know them. A child who has a clear and realistic relationship with their own worth and appearance is significantly more resilient to the specific type of exploitation that Hot or Not enables.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Having Your Appearance Rated by Adult Strangers Is Harmful — Being Matched With Them Afterwards Makes It Worse</h3>
+    <p class="closing-body">
+      Hot or Not creates two distinct harms simultaneously: the impact of having one's physical appearance publicly scored by unknown adults in a sexual attractiveness context, and the adult contact risk from the dating features that follow. iLimits gives you the tools to block it. The conversation that addresses both — starting with how the experience of being rated made your child feel, then explaining why the adult population rating them is a dating audience — is the most honest and complete basis for the restriction.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
