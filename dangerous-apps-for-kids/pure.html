@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Pure – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Pure: deep charcoal-black with crimson accent */
+    --pu:           #1A1A1A;
+    --pu-mid:       #111111;
+    --pu-deep:      #050505;
+    --pu-light:     #F5F5F5;
+    --pu-bdr:       #D4D4D4;
+    --pu-text:      #111111;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --charcoal-bg:  #F5F5F5;
+    --charcoal-bdr: #D4D4D4;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --violet-bg:    #F5F3FF;
+    --violet-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #050505 0%, #0F0F0F 50%, #181818 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(240,67,106,0.38) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.30) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(240,67,106,0.18);
+    border: 1px solid rgba(240,67,106,0.36);
+    color: #FF9DB5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+    word-break: break-word;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #050505 0%, #1A1A1A 50%, #333333 100%);
+    border: 2px solid rgba(240,67,106,0.50);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(240,67,106,0.40), 0 0 0 1px rgba(255,255,255,0.08);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.06); border-radius: 16px 16px 0 0;
+  }
+  .app-top-text { flex: 1; min-width: 0; }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val {
+    font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-inner { flex: 1; min-width: 0; }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid); font-weight: 400;
+    margin-top: 5px; line-height: 1.65;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Pure callout ── */
+  .pu-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .pu-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E8; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pu-callout-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .pu-title { font-size: 13px; font-weight: 700; color: #881337; line-height: 1.3; margin-bottom: 3px; }
+  .pu-body  { font-size: 12px; color: #9F1239; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ── Adult dating badge ── */
+  .adult-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--charcoal-bg); border: 1.5px solid var(--charcoal-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .adult-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #E5E5E5; border: 1.5px solid var(--charcoal-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .adult-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .adult-text strong { font-size: 12.5px; font-weight: 700; color: #111111; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .adult-text span   { font-size: 11.5px; color: #374151; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Feature rows ── */
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; display: block; overflow-wrap: break-word; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+    word-break: break-word;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; overflow-wrap: break-word; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; overflow-wrap: break-word; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E8; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .control-title { font-size: 13px; font-weight: 700; color: #881337; line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #9F1239; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ══ WHAT PARENTS SHOULD KNOW ══ */
+  .know-row {
+    display: flex; align-items: flex-start;
+    gap: 0; padding: 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num-wrap { padding: 18px 0 18px 18px; flex-shrink: 0; }
+  .know-num {
+    width: 32px; height: 32px; min-width: 32px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .know-text {
+    flex: 1; min-width: 0;
+    padding: 18px 18px 18px 14px;
+    overflow-wrap: break-word; word-break: break-word;
+  }
+  .know-title {
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    line-height: 1.4; margin-bottom: 7px; display: block; overflow-wrap: break-word;
+  }
+  .know-body {
+    font-size: 12.5px; color: var(--ink-mid); font-weight: 400;
+    line-height: 1.65; display: block; overflow-wrap: break-word; word-break: break-word;
+  }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #050505 0%, #111111 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; overflow-wrap: break-word; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; flex: 1; min-width: 0; overflow-wrap: break-word; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; overflow-wrap: break-word; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; display: block; overflow-wrap: break-word; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; overflow-wrap: break-word; word-break: break-word; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔥</div>
+        <div class="app-top-text">
+          <div class="app-name-text">Pure</div>
+          <div class="app-sub">Adult Hookup &amp; Casual Dating App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Adult Dating / Hookup Platform</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">An adult hookup and casual sex platform explicitly designed for anonymous sexual encounters, with explicit content in its feed, no meaningful age verification, and a design philosophy of radical anonymity and message auto-deletion — placing it firmly in the adult entertainment category with no legitimate use case for any child</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div class="rf-inner">
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Pure and adult hookup platforms from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Pure — an adult-only hookup platform explicitly designed to facilitate anonymous casual sexual encounters, featuring explicit user-generated content in its feed, radical anonymity for its users, automatic message deletion after one hour, and no meaningful age verification — a platform whose entire purpose and content environment are explicitly adult sexual in nature and entirely inappropriate for any child.</p>
+  </div>
+
+  <div class="pu-callout">
+    <div class="pu-ico">🔥</div>
+    <div class="pu-callout-text">
+      <div class="pu-title">Pure Is an Adult Hookup Platform — Its Entire Purpose and Content Environment Are Explicitly Sexual and Entirely Inappropriate for Children of Any Age</div>
+      <div class="pu-body">Pure is an app explicitly designed for adults seeking casual sexual encounters. Unlike dating apps such as Tinder or Bumble that include a range of relationship intentions, Pure's stated purpose is anonymous hookups — its marketing, its content environment, and its design features all reflect an adult sexual audience. The app's general feed contains explicit user-generated content including sexual images and videos that are visible without any meaningful age verification. Conversations auto-delete after one hour, leaving no record. The platform's radical anonymity design is specifically intended to facilitate sexual encounters without social consequences — a design intent that has no appropriate application in a child's hands and whose content environment would expose a child to explicit sexual material from first access.</div>
+    </div>
+  </div>
+
+  <div class="adult-band">
+    <div class="adult-icon">🔞</div>
+    <div class="adult-text">
+      <strong>An Explicitly Adult Hookup Platform — No Appropriate Use Case for Any Child</strong>
+      <span>Pure is not a general social or dating app that carries incidental adult risks — it is a platform designed entirely around adult sexual encounters, whose content, features, and design intent are explicitly sexual and have no appropriate use for anyone under 18.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1A1A1A;"></span> Hookup Platform</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Explicit Content</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D4D4D4;"></span> No Age Check</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Auto-Delete Msgs</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Radical Anonymity</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Pure is an <strong>adult hookup platform with explicit content</strong> whose entire purpose is facilitating casual sexual encounters. It is not a social platform with incidental adult risks — it is a platform designed for adult sexual use whose content environment, anonymity features, and automatic message deletion make it entirely inappropriate for any child.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--red-bg);">🔥</div>
+      <div class="feat-text">
+        <div class="feat-name">Explicitly Designed for Anonymous Adult Sexual Encounters</div>
+        <div class="feat-desc">Pure's stated and marketed purpose is facilitating anonymous casual sexual encounters between adults. Its marketing materials, app store descriptions, and design features all explicitly describe this purpose. Unlike Tinder or Bumble, which accommodate a range of intentions from casual to serious relationships, Pure's product proposition is specifically and exclusively sexual connection — it is positioned in the adult entertainment and hookup space rather than the general dating app space. This explicit purpose means that the platform's content, user base, and intended interactions are all oriented around adult sexual activity.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔞</div>
+      <div class="feat-text">
+        <div class="feat-name">Explicit Sexual Content Visible in the General Feed Without Meaningful Age Verification</div>
+        <div class="feat-desc">Pure's general content feed contains explicit sexual images and videos posted by users. This explicit content is accessible without any meaningful age verification — the platform requires self-declared age at account creation without any identity check. A child who accesses Pure is immediately exposed to explicit sexual content in the general feed before any interaction takes place. The explicit content is not an edge case or a moderation failure — it reflects the platform's adult sexual design intent and its user base, who are present specifically for the sexual content and encounter facilitation the platform provides.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--charcoal-bg);">⏱️</div>
+      <div class="feat-text">
+        <div class="feat-name">Messages Auto-Delete After One Hour — No Record of Any Interaction</div>
+        <div class="feat-desc">Pure automatically deletes all messages after one hour — a design feature specifically intended to ensure no record of any interaction or communication remains after the encounter facilitation is complete. This auto-deletion is built into the platform's design as a core feature serving its adult hookup purpose: radical anonymity for all parties. For a child who accesses Pure, the auto-deletion means that any contact, any explicit content received, and any communication that occurred through the platform leaves no accessible record after one hour — making even retrospective review of what occurred on the platform impossible.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">👤</div>
+      <div class="feat-text">
+        <div class="feat-name">Radical Anonymity — No Social Identity Attached to Any Account or Interaction</div>
+        <div class="feat-desc">Pure's design philosophy centres on radical anonymity — no social identity is required, no real name is verified, and interactions are designed to be consequence-free within the platform's adult sexual context. An adult user of Pure can interact with other users without revealing any verifiable identity. In a child's hands, this radical anonymity means that adults on the platform can interact with a child without any identity attached to those interactions, and that the child's own identity and location are similarly unprotected in a platform environment specifically designed for adults seeking sexual encounters.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">📍</div>
+      <div class="feat-text">
+        <div class="feat-name">Location-Based Matching — Adults Can Identify Nearby Users</div>
+        <div class="feat-desc">Pure uses location-based matching to connect users in the same geographic area — a feature designed for its adult hookup purpose that, in the context of a child using the platform, means that adults seeking sexual encounters can identify that they are physically near a child who is on the platform. The combination of explicit sexual intent, anonymity, location proximity, and no age verification creates conditions where a child on Pure is physically accessible to adults on the platform whose intentions are explicitly sexual.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Pure's risks are among the most direct in this entire document — the platform is explicitly designed for adult sexual encounters, exposes users to explicit sexual content from first access, facilitates contact with adults seeking sexual connections in the user's physical location, and leaves no record of any interaction after one hour.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Explicit Sexual Content From First Access</div>
+      <div class="rc-desc">The general feed contains explicit sexual content accessible without age verification — a child is exposed to adult sexual material from the moment they access the platform, before any account creation or interaction</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔥</span>
+      <div class="rc-name">Platform Designed for Adult Sexual Encounters</div>
+      <div class="rc-desc">Pure's entire purpose is facilitating adult casual sex — its content, user base, and design features all reflect an adult sexual context that has no appropriate application for any child of any age</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Location-Based Matching With Adults Seeking Sex</div>
+      <div class="rc-desc">Location-based matching designed for adult hookup encounters means adults seeking sexual connections can identify a child as physically nearby — combining explicit sexual intent with physical location in a platform with no meaningful age verification</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">⏱️</span>
+      <div class="rc-name">All Messages Auto-Delete After One Hour</div>
+      <div class="rc-desc">Automatic message deletion after one hour means no record of any interaction, communication, or explicit content received through the platform is accessible after that time — making retrospective review of what occurred impossible</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">Radical Anonymity — No Identity Verification</div>
+      <div class="rc-desc">No real identity is verified for any user — adults can contact a child without any verifiable identity, and the child's own identity and location are exposed in an adult sexual platform without any protection</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">No Meaningful Age Verification</div>
+      <div class="rc-desc">Age is self-declared at account creation with no identity check — a child can access the full Pure platform and its explicit content and adult user base without any verification of their age</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Pure Carries the Highest Risk Rating — An Adult Sexual Platform With No Appropriate Use Case for Any Child</strong>
+      <span>Pure is one of a small number of platforms in this document — alongside Shagle — where the risk is not about specific features of a general platform creating parental oversight challenges, but about a platform that was designed entirely for adult use and whose content environment, user intent, and design features are explicitly sexual. There is no version of Pure's use by a child that is appropriate. The platform's purpose is adult sexual encounters; its content reflects that purpose; and the combination of location-based matching, radical anonymity, and no age verification creates conditions that are directly dangerous to any child who accesses it.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🔥</div>
+    <div class="control-text">
+      <div class="control-title">Pure Is in the Same Category as Shagle — A Platform Designed for Adults That Children Have No Business Accessing, Not a General Platform With Incidental Risks</div>
+      <div class="control-body">The distinction made in Shagle's page applies equally here: most platforms in this document are general-audience tools that carry specific parental oversight risks — Telegram has Secret Chats, Signal has end-to-end encryption, Voxer has voice-format monitoring gaps. Pure is not a general-audience platform — it is an adult sexual platform whose entire design, content, and user intent reflect its adult hookup purpose. A child who accesses Pure is not accessing a general social platform that happens to carry some adult risk; they are accessing a platform built for adult sexual encounters, exposing themselves to explicit content and adults whose explicit intention is sexual connection. The restriction is not about a specific feature — it is about the platform as a whole.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">1</div></div>
+      <div class="know-text">
+        <div class="know-title">Pure Is an Adult Hookup App — There Is No Ambiguity About What the Platform Is or Who It Is For</div>
+        <div class="know-body">Unlike most platforms in this document where the parental concern involves specific features of a generally useful app, Pure has no ambiguity about what it is. It is an adult hookup platform — its marketing, its app store description, its content, and its user base all explicitly reflect its adult sexual purpose. A child who has Pure installed has accessed an app whose purpose and content are explicitly adult sexual in nature. The conversation with the child about Pure does not require the nuance needed for Telegram or Signal — there is no legitimate use case for Pure by anyone under 18, and the conversation can be direct and clear about what the platform is and why it is not appropriate.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">2</div></div>
+      <div class="know-text">
+        <div class="know-title">The One-Hour Message Auto-Deletion Means There May Be No Record of What Occurred — Act Promptly When the App Is Found</div>
+        <div class="know-body">Pure's one-hour message auto-deletion means that any conversations, explicit content received, or contact that occurred through the platform leaves no accessible record after one hour. If Pure is found on a child's device, open the app promptly — before the one-hour deletion window has passed for any recent interactions — to see what contacts have been made and what communication has occurred. Unlike other apps where historical review is possible regardless of when the discovery is made, Pure's auto-deletion means the window for reviewing recent interactions is narrow. After reviewing what is visible, delete the account and the app and apply the iLimits restriction immediately.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">3</div></div>
+      <div class="know-text">
+        <div class="know-title">A Child Who Has Pure May Have Encountered Explicit Content and Adult Contact — The Conversation Should Create Space for Disclosure</div>
+        <div class="know-body">A child who has accessed Pure may have been exposed to explicit sexual content and may have received contact from adults on the platform whose intentions are explicitly sexual. The conversation with the child should create space for the child to disclose what they encountered and what contact they have had, without the parental response being so reactive that the child feels unable to be honest. Understanding what the child has experienced — how they found Pure, how long they have had it, whether they have had conversations with other users, and whether any of those conversations were concerning — is important both for the child's immediate safety and for determining whether any more immediate response is warranted. If there is any indication of contact with adults seeking sexual encounters, this situation may warrant reporting to appropriate child safety authorities.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">4</div></div>
+      <div class="know-text">
+        <div class="know-title">Delete the Account, Not Just the App — And Consider Whether Immediate Safeguarding Action Is Warranted</div>
+        <div class="know-body">As with Tellonym and Sarahah, deleting the Pure app from the device does not delete the account — the account remains active and can be accessed from any browser or by reinstalling the app. Delete the Pure account through the account settings within the app before or alongside removing the app from the device. After deleting the account and the app and applying the iLimits restriction, consider carefully whether the circumstances of the child's Pure use — particularly whether they have had contact with adults seeking sexual encounters, whether they have shared their location or identifying information with any such contact, or whether any planned in-person meeting has been discussed — require a safeguarding response beyond the restriction and conversation. If there is any indication of contact with adults with sexual intentions toward the child, involving child safety professionals or law enforcement may be the appropriate next step rather than only the parental restriction and conversation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Pure and adult hookup platforms — preventing any access to a platform whose entire purpose, content, and user base are explicitly adult sexual and entirely inappropriate for children.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Pure and adult hookup platforms with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar adult dating and hookup apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents exposure to explicit content and adult sexual contact attempts</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged adult platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div class="note-text">
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Pure as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. If Pure is found on your child's device, <strong>open the app promptly to review any contacts before the one-hour message deletion window closes</strong>, delete both the account and the app, and consider carefully whether the circumstances require a safeguarding response beyond restriction. <strong>This is one of the highest-priority restrictions available.</strong></div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps reflecting Pure's specific and serious profile — acting promptly given the one-hour message deletion, having a direct conversation that creates space for disclosure, and considering whether the circumstances require a safeguarding response beyond the restriction.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div class="tip-text">
+        <div class="tip-name">Be Direct — But Create Space for the Child to Disclose What They Experienced</div>
+        <div class="tip-body">A conversation about Pure does not require the nuance of the Telegram or Signal conversations — there is no legitimate use case for Pure by a child, and the conversation can be direct and clear about what Pure is and why it is restricted. However, directness about the restriction should not prevent creating space for the child to disclose what they encountered on the platform. A child who has been exposed to explicit sexual content, or who has been contacted by an adult with sexual intentions, needs to be able to disclose that to a parent — and the parental response in the opening moments of the conversation determines whether the child will. Lead with calm and with questions rather than with reaction: how did you find this app, how long have you had it, did anyone message you. The child's answers give the parent the information needed to assess whether the situation requires a response beyond the conversation and restriction.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div class="tip-text">
+        <div class="tip-name">Open the App Promptly, Review What Is Visible, Then Delete the Account Before Removing the App</div>
+        <div class="tip-body">Act promptly when Pure is found — the one-hour message auto-deletion means recent conversations are only visible within the first hour after they occurred. Open Pure on the child's device and review the conversation list for any contacts and any content that is still within the deletion window. Note the usernames or identifiers of any contacts who have messaged the child, and the content of any conversations still visible. Also check the profile the child has created — what information has been shared, including any photos or location details. After reviewing, navigate to the account settings to delete the Pure account entirely before removing the app — account deletion closes the profile and prevents further contact from any users who may have already identified the child on the platform. Then remove the app and apply the iLimits restriction.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div class="tip-text">
+        <div class="tip-name">Apply the Restriction — and Assess Whether a Safeguarding Response Is Warranted</div>
+        <div class="tip-body">Apply the iLimits restriction to block Pure and the category of adult hookup platforms on your child's device. After applying the restriction, assess carefully whether the circumstances of the child's Pure use require a response beyond the parental conversation and restriction. If any conversation reviewed in the app suggested an adult was seeking to meet the child in person, if the child shared their location or identifying details with any contact, or if the child is younger and any contact is particularly concerning, involving child safety professionals or law enforcement may be the appropriate next step. The restriction closes the immediate access; the account deletion removes the child's profile from the platform; but if concerning contact has already been established, those steps alone may not be sufficient. Child safety concerns arising from adult contact on a hookup platform are exactly the kind of situation where seeking professional guidance — from school safeguarding staff, a child protection helpline, or law enforcement — is appropriate rather than managing the situation entirely within the family.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">An Adult Platform Is Not a Platform With Adult Risks — It Is a Platform That Should Not Be on a Child's Device at All</h3>
+    <p class="closing-body">
+      Pure was designed for adults seeking casual sexual encounters. Its content, its user base, and its design features all reflect that purpose without ambiguity. A child who has it has accessed explicit sexual content and may have been contacted by adults whose intentions are explicitly sexual. iLimits blocks the app. The account deletion removes the profile. The conversation creates space for disclosure. And when the circumstances warrant it, the appropriate response goes beyond what any app restriction can achieve — because some situations require professional safeguarding support, not only parental action.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
