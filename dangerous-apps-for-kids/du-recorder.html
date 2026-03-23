@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DU Recorder – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* DU Recorder brand: vivid electric blue */
+    --du:           #1D6FD8;
+    --du-mid:       #1558B0;
+    --du-deep:      #0C3470;
+    --du-light:     #EFF6FF;
+    --du-bdr:       #93C5FD;
+    --du-text:      #0C2A5C;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #93C5FD;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --violet-bg:    #F5F3FF;
+    --violet-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #030A18 0%, #071428 50%, #0C1E3C 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(29,111,216,0.48) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(147,197,253,0.26) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(29,111,216,0.20);
+    border: 1px solid rgba(147,197,253,0.35);
+    color: #93C5FD; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #030A18 0%, #1D6FD8 58%, #60A5FA 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(29,111,216,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium { color: #FDE68A; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── DU callout ── */
+  .du-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--du-light); border: 1.5px solid var(--du-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .du-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--du-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .du-title { font-size: 13px; font-weight: 700; color: var(--du-text); line-height: 1.3; margin-bottom: 3px; }
+  .du-body  { font-size: 12px; color: #0C2A5C; font-weight: 400; line-height: 1.55; }
+
+  /* ── Live stream badge ── */
+  .live-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .live-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E8; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .live-text strong { font-size: 12.5px; font-weight: 700; color: #881337; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .live-text span   { font-size: 11.5px; color: #9F1239; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFAF0; border: 1.5px solid #FBD38D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEEBCB; border: 1.5px solid #FBD38D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #744210; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5A3110; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--du-light); border: 1.5px solid var(--du-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DBEAFE; border: 1.5px solid var(--du-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--du-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #0C2A5C; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #030A18 0%, #071428 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,111,216,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📹</div>
+        <div>
+          <div class="app-name-text">DU Recorder</div>
+          <div class="app-sub">Screen Recorder &amp; Live Streaming</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Screen Recording / Livestream</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟡 Medium</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables live streaming of the device screen directly to public platforms without the safety features or parental controls of those platforms' native apps, and can capture and share any on-screen content including messages, passwords, and private information</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block screen recording and live streaming tools from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of DU Recorder — a widely used screen recording and live streaming app that can record or broadcast everything visible on a device's screen in real time, including the ability to stream directly to public platforms from within the app — introducing risks around unintended content exposure, live streaming without platform safety controls, and the capture of private on-screen information.</p>
+  </div>
+
+  <div class="du-callout">
+    <div class="du-ico">📹</div>
+    <div>
+      <div class="du-title">DU Recorder Captures and Can Broadcast Everything on a Device Screen — Including Live Streaming to Public Platforms Without the Safety Controls of Those Platforms' Native Apps</div>
+      <div class="du-body">DU Recorder is a feature-rich screen recording application that can record the full device screen including audio, and can live stream the screen's content directly to platforms such as YouTube Live, Facebook Live, and Twitch from within the app. The ability to broadcast live from a phone screen — including any app, any content, any conversation — introduces risks that are distinct from ordinary social media or messaging use. A child can stream their screen in real time to a public or semi-public audience without the age verification, content moderation, or parental control features that those platforms' native streaming apps apply. The screen recording capability also means that any on-screen content — including messages, passwords, notifications, and personal information — can be captured and shared without the knowledge of anyone whose information appears on screen.</div>
+    </div>
+  </div>
+
+  <div class="live-band">
+    <div class="live-icon">🔴</div>
+    <div class="live-text">
+      <strong>Live Streaming Without Platform Safety Controls — Public Broadcast From a Child's Screen</strong>
+      <span>DU Recorder can stream a child's screen live to public platforms without the age verification, content moderation, and parental approval features that those platforms apply to streaming through their own native apps.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1D6FD8;"></span> Screen Recording</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Live Streaming</div>
+    <div class="mode-chip"><span class="cdot" style="background:#93C5FD;"></span> Public Broadcast</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> No Age Check</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Any On-Screen Content</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      DU Recorder is a <strong>screen recording and live streaming tool</strong> that can capture everything visible on the device screen and broadcast it live to public platforms. Its risks for children centre on unmoderated live streaming, the bypass of platform age and safety controls, and the capture and potential sharing of any private or sensitive content that appears on screen.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--du-light);">🎬</div>
+      <div>
+        <div class="feat-name">Records the Full Device Screen Including Any App, Any Content, Any Conversation</div>
+        <div class="feat-desc">DU Recorder can record everything visible on the device's screen — any app, any message, any content, any notification that appears during the recording session. This includes messaging conversations, social media content, browsing sessions, games, calls, and any other on-screen activity. Recordings are saved to the device's storage and can be shared directly from the app. A child can use DU Recorder to capture and share content from any app on the device — including content from other people's accounts, private messages, or sensitive information visible on screen — without requiring any special permissions from the people whose information is being captured.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔴</div>
+      <div>
+        <div class="feat-name">Live Streaming to Public Platforms Without Platform Safety Controls</div>
+        <div class="feat-desc">DU Recorder can stream the device screen live to YouTube Live, Facebook Live, Twitch, and other platforms directly from within the app. When streaming through DU Recorder rather than a platform's native streaming app, a child can bypass the age verification, content moderation setup, account eligibility requirements, and parental control features that those platforms apply to streaming through their own apps. A child who is too young to meet a platform's live streaming eligibility requirements — or whose parent has restricted live streaming through that platform's own parental controls — can circumvent those restrictions by streaming through DU Recorder instead.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Broadcasts to a Public or Semi-Public Audience in Real Time</div>
+        <div class="feat-desc">Live streaming through DU Recorder sends the device screen to a public or semi-public audience in real time — the stream can be seen by anyone who finds or is directed to it on the receiving platform. A child streaming their screen live is broadcasting their location, their home environment, their conversations, their gaming activity, or whatever is on their screen to an audience whose size and composition they may not fully understand. The real-time nature of live streaming means there is no opportunity to review or edit what is shared before it is seen by viewers — and stream recordings may persist on the receiving platform after the live session ends.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🔑</div>
+      <div>
+        <div class="feat-name">Can Capture Passwords, Messages, and Private Information Appearing On Screen</div>
+        <div class="feat-desc">Because DU Recorder captures the full device screen, it can record any content that appears on that screen during a session — including passwords entered in visible fields, notification content from messaging apps, account details, personal photographs, and any other sensitive or private information that appears on the device display. If a recording made with DU Recorder is shared — whether deliberately or accidentally — any sensitive information visible during the recorded session is included in the shared content. This risk applies both to a child who makes recordings of their own device and to anyone who uses DU Recorder on a device they share with others.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--violet-bg);">🎙️</div>
+      <div>
+        <div class="feat-name">Audio Recording Including Device Microphone — Captures Conversations in the Environment</div>
+        <div class="feat-desc">DU Recorder can record audio alongside the screen capture, including audio from the device's microphone. This means a recording session captures not only what is visible on screen but also conversations and ambient sound occurring in the child's physical environment during the recording. Live streaming with microphone audio enabled broadcasts both the screen content and the surrounding audio environment to the live audience in real time. A child streaming from their home, bedroom, or school environment with microphone audio enabled may inadvertently broadcast conversations, personal information spoken aloud, or identifiable environmental audio to a public audience.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">DU Recorder's risks are distinct from the bypass and concealment tools that dominate this category — its risks relate to unintended public exposure, the bypass of platform streaming safety controls, the capture of private information, and the potential for content shared in real time to be seen by strangers before it can be reviewed or retracted.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔴</span>
+      <div class="rc-name">Live Streaming Without Age or Safety Controls</div>
+      <div class="rc-desc">DU Recorder bypasses the age verification and parental control features that streaming platforms apply through their own native apps — a child can stream live to a public audience without meeting the platform's eligibility requirements</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Real-Time Public Broadcast of the Screen</div>
+      <div class="rc-desc">Live streaming broadcasts the child's screen — including their environment, conversations, and location signals — to a potentially unknown audience in real time, with no opportunity to review or edit what is shared before viewers see it</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔑</span>
+      <div class="rc-name">Captures Passwords and Private Information On Screen</div>
+      <div class="rc-desc">Full-screen recording captures any sensitive content visible on the device during the session — passwords entered in visible fields, private messages, notification content, and personal information — which may be shared if the recording is distributed</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎙️</span>
+      <div class="rc-name">Microphone Audio Captures the Physical Environment</div>
+      <div class="rc-desc">Microphone recording captures conversations and ambient sound in the child's physical environment during a recording or live stream — potentially broadcasting private conversations or location-identifiable audio to a public audience</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📵</span>
+      <div class="rc-name">Can Record Other People's Private Screens Without Consent</div>
+      <div class="rc-desc">On shared devices, DU Recorder can capture the screen activity of other household members — including their messages, browsing history, accounts, and personal information — without their knowledge or consent</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💾</span>
+      <div class="rc-name">Recordings Saved and Shareable From the App</div>
+      <div class="rc-desc">Screen recordings are saved to the device and can be shared directly from DU Recorder — a child can capture and distribute content from any app on the device, including content from messaging apps or other sources, without any further steps</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>DU Recorder Carries a Medium Risk Rating — Distinct From Bypass Tools, Focused on Exposure and Sharing Risks</strong>
+      <span>DU Recorder's medium rating reflects that it is a different category of risk from the bypass and concealment tools that make up the majority of this series. It does not bypass content filters or hide browsing history — its risks centre on unintended content exposure through live streaming, the bypass of platform streaming safety controls, and the capture and potential sharing of private on-screen information. These risks are real but more contextual — they depend on how the app is used rather than being intrinsic to its mere presence on the device.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">📹</div>
+    <div>
+      <div class="control-title">The Live Streaming Capability Is the Most Significant Risk — It Bypasses Platform Streaming Controls and Broadcasts in Real Time to a Public Audience Without Review</div>
+      <div class="control-body">Screen recording as a function has many legitimate uses — capturing gameplay, creating tutorials, documenting issues for technical support. The specific risk that elevates DU Recorder's concern for families is its live streaming capability — the ability to broadcast the device screen in real time to a public audience on major platforms without the age verification and content moderation requirements those platforms apply to streaming through their own native apps. A child using DU Recorder to live stream is operating in a streaming environment without the safety guardrails of the native platform experience, broadcasting to an audience of unknown size and composition, in real time, with no ability to review what is being shared before it is seen.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">DU Recorder Is a Legitimate Productivity Tool With Genuine Uses — Its Restriction Relates to Specific Capabilities, Not the App as a Whole</div>
+        <div class="know-body">Screen recording is a genuinely useful capability — used by teachers, content creators, technical support users, gamers, and many others for entirely benign purposes. DU Recorder is a well-made app with a legitimate user base and real utility. Parents should understand that its restriction relates specifically to its live streaming capability and the screen-wide capture of sensitive information — not to screen recording as a concept. A family may decide that screen recording without the live streaming function is acceptable for their child, or may determine that the specific risks of DU Recorder make restriction appropriate for their family's situation. iLimits gives parents the information to make this call on their own terms rather than applying a one-size restriction automatically.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Live Streaming Bypasses the Age and Safety Controls That Platforms Apply to Their Own Native Streaming Apps</div>
+        <div class="know-body">Streaming platforms including YouTube and Facebook apply age eligibility requirements and content moderation configurations when a user streams through those platforms' own native apps or dashboards. These requirements include minimum age thresholds for live streaming, account eligibility criteria, and in some cases default safety settings for younger accounts. When a child streams through DU Recorder rather than the platform's own streaming interface, these eligibility checks and safety configurations do not apply in the same way — the stream is initiated from the recording app rather than from the platform's own interface, and the platform's age-specific streaming restrictions may not be enforced through this route. Parents who have relied on platform-level streaming controls to limit their child's live streaming activity should be aware that DU Recorder provides a pathway around those controls.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Screen Recordings Can Capture Sensitive Information From Any App on the Device</div>
+        <div class="know-body">Unlike an ordinary screenshot — which captures a single moment — DU Recorder captures everything that appears on screen during a continuous recording session. This includes any sensitive information that appears on screen during that session: passwords entered into login fields, banking notifications, private messages from other household members on shared devices, account credentials, personal photos, and any other content that appears during the recording window. A recording that a child makes for one purpose — capturing gameplay, for example — may inadvertently capture sensitive information visible during the same session if other notifications or content appear on screen. Parents using shared household devices should be particularly aware that DU Recorder's full-screen capture applies to any on-screen content regardless of which household member's information it represents.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Most Smartphones Have a Built-In Screen Recording Function — DU Recorder Adds Live Streaming as Its Primary Distinctive Capability</div>
+        <div class="know-body">Most modern Android and iOS devices include a built-in screen recording function accessible through the device's control centre or quick settings panel. The built-in recording function does not include live streaming capability. DU Recorder's primary distinctive feature — the capability that separates it from what is already available on the device — is the integrated live streaming function. Parents who are primarily concerned about the live streaming risk may find that restricting DU Recorder specifically addresses that capability without needing to restrict the device's built-in screen recording function, which does not carry the same live streaming risk. Understanding this distinction allows for a more calibrated restriction decision that addresses the specific risk rather than restricting all screen recording capability.</dive>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block DU Recorder and similar screen recording and live streaming tools — preventing the live streaming capability that bypasses platform safety controls and broadcasts a child's screen to a public audience without review.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block DU Recorder and screen recording / live streaming tools with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar livestreaming and screen capture apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents bypass of platform live streaming age and safety controls</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged recording or streaming tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like DU Recorder as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. DU Recorder has legitimate uses alongside its risks. The decision to restrict it should reflect your family's specific situation — particularly whether the live streaming capability and the screen-wide capture of sensitive information are concerns that apply to your child's use patterns.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect the nuanced nature of DU Recorder's risk — distinguishing the live streaming capability from screen recording generally, discussing responsible use of sharing tools, and applying restrictions that address the specific risk if relevant to your family's situation.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About What Live Streaming Means — Who Can See It, What It Captures, and Why It Cannot Be Taken Back</div>
+        <div class="tip-body">Many children who use live streaming tools do not fully appreciate the permanence and reach of what they are broadcasting. A conversation about live streaming is most effective when it focuses on concrete, practical understanding: anyone who finds or is sent the stream link can watch in real time; the stream may be recorded by viewers without the streamer's knowledge; anything that appears on screen — including the home environment, overheard conversations, and any notification or content that pops up during the stream — is visible to the audience; and stream recordings may persist on the receiving platform after the live session ends. The irrevocability of live content — unlike a message or photo that can be deleted before someone sees it — is the most important thing for a child to understand about live streaming. Content shared live cannot be unshared, unseen, or recalled.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check the App for Saved Recordings — Then Review Whether Live Streaming Has Been Used</div>
+        <div class="tip-body">If DU Recorder is found on a child's device, open the app and review the saved recordings library — this will show any screen recordings the child has made and may give a clear picture of what has been captured and potentially shared. Also check the app's connected platform accounts to determine whether live streaming has been used and, if so, to which platform the stream was directed. On the receiving platform — YouTube, Facebook, or Twitch — check the child's account for any live stream recordings or scheduled stream setups that may not be immediately apparent from the DU Recorder app itself. Understanding what has been recorded and whether it has been streamed or shared allows a more informed and targeted conversation about what occurred and what the appropriate response is.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Restrict DU Recorder If the Live Streaming Risk Applies — But Consider Whether the Device's Built-In Recorder Is Sufficient for Legitimate Uses</div>
+        <div class="tip-body">If the live streaming capability and the full-screen capture risk are concerns for your family, use iLimits to block DU Recorder. When making this decision, consider whether your child has a legitimate use for screen recording that would be served by the device's built-in recording function — available through the control centre or quick settings on most smartphones — which does not carry the live streaming risk that DU Recorder adds. If the built-in function meets the legitimate need, restricting DU Recorder addresses the specific risk without removing a capability the child uses for benign purposes. Also review the streaming settings and age controls on any platform accounts the child has — YouTube, Facebook, Twitch — to ensure platform-level live streaming restrictions are in place as an additional layer of protection that applies regardless of which app a child might use to initiate a stream.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Live Content Cannot Be Unshared — The Risk Is in the Broadcast, Not the Recording</h3>
+    <p class="closing-body">
+      DU Recorder's core risk for children is its live streaming capability — the ability to broadcast whatever is on the device screen to a public audience in real time, bypassing the age and safety controls that platforms apply to streaming through their own native apps. A screen recording saved to the device is something a parent can review and discuss; a live stream shared with an unknown audience in real time is not. iLimits gives you the tools to prevent the live streaming risk from reaching your child's device — and the device's built-in recorder remains available for legitimate screen capture needs that don't require that risk.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
