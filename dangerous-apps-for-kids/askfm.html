@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ASKfm – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* ASKfm: deep ocean-blue */
+    --af:           #0369A1;
+    --af-mid:       #075985;
+    --af-deep:      #082040;
+    --af-light:     #F0F9FF;
+    --af-bdr:       #7DD3FC;
+    --af-text:      #082040;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+    --purple-bg:    #FAF5FF;
+    --purple-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #020C18 0%, #082040 50%, #0A2D58 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(3,105,161,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(3,105,161,0.42) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(3,105,161,0.20);
+    border: 1px solid rgba(125,211,252,0.36);
+    color: #7DD3FC; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #082040 0%, #0369A1 55%, #38BDF8 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(3,105,161,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .af-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--af-light); border: 1.5px solid var(--af-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .af-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #BAE6FD; border: 1.5px solid var(--af-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .af-title { font-size: 13px; font-weight: 700; color: var(--af-text); line-height: 1.3; margin-bottom: 3px; }
+  .af-body  { font-size: 12px; color: #075985; font-weight: 400; line-height: 1.55; }
+
+  .history-banner {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .hb-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E4; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .hb-title { font-size: 12.5px; font-weight: 700; color: #7F1D1D; margin-bottom: 3px; line-height: 1.3; }
+  .hb-body  { font-size: 11.5px; color: #991B1B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before  { background: var(--rose); }
+  .risk-card.c-blue::before  { background: #0369A1; }
+  .risk-card.c-amber::before { background: #F59E0B; }
+  .risk-card.c-red::before   { background: #EF4444; }
+  .risk-card.c-sky::before   { background: #0EA5E9; }
+  .risk-card.c-slate::before { background: #64748B; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Standalone profile note ── */
+  .profile-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--af-light); border: 1.5px solid var(--af-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .pn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #BAE6FD; border: 1.5px solid var(--af-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .pn-title { font-size: 13px; font-weight: 700; color: var(--af-text); line-height: 1.3; margin-bottom: 3px; }
+  .pn-body  { font-size: 12px; color: #075985; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #020C18 0%, #0A2D58 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(3,105,161,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: 0 2px 14px rgba(240,67,106,0.10); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .af-callout      { animation: fadeUp 0.42s ease 0.03s both; }
+  .history-banner  { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .profile-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">❓</div>
+        <div>
+          <div class="app-name-text">ASKfm</div>
+          <div class="app-sub">Anonymous Q&amp;A Social Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Anonymous Social</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val high">🔴 High</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Enables fully anonymous questions and messages directed at a child's named public profile — with a documented history of facilitating severe bullying and harassment linked to serious harm to young users</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of ASKfm — one of the original and longest-running anonymous Q&A platforms, which allows anyone to send anonymous questions and messages to a child's named public profile, and which has a longer and more extensively documented history of facilitating serious harm to young users than almost any other platform in this category.</p>
+  </div>
+
+  <div class="af-callout">
+    <div class="af-ico">❓</div>
+    <div>
+      <div class="af-title">ASKfm Has Been in Operation Since 2010 — and Has the Longest Documented Record of Anonymous Bullying Harm of Any App in This Category</div>
+      <div class="af-body">ASKfm is one of the original anonymous Q&A platforms, launched in 2010 and still in operation today. Its core function is allowing anyone to send anonymous questions or messages to a user's public profile. ASKfm has been linked to serious cases of bullying-related harm to young users across multiple countries over more than a decade — incidents that led to widespread media coverage, government investigations and significant regulatory attention in multiple jurisdictions. The platform has introduced moderation measures over the years in response to this pressure, but its fundamental design — anonymous questions to a named user's public profile — has remained unchanged.</div>
+    </div>
+  </div>
+
+  <div class="history-banner">
+    <div class="hb-ico">📋</div>
+    <div>
+      <div class="hb-title">ASKfm Has Been Investigated by Governments and Regulators in Multiple Countries — Its History of Harm Is the Longest in the Anonymous Q&A Category</div>
+      <div class="hb-body">ASKfm attracted sustained regulatory and law enforcement attention from 2012 onwards following high-profile cases in the UK, Ireland, and other countries in which the platform was identified as having been used to harass young users. Parliamentary inquiries, police investigations and significant media coverage followed. The platform was the subject of formal child safety investigations across multiple jurisdictions. This documented regulatory history distinguishes ASKfm from newer entrants to the anonymous messaging category — it is not a platform whose risks are theoretical but one with the most extensively documented record of harm in its category.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#0369A1;"></span> Anonymous Q&amp;A</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Public Profile</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> Documented Harm</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> No Sender ID</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Since 2010</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">ASKfm is a <strong>long-running anonymous Q&A platform</strong> that allows anyone to send anonymous questions and messages to a child's named public profile — with no sender identification, a public audience for responses, and the most extensively documented record of facilitating bullying-related harm of any app in the anonymous social category.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--af-light);">❓</div>
+      <div>
+        <div class="feat-name">Anyone Can Send Anonymous Questions to a Child's Named Public Profile</div>
+        <div class="feat-desc">ASKfm allows any user — logged in or not — to send an anonymous question or message to a child's public profile. The child receives the questions and can respond, with both the anonymous question and their response visible on their public profile to anyone who visits it. This creates a publicly visible record of anonymous messages directed at a specific named child — visible to their peers, classmates, and anyone who searches for their profile — alongside their own responses.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">👥</div>
+      <div>
+        <div class="feat-name">Responses Are Publicly Visible — Creating a Social Pressure to Answer</div>
+        <div class="feat-desc">Unlike some anonymous messaging formats where messages are private to the recipient, ASKfm is designed around a public Q&A feed. When a child answers an anonymous question, the exchange is posted to their public profile. This creates a social dynamic where a child may feel compelled to respond to questions — including inappropriate, hostile or distressing ones — because not responding is also visible. The public nature of the format amplifies the impact of hostile questions by making them visible to the child's entire social audience.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">📋</div>
+      <div>
+        <div class="feat-name">Extensively Documented Record of Facilitating Harm to Young Users</div>
+        <div class="feat-desc">ASKfm's record of harm is more extensively documented than any other app in the anonymous social category. High-profile cases in the UK, Ireland and elsewhere linked ASKfm to serious harm suffered by young users who had been subjected to sustained anonymous bullying through the platform. The cases attracted parliamentary-level attention, formal regulatory investigations, and sustained media scrutiny over several years beginning in 2012. The platform has updated its moderation practices and safety features in response to this pressure, but the fundamental anonymous-questions-to-public-profile design that created the conditions for harm has remained its core feature.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">🌍</div>
+      <div>
+        <div class="feat-name">Global Platform — Anonymous Questions Can Come From Anywhere</div>
+        <div class="feat-desc">Unlike location-based anonymous platforms, ASKfm operates globally — anonymous questions can be sent from anyone, anywhere in the world, who can find a child's profile. A child with a discoverable public profile on ASKfm can receive anonymous questions from completely unknown individuals with no geographic or social connection to them, in addition to questions from peers who know them. This extends the potential sender pool beyond a child's local social circle to an entirely unlimited global audience.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">🔗</div>
+      <div>
+        <div class="feat-name">Profiles Are Shareable and Linkable — Amplifying Exposure</div>
+        <div class="feat-desc">ASKfm profiles and individual question-answer exchanges can be linked and shared through other platforms. A hostile or embarrassing exchange on a child's ASKfm profile can be screenshotted and shared through social media, messaging apps or other channels — amplifying the content beyond ASKfm itself and creating a persistent public record of the anonymous harassment. The shareable nature of public Q&A profiles means that harmful content posted to ASKfm can spread to communities outside the platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">ASKfm's risks centre on anonymous harassment of a named child through a public-facing profile, the social pressure to respond to hostile questions that the public format creates, and a documented record of serious harm that is longer and more extensively evidenced than any other app in its category.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">📋</span>
+      <div class="rc-name">Most Extensively Documented Record of Harm in the Category</div>
+      <div class="rc-desc">ASKfm's record of facilitating harm to young users is documented across years of law enforcement cases, regulatory investigations and parliamentary scrutiny in multiple countries — making it the most historically evidenced risk in the anonymous Q&A category</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">🎯</span>
+      <div class="rc-name">Anonymous Harassment Targeted at a Specific Named Child</div>
+      <div class="rc-desc">Every anonymous question on ASKfm is directed at a specific named user — personally targeted harassment with no accountability for senders and no way for the recipient to identify who sent it</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Public Profile Creates Social Pressure to Respond</div>
+      <div class="rc-desc">The public Q&A format creates social pressure to respond to anonymous questions — including hostile ones — because non-response is also visible. A child may feel compelled to engage with distressing content to maintain a normal-looking profile</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Global Anonymous Sender Pool — Not Limited to Known Peers</div>
+      <div class="rc-desc">Unlike location-based platforms, ASKfm's anonymous sender pool is global — a public profile can be targeted by completely unknown individuals from anywhere, in addition to local peers who know the child</div>
+    </div>
+    <div class="risk-card c-sky">
+      <span class="rc-emoji">🔗</span>
+      <div class="rc-name">Public Exchanges Are Shareable — Content Can Spread Beyond the Platform</div>
+      <div class="rc-desc">Hostile or embarrassing Q&A exchanges can be screenshotted and shared through other platforms — creating a persistent public record of anonymous harassment that can spread beyond ASKfm to the child's wider social audience</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Significant Impact on Mental Health and Wellbeing</div>
+      <div class="rc-desc">Sustained anonymous questions from unidentifiable peers and strangers — visible to a child's entire social audience — is documented to cause significant anxiety, distress and harm to self-esteem and mental health</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>ASKfm Carries a High Risk Rating</strong>
+      <span>ASKfm has the longest and most extensively documented record of facilitating harm to young users of any app in the anonymous Q&A category. Its fundamental design — anonymous questions to a named child's public profile — has not changed since the documented harms began attracting regulatory attention over a decade ago. It should be blocked on all devices accessible to children.</span>
+    </div>
+  </div>
+
+  <div class="profile-note">
+    <div class="pn-ico">🌐</div>
+    <div>
+      <div class="pn-title">ASKfm Profiles Are Public by Default and Discoverable Through Search — A Child's Profile May Be Visible to Strangers Without Their Awareness</div>
+      <div class="pn-body">ASKfm profiles are public by default, which means a child's profile — including all anonymous questions received and their responses — can be found and viewed by anyone who searches for their username or name online. A child who has not actively set their profile to private has a publicly indexed record of anonymous messages directed at them and their responses. This public discoverability means that content on a child's ASKfm profile is not contained within the platform but potentially visible through standard web searches by anyone.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">ASKfm's History Sets It Apart From Other Anonymous Q&A Apps — It Is Not a Newly Emerged Risk</div>
+        <div class="know-body">Many parents who encounter ASKfm on a child's device may be more familiar with the platform's reputation from a decade ago than from recent experience. It is worth knowing that ASKfm is still active, still used by teenagers, and that its fundamental design has not meaningfully changed despite years of safety-related pressure. The platform introduced moderation tools and reporting mechanisms following the regulatory attention it received, but these do not address the core mechanism — anonymous targeted messages to a named public profile — that created the conditions for harm in the first place. ASKfm's history is not a reason to treat it as a historical problem that has been resolved; it is the context that makes its continued use by children a well-evidenced rather than theoretical concern.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Public Profile Format Adds a Dimension of Harm Not Present in Private Anonymous Messaging Apps</div>
+        <div class="know-body">Unlike NGL, where anonymous messages are received privately, ASKfm's anonymous questions are received and responded to publicly. This means a child's entire social audience — and anyone who finds the profile through a search — can see both the anonymous questions directed at them and their responses. A hostile or mocking question that a child responds to becomes part of a publicly indexed record. The child may feel pressure to respond normally to hostile questions to avoid drawing attention to the fact they received them. The public nature of the format makes the harm more visible to peers and more difficult to contain than private anonymous messaging.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">If Your Child Has an ASKfm Profile, Check Whether It Is Public and What It Contains</div>
+        <div class="know-body">If ASKfm is found on a child's device, check whether they have a profile and, if so, whether it is set to public or private. A public ASKfm profile is searchable and viewable by anyone, and may contain a record of anonymous questions the child has received alongside their responses — including potentially harmful content the child did not disclose. Reviewing the profile can give useful information about what kinds of questions were received, how long the profile has been active, and whether any of the content requires follow-up conversation. The profile should be reviewed sensitively, as its contents may include material the child found distressing that they did not feel able to bring to a parent.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The Same Category of Appeal Applies Here as With NGL — Start With Understanding Why the Child Was Using It</div>
+        <div class="know-body">Like NGL and other anonymous Q&A formats, ASKfm is used by teenagers who want to know what their peers think of them — a normal adolescent desire for social feedback and validation. The conversation about ASKfm is most productive when it begins by acknowledging this motivation honestly, then explains why the specific format creates conditions where anonymous feedback is more likely to be harmful than helpful. A child who used ASKfm was responding to a genuine social desire — not making a reckless choice — and the restriction is easier to accept when it is explained in terms of the format's specific problems rather than as a general prohibition on social apps.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block ASKfm and the broader anonymous Q&A messaging category — protecting children from one of the most historically documented harmful app formats for adolescents.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block ASKfm and anonymous Q&A apps by category with one tap</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Category restrictions cover ASKfm, NGL and equivalent anonymous messaging apps</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like ASKfm as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for ASKfm — including how to review an existing public profile, how to approach the conversation with context from the platform's history, and how category-level blocking covers ASKfm alongside its successors.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🔍</div>
+      <div>
+        <div class="tip-name">Check Whether a Public ASKfm Profile Exists and What It Contains</div>
+        <div class="tip-body">If ASKfm is found on a child's device, the first practical step is reviewing whether they have a profile and what it contains. ASKfm profiles are public by default and searchable online — you can view the profile's public content without the child's device. Check whether the profile is set to public or private, how long it has been active, and what kinds of anonymous questions it has received alongside the child's responses. Review the content sensitively: the profile may contain material the child found distressing that they have not disclosed, and approaching the review as information-gathering rather than surveillance is more likely to support a productive follow-up conversation. If the profile contains content that constitutes harassment or threatening material, it can be reported through the platform and, where appropriate, to school administration or law enforcement.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--af-light); border-color: var(--af-bdr);">💬</div>
+      <div>
+        <div class="tip-name">Have the Same Conversation as for NGL — With Context From ASKfm's Documented History</div>
+        <div class="tip-body">The conversation about ASKfm follows the same framework as the NGL conversation: acknowledge the legitimate desire for peer feedback and validation that anonymous Q&A platforms exploit, explain why the anonymous format specifically produces conditions more likely to generate harmful messages than helpful ones, and address directly the specific harm that a public profile adds compared to private anonymous messaging. For ASKfm specifically, there is one additional element worth including: the platform's documented history. ASKfm is not a new app whose risks are theoretical — it is an app that attracted formal government and law enforcement attention over years of documented harm to young users. This context gives the restriction a basis in public record rather than parental concern alone, which may make it easier for a teenager to accept as a considered rather than arbitrary decision.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block ASKfm at the Category Level and Deactivate Any Existing Profile Before Restriction Takes Effect</div>
+        <div class="tip-body">Apply iLimits category-level restrictions to block ASKfm alongside NGL and equivalent anonymous Q&A apps in a single action. Enable Family Link's app installation approval to generate alerts for future installation attempts. Before or alongside the restriction, consider deactivating any existing ASKfm profile — an active public profile continues to be accessible and sendable by others even if the child no longer has the app installed, because ASKfm is also accessible through a web browser. Deactivating or deleting the profile removes the anonymous inbound message channel entirely, not just the app. To deactivate: log into the profile and use the account settings to deactivate or delete the account. If the child's profile is public, also consider whether a Google search of their username shows the profile in results — deactivating the account does not immediately remove search engine indexing of previously public content, and this may take additional time.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Longest-Running Anonymous Q&A Platform Has the Longest Record of Harm — That Record Exists for a Reason</h3>
+    <p class="closing-body">
+      ASKfm has been operating for over a decade and has been the subject of formal investigations, regulatory scrutiny and parliamentary attention in multiple countries. The platform has introduced safety features over the years — but its core design, anonymous questions directed at a named child's public profile, remains unchanged. iLimits gives you the tools to block it. The conversation that uses ASKfm's documented history to explain why the restriction is well-founded — rather than presenting it as a precautionary or arbitrary limit — gives your child the most honest and complete basis for understanding it.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
