@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Wizz – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Wizz brand: electric yellow-chartreuse */
+    --wz:           #7C6F00;
+    --wz-mid:       #5C5200;
+    --wz-deep:      #2E2800;
+    --wz-light:     #FEFCE8;
+    --wz-bdr:       #FDE047;
+    --wz-text:      #292200;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --yellow-bg:    #FEFCE8;
+    --yellow-bdr:   #FDE047;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0A0900 0%, #181500 50%, #242000 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(124,111,0,0.55) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(253,224,71,0.30) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(124,111,0,0.22);
+    border: 1px solid rgba(253,224,71,0.36);
+    color: #FDE047; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0A0900 0%, #7C6F00 55%, #FDE047 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(124,111,0,0.56), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Wizz callout ── */
+  .wz-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--yellow-bg); border: 1.5px solid var(--yellow-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .wz-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF08A; border: 1.5px solid var(--yellow-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .wz-title { font-size: 13px; font-weight: 700; color: var(--wz-text); line-height: 1.3; margin-bottom: 3px; }
+  .wz-body  { font-size: 12px; color: #3A3000; font-weight: 400; line-height: 1.55; }
+
+  /* ── Stranger contact badge ── */
+  .stranger-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .stranger-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E8; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .stranger-text strong { font-size: 12.5px; font-weight: 700; color: #881337; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .stranger-text span   { font-size: 11.5px; color: #9F1239; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--yellow-bg); border: 1.5px solid var(--yellow-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF08A; border: 1.5px solid var(--yellow-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--wz-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #3A3000; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0A0900 0%, #181500 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,111,0,0.32) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">⚡</div>
+        <div>
+          <div class="app-name-text">Wizz</div>
+          <div class="app-sub">Random Stranger Chat App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Stranger Contact / Social Chat</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Connects users with random strangers for chat and friendship, with minimal verification, a predominantly teenage user base, and documented use by adults seeking to contact minors — making it one of the highest-risk stranger contact platforms available to children</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Wizz and stranger contact apps from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Wizz — a social app specifically designed to connect users with random strangers for chat and "friendship", marketed heavily to teenagers, with a minimal age verification process, a feature set that encourages ongoing contact with people the user has never met in person, and a documented history of being used by adults to initiate contact with minors.</p>
+  </div>
+
+  <div class="wz-callout">
+    <div class="wz-ico">⚡</div>
+    <div>
+      <div class="wz-title">Wizz Is Specifically Designed to Connect Children and Teenagers With Random Strangers — Its Core Function Is the Risk</div>
+      <div class="wz-body">Wizz is a social platform whose stated purpose is to help users "make new friends" by connecting them with random other users for chat. Unlike general social media platforms where strangers may occasionally initiate contact, Wizz's entire core function is the facilitation of contact between people who do not know each other — including connecting adults with children and teenagers. The app has been explicitly marketed toward the teenage demographic, which means its user base is predominantly young. Stranger contact platforms whose primary audience is minors attract adults who seek access to that audience. Wizz has been specifically identified by child safety organisations, journalists, and law enforcement bodies as a platform of concern for child safety.</div>
+    </div>
+  </div>
+
+  <div class="stranger-band">
+    <div class="stranger-icon">⚠️</div>
+    <div class="stranger-text">
+      <strong>Documented by Child Safety Organisations and Law Enforcement as a Platform of Concern</strong>
+      <span>Wizz has been specifically identified by child safety organisations, journalists, and law enforcement as a platform used by adults to make contact with minors — not as an incidental risk but as a documented pattern of use.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#7C6F00;"></span> Random Strangers</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Teen-Targeted</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FDE047;"></span> Direct Messaging</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Minimal Verification</div>
+    <div class="mode-chip"><span class="cdot" style="background:#DC2626;"></span> Documented Risk</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Wizz is a <strong>stranger contact platform marketed to teenagers</strong> whose entire core function — connecting users with random other users for direct messaging — creates the conditions for unsolicited contact from adults seeking access to minors, with minimal verification and documented use by bad actors specifically because of its young user base.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--yellow-bg);">👥</div>
+      <div>
+        <div class="feat-name">Connects Users With Random Strangers for Direct Messaging</div>
+        <div class="feat-desc">Wizz's core mechanism connects a user with random other users for direct messaging — the stated purpose is "making new friends" with people the user has no prior connection to. Users are matched with strangers and can begin messaging them immediately. Unlike general social platforms where a stranger must initiate contact deliberately, Wizz facilitates this connection as its primary product feature. For a child on the platform, every interaction begins with a stranger whose age, identity, and intentions are unknown, and whom the app's matching system has connected them with specifically for the purpose of starting a conversation.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">👶</div>
+      <div>
+        <div class="feat-name">Marketed to and Predominantly Used by Teenagers</div>
+        <div class="feat-desc">Wizz has been explicitly marketed toward the teenage demographic — its branding, app store positioning, and social media presence have targeted users in their early to mid teens. This marketing strategy has succeeded in establishing a predominantly young user base. The consequence of a social platform that facilitates random stranger contact and whose user base is predominantly minors is that the platform becomes attractive to adults who seek to contact young people — the young demographic that the app's marketing has deliberately cultivated becomes the feature that puts its users at risk from those with harmful intent.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🔓</div>
+      <div>
+        <div class="feat-name">Minimal Age Verification — Adults Can Access the Platform Without Identity Checks</div>
+        <div class="feat-desc">Wizz's age verification at account creation is minimal — requiring only a self-declared date of birth with no identity verification or parental consent process for underage accounts. An adult who wishes to access the platform and present themselves as a teenager or young adult can do so without any meaningful verification barrier. The minimal verification creates conditions where the age of anyone a child is matched with is entirely unverifiable — a child cannot know whether the stranger they have been connected with is another teenager or an adult misrepresenting their age, and the platform does not provide any technical mechanism for making this determination.</dive>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">📣</div>
+      <div>
+        <div class="feat-name">Specifically Identified by Child Safety Organisations and Law Enforcement as a Platform of Concern</div>
+        <div class="feat-desc">Wizz has not merely been flagged as carrying theoretical risks — it has been specifically identified and publicly named by child safety organisations, investigative journalists, and law enforcement bodies in multiple countries as a platform where adults have made contact with minors and where grooming and other harmful interactions have been documented. This documented pattern of harm distinguishes Wizz from platforms whose risks are primarily theoretical. The platform has been the subject of news investigations, child safety alerts, and public warnings issued by authorities specifically because the risks it creates for children have been demonstrated through documented incidents rather than only anticipated through theoretical risk assessment.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">💬</div>
+      <div>
+        <div class="feat-name">Direct Private Messaging Enables Private Contact Between Strangers Without Oversight</div>
+        <div class="feat-desc">Once two users are connected on Wizz, they can exchange direct private messages without any visibility to parents or other oversight mechanisms. Conversations conducted through the app's direct messaging function are private to the two participants and are not visible to anyone outside the conversation unless a child shares the messages. A child who has been connected with an adult through the platform's matching function can conduct a private messaging conversation with that person without any mechanism that would alert a parent that contact with an unverified stranger is occurring or continuing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Wizz's risks are direct and well-documented — the combination of a core function built around connecting strangers, a predominantly teenage user base, minimal age verification, and documented use by adults seeking access to minors places it among the highest-risk social apps available to children.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🚨</span>
+      <div class="rc-name">Documented Use by Adults Contacting Minors</div>
+      <div class="rc-desc">Wizz has been specifically identified by child safety organisations and law enforcement as a platform used by adults to make contact with minors — this is a documented pattern of harm, not a theoretical risk, supported by public investigations and official safety alerts</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Random Stranger Contact Is the Core Function</div>
+      <div class="rc-desc">Unlike platforms where stranger contact is an incidental risk, Wizz's entire purpose is to connect users with strangers — every interaction a child has on the platform begins with someone they have never met and whose identity and age are unverified</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">No Meaningful Age Verification</div>
+      <div class="rc-desc">The minimal age verification process allows adults to access the platform presenting any age they choose — a child has no reliable way to know whether a stranger they are matched with is another teenager or an adult misrepresenting their identity</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Private Direct Messaging Without Parental Visibility</div>
+      <div class="rc-desc">Conversations conducted through the app's direct messaging function are private — a child can maintain ongoing private contact with an unverified stranger without any mechanism alerting a parent that such contact is occurring</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎯</span>
+      <div class="rc-name">Teen-Targeted Marketing Attracts Harmful Actors</div>
+      <div class="rc-desc">The app's deliberate targeting of teenagers as its primary user base creates the conditions that attract adults seeking access to minors — the platform's young demographic is the feature that makes it useful to those with harmful intent</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Global User Base With No Geographic Restriction</div>
+      <div class="rc-desc">Wizz connects users without geographic restriction, meaning a child can be matched with strangers from anywhere in the world — including from jurisdictions where child protection laws differ from those in the child's country of residence</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Wizz Carries the Highest Risk Rating — Documented Harm, Not Theoretical Risk</strong>
+      <span>Wizz's highest risk rating reflects that its danger to children has been established through documented incidents, child safety alerts, and law enforcement action — not through theoretical risk assessment alone. An app whose core function is connecting strangers, whose user base is predominantly minors, whose age verification is minimal, and which has been specifically named by child safety organisations and authorities as a platform where harm to children has occurred is in the most serious category of concern for any parent.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">⚡</div>
+    <div>
+      <div class="control-title">Wizz's Design — Random Stranger Matching With a Teenage User Base and Minimal Verification — Creates the Conditions for Grooming and Exploitation by Design</div>
+      <div class="control-body">The risk Wizz creates for children is not a flaw in its design — it is a direct consequence of its design. A platform whose purpose is random stranger matching, whose marketing has deliberately targeted teenagers as its primary audience, and whose verification process does not prevent adults from accessing it creates by design the environment that makes grooming and exploitation possible. These three elements together — stranger matching, teenage demographic, minimal verification — are the combination that child safety researchers identify as high-risk. Wizz has all three as deliberate product features, and the documented incidents of harm involving the platform are the predictable consequence of combining them.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Wizz Has Been Specifically Identified by Child Safety Authorities — This Is Not a General Social Media Risk</div>
+        <div class="know-body">Many parental concerns about social media relate to general risks that apply broadly across multiple platforms — exposure to inappropriate content, the impact of social comparison, excessive screen time. The concern about Wizz is more specific and more serious: the platform has been named by child safety organisations, investigated by journalists, and flagged by law enforcement specifically because of documented cases of adults using it to contact and harm children. This is not a theoretical or generalised risk of the kind associated with most social platforms — it is a specific and documented pattern. Parents should understand that Wizz's restriction in iLimits reflects this documented pattern of harm rather than a generalised concern about social networking.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Not Understand the Difference Between Making Friends Online and Being Targeted</div>
+        <div class="know-body">Wizz markets itself as a platform for making friends — language that is familiar, benign-sounding, and appealing to children and teenagers who want social connection. A child using Wizz understands themselves to be doing something socially normal and positive: making new friends. They may not understand that the stranger who has been matched with them and who is engaging in friendly, normal-seeming conversation may have found and initiated contact specifically because the platform gives easy access to young people — and that the friendly conversation is a well-documented first stage in a pattern of behaviour that safety organisations describe as grooming. The gap between how the app presents itself — a friend-making platform — and what it enables — unrestricted adult access to a predominantly minor user base — is one that parents need to make explicit in conversations with their children.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The App May Be on a Child's Device Because a Peer Recommended It — Not Because the Child Sought Out a Risky Platform</div>
+        <div class="know-body">Many children who use Wizz have not sought out a risky stranger contact platform — they have installed an app that a friend, classmate, or peer group member told them about as a fun way to meet people. The app's appeal among peer groups, particularly among children aged 12 to 16, means that a child can come to use it through entirely social routes without any deliberate intention to seek contact with strangers. A parent who discovers Wizz on their child's device should not assume that the child has been actively seeking dangerous contact — they may simply have followed a peer recommendation without understanding the nature of the platform. The conversation is most effective when it addresses the specific risk the platform creates — the presence of adults who use it to access young people — rather than framing the child's installation of the app as evidence of deliberate risk-seeking behaviour.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">If the App Is on Your Child's Device, Check Whether Any Ongoing Contact With Strangers Has Been Established</div>
+        <div class="know-body">If Wizz is found on a child's device, opening the app and reviewing the conversation history will show any contacts the child has established through the platform and the content of any ongoing conversations. This is important context before a restriction decision — a child who has been using the app casually and has established only brief, obviously benign conversations with other young people presents a different situation from one who has developed ongoing private conversations with one or more strangers whose age and identity are unverified. The conversation history is visible within the app and should be reviewed before restricting and deleting the app, as deletion removes the history. If the conversation history suggests contact with adults presenting as teenagers, or conversations that have moved in a direction that raises concern, a more serious and immediate parental response is warranted alongside the restriction.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Wizz and similar stranger contact platforms — preventing a child from accessing an app that has been specifically identified by child safety authorities as a platform where harm to children has been documented.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Wizz and stranger contact platforms with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar random stranger chat and matching apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents unsolicited contact from unverified strangers through high-risk platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged stranger contact apps are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Wizz as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Given Wizz's documented risk to children and its specific identification by child safety authorities, this is one of the highest-priority restrictions available. If Wizz is on your child's device, <strong>review the conversation history within the app before deleting it</strong>, and consider whether any ongoing contact requires a more immediate response.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect the specific and serious nature of Wizz's risk — approaching the conversation with the child without assuming deliberate risk-seeking, checking the conversation history before deleting, and applying the restriction while addressing any ongoing contacts that may have been established.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Have an Honest Conversation About Why Making Friends With Strangers Online Carries Specific Risks — Without Assuming the Child Has Done Something Deliberately Dangerous</div>
+        <div class="tip-body">A child who has Wizz installed has most likely done so because a peer recommended it as a way to meet people — not because they sought out a platform specifically because it gives adults access to minors. The most productive conversation starts by acknowledging the appeal of meeting new people and making friends, before explaining the specific risk that Wizz creates: that the same platform that connects teenagers with each other also gives adults easy, unverified access to young people, and that some adults use platforms like Wizz specifically for this reason. Explaining what grooming looks like — friendly, normal-seeming conversation that gradually escalates, often moving quickly from the platform to other messaging apps — gives a child concrete and practical knowledge rather than a vague warning to be careful of strangers. A child who understands that friendly-seeming contact from a stranger on this platform can be the first stage of a harmful pattern is better equipped to recognise and respond to that pattern than one who has simply been told the app is dangerous.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Review the Conversation History Within the App Before Deleting — Look for Any Concerning Patterns</div>
+        <div class="tip-body">Open Wizz on the child's device and review the conversation history before restricting or deleting the app. Look for any conversations that suggest the child has been in contact with someone presenting as significantly older, conversations that have moved unusually quickly to personal topics, requests to share photographs, requests to move the conversation to another platform, or any other exchange that raises concern. Also note whether the child has shared any personal information — their real name, school, location, or contact details on other platforms — with any stranger through the app. If any conversation history suggests concerning contact has been established, consider whether the situation warrants a conversation with the child about the specific contact in question, or whether the concern is serious enough to warrant seeking advice from a child safety professional or local authority. Delete the app and apply the restriction after reviewing the history — once the app is deleted, the conversation history is removed and is no longer accessible.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Wizz Through iLimits and Discuss Safer Alternatives for Social Connection</div>
+        <div class="tip-body">Apply the iLimits restriction to block Wizz on your child's device, and extend the conversation to include what safe online social connection looks like — so that the restriction does not simply close off a social outlet without providing context or alternatives. Many children use Wizz because they want to meet new people and expand their social circle beyond their immediate school and friend group — a genuine and age-appropriate social need. Discussing how to pursue that need through platforms that connect people through shared interests — gaming communities, creative platforms, school-adjacent social networks — rather than through random stranger matching provides a framework for safer social exploration online. The restriction is the protective step; the conversation about why and about what safer alternatives exist is the educational step that makes the protection genuinely useful to the child rather than simply limiting.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Platform That Connects Children With Strangers Is Not a Friend-Making Tool — It Is a Risk</h3>
+    <p class="closing-body">
+      Wizz presents itself as a way to make new friends — language that is appealing, familiar, and entirely benign-sounding to a teenager. What it provides is unrestricted access to a platform whose user base is predominantly minors, with no meaningful verification of who the other users are or whether they are who they claim to be. Child safety organisations and law enforcement have documented the harm this creates. iLimits gives you the tools to prevent your child from being part of that accessible, unverified audience — and the information to have the conversation that explains why, in terms a child can understand and apply.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
