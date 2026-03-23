@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Wink – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Wink: vivid orange-tangerine */
+    --wk:           #EA580C;
+    --wk-mid:       #C2410C;
+    --wk-deep:      #431407;
+    --wk-light:     #FFF7ED;
+    --wk-bdr:       #FDBA74;
+    --wk-text:      #431407;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+    --purple-bg:    #FAF5FF;
+    --purple-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1C0602 0%, #3B0E04 50%, #431407 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(234,88,12,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(234,88,12,0.42) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(234,88,12,0.20);
+    border: 1px solid rgba(253,186,116,0.36);
+    color: #FDBA74; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #431407 0%, #EA580C 55%, #FB923C 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(234,88,12,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .wk-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--wk-light); border: 1.5px solid var(--wk-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .wk-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FED7AA; border: 1.5px solid var(--wk-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .wk-title { font-size: 13px; font-weight: 700; color: var(--wk-text); line-height: 1.3; margin-bottom: 3px; }
+  .wk-body  { font-size: 12px; color: #7C2D12; font-weight: 400; line-height: 1.55; }
+
+  .grooming-banner {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .gb-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E4; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .gb-title { font-size: 12.5px; font-weight: 700; color: #7F1D1D; margin-bottom: 3px; line-height: 1.3; }
+  .gb-body  { font-size: 11.5px; color: #991B1B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-orange::before { background: #EA580C; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Stranger danger note ── */
+  .stranger-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--wk-light); border: 1.5px solid var(--wk-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .sn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FED7AA; border: 1.5px solid var(--wk-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .sn-title { font-size: 13px; font-weight: 700; color: var(--wk-text); line-height: 1.3; margin-bottom: 3px; }
+  .sn-body  { font-size: 12px; color: #7C2D12; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1C0602 0%, #431407 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(234,88,12,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card             { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid        { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card          { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box         { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip       { animation: fadeUp 0.42s ease 0.05s both; }
+  .wk-callout       { animation: fadeUp 0.42s ease 0.03s both; }
+  .grooming-banner  { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip       { animation: fadeUp 0.42s ease 0.04s both; }
+  .stranger-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing          { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">😉</div>
+        <div>
+          <div class="app-name-text">Wink</div>
+          <div class="app-sub">Friend-Finding &amp; Social Discovery App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Social Discovery</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val high">🔴 High</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Marketed to teenagers as a friend-finding app but functions as an anonymous stranger-contact platform — enabling adults to initiate contact with children while obscuring age, identity and intent</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Wink — a social discovery app marketed to teenagers as a way to make new friends that functions as an anonymous stranger-contact platform, enabling anyone to initiate contact with a child without age verification, identity confirmation, or meaningful safeguards against adult access.</p>
+  </div>
+
+  <div class="wk-callout">
+    <div class="wk-ico">😉</div>
+    <div>
+      <div class="wk-title">Wink Is Marketed as a Friend-Finding App for Teens — It Functions as a Platform Where Adults Can Contact Children Anonymously</div>
+      <div class="wk-body">Wink presents itself as a way for teenagers to make new friends, often using the framing of expanding their Snapchat network. In practice it allows any user — of any age, with no verified identity — to initiate contact with a child's profile. The app has been repeatedly cited in child safety investigations and by law enforcement for facilitating adult contact with minors. There is no meaningful age verification, no system that prevents adults from creating profiles presenting themselves as teenagers, and no reliable moderation of contact attempts by adults. The "friend-finding" framing specifically targets teenagers while providing minimal protection against the most significant risk the platform creates.</div>
+    </div>
+  </div>
+
+  <div class="grooming-banner">
+    <div class="gb-ico">⚠️</div>
+    <div>
+      <div class="gb-title">Wink Has Been Specifically Identified in Child Safety Investigations — It Is Not a Generic Social App With Incidental Risks</div>
+      <div class="gb-body">Wink has been named in child safety reports, law enforcement investigations, and media coverage specifically focused on online grooming and adult contact with minors through the platform. The app's design — anonymous contact, Snapchat integration, teenager-focused marketing — creates conditions that have been exploited by adults seeking contact with children. This is not a platform with a moderate risk profile; it is a platform with a documented record of serious harm to children.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#EA580C;"></span> Stranger Contact</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> No Age Verification</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> Grooming Risk</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Snapchat Integration</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Teen-Targeted</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">Wink is a <strong>social discovery app marketed to teenagers</strong> that allows anonymous stranger contact, integrates with Snapchat to facilitate private messaging, and has no meaningful age verification — enabling adults to access and contact children's profiles while presenting themselves as peers.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--wk-light);">👤</div>
+      <div>
+        <div class="feat-name">Anonymous Stranger Contact — Anyone Can Initiate Contact With a Child's Profile</div>
+        <div class="feat-desc">Wink's core function is connecting users who do not know each other. Any user can view and initiate contact with any other user's profile — including children's profiles — without the child having approved or sought out that specific person. The platform provides no meaningful mechanism to distinguish between age-appropriate peer contact and adult contact with a child, because user ages are self-reported and not verified. An adult can create a profile claiming to be a teenager and contact children through the platform without any technical barrier.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📲</div>
+      <div>
+        <div class="feat-name">Designed Around Snapchat Integration — Moving Contact Off the Platform Quickly</div>
+        <div class="feat-desc">Wink is specifically designed to facilitate the exchange of Snapchat usernames, enabling contacts made on Wink to transition immediately to private Snapchat conversations that occur off the Wink platform entirely. This design means that contact initiated on Wink moves to a separate, private channel very quickly — bypassing even the limited moderation that may exist within Wink itself and removing the conversation from any platform where a parent could review it. The Snapchat integration is a core feature, not an incidental use, and it specifically accelerates the transition from stranger contact to private messaging.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">🔞</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification</div>
+        <div class="feat-desc">Wink has no meaningful age verification system — user ages are self-declared with no identity check or verification mechanism. An adult who wants to access the platform as a teenager can do so by entering a false date of birth, and there is no subsequent check that might identify the discrepancy. This means a child using Wink cannot assume that other users claiming to be their age are who they say they are. The absence of age verification is not a technical limitation that might be improved — it is a structural feature that makes the platform accessible to adults regardless of its intended audience.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">😉</div>
+      <div>
+        <div class="feat-name">Teenager-Focused Marketing Masks the Platform's Actual Risk Profile</div>
+        <div class="feat-desc">Wink's branding and marketing are specifically designed to appeal to teenagers — using youth-oriented language, teen-relevant social contexts ("make new friends on Snapchat"), and an interface style that echoes familiar social platforms. This marketing creates the impression of a safe, peer-oriented social app while the actual platform provides access to adults seeking contact with children. The gap between Wink's self-presentation and its documented risk profile is significant and worth making explicit to any teenager who presents the app as a normal social platform.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">🌍</div>
+      <div>
+        <div class="feat-name">Global User Base — Contact Not Limited to Local Peers</div>
+        <div class="feat-desc">Wink connects users globally, meaning a child's profile can be contacted by users from any country. This removes the natural social accountability that comes with local peer networks — where a person's behaviour might be known to mutual connections — and replaces it with entirely anonymous global contact from an unlimited pool of users with no mutual accountability.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Wink's risks centre on adult access to children through anonymous contact, the absence of age verification, the Snapchat integration that moves conversations off-platform rapidly, and the platform's documented record of facilitating harmful contact with minors.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">Adults Can Contact Children With No Barrier</div>
+      <div class="rc-desc">Any adult can create a Wink profile, claim to be a teenager, and initiate contact with children's profiles — there is no age verification, no identity check, and no technical barrier between an adult predator and a child's profile</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">⚠️</span>
+      <div class="rc-name">Documented Record of Facilitating Grooming</div>
+      <div class="rc-desc">Wink has been specifically named in child safety investigations and law enforcement cases involving adult contact with minors — it is not a platform with a theoretical risk; it is a platform with a documented record of serious harm to children</div>
+    </div>
+    <div class="risk-card c-orange">
+      <span class="rc-emoji">📲</span>
+      <div class="rc-name">Snapchat Integration Moves Contact to Private Channels Immediately</div>
+      <div class="rc-desc">Wink is specifically designed to facilitate Snapchat username exchange — moving contact from the platform to a private, off-platform conversation within a very short interaction, bypassing even Wink's own moderation and any parental review of in-app messages</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">No Meaningful Age Verification</div>
+      <div class="rc-desc">Self-declared ages with no verification mean a child cannot know whether other users are peers or adults — the platform's fundamental architecture makes age misrepresentation trivially easy and provides no safeguard against it</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">😉</span>
+      <div class="rc-name">Teen-Targeted Branding Lowers a Child's Guard</div>
+      <div class="rc-desc">Wink's youth-oriented marketing and interface design create an impression of a safe peer social platform — a framing that may make children less alert to the actual risk of the contacts they are making through it</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Anonymous Global Contact Pool</div>
+      <div class="rc-desc">Contact is global and anonymous — there is no mutual social accountability through shared connections, no local community context, and no limit on the geographic or demographic range of adults who can access a child's profile</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Wink Carries a High Risk Rating</strong>
+      <span>Wink is not a general social app with moderate incidental risks — it is a platform that has been specifically identified in child safety investigations for facilitating adult contact with minors. The combination of anonymous stranger contact, no age verification, teen-targeted branding, and Snapchat integration that moves contact off-platform rapidly makes it one of the most directly dangerous apps for children in the social discovery category. It should be blocked on all devices accessible to children.</span>
+    </div>
+  </div>
+
+  <div class="stranger-note">
+    <div class="sn-ico">🚨</div>
+    <div>
+      <div class="sn-title">Wink's Design Is Specifically Suited to Grooming — The Snapchat Integration Is Not Incidental</div>
+      <div class="sn-body">Grooming typically involves a period of contact-building in a more observable environment, followed by a transition to a private channel where the contact can be escalated away from scrutiny. Wink's Snapchat integration specifically facilitates this transition — initial contact on Wink moves to a private Snapchat conversation rapidly, removing the interaction from any context where it might be reviewed. The speed and design of this transition is not an accidental feature; it is what the platform is built to do. Parents should understand that any contact made through Wink that moves to Snapchat is contact that is specifically designed to be unobservable.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Wink Is Not a Safe Social App With Some Risks — It Is a Platform With a Documented Record of Facilitating Harm to Children</div>
+        <div class="know-body">Many social apps carry moderate risks from stranger contact or inappropriate content. Wink is in a different category: it has been specifically named in investigations into online grooming and adult contact with minors, including by law enforcement. The platform's design — anonymous contact, no age verification, youth-targeted marketing, Snapchat integration — is not a collection of independent incidental risks. It is a set of features that together create conditions specifically conducive to adult grooming of children. Parents who encounter Wink should treat it as one of the most directly dangerous apps for children currently available, not as a social app that requires monitoring and guidance.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">A Child Who Has Used Wink May Have Had Contact With Adults Presenting Themselves as Peers</div>
+        <div class="know-body">If Wink is found on a child's device — particularly if it has been actively used — there is a real possibility that the child has had contact with adults presenting themselves as teenagers. The approach to this discovery should be calm and non-judgmental: a child who has used Wink has not done something wrong by installing what is marketed as a normal social app, and a child who has had contact with adults through it may not have been aware that the people they were speaking with were not their peers. The priority is understanding what contact occurred, whether any conversation moved to Snapchat or another platform, and whether the child is safe. The conversation should be supportive first, informative second, and should make clear that the child is not in trouble for using the app.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Check Snapchat for Contact That Originated on Wink</div>
+        <div class="know-body">Because Wink is specifically designed to transition contact to Snapchat, any review of a child's use of Wink should include a review of recent additions to their Snapchat friend list and recent conversations on Snapchat. Contacts added around the time Wink was in use, or contacts that have no connection to the child's known social circle, may represent conversations that originated on Wink and transitioned to Snapchat. Given Snapchat's disappearing message design, recent conversations may not be reviewable — but the friend list addition dates and any available conversation metadata may provide useful information about the contact made.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The Conversation Should Address Why "Friend-Finding Apps" Carry Different Risks From Regular Social Media</div>
+        <div class="know-body">Teenagers often understand that they should not accept contact from strangers on mainstream social platforms — but may not apply the same caution to apps specifically marketed as friend-finding tools, where meeting new people is the explicit purpose. The most useful conversation about Wink helps a child understand why the "meeting new people" framing of an app does not make the people they meet safer than those they would encounter through other means — and specifically, that platforms without age verification and with no mutual social accountability create conditions where adults can contact them while presenting as peers. This conversation is most effective when it is not framed around blame or punishment, but around helping the child understand how to evaluate the actual risk of a platform rather than accepting its marketing framing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block Wink and similar stranger-contact social discovery apps — protecting children from one of the most directly dangerous platforms in the social app category.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block Wink and social discovery apps by category with one tap</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Restricted categories cover similar anonymous stranger-contact platforms</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Wink as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for Wink — including how to approach the discovery of the app on a child's device, how to check for contacts that moved to Snapchat, and how to have the most useful conversation about friend-finding apps and stranger contact.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Respond Calmly and Supportively — Then Have a Clear Conversation About What Wink Actually Is</div>
+        <div class="tip-body">If Wink is found on a child's device, the first priority is the child's safety and emotional state — not the restriction or the conversation about the app. Approach the discovery without blame: a child who installed Wink installed what is marketed as a normal social app for making new friends, and they are not at fault for the platform's actual risk profile. Make clear immediately that they are not in trouble. Then have a clear, calm conversation about what Wink actually does: it allows adults to contact children while presenting themselves as peers, it has been specifically investigated for this harm, and it is specifically designed to move contact off the platform to private Snapchat conversations quickly. Help your child understand the difference between the marketing framing of the app and its actual function — and make clear that if anything concerning happened while they were using it, they can tell you without fear of punishment.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--wk-light); border-color: var(--wk-bdr);">📲</div>
+      <div>
+        <div class="tip-name">Review Snapchat for Contacts and Conversations That May Have Originated on Wink</div>
+        <div class="tip-body">Check your child's Snapchat friend list for contacts added during the period when Wink was in use — look for additions that have no connection to their known school, local or family social circle. Also check any available conversation metadata: Snapchat messages disappear by default, but the friend list, any saved messages, and the recency of contacts may indicate whether conversations moved from Wink to Snapchat and how active they were. If you find contacts that appear to be from Wink and cannot be accounted for through the child's known social circle, address this with your child calmly and specifically — asking about each unknown contact and what they know about the person. If there is any indication that an adult made contact with your child while presenting as a peer, consider reporting this to the relevant platform and, if appropriate, to law enforcement.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Wink and Similar Apps, Apply Family Link Approval, and Help Your Child Understand How to Evaluate Social Apps Critically</div>
+        <div class="tip-body">Apply iLimits restrictions to block Wink and similar social discovery apps across all of your child's devices. Enable Family Link's app installation approval requirement to generate an alert before any similar app is installed in future. Beyond the specific restriction, the most durable protection is helping your child develop the ability to evaluate a social app's actual risk rather than accepting its marketing framing. Teach them to ask: Does this app let strangers contact me? Is there any way to verify who the other users are? What is this app specifically designed to do? An app whose stated purpose is "meet new people" and whose mechanism is anonymous unverified contact is a different kind of risk from a social platform where they connect with people they already know — and a child who can make that distinction independently is significantly more resilient to the risks of the social app landscape.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A "Friend-Finding App" With No Age Verification Is a Platform Where Adults Can Find Your Child</h3>
+    <p class="closing-body">
+      Wink's marketing positions it as a safe, fun way for teenagers to make new friends. Its design positions it as a platform where any adult can contact any child anonymously, quickly move that contact to private messaging, and do so with essentially no technical barrier. iLimits gives you the tools to block it immediately. The conversation that helps your child understand the gap between how an app is marketed and what it actually does gives them a critical tool they will use for the rest of their digital life.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
