@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Proxy Server – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Proxy Server: cool charcoal-steel */
+    --px:           #374151;
+    --px-mid:       #1F2937;
+    --px-deep:      #030712;
+    --px-light:     #F9FAFB;
+    --px-bdr:       #9CA3AF;
+    --px-text:      #030712;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #010204 0%, #030712 50%, #060E1C 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(55,65,81,0.60) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 275px; height: 275px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(75,85,99,0.50) 0%, transparent 68%);
+    filter: blur(30px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(156,163,175,0.18);
+    border: 1px solid rgba(156,163,175,0.32);
+    color: #D1D5DB; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #030712 0%, #374151 55%, #6B7280 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(55,65,81,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium-high { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .px-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--px-light); border: 1.5px solid var(--px-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .px-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E5E7EB; border: 1.5px solid var(--px-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .px-title { font-size: 13px; font-weight: 700; color: var(--px-text); line-height: 1.3; margin-bottom: 3px; }
+  .px-body  { font-size: 12px; color: #374151; font-weight: 400; line-height: 1.55; }
+
+  .category-banner {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .cb-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .cb-title { font-size: 12.5px; font-weight: 700; color: #78350F; margin-bottom: 3px; line-height: 1.3; }
+  .cb-body  { font-size: 11.5px; color: var(--amber-text); font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-steel::before  { background: #374151; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBEB; border: 1.5px solid #FCD34D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FCD34D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Web vs app note ── */
+  .web-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--px-light); border: 1.5px solid var(--px-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .wn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E5E7EB; border: 1.5px solid var(--px-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .wn-title { font-size: 13px; font-weight: 700; color: var(--px-text); line-height: 1.3; margin-bottom: 3px; }
+  .wn-body  { font-size: 12px; color: #374151; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #010204 0%, #060E1C 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(75,85,99,0.36) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card              { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid         { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card           { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box          { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip        { animation: fadeUp 0.42s ease 0.05s both; }
+  .px-callout        { animation: fadeUp 0.42s ease 0.03s both; }
+  .category-banner   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip        { animation: fadeUp 0.42s ease 0.04s both; }
+  .web-note          { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing           { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔀</div>
+        <div>
+          <div class="app-name-text">Proxy Server</div>
+          <div class="app-sub">Web Proxy &amp; Bypass Tool</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Proxy / Bypass Tool</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val medium-high">🟡 Medium–High</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Routes browsing traffic through external servers, bypassing network-level parental controls, content filters and monitoring tools — with additional concern about the unknown quality and trustworthiness of free public proxy servers</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Proxy Server — a web proxy app that routes browser traffic through external servers, bypassing network-level parental controls and content filters, while raising its own data practice concerns due to the unknown quality of the proxy servers it connects through.</p>
+  </div>
+
+  <div class="px-callout">
+    <div class="px-ico">🔀</div>
+    <div>
+      <div class="px-title">Proxy Server Apps Route Web Traffic Through External Servers — Bypassing Parental Controls and Hiding Browsing From Monitoring Tools</div>
+      <div class="px-body">Proxy Server is a web proxy app that routes browser traffic through an external server before it reaches its destination. Like VPN tools, this bypasses network-level content filters and monitoring set up by parents on their household network. Unlike most commercial VPN tools, proxy apps typically connect through unverified public servers whose operators are unknown — meaning both the bypass of parental controls and the destination of a child's browsing traffic are concerns that apply simultaneously.</div>
+    </div>
+  </div>
+
+  <div class="category-banner">
+    <div class="cb-ico">🔀</div>
+    <div>
+      <div class="cb-title">Proxy Apps and VPN Apps Belong to the Same Category — Both Should Be Blocked Together</div>
+      <div class="cb-body">Proxy apps like Proxy Server and VPN apps like Turbo VPN share the same fundamental capability: routing traffic through external servers to bypass network-level parental controls. The technical difference is in the routing method and encryption level, not in the practical outcome for parental oversight. iLimits allows blocking this entire category at once — covering VPNs, proxies and similar bypass tools in a single restriction.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#374151;"></span> Web Proxy</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Bypasses Filters</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> Unknown Servers</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Hides Traffic</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Free / No Account</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">Proxy Server is a <strong>web proxy app</strong> that routes browser traffic through external proxy servers, bypassing network-level content filters and parental controls, hiding browsing activity from monitoring tools, and routing a child's web traffic through servers of unknown ownership and quality.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--px-light);">🌐</div>
+      <div>
+        <div class="feat-name">Routes Browser Traffic Through External Proxy Servers</div>
+        <div class="feat-desc">Proxy Server forwards web browsing requests through external servers before they reach their destinations. The household network sees a connection to a proxy server, not the actual websites visited — making DNS-based content filters and router-level category blocks ineffective for any traffic routed through the proxy. The practical effect on parental controls is the same as a VPN: network-level restrictions are bypassed for any browsing session using the proxy.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">👁️</div>
+      <div>
+        <div class="feat-name">Hides Browsing Activity From Network Monitoring Tools</div>
+        <div class="feat-desc">Network monitoring tools that log website visits see only connections to proxy server addresses, not the actual websites a child accessed through the proxy. A parent reviewing router logs or a household network monitoring tool finds no useful record of what was browsed during a proxy session. Browser history may still be recorded in the device's browser unless the child uses private browsing mode alongside the proxy — making browser history review a partial but not complete compensating control.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">⚠️</div>
+      <div>
+        <div class="feat-name">Connects Through Public Proxy Servers of Unknown Quality and Ownership</div>
+        <div class="feat-desc">Unlike named commercial VPN services — where the provider is a known entity with at least some public accountability — free proxy apps typically route traffic through a pool of public proxy servers operated by parties whose identity, jurisdiction and data practices are entirely unknown. A child's complete browsing activity passes through these servers, and there is no way to verify whether those servers are logging the traffic, injecting advertisements, modifying content, or engaging in other practices that may affect both the child's privacy and the safety of the content they receive.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">⚡</div>
+      <div>
+        <div class="feat-name">Typically Free and Requires No Account — Zero Friction to Activate</div>
+        <div class="feat-desc">Proxy Server apps are typically free to use with no account required — a child who downloads the app can have an active proxy connection within seconds of opening it for the first time. This zero-friction design removes every practical barrier between downloading the app and having all household network content controls bypassed. The absence of an account also means there is no login history, subscription footprint, or account activity that might signal to a parent that the app is being used.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">📱</div>
+      <div>
+        <div class="feat-name">Available on Google Play — Discoverable Through Standard App Store Search</div>
+        <div class="feat-desc">Proxy Server apps are available through the Google Play Store and are discoverable through searches for terms like "proxy", "unblock" or "bypass". A Family Link approval request will be triggered on devices where installation approval is active. A child who encounters a content restriction on their device may search for bypass tools and find proxy apps within the first results — without needing to know what a VPN is or how it works.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Proxy Server carries the standard bypass-tool risk of circumventing parental controls and hiding browsing activity, combined with the specific additional concern of routing traffic through unverified public servers of entirely unknown quality and ownership.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">Bypasses All Network-Level Parental Controls</div>
+      <div class="rc-desc">DNS filters, router content blocks and household network monitoring tools are all bypassed for any browsing through the proxy — the same practical outcome as a VPN, achieved through web proxy routing rather than full tunnel encryption</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">⚠️</span>
+      <div class="rc-name">Unknown Proxy Server Operators and Data Practices</div>
+      <div class="rc-desc">Free proxy apps route traffic through public servers operated by unknown parties — a child's complete browsing activity passes through these servers, and their identity, data practices and content modification behaviour cannot be verified</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">👁️</span>
+      <div class="rc-name">Hides Browsing From Network Monitoring Tools</div>
+      <div class="rc-desc">Network monitoring logs show only proxy server connections — a parent reviewing router logs or a network monitoring tool finds no useful record of what websites their child actually visited during any proxy session</div>
+    </div>
+    <div class="risk-card c-steel">
+      <span class="rc-emoji">⚡</span>
+      <div class="rc-name">Zero Friction — No Account, Active in Seconds</div>
+      <div class="rc-desc">Free proxy apps require no account creation and no configuration — a child can download and activate a complete bypass of household network controls within seconds, with no setup step that might prompt second thoughts</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Access to Content Blocked by Network Filters</div>
+      <div class="rc-desc">Any website or content category blocked at the network level — adult content, social media restrictions, gaming platforms, or any other category a parent has restricted — becomes accessible through the proxy with no age check or parental notification</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">📲</span>
+      <div class="rc-name">Easily Found by Children Searching for Bypass Tools</div>
+      <div class="rc-desc">Proxy apps appear prominently in app store searches for "unblock" and "bypass" — a child who encounters a content restriction and searches for a way around it will find proxy apps immediately, with no technical knowledge required</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Proxy Server Carries a Medium–High Risk Rating</strong>
+      <span>Proxy apps carry the same network bypass risk as consumer VPN tools, with the additional concern of routing traffic through unverified public servers of entirely unknown quality. Unlike named commercial VPN providers — where at least some public accountability exists — free proxy apps offer no way to assess whose servers handle a child's browsing traffic or what happens to it. Restriction on children's devices is appropriate.</span>
+    </div>
+  </div>
+
+  <div class="web-note">
+    <div class="wn-ico">🌐</div>
+    <div>
+      <div class="wn-title">Web-Based Proxy Sites Are a Separate Route — Browser History Review Remains Partially Useful</div>
+      <div class="wn-body">Beyond proxy apps, web-based proxy sites — websites that allow browsing through a proxy directly in the browser — are a related concern. Unlike VPN tools or proxy apps, web-based proxies may leave a trace in the browser's history (the proxy site itself will appear, even if the sites visited through it do not). Network-level DNS filters that block known proxy sites address this route, but proxy site lists change frequently and cannot be comprehensively blocked. App-level proxy tools are more effective at removing browsing history entirely than web-based proxy sites.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Proxy Apps and VPN Apps Are the Same Category of Risk — Both Bypass Network-Level Controls</div>
+        <div class="know-body">The technical difference between a proxy app and a VPN app — the level of encryption applied to the traffic and the routing method used — is not relevant to the child safety concern. Both bypass network-level content filters, both hide browsing destinations from monitoring tools, and both allow access to content that household controls are designed to restrict. A parent who has blocked VPN tools but not proxy tools has a gap in their coverage. iLimits addresses both categories in a single category-level restriction, which is the most practical approach given the number of individual apps in each.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Free Proxy Apps Route a Child's Traffic Through Servers That Cannot Be Verified</div>
+        <div class="know-body">One of the specific concerns with free proxy apps that distinguishes them from named commercial VPN services is the complete absence of information about the servers handling the traffic. A child whose browsing is routed through a free proxy app's public server pool is sending their web requests — including any typed information in forms, login details on sites, and browsing history — through a server operated by a party whose identity, location, and data practices are entirely unknown. This is not a hypothetical risk: public proxy servers have been used to inject advertising, harvest credentials, and modify web content. Parents should understand that "free and easy to use" in the proxy context often means "operated by someone with an undisclosed motivation for providing free internet routing."</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">A Child Using a Proxy App Was Trying to Bypass Something Specific</div>
+        <div class="know-body">Like VPN tools, proxy apps are specifically sought by people who know they want to bypass a network restriction. A child who has downloaded and activated a proxy app was motivated by something they believed was blocked — a platform, a category of content, or a specific website. Understanding what that was gives more useful information than removing the app alone. The conversation that begins with genuine curiosity about what they were trying to access is more likely to address the actual situation than a conversation focused purely on the tool.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Browser History May Still Contain Partial Information — Proxy Apps Are Not as Thorough as VPNs at Removing All Traces</div>
+        <div class="know-body">Unlike VPN apps, which encrypt all traffic and leave network monitoring tools entirely blind, basic proxy apps may not encrypt the traffic they route and may not prevent the browser from recording the visited URLs in its history. A parent who suspects a proxy app is being used should check the device's browser history — the proxy server's own address will appear, and depending on the proxy's implementation, the sites visited through it may also appear. Network monitoring tools at the router level may also show connection destinations that a basic proxy does not fully conceal. This partial visibility is a useful compensating control that does not apply to VPN tools.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents tools to block Proxy Server and the full category of proxy and VPN bypass tools — ensuring your network-level controls cannot be circumvented through either class of tool.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block proxy apps and VPN bypass tools by category with one tap</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Category-level restriction covers Proxy Server and equivalent proxy apps together</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Proxy Server as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for Proxy Server — addressing the bypass concern, the unknown server quality, and the motivation behind its use, alongside the most effective controls to put in place.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Address Both the Bypass and the Unknown Server Risk in Conversation</div>
+        <div class="tip-body">A conversation about proxy apps has two useful angles. The first is the same as for VPN tools: explain what a proxy does to household network controls and why that matters. The second is specific to free proxy apps: explain that unlike a named VPN service — where at least some public information about the provider exists — a free proxy app routes your child's browsing through servers run by parties whose identity is completely unknown, and whose motivation for providing free internet routing is undisclosed. Help your child understand that the question "whose server is handling my browsing?" is not paranoid — it is the right question to ask about any service that offers to route your internet traffic for free. For a child who has found the proxy app through a simple search for "how to unblock [something]", this is likely to be a more informative conversation than the technical explanation of how proxy routing works.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--px-light); border-color: var(--px-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Check the Browser History and Router Logs for Context on What Was Being Accessed</div>
+        <div class="tip-body">Unlike VPN tools, basic proxy apps may leave partial traces. Check the device's browser history for proxy server addresses and for any sites that may have appeared directly despite the proxy use. If your household router has activity logging enabled, check the connection logs for the period when the proxy was active — basic proxy apps may not fully conceal destination addresses at the network level in the same way a fully encrypted VPN does. This gives useful context for understanding what was being accessed and whether the proxy was used occasionally for a specific purpose or regularly as a persistent bypass. Understanding the pattern of use helps calibrate the response and the conversation.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block the Proxy and VPN Category Together, Enable Family Link Approval, and Layer Device With Network Controls</div>
+        <div class="tip-body">Apply iLimits restrictions at the proxy and VPN category level — this covers Proxy Server alongside VPN tools and similar bypass apps in a single action. Enable Google Family Link's app installation approval requirement to generate an alert before any new proxy app is installed. Combine device-level controls with network-level DNS filtering: device-level controls block proxy apps from running, while DNS-based content filters address content access from devices and browsing contexts not under direct device management. Also consider enabling DNS-based blocking of known web proxy sites at the router level as a complementary layer — while no DNS block list is comprehensive, blocking the most commonly used web proxy sites adds friction that may be sufficient for casual bypass attempts.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Proxy App Is the Same Problem as a VPN App — With an Extra Layer of Unknown Risk</h3>
+    <p class="closing-body">
+      Proxy Server routes a child's browsing through external servers with the same practical effect on parental controls as a VPN — and through servers whose operators are entirely unknown rather than at least nominally accountable as named businesses. iLimits gives you the tools to block it and the broader proxy and VPN category together. The conversation about both what the proxy does to household controls and whose servers are handling the traffic gives the restriction its most complete and honest foundation.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
