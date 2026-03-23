@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Shagle – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Shagle: deep cinnabar-vermilion */
+    --sh:           #DC2626;
+    --sh-mid:       #B91C1C;
+    --sh-deep:      #450A0A;
+    --sh-light:     #FFF5F5;
+    --sh-bdr:       #FCA5A5;
+    --sh-text:      #450A0A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --crimson-bg:   #FFF5F5;
+    --crimson-bdr:  #FCA5A5;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --orange-bg:    #FFF7ED;
+    --orange-bdr:   #FDBA74;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0F0000 0%, #200000 50%, #310404 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(220,38,38,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.24) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(252,165,165,0.24) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.26) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(220,38,38,0.22);
+    border: 1px solid rgba(252,165,165,0.34);
+    color: #FCA5A5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0F0000 0%, #DC2626 58%, #F87171 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(220,38,38,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Shagle callout ── */
+  .sh-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--crimson-bg); border: 1.5px solid var(--crimson-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .sh-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E4; border: 1.5px solid var(--crimson-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .sh-title-c { font-size: 13px; font-weight: 700; color: var(--sh-text); line-height: 1.3; margin-bottom: 3px; }
+  .sh-body  { font-size: 12px; color: #450A0A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Adult content badge ── */
+  .adult-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--peach-bg); border: 1.5px solid var(--peach-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .adult-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEE0C0; border: 1.5px solid var(--peach-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .adult-text strong { font-size: 12.5px; font-weight: 700; color: #431407; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .adult-text span   { font-size: 11.5px; color: #5C1A00; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--crimson-bg); border: 1.5px solid var(--crimson-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E4; border: 1.5px solid var(--crimson-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--sh-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #450A0A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0F0000 0%, #200000 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(220,38,38,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🎲</div>
+        <div>
+          <div class="app-name-text">Shagle</div>
+          <div class="app-sub">Random Stranger Video Chat</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Random Video Chat / Adult Platform</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">A random stranger video chat platform with an explicitly adult-oriented user base and adult content visible in its general feed — combining the live stranger video risk of Emerald Chat with the additional dimension of an adult entertainment ecosystem deliberately embedded in the platform</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Shagle and adult-oriented random video platforms from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Shagle — a random stranger video chat platform that, unlike Emerald Chat, does not present itself as a neutral or teen-accessible alternative to Omegle. Shagle's platform is explicitly oriented toward an adult audience, with adult content visible in its general feed, gender and location filtering designed for adult social and romantic connection, and a freemium model that monetises the adult entertainment dimension of its random video chat experience.</p>
+  </div>
+
+  <div class="sh-callout">
+    <div class="sh-ico">🎲</div>
+    <div>
+      <div class="sh-title-c">Shagle Combines the Random Stranger Live Video Risk With an Explicitly Adult-Oriented Platform Environment — It Is Not Presented as a Teen Platform and Children Have No Place on It</div>
+      <div class="sh-body">Shagle is a random stranger video chat platform that differs from Emerald Chat in a specific and significant way: it does not market itself as a safe or teen-accessible alternative to Omegle, and does not position safety features as its differentiating proposition. Shagle's platform is oriented toward an adult social and romantic audience, with gender and location filtering designed to facilitate adult connection, adult content visible in its general video feed without meaningful age verification, and a freemium model that includes premium features specifically serving the adult entertainment dimension of the platform. A child who accesses Shagle is not arriving at a platform that was designed for general audiences and carries incidental adult risks — they are arriving at a platform that was designed for adults and whose content environment reflects that orientation from the first connection.</div>
+    </div>
+  </div>
+
+  <div class="adult-band">
+    <div class="adult-icon">🔞</div>
+    <div class="adult-text">
+      <strong>Explicitly Adult-Oriented Platform — Adult Content in the General Feed Without Age Verification</strong>
+      <span>Unlike Emerald Chat, which presents itself as a general-audience stranger chat platform, Shagle's user base, features, and content environment are explicitly oriented toward adult social and romantic connection — with adult content accessible in the general video feed from the first connection.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#DC2626;"></span> Adult Content</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Random Video</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FCA5A5;"></span> No Verification</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Explicit Feeds</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Web-Based Access</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Shagle is a <strong>random stranger video chat platform with an explicitly adult-oriented user base and content environment</strong>. It combines the live stranger video risk shared by all platforms in this category with the additional dimension of a platform whose design, features, and content reflect an adult entertainment orientation that makes it fundamentally unsuitable for children of any age.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--crimson-bg);">🎲</div>
+      <div>
+        <div class="feat-name">Random Live Video Connection — Instantly to Any Adult Anywhere</div>
+        <div class="feat-desc">Shagle's core mechanism is identical to Emerald Chat's in its fundamental structure: a user is connected by live video feed with a random stranger within seconds of arriving on the platform, with no pre-screening of who they will be shown. No account is required to begin connecting, and no identity or age verification is performed. The difference is not in the mechanics of the random video connection but in the platform environment and user base into which a child is dropped when that connection is made — a platform explicitly oriented toward adult social, romantic, and sexual interaction.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔞</div>
+      <div>
+        <div class="feat-name">Adult Content Visible in the General Feed Without Age Verification</div>
+        <div class="feat-desc">Unlike random stranger chat platforms that carry adult content risks incidentally, Shagle's general video feed contains explicitly adult content that is accessible without any age verification step beyond a self-declared age at account creation — which is not required to begin connecting at all. A child who visits the platform can be connected to users broadcasting adult content within the first few random video connections, without any gate or warning system that meaningfully prevents this. The adult content is not an aberration or a moderation failure on Shagle — it reflects the platform's adult-oriented design intent and its user base, who are present specifically for the adult social and entertainment content the platform provides.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">⚙️</div>
+      <div>
+        <div class="feat-name">Gender and Location Filtering Designed for Adult Social and Romantic Connection</div>
+        <div class="feat-desc">Shagle provides gender filtering and country-based location filtering as core features of its stranger matching system. These filters are designed for adult users who wish to find connections with specific demographics — they allow a male user, for example, to filter specifically for female connections, or to target connections in a specific country. In the context of a random stranger video platform with an explicitly adult user base and adult content, gender filtering specifically enables targeting of young female users by adult male users — a filtering capability whose consequences in this platform environment are more serious than in a general-audience context.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">💳</div>
+      <div>
+        <div class="feat-name">Freemium Model With Premium Features Serving the Adult Entertainment Dimension</div>
+        <div class="feat-desc">Shagle operates a freemium model with paid premium features including unlimited gender filtering, virtual gifts, and other capabilities that serve the adult social and entertainment use cases of the platform. The existence of a paid tier oriented toward adult entertainment features reflects the platform's intended user base and purpose — this is not a general-purpose social platform that carries incidental adult content, but a platform whose premium revenue model is built around the adult entertainment dimension of its random video chat service. A child who creates an account may encounter in-app purchase prompts for features whose content orientation makes their purpose clear.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Primarily Web-Based — Accessible Without App Installation, Not Visible in App Lists</div>
+        <div class="feat-desc">Like Emerald Chat, Shagle is primarily accessed through a web browser rather than a dedicated app installation. A child can visit shagle.com in any browser on any device and begin random video connections without installing any application. This means Shagle does not appear in the device's installed app list and standard app-level parental controls that check installed applications will not detect its use. Detection requires browser history review for shagle.com visits or network-level DNS filtering that blocks the domain.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Shagle carries the highest risk rating because it compounds the live stranger video risk shared by all platforms in this category with the additional and compounding dimension of an explicitly adult-oriented platform environment — meaning a child on Shagle faces both the risk of contact with adults seeking to exploit minors and immediate exposure to adult content from first connection.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Adult Content From First Connection</div>
+      <div class="rc-desc">The general video feed contains explicitly adult content accessible without any meaningful age verification — a child can be exposed to adult content in the first few random connections without any warning or gate</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📹</span>
+      <div class="rc-name">Live Video With Unverified Strangers</div>
+      <div class="rc-desc">The same random stranger live video structure as Emerald Chat — instant connection, no pre-screening, no account required — into an explicitly adult-oriented platform environment whose content and user base reflect that orientation</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">⚙️</span>
+      <div class="rc-name">Gender Filtering Enables Targeting of Minors</div>
+      <div class="rc-desc">Gender filtering enables adult users to specifically select connections based on gender — in an adult-oriented platform with no meaningful age verification, this filtering capability can be used to specifically target young female users by adult males</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Web-Based — Not Visible in App Lists</div>
+      <div class="rc-desc">Shagle is browser-based and leaves no installed-app trace — detection requires browser history review for shagle.com or network-level domain blocking, not standard app-list inspection</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">No Account Required — No Identity, No Parental Trace</div>
+      <div class="rc-desc">Random video sessions can begin without any account or registration, meaning no account-based parental trace of any kind exists — a child can use the platform repeatedly without leaving any identifiable account footprint</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Adult Entertainment Freemium Model</div>
+      <div class="rc-desc">Premium features oriented toward adult entertainment content create in-app purchase prompts whose nature reflects the platform's adult orientation — a child encountering these prompts is exposed to the adult entertainment framing of the platform's commercial model</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Shagle Carries the Highest Risk Rating — Live Stranger Video Plus an Explicitly Adult Platform Environment</strong>
+      <span>Shagle is distinctively more serious than Emerald Chat not because its random stranger video mechanism is different — it is not — but because its platform environment is explicitly adult-oriented rather than general-audience. A child on Emerald Chat is in a platform that was designed for general audiences and carries adult risk incidentally. A child on Shagle is in a platform that was designed for adults and whose content, features, and commercial model all reflect that design intent. The combination of live stranger video and an explicitly adult content environment from first connection places Shagle in the most serious tier of risk for any child who accesses it.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🎲</div>
+    <div>
+      <div class="control-title">Shagle Is Differentiated From Emerald Chat by the Adult Orientation of Its Platform — Not by the Mechanics of Its Random Video Chat</div>
+      <div class="control-body">Parents who have already addressed Emerald Chat may wonder how Shagle differs, given that both are random stranger video chat platforms with no account requirement and web-based access. The distinction is in the platform environment. Emerald Chat presents itself as a general-audience alternative to Omegle and positions safety features as its differentiator — its risks are those of any random stranger video platform. Shagle does not make this positioning: its user base is explicitly adult-oriented, its general video feed contains adult content without meaningful age verification, its features include gender filtering designed for adult social and romantic matching, and its premium model serves an adult entertainment use case. A child on Shagle faces both the structural stranger video risks of the category and immediate exposure to an explicitly adult content environment — two compounding and distinct risk dimensions.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Shagle Is an Adult Platform — A Child Accessing It Is Not in a General-Audience Environment With Incidental Adult Risks</div>
+        <div class="know-body">The most important thing for parents to understand about Shagle is that it is not a general-audience platform that carries incidental adult content — it is a platform explicitly designed for adult social, romantic, and entertainment interaction. A child who accesses Shagle is not in an environment that was built for their demographic and happens to have adult users. They are in an environment that was built for adult users and whose entire content ecosystem reflects that orientation. This distinction matters for how the conversation is framed: Shagle is not a platform that failed to protect children from adult content, it is a platform that was never designed with children as users and whose content reflects the adult audience it was built for. A child who encounters Shagle through Omegle-adjacent searching or peer recommendation may not understand this distinction — they may arrive expecting a general stranger chat platform and find themselves in an adult content environment without anticipating or understanding what they have accessed.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Browser History Is the Primary Detection Signal — Check for shagle.com in All Browsers on Every Device</div>
+        <div class="know-body">As with Emerald Chat, Shagle is web-based and does not appear in any installed app list. Detection requires reviewing the browser history in every browser installed on every device the child uses — Chrome, Safari, Firefox, Edge, and any others — specifically checking for shagle.com and any related domains. Also check private or incognito browsing history if accessible through parental monitoring software. If Shagle visits are found in the browser history, the frequency and pattern of visits — a single curiosity visit versus repeated access — gives important context for the conversation and for the urgency of the response. For network-level protection on the home network, adding shagle.com to a DNS or router-level domain blocklist prevents access through any browser on any home-connected device regardless of the child's browser choice or use of private browsing within the local network.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">A Child Who Has Accessed Shagle May Have Been Exposed to Adult Content Before Realising What Platform They Were On</div>
+        <div class="know-body">Children who arrive at Shagle through Omegle-adjacent searching often do not know in advance that Shagle is an explicitly adult-oriented platform — they are looking for a random stranger chat alternative and arrive at what looks, in search results, like another stranger video chat platform. A child's first experience of Shagle may involve being connected to explicitly adult video content before they have formed an accurate understanding of what kind of platform they are on. This means a child who has accessed Shagle may have been exposed to adult content not through deliberate seeking but through the platform's default content environment for unverified users. A parent who discovers Shagle visits in the browser history should approach the conversation with awareness of this possibility — the child may need support in processing what they encountered, rather than only a conversation about why the platform is restricted.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The "Random Video Chat" Category Has Multiple Platforms — Restricting Shagle and Emerald Chat Addresses the Two Most Common but Not All</div>
+        <div class="know-body">Random stranger video chat platforms exist in a wider ecosystem — Shagle, Emerald Chat, Omegle (now closed), Chatroulette, and a range of similar platforms all operate on the same core model. A child who is blocked from Shagle and Emerald Chat and who continues to search for random stranger video chat platforms will find alternatives. The most durable protection combines app-level and DNS-level restrictions on the specific named platforms with a broader conversation about why the random stranger live video model itself — regardless of which platform provides it — creates the specific risks it does. A child who understands why live video contact with unverified strangers is inherently risky is better equipped to make their own assessment of unfamiliar platforms in this category than one who knows only that two specific named platforms are restricted.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Shagle and adult-oriented random stranger video platforms — preventing a child from accessing an explicitly adult content environment through a random video connection mechanism that requires no account and no age verification.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Shagle and adult random video platforms with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar adult-oriented stranger video platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents exposure to adult content through live random video connections</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged adult video platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like Shagle as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Because Shagle is <strong>web-based and not app-based</strong>, pair the iLimits restriction with DNS-level domain blocking for shagle.com on the home network for the most complete coverage. If browser history shows visits to Shagle, consider whether the child may need support in processing any adult content they were unexpectedly exposed to.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps reflecting Shagle's compounding risks — addressing the possibility of unexpected adult content exposure, applying DNS-level domain blocking alongside the iLimits restriction, and framing the broader category conversation that addresses the random stranger video model itself.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Approach the Conversation With Awareness That the Child May Have Been Unexpectedly Exposed to Adult Content</div>
+        <div class="tip-body">A child who has accessed Shagle may have encountered adult content not through deliberate seeking but because the platform's default environment for unverified users includes adult content in its general video feed from the first connection. The conversation should create space for the child to talk about what they encountered before focusing on the restriction — a child who was shocked or disturbed by what they saw on Shagle needs to be able to say so without the parental response focusing primarily on why they should not have been there. This approach — support first, restriction conversation second — is especially important if the browser history shows multiple visits that may represent repeated exposure to adult content, as opposed to a single curiosity visit. A child who feels they can disclose what they encountered and how it affected them, without the conversation immediately becoming about their behaviour, is more likely to disclose fully and more likely to come to a parent in future when they encounter something distressing online.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check Browser History for shagle.com — Then Block the Domain at Network Level</div>
+        <div class="tip-body">Review the browser history on every device the child uses — checking all browsers including any private browsing history accessible through monitoring software — specifically for shagle.com and related domains. Note the pattern of visits: a single visit that stopped quickly suggests a child who encountered the platform's adult content environment unexpectedly and left; multiple visits over a period suggests a pattern of access that warrants a different and more direct conversation. After reviewing, add shagle.com to any DNS or router-level domain blocklist on the home network to prevent future access through any browser on any home-connected device. For devices that access the internet through mobile data as well as home Wi-Fi, a mobile DNS filtering service applied to the device specifically can extend this protection to mobile data connections that home network filtering cannot cover.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Shagle Through iLimits, Apply DNS Blocking, and Address the Random Stranger Video Category Broadly</div>
+        <div class="tip-body">Apply the iLimits restriction to block Shagle and the broader category of adult random stranger video platforms. Pair this with DNS-level domain blocking for shagle.com on the home network. Then extend the conversation to address the random stranger video model as a category — not only Shagle specifically. The core risk of all platforms in this category is the same: live video, unverified stranger, no pre-screening, any adult, immediately. Shagle adds explicit adult content to this combination; Emerald Chat adds the Omegle legacy; other platforms in the category carry variations of the same core risk. A child who understands why live stranger video contact is inherently risky — because no platform can verify who the stranger is, how old they are, or what they intend — has a framework that applies across the entire category, making them better equipped to assess any unfamiliar platform they encounter in future that operates on the same model under a different name.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Platform Designed for Adults Is Not Safe for Children — Regardless of How It Is Found</h3>
+    <p class="closing-body">
+      Shagle was not designed for children, does not consider children part of its audience, and makes no meaningful attempt to prevent children from accessing its explicitly adult content environment. A child who arrives at Shagle through an Omegle-adjacent search or peer recommendation arrives without warning in a platform whose general video feed and features reflect an adult entertainment orientation. iLimits blocks the platform. DNS filtering closes the web-based access route. The conversation explains both why Shagle is an adult platform and why the random stranger live video model carries risks that no platform in this category can fully resolve — so that the next unfamiliar name in the same category does not require a new discovery to prompt the same protection.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
