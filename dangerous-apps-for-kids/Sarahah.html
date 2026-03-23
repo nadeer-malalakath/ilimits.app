@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sarahah – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Sarahah: warm sand-amber — Arabic origin, honesty theme */
+    --sa:           #B45309;
+    --sa-mid:       #92400E;
+    --sa-deep:      #3D1A00;
+    --sa-light:     #FFFBF0;
+    --sa-bdr:       #FCD34D;
+    --sa-text:      #291200;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --sand-bg:      #FFFBF0;
+    --sand-bdr:     #FCD34D;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --violet-bg:    #F5F3FF;
+    --violet-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #150900 0%, #261400 50%, #381E00 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(180,83,9,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(252,211,77,0.28) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(180,83,9,0.22);
+    border: 1px solid rgba(252,211,77,0.36);
+    color: #FCD34D; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #150900 0%, #B45309 58%, #F59E0B 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(180,83,9,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Sarahah callout ── */
+  .sa-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--sand-bg); border: 1.5px solid var(--sand-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .sa-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF3C7; border: 1.5px solid var(--sand-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .sa-title { font-size: 13px; font-weight: 700; color: var(--sa-text); line-height: 1.3; margin-bottom: 3px; }
+  .sa-body  { font-size: 12px; color: #3D1A00; font-weight: 400; line-height: 1.55; }
+
+  /* ── "Honesty" framing badge ── */
+  .honesty-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--violet-bg); border: 1.5px solid var(--violet-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .honesty-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #EDE9FE; border: 1.5px solid var(--violet-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .honesty-text strong { font-size: 12.5px; font-weight: 700; color: #2E1065; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .honesty-text span   { font-size: 11.5px; color: #4C1D95; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--sand-bg); border: 1.5px solid var(--sand-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF3C7; border: 1.5px solid var(--sand-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--sa-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #3D1A00; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #150900 0%, #261400 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(180,83,9,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">✉️</div>
+        <div>
+          <div class="app-name-text">Sarahah</div>
+          <div class="app-sub">Anonymous "Honest" Feedback Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Anonymous Social / Q&amp;A</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">An anonymous messaging platform explicitly framed around "honesty" — a framing that normalises the receipt of uninvited personal criticism from anonymous strangers and discourages children from rejecting harmful messages as the natural price of "honest feedback"</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Sarahah and anonymous feedback platforms from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Sarahah — an anonymous messaging platform that invites users to receive completely anonymous messages from anyone who has their link, explicitly framed around the concept of "honest" feedback. The "honesty" branding is Sarahah's defining characteristic and its most significant risk factor: it positions anonymous cruelty as candid truth-telling, making it psychologically harder for a child to reject harmful messages as unacceptable.</p>
+  </div>
+
+  <div class="sa-callout">
+    <div class="sa-ico">✉️</div>
+    <div>
+      <div class="sa-title">Sarahah Frames Anonymous Cruelty as "Honest Feedback" — Making It Psychologically Harder for Children to Reject Harmful Messages</div>
+      <div class="sa-body">Sarahah — meaning "frankness" or "candour" in Arabic — is an anonymous messaging platform explicitly built around the proposition of receiving honest, unfiltered feedback from people in your life. The name, the branding, and the platform's entire premise frame anonymous messages as the things people genuinely think but would not say face-to-face. This framing is what distinguishes Sarahah from other anonymous Q&A platforms and makes it uniquely harmful: a child who receives a cruel message on Tellonym can recognise it as an anonymous attack; a child who receives the same message on Sarahah has been primed by the platform's framing to receive it as honest truth — something people "really think" about them but are too polite to say directly. This psychological framing makes harmful content significantly harder to dismiss and significantly more likely to be internalised.</div>
+    </div>
+  </div>
+
+  <div class="honesty-band">
+    <div class="honesty-icon">🎭</div>
+    <div class="honesty-text">
+      <strong>"Honesty" Branding Reframes Anonymous Cruelty as Candid Truth — Children Are Primed to Receive Abuse as Feedback</strong>
+      <span>Sarahah's explicit framing around honesty and frankness is the feature that makes it distinctively harmful: it positions anonymous cruelty as authentic truth-telling, making it psychologically harder to reject harmful messages as what they are.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#B45309;"></span> "Honest" Framing</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Anonymous Senders</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FCD34D;"></span> Named Recipients</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> No Accountability</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Internalisation Risk</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Sarahah is an <strong>anonymous messaging platform framed around "honest" feedback</strong>. Its branding is its primary risk: by positioning anonymous messages as candid truths people are too polite to say directly, it makes cruel or harmful content significantly more likely to be internalised by the child who receives it — rather than recognised as the unaccountable abuse it actually is.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--sand-bg);">✉️</div>
+      <div>
+        <div class="feat-name">Anonymous Messages Framed as "Honest" — What People Really Think but Won't Say to Your Face</div>
+        <div class="feat-desc">Sarahah's explicit proposition is that it allows people to share "what they really think" about you without the social barriers that prevent honesty in face-to-face interaction. The platform presents itself as a space for authentic, unfiltered feedback — the things people genuinely feel but would never say directly. This framing sets up the child who creates an account to receive anonymous messages with a specific interpretive lens: messages on Sarahah are not random anonymous content, they are positioned as genuine, candid, and reflective of what real people in their life actually think. A cruel message received through this framing carries a very different psychological weight than one received through a platform with no such framing — it arrives pre-packaged as "what people really think about you."</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🧠</div>
+      <div>
+        <div class="feat-name">The "Honesty" Frame Makes Harmful Messages Harder to Reject Psychologically</div>
+        <div class="feat-desc">When a child receives an anonymous cruel message on a platform with no particular framing — such as "you're ugly" appearing in an anonymous inbox — they can potentially respond to it as a random attack from someone with no accountability: dismiss it, report it, or choose not to engage. When the same message arrives on Sarahah, the platform's entire premise has primed the child to interpret it differently — as honest feedback that someone felt strongly enough about to share through an honesty-focused platform. This pre-framing does not prevent the child from intellectually recognising that the message is cruel, but it significantly increases the likelihood that the child will partly believe it represents a genuine opinion of real people in their life, giving it far greater psychological impact than an identically worded message received without the honesty frame.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🎯</div>
+      <div>
+        <div class="feat-name">Same Asymmetric Anonymity Structure as Tellonym — Named Recipient, Anonymous Senders</div>
+        <div class="feat-desc">Sarahah shares the same structural anonymity asymmetry as Tellonym and Sendit: the account holder is publicly identified while every sender is completely anonymous, no identity verification is required, and the platform provides no mechanism for screening or identifying the source of harmful messages before they are received. Any person with the child's Sarahah link — classmates, acquaintances, adults, strangers who receive the link secondhand — can send completely untraceable anonymous messages. The child cannot identify who sent a message, cannot prevent further messages from the same sender, and cannot know whether a message represents one person's view or many people's.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">📣</div>
+      <div>
+        <div class="feat-name">Shared as a Link on Other Social Platforms — Exponentially Expanding the Anonymous Sender Pool</div>
+        <div class="feat-desc">Children share their Sarahah link on Instagram, Snapchat, Twitter, and other social platforms, inviting their followers to send "honest" anonymous messages. This sharing behaviour — encouraged by the platform's social framing — expands the pool of anonymous senders far beyond Sarahah's own user base to every follower on every platform where the link is posted, plus anyone those followers share it with. The expanded sender pool means that people the child has no relationship with, people from different social contexts, and complete strangers can all gain anonymous messaging access through the shared link — all under the platform's framing that the messages they receive represent honest opinions from real people in their life.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">📱</div>
+      <div>
+        <div class="feat-name">Available on Both iOS and Android — No Account Required From Senders</div>
+        <div class="feat-desc">Sarahah is available on both iOS and Android and allows messages to be sent to any account holder without the sender creating an account, without any identity verification, and without any age check. An adult who wishes to send anonymous messages to a child through Sarahah needs only the link — no registration, no age declaration, and no identity that could be traced or reported. The child has no mechanism for limiting messages by sender account status, age, or any other characteristic.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Sarahah's risks combine the structural anonymous harassment danger shared by all asymmetric-anonymity platforms with a unique additional harm: the platform's "honesty" framing specifically increases the psychological impact of harmful messages by pre-framing them as genuine, candid truth rather than unaccountable anonymous attack.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">"Honesty" Framing Amplifies Psychological Impact</div>
+      <div class="rc-desc">The platform's explicit "honest feedback" framing pre-conditions children to receive anonymous cruel messages as candid truths from real people in their lives — dramatically increasing the likelihood of internalisation compared to unframed anonymous harassment</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Children Are Primed to Believe Anonymous Cruelty</div>
+      <div class="rc-desc">Sarahah's proposition — that messages represent what people really think — specifically undermines a child's protective scepticism toward anonymous content, replacing it with a frame that makes cruel messages feel like genuine, if painful, peer feedback</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎯</span>
+      <div class="rc-name">Asymmetric Anonymity — Named Recipient, Anonymous Senders</div>
+      <div class="rc-desc">Named, identified recipient with no ability to screen or trace anonymous senders — the same structural harassment channel as Tellonym, with the added psychological harm of the honesty framing that makes harmful content harder to dismiss</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">😔</span>
+      <div class="rc-name">Serious Mental Health Impact — Internalisation of Abuse as Truth</div>
+      <div class="rc-desc">Anonymous harassment already carries significant mental health risk; Sarahah's honesty framing elevates that risk by specifically positioning harmful messages as genuine peer opinion — making anonymous cruelty feel like a reflection of real social reality rather than an unaccountable attack</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📣</span>
+      <div class="rc-name">Link Sharing Extends Anonymous Access Widely</div>
+      <div class="rc-desc">Sharing the Sarahah link on Instagram, Snapchat, and other platforms opens anonymous messaging to every social media follower plus their networks — all framed as potential "honest" feedback from real people the child knows</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">No Verification — Adults Can Contact Children Anonymously</div>
+      <div class="rc-desc">No account required from senders, no age verification, no identity check — an adult with the child's link can send anonymous messages framed as "honest feedback" without any barrier, and the child cannot distinguish adult contact from peer feedback</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Sarahah Carries the Highest Risk Rating — The "Honesty" Frame Is What Separates It From Other Anonymous Platforms</strong>
+      <span>Every anonymous Q&A platform in this sub-series carries the same structural risk: named recipient, anonymous senders, no accountability. Sarahah carries all of these — and adds the specific and serious psychological harm of its "honesty" framing, which actively works against the protective scepticism a child might otherwise apply to anonymous content. An app that does not merely enable anonymous cruelty but specifically pre-conditions the recipient to believe it as candid truth is distinctively and seriously harmful to children's mental health and self-perception.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">✉️</div>
+    <div>
+      <div class="control-title">The Honesty Framing Is Not a Marketing Quirk — It Is the Feature That Makes Sarahah More Harmful Than an Equivalent Anonymous Platform Without It</div>
+      <div class="control-body">A child who receives a cruel anonymous message on a neutral platform can apply the scepticism available to them — this is an anonymous message from someone I cannot identify, who faces no accountability, and whose opinion I have no reason to take as representative of any truth about me. Sarahah's platform design and branding specifically target and undermine that scepticism. The platform's proposition — that messages represent what people really think but are too polite to say — is designed to make anonymous content feel more credible, more personal, and more representative of genuine peer opinion than it would on a platform without that framing. For a child whose self-image and sense of social standing is still developing and genuinely sensitive to peer opinion, this targeted undermining of protective scepticism is not a minor detail — it is the feature that determines how deeply harmful anonymous messages land.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">The "Honesty" Framing Is What Makes Sarahah Distinctively Harmful — This Is the Specific Thing to Address in the Conversation With a Child</div>
+        <div class="know-body">A conversation about Sarahah that addresses only the structural anonymous Q&A risk — the same conversation that applies to Tellonym and Sendit — misses the specific and serious additional harm that Sarahah's framing creates. The thing to address directly with a child about Sarahah is the platform's proposition itself: that anonymous messages represent honest opinions from real people. This proposition is false in a specific and important way. Anonymous messages do not represent honest feedback from real people — they represent whatever an anonymous, unaccountable sender chose to write, which may have no relationship whatsoever to what any real person in the child's life actually thinks. A person who writes something cruel anonymously under the banner of "honesty" is not being honest — they are using the cover of anonymity to say something they would not stand behind if their name were attached to it. If the message cannot be said with identity attached, calling it "honest" is specifically misleading. This distinction — between actual honesty and anonymous cruelty dressed in honesty's branding — is the most important thing a child can understand about Sarahah.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Have Already Received Messages That Are Affecting Their Self-Image Without Disclosing It</div>
+        <div class="know-body">The particular harm of Sarahah's framing is that it can operate silently — a child who has received anonymous cruel messages through Sarahah and has partly internalised them as honest feedback from peers may be experiencing a quietly diminished sense of self-worth without any visible crisis or disclosure. Unlike obvious harassment that a child might report, messages received through a platform framed around honesty may be processed by the child as painful but genuine peer opinion — something to be quietly accepted rather than rejected or reported. A parent who discovers Sarahah on a child's device should approach the message history review and the conversation with awareness that the child may have been quietly affected by messages they have not disclosed, and should create explicit space for the child to talk about how what they received made them feel.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Sarahah Is One of a Series of Anonymous Q&A Platforms — Children Blocked From One Often Move to Another</div>
+        <div class="know-body">Sarahah, Tellonym, NGL (Not Gonna Lie), ASKfm, and Sendit all operate on the same structural model of anonymous messages directed at a named, identified recipient. These platforms have existed in waves — one rises in popularity, generates child safety concern, declines, and another rises in its place. A child who is blocked from Sarahah may move to an equivalent platform if the underlying social dynamic — peer groups participating in anonymous Q&A — continues. The most durable protection combines the app-level restriction with a broader conversation about the structural harm of anonymous Q&A platforms as a category, giving the child a framework for evaluating similar platforms independently rather than simply knowing that one specific app has been blocked.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Removing the App Does Not Remove the Link — Both the Account and Any Shared Links Must Be Addressed</div>
+        <div class="know-body">As with Tellonym, removing the Sarahah app from a child's device does not deactivate their Sarahah profile or the links they have shared. Anyone who has the child's Sarahah link can continue sending anonymous messages to the profile even after the app is deleted from the device — the messages will simply accumulate in the account without being seen until the app is reinstalled. A complete response to finding Sarahah on a child's device includes: reviewing the message history within the app before deletion, deleting the Sarahah account itself through the account settings, and removing the Sarahah link from any social media profiles — Instagram bio, Snapchat story, Twitter profile — where it has been shared. All three steps are necessary to fully close the anonymous messaging access that was created when the child shared their link.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Sarahah and similar anonymous feedback platforms — preventing a child from accessing a platform whose explicit "honesty" framing is specifically designed to make anonymous cruelty feel like candid, credible peer opinion.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Sarahah and anonymous feedback platforms with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar anonymous Q&A and feedback apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents the "honesty" framing from conditioning a child to receive abuse as truth</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged anonymous social platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Sarahah as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. If Sarahah is found on your child's device, <strong>review the messages received before deleting the app, delete the account itself (not just the app), and remove the Sarahah link from any social media profiles</strong> where it has been shared — all three steps are needed to fully close anonymous messaging access.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps centred on Sarahah's specific risk — directly addressing the "honesty" framing with the child, checking for messages that may have quietly affected their self-image, and completing the full account removal process rather than only deleting the app.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Directly Address the "Honesty" Frame — Explain Why Anonymous Is Not the Same as Honest</div>
+        <div class="tip-body">The most important thing to address in a conversation about Sarahah is the platform's central proposition: that anonymous messages represent what people really think. Explain to the child specifically why this is false — not because people are always dishonest, but because anonymity and honesty are not the same thing. Genuine honesty means standing behind what you say with your name attached — it means being willing to be known as the person who said it. Anonymous messages have no accountability, which means there is no cost to saying something cruel, exaggerated, or entirely invented. A person who says something genuinely honest does so with their identity attached to it. A person who says something anonymous may be doing so specifically because they know it is something they could not defend if identified. The platform calling itself "Sarahah" — frankness — does not make the content honest; it dresses unaccountable anonymous messages in honesty's clothing. A child who understands this distinction can apply it not only to Sarahah but to every anonymous platform they will encounter.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Review Messages With the Child's Emotional State in Mind — Look for Signs of Quiet Internalisation</div>
+        <div class="tip-body">Open Sarahah on the child's device and review the anonymous messages that have been received. Unlike obvious harassment that a child might have flagged, look for messages that are phrased as critical assessments — comments about appearance, personality, social standing, or behaviour that are presented as candid observations rather than overt attacks. These are the messages most likely to have been processed by the child through the platform's honesty frame and quietly internalised as peer opinion. After reviewing, approach the conversation about those messages with sensitivity — not from the position of "these messages are terrible and wrong" but from the position of "let's talk about how these messages made you feel, and why anonymous messages, however they're framed, are not the same as genuine feedback from real people in your life." If the child seems to have been significantly affected, consider whether additional support — from a school counsellor or another trusted adult — would be beneficial alongside the parental conversation.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Complete the Full Removal Process — Account Deletion, Link Removal, and iLimits Restriction</div>
+        <div class="tip-body">Apply the iLimits restriction to block Sarahah on the child's device. Also complete the full account removal process: delete the Sarahah account through the account settings within the app — not just the app from the device — and then check and remove the Sarahah link from any social media profiles where it has been shared. The account deletion closes the profile and deactivates the link; removing the link from social media profiles prevents anyone who previously saved it from sending messages if the account were somehow reinstated. After completing these three steps, extend the conversation to the category of anonymous Q&A platforms — using the specific insight about the difference between anonymity and honesty as a framework that the child can apply independently when they encounter Tellonym, NGL, ASKfm, or any other platform in the same category in the future.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Calling It "Honest" Doesn't Make It True — Anonymity Without Accountability Is Not Candour</h3>
+    <p class="closing-body">
+      Sarahah's name means frankness. Its platform promises "what people really think." Both frame anonymous, unaccountable messages from unknown senders as candid truth from real people in a child's life — making harmful content not just painful but believable in a way that plain anonymous harassment is not. iLimits blocks the platform. The conversation addresses the framing — giving the child the most durable protection of all: the understanding that a message no one will sign their name to is not honesty, whatever the platform calls itself.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
