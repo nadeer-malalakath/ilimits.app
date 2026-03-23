@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Yik Yak – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Yik Yak: forest-yak green */
+    --yy:           #16A34A;
+    --yy-mid:       #15803D;
+    --yy-deep:      #052E16;
+    --yy-light:     #F0FDF4;
+    --yy-bdr:       #86EFAC;
+    --yy-text:      #052E16;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+    --purple-bg:    #FAF5FF;
+    --purple-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #010C05 0%, #052E16 50%, #073D1C 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(22,163,74,0.42) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 275px; height: 275px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(22,163,74,0.38) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(22,163,74,0.18);
+    border: 1px solid rgba(134,239,172,0.34);
+    color: #86EFAC; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #052E16 0%, #16A34A 55%, #4ADE80 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(22,163,74,0.50), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .yy-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--yy-light); border: 1.5px solid var(--yy-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .yy-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #BBF7D0; border: 1.5px solid var(--yy-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .yy-title { font-size: 13px; font-weight: 700; color: var(--yy-text); line-height: 1.3; margin-bottom: 3px; }
+  .yy-body  { font-size: 12px; color: #166534; font-weight: 400; line-height: 1.55; }
+
+  .anon-banner {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .ab-ico {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E4; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .ab-title { font-size: 12.5px; font-weight: 700; color: #7F1D1D; margin-bottom: 3px; line-height: 1.3; }
+  .ab-body  { font-size: 11.5px; color: #991B1B; font-weight: 400; line-height: 1.55; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-green::before  { background: #16A34A; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Bullying note ── */
+  .bullying-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--yy-light); border: 1.5px solid var(--yy-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .bn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #BBF7D0; border: 1.5px solid var(--yy-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .bn-title { font-size: 13px; font-weight: 700; color: var(--yy-text); line-height: 1.3; margin-bottom: 3px; }
+  .bn-body  { font-size: 12px; color: #166534; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #010C05 0%, #073D1C 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(22,163,74,0.26) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: 0 2px 14px rgba(240,67,106,0.10); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card            { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid       { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card         { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box        { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip      { animation: fadeUp 0.42s ease 0.05s both; }
+  .yy-callout      { animation: fadeUp 0.42s ease 0.03s both; }
+  .anon-banner     { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip      { animation: fadeUp 0.42s ease 0.04s both; }
+  .bullying-note   { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing         { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🐃</div>
+        <div>
+          <div class="app-name-text">Yik Yak</div>
+          <div class="app-sub">Anonymous Location-Based Social App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Anonymous Social</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val high">🔴 High</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Fully anonymous location-based posting that enables targeted bullying, harassment and threatening content directed at specific individuals in a child's immediate physical community — with no identity attached to any post</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Yik Yak — an anonymous location-based social app where users post to a shared feed visible to everyone within a few miles, with no identity attached to any post or response, creating conditions specifically conducive to targeted harassment and bullying of identifiable local individuals.</p>
+  </div>
+
+  <div class="yy-callout">
+    <div class="yy-ico">🐃</div>
+    <div>
+      <div class="yy-title">Yik Yak Combines Full Anonymity With Hyper-Local Visibility — Posts Can Be Read by Everyone in Your Child's School Without Anyone Knowing Who Wrote Them</div>
+      <div class="yy-body">Yik Yak shows users a feed of anonymous posts from anyone within a few miles of their current location. No username, no profile photo, no identity is attached to any post. Because it is location-based, the feed at a school will be dominated by posts from students at that school — creating a shared anonymous space where a child's peers can post about them, name them, target them, or harass them without accountability of any kind. Yik Yak has a documented history of being used for cyberbullying, threats, hate speech and the sharing of information designed to humiliate specific identifiable individuals in local communities.</div>
+    </div>
+  </div>
+
+  <div class="anon-banner">
+    <div class="ab-ico">⚠️</div>
+    <div>
+      <div class="ab-title">Yik Yak Has a Documented History of Targeted Harassment, Threats and Cyberbullying — Including Cases Involving School Students Specifically</div>
+      <div class="ab-body">Yik Yak's original version was shut down in 2017 partly in response to widespread misuse for harassment, threats and hate speech. When it was relaunched in 2021, the same patterns re-emerged. The app has been linked to documented cases of targeted harassment of school students, threats made against specific individuals, and the creation of content specifically designed to humiliate or harm people who are identifiable to the local community even when their names are not used. The combination of anonymity and location makes it a particularly effective harassment tool in contained communities like schools.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#16A34A;"></span> Anonymous Posts</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Location-Based</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> No Accountability</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Peer-Targeted Content</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Community Feed</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">Yik Yak is an <strong>anonymous location-based social app</strong> where users post to a shared feed visible to everyone within a few miles, with no identity attached to any post — creating a locally targeted anonymous space that has been repeatedly used for bullying, harassment and threats directed at identifiable individuals in school communities.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--yy-light);">📍</div>
+      <div>
+        <div class="feat-name">Location-Based Feed — Everyone Within a Few Miles Sees the Same Posts</div>
+        <div class="feat-desc">Yik Yak shows users a shared feed of posts from anyone physically within approximately five miles of their current location. At a school, this means the feed is effectively a school-specific anonymous forum — dominated by posts from students who are physically present at the same location. A child using Yik Yak at school is reading posts from their peers about their shared environment, their classmates, their teachers, and potentially about themselves — without knowing who wrote any of it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">👤</div>
+      <div>
+        <div class="feat-name">Full Anonymity — No Profile, No Username, No Identity on Any Post</div>
+        <div class="feat-desc">Yik Yak attaches no identifying information whatsoever to posts or responses. There is no username, no profile photo, no persistent identity across posts. Every piece of content on the platform is posted by an anonymous account whose other posts and identity are entirely invisible. This complete anonymity removes all social accountability — a child can post anything about any of their peers without any risk of being identified, and peers can read content about themselves or others without any ability to know who created it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">🎯</div>
+      <div>
+        <div class="feat-name">Specifically Enables Targeted Harassment of Identifiable Local Individuals</div>
+        <div class="feat-desc">The combination of hyper-local geographic targeting and full anonymity creates conditions specifically suited to targeted harassment. A post that does not name a person can still be entirely clear to everyone in a local community about who it refers to — physical descriptions, references to specific events, mentions of visible characteristics or social situations all allow a person to be targeted in ways that are obvious to their peers while remaining deniable. Yik Yak posts about students in a school do not need to name anyone to constitute targeted harassment of a specific individual.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">👍</div>
+      <div>
+        <div class="feat-name">Upvote/Downvote System Amplifies the Most Engaging — Often the Most Provocative — Content</div>
+        <div class="feat-desc">Yik Yak uses an upvote and downvote system that determines which posts are most visible in the feed. Content that generates strong reactions — including provocative, cruel, or shocking posts — tends to be upvoted and rise to the top of the feed. This creates an incentive structure that amplifies the most engaging content, which in a local school context often means the most gossip-laden, targeted or potentially harmful posts about identifiable peers. Posts that receive too many downvotes are removed, providing some moderation, but the system primarily rewards high-engagement content regardless of its nature.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">💬</div>
+      <div>
+        <div class="feat-name">Direct Messaging Available — Anonymous Contact Between Users</div>
+        <div class="feat-desc">Beyond the public local feed, Yik Yak allows direct messaging between users who remain anonymous throughout the conversation. This enables anonymous private contact between any two users in the same geographic area — including anonymous harassment or threatening messages sent directly to a child without any identity attached to the sender. The combination of anonymous public posts and anonymous private messaging means there is no accountability at any level of interaction on the platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Yik Yak's risks are centred on the combination of anonymity and local targeting that makes it uniquely effective for bullying and harassment of school-aged children by their immediate peers, with no accountability mechanism and a documented record of serious harm.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🎯</span>
+      <div class="rc-name">Targeted Cyberbullying of Local Peers</div>
+      <div class="rc-desc">The hyper-local feed and full anonymity combine to enable targeted harassment of identifiable school students — posts can be obviously about a specific person to the entire local community without naming them, with no accountability to the poster</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">⚠️</span>
+      <div class="rc-name">Documented History of Harassment, Threats and Hate Speech</div>
+      <div class="rc-desc">Yik Yak has a documented record of being used for threats against individuals, targeted harassment campaigns, and hate speech in school communities — the original app was shut down partly for this reason, and the same patterns recurred after relaunch</div>
+    </div>
+    <div class="risk-card c-green">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">Complete Anonymity Removes All Social Accountability</div>
+      <div class="rc-desc">No username, no profile, no persistent identity — a child can read content about themselves from anonymous peers with no ability to know who posted it, and cannot report a specific person for what was written about them</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Significant Impact on Mental Health and Wellbeing</div>
+      <div class="rc-desc">Reading anonymous content about oneself posted by unidentifiable peers in one's immediate community is documented to cause significant anxiety, distress and harm to mental health — the anonymity amplifies the impact rather than reducing it</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Anonymous Direct Messaging Enables Private Harassment</div>
+      <div class="rc-desc">Direct messaging on Yik Yak is fully anonymous — any user in the local area can send a child anonymous messages, including threatening or harassing content, with no identity attached and no ability to block a specific person from contacting them again</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">📢</span>
+      <div class="rc-name">Upvote System Amplifies Harmful Content</div>
+      <div class="rc-desc">The engagement-based feed amplifies posts that generate strong reactions — often the most provocative or harmful content in a school context — giving the most damaging posts the greatest visibility among the child's entire local peer community</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Yik Yak Carries a High Risk Rating</strong>
+      <span>Yik Yak is not a social app with incidental bullying risks — its core design combines the features that make targeted harassment of school-age children most effective: anonymity that removes accountability, hyper-local targeting that makes posts obvious to a peer community without naming victims, and an engagement system that amplifies the most provocative content. Its documented record of harm to children makes it one of the most directly dangerous apps in the social category for school-age users.</span>
+    </div>
+  </div>
+
+  <div class="bullying-note">
+    <div class="bn-ico">🔍</div>
+    <div>
+      <div class="bn-title">Yik Yak Is Particularly Dangerous Because the Harm Comes From People the Child Already Knows</div>
+      <div class="bn-body">Most online safety concerns involve strangers. Yik Yak's harm comes specifically from peers — people in a child's school or local community who know them and can post content that is obviously about them without naming them. This makes the experience of being targeted on Yik Yak more psychologically damaging than anonymous harassment from strangers: the child knows the people posting are someone in their immediate world, but cannot know which person it is, creating a pervasive uncertainty about who among their peers wrote what. This dynamic has been specifically associated with significant anxiety and distress in adolescents.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Yik Yak Is Not a General Anonymous App — It Is Specifically Designed for the Context Where Bullying Is Most Harmful: the Child's Own School Community</div>
+        <div class="know-body">Many anonymous social apps create risks from stranger contact or inappropriate content from unknown users. Yik Yak is different: its hyper-local focus means the people posting are the child's own peers — classmates, people they see every day, people who know them and who they know. Content posted about them is posted by people in their immediate social environment. Being unable to know which of their peers wrote something about them while knowing it was definitely someone from their own community creates a specific form of distress that is documented to be more damaging than anonymous content from strangers. The platform's design is not accidentally suited to peer harassment — it is the feature that made the app popular.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">A Child Who Has Been Targeted on Yik Yak May Not Tell You — Know the Signs</div>
+        <div class="know-body">Children who have been targeted by harassment on Yik Yak may not disclose it to parents — partly because of embarrassment about what was posted, partly because they may fear their device access will be restricted, and partly because the anonymous nature of the posts means they cannot provide a specific person to report. Signs that a child may have been targeted include changes in willingness to attend school, withdrawal from social activity, unusual anxiety about social situations with peers, or unexplained distress that increases during school periods and decreases on weekends and holidays. If your child shows these signs, asking directly and calmly about their experience on anonymous social apps — making clear they will not be in trouble for telling you — may open the conversation.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">A Child Who Has Posted Harassing Content on Yik Yak Is Also at Risk — Legal and Social Consequences Are Real</div>
+        <div class="know-body">While the most common parental concern is a child being targeted, it is also possible that a child has posted content on Yik Yak that targets others. The anonymity of the platform may lead children to post content they would not say to a person's face, without fully considering the impact or the possibility of being identified. Law enforcement has been able to identify Yik Yak users in serious harassment cases through the platform's own records and through device metadata. A child who posts threatening or harassing content on Yik Yak is not protected by the apparent anonymity — and the social consequences if they are identified by their peer community can be significant. This is worth addressing in conversation alongside the more common concern about being a target.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">If Your Child Has Been Targeted by Threatening Content, This Can Be Reported to the Platform and Potentially to Authorities</div>
+        <div class="know-body">Yik Yak has content reporting functions and has cooperated with law enforcement in cases involving credible threats. If your child has received anonymous threatening content — particularly content that constitutes a genuine threat to their safety — this can be reported through the app and, if the threat is credible, to law enforcement who may be able to request identifying information through appropriate legal channels. Anonymous posting does not provide complete legal protection to someone who makes threats. Preserving screenshots of threatening content before reporting it is important, as posts may be removed after reporting. If your child's school is involved — for example, if threats appear to target students at a specific school — involving school administration alongside platform reporting is appropriate.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block Yik Yak and similar anonymous social apps — protecting children from one of the most directly harmful social platforms for school-age users.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block Yik Yak and anonymous social discovery apps by category with one tap</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Restricted categories cover similar anonymous location-based platforms</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which apps are accessible on every device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Yik Yak as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual age, maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for Yik Yak — including how to have a conversation that addresses both the risk of being targeted and the risk of posting harmful content, how to recognise signs of distress, and how to respond if your child has been targeted by threatening content.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Address Both Sides — Being a Target and Being a Poster — in the Same Conversation</div>
+        <div class="tip-body">The conversation about Yik Yak is most complete when it addresses both directions. First, being targeted: explain clearly what the platform does, why anonymity combined with local targeting is specifically harmful, and make clear that if they encounter content about themselves or see content targeting others, they can come to you. Emphasise that they will not be in trouble for telling you, and that if content is threatening it can be reported. Second, posting: address directly that the apparent anonymity is not complete — law enforcement has identified Yik Yak users in serious cases, and being identified by their own peer community carries serious social consequences. Help them understand that posting something anonymously does not mean the impact on the person targeted is any less real. Both parts of the conversation are most effective when they are calm, specific and treat your child as capable of understanding the implications.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--yy-light); border-color: var(--yy-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Know the Signs That Your Child May Have Been Targeted — and Ask Directly If You Suspect It</div>
+        <div class="tip-body">Children targeted by peer harassment on anonymous platforms often do not disclose it spontaneously. Watch for changes in school attendance or willingness, withdrawal from social activity with peers, increased anxiety during school days, and unexplained distress. If your child shows these signs, ask directly and calmly: have they seen content about themselves on Yik Yak? Have they received any messages that upset them? Make the conversation as low-barrier as possible — reassure them there is no punishment for telling you, that you will take it seriously, and that you will not overreact in a way that makes their social situation worse. If they disclose that they have been targeted, listen first. Understand what was posted, how long it has been happening, and whether any of the content constitutes a genuine threat before deciding on next steps. Preserving screenshots before reporting is important.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Yik Yak With iLimits, Enable Family Link Approval, and Consider Involving the School if Harassment Has Occurred</div>
+        <div class="tip-body">Apply iLimits restrictions to block Yik Yak and similar anonymous social apps across all of your child's devices. Enable Family Link's app installation approval requirement to generate an alert if a similar app is subsequently installed. If your child has already been targeted by harassment on Yik Yak — particularly content that appears to involve students at their school — consider whether to involve school administration. Schools increasingly have policies on cyberbullying that extend to off-campus platforms, and school administrators who are aware of a pattern of harassment involving their students can take actions that the platform itself cannot. If any content constitutes a credible threat to your child's safety, report it to both the platform and to law enforcement, providing screenshots before reporting to ensure the evidence is preserved.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Anonymous Posts From People Who Know You Are Harder to Bear Than Anonymous Posts From Strangers</h3>
+    <p class="closing-body">
+      Yik Yak's specific harm is not that strangers can be cruel online — children understand that. Its harm is that the people posting are the child's own peers, whose identities are unknown but whose physical proximity makes it certain the posts come from someone in their immediate world. That uncertainty is what makes Yik Yak's harassment so damaging. iLimits gives you the tools to block it. The conversation that helps your child understand why anonymity paired with local community targeting is specifically harmful — and that opens the door for them to tell you if they have been targeted — is the most important protection you can give them.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
