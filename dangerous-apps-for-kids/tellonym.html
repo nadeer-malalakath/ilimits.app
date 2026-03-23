@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Tellonym – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Tellonym brand: deep teal-cyan */
+    --te:           #0891B2;
+    --te-mid:       #0E7490;
+    --te-deep:      #164E63;
+    --te-light:     #ECFEFF;
+    --te-bdr:       #67E8F9;
+    --te-text:      #083344;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --cyan-bg:      #ECFEFF;
+    --cyan-bdr:     #67E8F9;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #020E12 0%, #06202A 50%, #0A3040 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(8,145,178,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(103,232,249,0.24) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(8,145,178,0.20);
+    border: 1px solid rgba(103,232,249,0.34);
+    color: #67E8F9; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #020E12 0%, #0891B2 58%, #22D3EE 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(8,145,178,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Tellonym callout ── */
+  .te-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cyan-bg); border: 1.5px solid var(--cyan-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .te-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CFFAFE; border: 1.5px solid var(--cyan-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .te-title { font-size: 13px; font-weight: 700; color: var(--te-text); line-height: 1.3; margin-bottom: 3px; }
+  .te-body  { font-size: 12px; color: #083344; font-weight: 400; line-height: 1.55; }
+
+  /* ── Cyberbullying badge ── */
+  .bully-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .bully-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E8; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .bully-text strong { font-size: 12.5px; font-weight: 700; color: #881337; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .bully-text span   { font-size: 11.5px; color: #9F1239; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cyan-bg); border: 1.5px solid var(--cyan-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CFFAFE; border: 1.5px solid var(--cyan-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--te-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #083344; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #020E12 0%, #06202A 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(8,145,178,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">💬</div>
+        <div>
+          <div class="app-name-text">Tellonym</div>
+          <div class="app-sub">Anonymous Q&amp;A &amp; Message Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Anonymous Social / Q&amp;A</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Allows any anonymous user to send messages or questions to a named, identified account holder — creating a direct channel for anonymous cyberbullying, harassment, and grooming that the recipient cannot prevent or trace back to its source</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Tellonym and anonymous Q&amp;A platforms from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Tellonym — an anonymous Q&A and messaging platform where any user can send a message or question to a named account holder without identifying themselves, the responses are posted publicly on the recipient's profile, and the account holder has no way to identify or block the anonymous senders of harmful messages before those messages have been received.</p>
+  </div>
+
+  <div class="te-callout">
+    <div class="te-ico">💬</div>
+    <div>
+      <div class="te-title">Tellonym Lets Any Anonymous User Send Messages Directly to a Named, Identified Child — Creating an Unblockable Channel for Harassment, Bullying, and Grooming</div>
+      <div class="te-body">Tellonym is an anonymous Q&A platform that allows any user — whether registered or not — to send messages or questions to any account holder without revealing their identity. The account holder's profile is public and identified — unlike platforms where both parties are anonymous, Tellonym creates a specific asymmetry: the recipient is a named, identifiable person, while every sender is completely anonymous. This asymmetry means that a child who creates a Tellonym account is immediately accessible to anonymous messages from anyone who knows their username — including people from their school, community, or from adult strangers — without any ability to screen, filter, or identify who is contacting them before the message has been received.</div>
+    </div>
+  </div>
+
+  <div class="bully-band">
+    <div class="bully-icon">🎯</div>
+    <div class="bully-text">
+      <strong>A Targeted Harassment Tool by Design — The Sender Is Anonymous, the Recipient Is Named</strong>
+      <span>Tellonym's asymmetric anonymity means the recipient is always identifiable while every sender is always protected — creating a structure that is uniquely suited to anonymous harassment of a specific, identified person.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#0891B2;"></span> Anonymous Senders</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Named Recipients</div>
+    <div class="mode-chip"><span class="cdot" style="background:#67E8F9;"></span> Public Responses</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Untraceable Abuse</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> No Block Mechanism</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Tellonym is an <strong>anonymous Q&amp;A and messaging platform</strong> where the sender is always anonymous and the recipient is always a named, identified person. This structural asymmetry makes it uniquely suited as a channel for anonymous cyberbullying, targeted harassment, and grooming — with no ability for the recipient to screen, identify, or prevent harmful messages before they have been received.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--cyan-bg);">🎯</div>
+      <div>
+        <div class="feat-name">Asymmetric Anonymity — The Sender Is Anonymous, the Recipient Is Named</div>
+        <div class="feat-desc">Unlike platforms where all users are anonymous to each other, Tellonym creates a structural asymmetry: the account holder — typically a child who has shared their Tellonym link with their peer group — is publicly identified by their real name or username, while every person who sends them a message is completely anonymous. This means the child is publicly exposed and identified while everyone who contacts them is completely protected. An abusive or harmful message cannot be traced back to its sender, cannot be responded to privately, and can be sent by anyone who has the child's Tellonym link regardless of whether they have an account on the platform.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">😔</div>
+      <div>
+        <div class="feat-name">A Primary Vehicle for Anonymous Cyberbullying and Targeted Harassment</div>
+        <div class="feat-desc">The combination of complete sender anonymity and named, identified recipients makes Tellonym structurally ideal for anonymous harassment. A classmate, a peer, or anyone who knows the child's Tellonym link can send cruel, humiliating, or abusive messages without any risk of identification or consequence. The recipient receives the message — including all of its emotional impact — without any ability to identify who sent it, report them by identity, or prevent further messages from the same source. Tellonym and similar anonymous Q&A platforms have been specifically associated with cyberbullying incidents and, in documented cases, with messages that have contributed to serious harm to the mental health and wellbeing of young recipients.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">👤</div>
+      <div>
+        <div class="feat-name">No Verification for Senders — Adults Can Contact Children Without Any Account</div>
+        <div class="feat-desc">Anyone can send a message to a Tellonym account holder without registering an account, without providing any identity, and without any age verification. An adult who wishes to contact a child whose Tellonym link is publicly available needs nothing more than the link — no account, no identity, no verification. The child cannot determine whether an anonymous message has come from a classmate or from an adult they have never met. The platform provides no mechanism for screening senders by age, identity, or account status before a message is received.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">📣</div>
+      <div>
+        <div class="feat-name">Responses Are Posted Publicly on the Profile — Creating Public Humiliation Dynamics</div>
+        <div class="feat-desc">When a Tellonym account holder responds to an anonymous message, both the message and the response are posted publicly on their profile. This creates a social dynamic where an anonymous sender can post a message designed to embarrass, humiliate, or manipulate the recipient into a public response — and the recipient either responds publicly, potentially amplifying the embarrassing content, or declines to respond, leaving the message visible on their profile without context. The public nature of the message-response format creates dynamics that can be exploited for public humiliation alongside direct private harm.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🔗</div>
+      <div>
+        <div class="feat-name">Links Are Shared on Other Social Platforms — Expanding the Pool of Anonymous Senders</div>
+        <div class="feat-desc">Children typically share their Tellonym profile link on their other social media accounts — Instagram, TikTok, Snapchat — inviting their followers to send them anonymous messages. This sharing extends the pool of potential anonymous senders from the Tellonym user base to the much larger audience of every follower the child has on other platforms, as well as anyone those followers share the link with. A child's Tellonym link can reach people they do not know, people they have blocked on other platforms, and people from entirely different social contexts — all of whom gain anonymous messaging access to the child through the shared link.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Tellonym's risks centre on the specific harm enabled by anonymous harassment directed at a named, identified person — a structure that enables anonymous cruelty without consequence, adult access to named children without verification, and a social dynamic that can cause serious harm to a child's mental health and wellbeing.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">😔</span>
+      <div class="rc-name">Anonymous Cyberbullying Without Accountability</div>
+      <div class="rc-desc">The complete anonymity of senders means abusive, cruel, and harmful messages arrive with no ability to identify, report by identity, or prevent further contact from the same source — the child absorbs the full impact of the message with no recourse</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎯</span>
+      <div class="rc-name">Targeted Harassment of a Named, Identified Person</div>
+      <div class="rc-desc">Unlike anonymous platforms where everyone is anonymous, Tellonym exposes the recipient while protecting every sender — a structure specifically suited to directing targeted cruelty, humiliation, or manipulation at a specific identified individual</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">No Verification — Adults Can Message Children Freely</div>
+      <div class="rc-desc">Anyone can send a message without an account or any verification — an adult can contact a named child anonymously without any registration, age check, or identity record, and the child cannot distinguish adult contact from peer contact</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Serious Mental Health Impact</div>
+      <div class="rc-desc">Anonymous harassment platforms are specifically associated with significant mental health harm to young recipients — the receipt of anonymous cruel or humiliating messages without any ability to identify the source creates a particular form of distress that is distinct from identified bullying</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔗</span>
+      <div class="rc-name">Link Sharing Expands the Sender Pool Widely</div>
+      <div class="rc-desc">Sharing the Tellonym link on other social platforms opens anonymous messaging access to every follower across all platforms — including people the child has blocked elsewhere, people from different social contexts, and complete strangers who receive the link second-hand</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📣</span>
+      <div class="rc-name">Public Responses Create Humiliation Dynamics</div>
+      <div class="rc-desc">The public message-response format can be exploited to force a child into a public response to a humiliating message — creating a dynamic where the child either publicly amplifies embarrassing content or leaves the message visible without context</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Tellonym Carries the Highest Risk Rating — A Platform Structurally Designed for Anonymous Harm to Named Recipients</strong>
+      <span>Tellonym's highest risk rating reflects that its asymmetric anonymity structure — named, identified recipient; completely anonymous senders — is not merely a feature that creates incidental risk. It is the platform's core design, and it is specifically suited to the anonymous delivery of harmful content to a specific, identified person without any accountability, any ability to identify the sender, or any effective way to prevent further contact from the same source. This is the structural basis of anonymous cyberbullying, and Tellonym implements it by design.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">💬</div>
+    <div>
+      <div class="control-title">The Harm Arrives Before Any Defence Is Possible — A Message Is Received Before Any Blocking Can Occur</div>
+      <div class="control-body">Most online harassment risks allow for some form of defensive response — blocking an identified account, reporting an identified user, refusing to accept contact from unknown accounts. Tellonym's structure removes this possibility: harmful messages are received before any action can be taken, because there is no sender identity to block, no account to report, and no pre-screening mechanism that prevents a message from being delivered. By the time a child has received a harmful anonymous message on Tellonym, the harm has already occurred. The only effective protection is preventing the child from having a Tellonym account in the first place — because once a profile exists and the link is shared, there is no technical defence against the receipt of harmful anonymous messages from anyone who has the link.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Children Create Tellonym Accounts Because Peer Groups Use Them — They May Not Understand the Risk Until They Receive a Harmful Message</div>
+        <div class="know-body">The primary motivation for creating a Tellonym account is social — a peer group uses the platform, and a child creates an account to participate in the same social dynamic, often sharing their link on their social media profiles because their friends have done so. The child may understand that they will receive anonymous messages, but typically has not thought through what happens when an anonymous message is cruel, humiliating, or designed to hurt. The risk often only becomes apparent after the first harmful message is received — at which point the child has already shared their link widely, anonymous senders already have access to their profile, and there is no way to retract the messages already received. Prevention — before the account is created and the link is shared — is the only point at which the risk can be fully avoided.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Mental Health Impact of Anonymous Harassment Is Distinct and Serious</div>
+        <div class="know-body">Research on cyberbullying consistently identifies anonymous harassment as particularly harmful compared to identified bullying — in part because the anonymity removes the child's ability to attribute the message to a specific person and understand why it was sent, and in part because the child cannot know whether the message represents one person or many. A cruel anonymous message can feel like it comes from an unknown number of unknown people — it cannot be contextualised as coming from a specific person with a specific grievance — which makes it more destabilising and more difficult to process than a harmful message from an identified source. Parents should take anonymous harassment through platforms like Tellonym seriously as a mental health concern, not only as a safety concern. If a child has received harmful anonymous messages through Tellonym, the conversation should address both how they are feeling about what was sent and the steps being taken to prevent further contact.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Sharing the Link on Other Platforms Has Already Extended Anonymous Access — Deleting the App Does Not Retract the Link</div>
+        <div class="know-body">A child who has created a Tellonym account and shared the link on their Instagram, TikTok, or Snapchat profile has already given anonymous messaging access to everyone who has seen that link — including people who may have saved or reshared it. Deleting the Tellonym app from the device does not remove the child's profile from the platform, does not retract the link from anywhere it has been shared, and does not prevent people who already have the link from sending anonymous messages to the profile. A complete response to finding Tellonym on a child's device includes deleting the Tellonym account itself — not just the app — and removing the Tellonym link from any social media profiles where it has been shared. Both steps are necessary to fully close the anonymous messaging access that was opened when the child created their account.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">A Child Who Has Received Harmful Anonymous Messages May Not Disclose This Without a Direct and Gentle Conversation</div>
+        <div class="know-body">Children who have received cruel or humiliating anonymous messages on Tellonym often do not disclose this to a parent — either because they are embarrassed by the content of what was sent, because they do not want to appear unable to handle peer social dynamics, because they are not sure a parent will understand the context, or because they are trying to manage the emotional impact themselves. A parent who discovers Tellonym on a child's device and opens the conversation should begin by looking at the messages that have already been received — visible within the app — and approach the conversation from a position of supporting the child rather than interrogating them. If harmful messages have been received, the most important thing the child needs to know is that the content of the message says something about the person who sent it and nothing about their worth — and that bringing this to a parent is the right response, not a sign of weakness.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Tellonym and anonymous Q&A platforms — preventing a child from creating a profile that opens them to anonymous harassment, before any link is shared and any harmful message is received.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Tellonym and anonymous Q&A platforms with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar anonymous messaging and Q&A apps</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents the creation of a profile before any harmful link is shared</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged anonymous social platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Tellonym as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. If Tellonym is already on your child's device, <strong>deleting the app alone is not sufficient — the Tellonym account must also be deleted and the link removed from all other social profiles</strong> to fully close anonymous messaging access to the child.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect Tellonym's specific harm mechanism — checking messages before deleting, ensuring the account and link are fully removed rather than just the app, and approaching any conversation about received harmful messages with the child's emotional wellbeing at the centre.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Approach the Conversation With the Child's Emotional Wellbeing First — Especially If Harmful Messages Have Been Received</div>
+        <div class="tip-body">If Tellonym is found on a child's device and the message history shows harmful content, the most important first step is checking how the child is feeling about what they have received — before addressing the platform, the restriction, or anything else. A child who has been receiving cruel or humiliating anonymous messages may have been managing significant distress without disclosure, and the conversation that surfaces this needs to prioritise the child's emotional state before the safety discussion. Make clear that the content of anonymous messages reflects only on the person who sent them and says nothing true about the child who received them. Ensure the child knows that bringing this kind of thing to a parent is exactly the right response — and that the parental response will be supportive rather than focused on blame or restriction before understanding. The restriction of the platform is a step that follows from ensuring the child is supported; it should not be the opening move in the conversation.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Review Messages Within the App, Then Delete the Account — Not Just the App</div>
+        <div class="tip-body">Open Tellonym on the child's device and review the anonymous messages that have been received before taking any further steps — these may reveal whether the child has been experiencing harassment, and the content may be relevant context for the conversation. After reviewing, delete the Tellonym account itself through the account settings within the app — not just the app from the device. Deleting only the app leaves the profile active, the link valid, and anonymous messages continuing to be receivable if someone sends to the link. The account deletion removes the profile and deactivates the link. After deleting the account, check the child's other social media profiles — Instagram, TikTok, Snapchat — for any Tellonym link that has been posted in their bio, stories, or posts, and remove those links to prevent anyone who saves them from being able to send messages if the account were ever reinstated.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Tellonym Through iLimits and Discuss Anonymous Q&A Platforms as a Category</div>
+        <div class="tip-body">Apply the iLimits restriction to block Tellonym on the child's device, and extend the conversation to include anonymous Q&A platforms as a category rather than addressing only this specific app. Tellonym is one of several anonymous Q&A platforms — NGL (Not Gonna Lie), ASKfm, and similar apps operate on the same asymmetric anonymity model. A child who is blocked from Tellonym may find an alternative if the underlying social dynamic — peer groups using anonymous Q&A apps — continues. A broader conversation about why the asymmetric anonymity structure of these platforms makes them specifically risky — the sender is always protected, the recipient is always exposed, and harmful messages cannot be prevented before they are received — gives the child a framework for evaluating similar platforms independently, rather than simply knowing that one specific app has been restricted.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Harm Arrives Before Any Defence Is Possible — Prevention Is the Only Complete Protection</h3>
+    <p class="closing-body">
+      Tellonym's structure means that once a child has created a profile and shared the link, anonymous harmful messages can be received with no ability to screen, block, or identify the sender before the message has already been read. Every other form of online harm has some defensive response available after the fact — Tellonym's anonymous targeting removes that possibility by design. iLimits gives you the tool to prevent the profile from being created in the first place, so that the link is never shared, the access is never opened, and the harm never has a channel through which to arrive.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
