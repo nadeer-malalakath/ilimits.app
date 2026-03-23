@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Voxer – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Voxer brand: deep walkie-talkie orange */
+    --vx:           #EA580C;
+    --vx-mid:       #C2410C;
+    --vx-deep:      #431407;
+    --vx-light:     #FFF7ED;
+    --vx-bdr:       #FDBA74;
+    --vx-text:      #431407;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --orange-bg:    #FFF7ED;
+    --orange-bdr:   #FDBA74;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --violet-bg:    #F5F3FF;
+    --violet-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #180600 0%, #2C0D00 50%, #3E1400 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(234,88,12,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(253,186,116,0.26) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(234,88,12,0.22);
+    border: 1px solid rgba(253,186,116,0.36);
+    color: #FDBA74; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+    word-break: break-word;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #180600 0%, #EA580C 58%, #FB923C 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(234,88,12,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-top-text { flex: 1; min-width: 0; }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val {
+    font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .meta-val.medium { color: #FDE68A; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-inner { flex: 1; min-width: 0; }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid); font-weight: 400;
+    margin-top: 5px; line-height: 1.65;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Voxer callout ── */
+  .vx-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--orange-bg); border: 1.5px solid var(--orange-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .vx-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE0C0; border: 1.5px solid var(--orange-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .vx-callout-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .vx-title { font-size: 13px; font-weight: 700; color: var(--vx-text); line-height: 1.3; margin-bottom: 3px; }
+  .vx-body  { font-size: 12px; color: #5C1A00; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ── Voice-first badge ── */
+  .voice-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--violet-bg); border: 1.5px solid var(--violet-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .voice-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #EDE9FE; border: 1.5px solid var(--violet-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .voice-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .voice-text strong { font-size: 12.5px; font-weight: 700; color: #2E1065; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .voice-text span   { font-size: 11.5px; color: #4C1D95; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Feature rows ── */
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; display: block; overflow-wrap: break-word; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+    word-break: break-word;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; overflow-wrap: break-word; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; overflow-wrap: break-word; }
+
+  /* ── Medium risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFAF0; border: 1.5px solid #FBD38D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEEBCB; border: 1.5px solid #FBD38D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #744210; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5A3110; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--orange-bg); border: 1.5px solid var(--orange-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE0C0; border: 1.5px solid var(--orange-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--vx-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #5C1A00; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ══ WHAT PARENTS SHOULD KNOW ══ */
+  .know-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num-wrap {
+    padding: 18px 0 18px 18px;
+    flex-shrink: 0;
+  }
+  .know-num {
+    width: 32px; height: 32px; min-width: 32px;
+    border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .know-text {
+    flex: 1; min-width: 0;
+    padding: 18px 18px 18px 14px;
+    overflow-wrap: break-word; word-break: break-word;
+  }
+  .know-title {
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    line-height: 1.4; margin-bottom: 7px; display: block; overflow-wrap: break-word;
+  }
+  .know-body {
+    font-size: 12.5px; color: var(--ink-mid); font-weight: 400;
+    line-height: 1.65; display: block; overflow-wrap: break-word; word-break: break-word;
+  }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #180600 0%, #2C0D00 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(234,88,12,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; overflow-wrap: break-word; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; flex: 1; min-width: 0; overflow-wrap: break-word; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; overflow-wrap: break-word; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; display: block; overflow-wrap: break-word; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; overflow-wrap: break-word; word-break: break-word; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📻</div>
+        <div class="app-top-text">
+          <div class="app-name-text">Voxer</div>
+          <div class="app-sub">Walkie-Talkie Voice Messaging App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Voice Messaging / Communication</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟡 Medium</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">A voice-first messaging platform that transmits live voice, images, video, and text without standard parental monitoring tool visibility — voice messages are not captured by parental monitoring software that reads text, and the walkie-talkie format creates a real-time audio communication channel outside standard parental oversight</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div class="rf-inner">
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can restrict Voxer from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Voxer — a voice-first messaging app that lets users send live voice messages like a walkie-talkie, alongside text, images, and video, to individuals or groups. Its defining characteristic for parental oversight is that voice messages — the core medium of communication on the platform — are not captured or readable by most parental monitoring tools that focus on text-based communication.</p>
+  </div>
+
+  <div class="vx-callout">
+    <div class="vx-ico">📻</div>
+    <div class="vx-callout-text">
+      <div class="vx-title">Voxer's Walkie-Talkie Voice Format Creates a Communication Channel That Standard Parental Monitoring Tools Cannot Read or Review</div>
+      <div class="vx-body">Voxer is a voice-first messaging platform that allows users to send real-time voice messages — like a walkie-talkie — to individuals or groups, alongside text, photos, and video. Its primary distinguishing feature from a parental oversight perspective is that the core communication medium is audio, not text. Most parental monitoring apps and tools that review messaging content do so by reading text messages — they are not designed to transcribe, review, or flag audio messages. A child whose text messaging is monitored through parental software can conduct conversations through Voxer's voice messaging system that are functionally invisible to those monitoring tools. The voice-first format is a genuine blind spot in most standard parental monitoring approaches.</div>
+    </div>
+  </div>
+
+  <div class="voice-band">
+    <div class="voice-icon">🎙️</div>
+    <div class="voice-text">
+      <strong>Voice Messages Are Invisible to Most Parental Monitoring Software — Text-Based Monitoring Cannot Read Audio</strong>
+      <span>Parental monitoring tools that review message content typically read text — they cannot transcribe or analyse Voxer voice messages, creating a monitoring blind spot specific to voice-first messaging platforms.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#EA580C;"></span> Live Voice</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Monitoring Blind Spot</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FDBA74;"></span> Text + Media</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Group Chats</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> No Age Filter</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Voxer is a <strong>voice-first walkie-talkie messaging app</strong> that lets users send real-time audio, text, images, and video to individuals and groups. Its specific parental oversight risk is the audio-first format — voice messages are the primary communication medium but are not readable by text-based parental monitoring tools, creating a monitoring gap that is unique to voice messaging platforms.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--orange-bg);">🎙️</div>
+      <div class="feat-text">
+        <div class="feat-name">Live Voice Messaging — Walkie-Talkie Style Real-Time Audio</div>
+        <div class="feat-desc">Voxer's primary feature is live voice messaging — users hold a button to record and transmit audio messages that the recipient can play in real time, like a walkie-talkie, or listen to later as a voice message. Conversations on Voxer are predominantly conducted through this voice format rather than typed text, making them qualitatively different from standard messaging apps in how they would appear to any monitoring system that focuses on reading text. A monitoring system that would flag concerning keywords in a typed message has no equivalent capability for audio content — the conversation happens in voice, not in text.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">👁️‍🗨️</div>
+      <div class="feat-text">
+        <div class="feat-name">Voice Messages Are Not Captured by Standard Text-Based Parental Monitoring</div>
+        <div class="feat-desc">Most parental monitoring tools — whether built into the device's operating system or provided by third-party parental control software — monitor text-based messaging by reading message content. They are not designed to transcribe, analyse, or review audio messages. A child using Voxer to have voice-based conversations with contacts is conducting those conversations in a medium that is invisible to the monitoring tools most parents rely on to understand their child's messaging activity. The voice messages may exist in the app as audio files, but their content is not accessible to text-monitoring systems. This is the specific and primary oversight gap that makes Voxer distinct from other messaging platforms.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">👥</div>
+      <div class="feat-text">
+        <div class="feat-name">Group Voice Chats Allow Multiple Contacts in a Single Conversation</div>
+        <div class="feat-desc">Voxer supports group conversations in which multiple contacts can participate in the same voice messaging thread. A child can be added to or create group Voxer chats that include people their parent may not know — contacts from gaming communities, social media, or other online contexts who have been given the child's Voxer contact details. The group format means the voice-message monitoring gap applies to multi-party conversations, not only one-on-one exchanges. A child discussing plans, sharing personal information, or receiving inappropriate content in a group Voxer chat does so in a format invisible to text monitoring tools regardless of how many participants the chat contains.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">📸</div>
+      <div class="feat-text">
+        <div class="feat-name">Images and Video Sent Alongside Voice — Full Media Sharing Without Text</div>
+        <div class="feat-desc">In addition to voice messages, Voxer supports sending images and video clips within conversations. A conversation conducted entirely through Voxer can involve voice messages, photos, and video without a single typed word — meaning the entire content of the exchange can be invisible to text-based monitoring while still involving a substantial exchange of personal, location, or sensitive visual information. The combination of voice and visual media sharing within a platform that text monitoring tools cannot read creates a complete communication channel outside standard parental oversight.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🏢</div>
+      <div class="feat-text">
+        <div class="feat-name">Primarily Marketed to Businesses — Children Use It as a Peer Communication Tool</div>
+        <div class="feat-desc">Voxer's primary marketing and target audience is business and professional team communication — it is positioned as a walkie-talkie tool for distributed teams, construction crews, field workers, and similar professional use cases. However, it has been adopted by teenagers and children as a peer-to-peer voice messaging tool, particularly in gaming and sports contexts where real-time voice coordination is appealing. A child who uses Voxer is typically doing so not because of its business positioning but because the walkie-talkie format is engaging for the specific communication they want to have — and because voice messaging platforms are less commonly monitored by parents than standard text messaging apps.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Voxer's risks are focused and specific — the platform itself is not inherently harmful, but the voice-first format creates a monitoring blind spot that allows conversations invisible to standard parental oversight tools, combined with media sharing that can include images and video alongside unreadable audio content.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">👁️‍🗨️</span>
+      <div class="rc-name">Voice Messages Invisible to Text Monitoring</div>
+      <div class="rc-desc">The core communication medium — audio — cannot be read by text-based parental monitoring tools, creating a complete monitoring blind spot for any conversation conducted through Voxer's voice messaging feature</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎙️</span>
+      <div class="rc-name">Real-Time Voice Without a Phone Call Record</div>
+      <div class="rc-desc">Voxer voice messages are not phone calls and do not appear in the device's call log — a parent reviewing call history will see no record of voice communication that occurred through Voxer</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📸</span>
+      <div class="rc-name">Image and Video Sharing Within Audio Conversations</div>
+      <div class="rc-desc">Photos and video clips can be shared within Voxer conversations alongside voice messages — a full exchange of visual media can occur within a platform whose core content is invisible to text monitoring tools</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Group Chats Including Unknown Contacts</div>
+      <div class="rc-desc">Group Voxer conversations can include contacts from any social context — gaming communities, online connections, near-strangers — in a multi-party voice conversation that text monitoring tools cannot review</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏢</span>
+      <div class="rc-name">Business App Positioning Reduces Parental Awareness</div>
+      <div class="rc-desc">Voxer's primary marketing as a business communication tool means parents are less likely to be aware of it as a platform their child uses, and less likely to have reviewed what the platform enables in a peer communication context</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📵</span>
+      <div class="rc-name">Conversations Leave No Text Record to Review</div>
+      <div class="rc-desc">Voice conversations on Voxer leave audio files rather than text records — a parent who opens the app and looks at a conversation will see an audio waveform, not readable text, making even direct device inspection less informative than on standard messaging apps</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Voxer Carries a Medium Risk Rating — The Risk Is the Monitoring Blind Spot, Not an Inherently Harmful Platform</strong>
+      <span>Voxer's medium rating reflects that the platform itself is a legitimate communication tool with many benign uses — including genuine professional and peer coordination applications. The risk is specific and focused: the voice-first format creates a monitoring blind spot in standard parental oversight tools that is not present with text-based messaging. A child using Voxer for normal peer communication with known contacts presents a different risk level from one using it to communicate with contacts the parent does not know — the concern scales with who the child is communicating with, not only with the platform itself.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">📻</div>
+    <div class="control-text">
+      <div class="control-title">The Monitoring Blind Spot Is the Specific Concern — A Child Whose Text Messaging Is Monitored Can Conduct Conversations Through Voxer That Are Completely Outside That Monitoring</div>
+      <div class="control-body">Parents who use parental monitoring software to review their child's text messaging — whether through the device's built-in screen time tools, Google Family Link, Apple Screen Time, or third-party monitoring apps — should understand that this monitoring is specific to text-based communication. Voice messages on Voxer are audio recordings, not text, and are not captured, transcribed, or reviewed by any of these monitoring tools. A child who is aware that their text messages are monitored may choose to conduct sensitive or concerning conversations through Voxer precisely because they understand that voice messages are outside the monitoring system. This monitoring evasion is the specific and primary parental concern about Voxer — not that the platform is inherently harmful, but that it creates a communication channel specifically outside the reach of the monitoring tools parents most commonly use.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">1</div></div>
+      <div class="know-text">
+        <div class="know-title">Voxer Is a Legitimate Tool Used by Both Professionals and Teenagers — The Risk Is the Voice Format, Not the Platform</div>
+        <div class="know-body">Voxer is a well-designed, legitimate communication application used by businesses, emergency services, sports teams, and professional organisations for real-time voice coordination. It is also used by teenagers and children as a peer communication platform, particularly in gaming and sports contexts where the walkie-talkie format is appealing. A child who has Voxer installed is not necessarily using it to evade parental oversight deliberately — they may genuinely prefer the voice format for communication with their existing friend group. The restriction decision should reflect the family's specific monitoring approach: for families who do not actively monitor text message content, the voice-monitoring blind spot may be less significant; for families whose parental oversight specifically includes text message monitoring, Voxer's voice format creates a gap that is worth addressing.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">2</div></div>
+      <div class="know-text">
+        <div class="know-title">Voice Messages Do Not Appear in Call Logs — Voxer Communication Leaves No Standard Device Trace</div>
+        <div class="know-body">A parent who reviews their child's device for communication activity — checking the phone's call log, reviewing text message history, or looking at iMessage or WhatsApp — will find no record of any Voxer communication from those standard device review points. Voxer voice messages are not phone calls and do not appear in the device's call history. They are audio recordings within the Voxer app, accessible only by opening Voxer and reviewing the conversation history within it. Unlike a text message that might be visible through a standard messaging review, a Voxer conversation's existence is only detectable by opening the app itself — and its content is only reviewable by listening to the audio files within it.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">3</div></div>
+      <div class="know-text">
+        <div class="know-title">If Voxer Is Found — Open the App and Review Who the Child Is Communicating With and in What Groups</div>
+        <div class="know-body">If Voxer is found on a child's device, open the app and review the conversation list — which contacts the child has active conversations with, and what group chats they belong to. The participants in each conversation are visible even if the audio content requires listening. Look specifically for any contacts who do not appear to be from the child's established social circle — names, usernames, or contacts that are unfamiliar — and any group chats that include people whose identity is not clear. The audio content of conversations can be listened to by pressing play on individual voice messages within the app, though this is a more time-consuming review process than reading text. The conversation list and contact identities are the most efficient first review step, followed by selective listening to conversations that raise concern based on the identity of the participants.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">4</div></div>
+      <div class="know-text">
+        <div class="know-title">The Restriction Decision Scales With the Child's Age, Contacts, and the Family's Monitoring Approach</div>
+        <div class="know-body">Voxer's risk is contextual in a way that most platforms in this document are not. A 15-year-old using Voxer to coordinate with their sports team — where the parent knows the other participants — presents a minimal risk scenario in which the voice monitoring blind spot is largely irrelevant. The same 15-year-old using Voxer to communicate with contacts from online gaming communities that the parent does not know presents a more significant risk, because those conversations are in a medium the parent cannot review and involve contacts the parent cannot identify. Parents should make the restriction decision based on who their child is communicating with through Voxer and whether those contacts are known, rather than applying a blanket restriction or permission based solely on the platform. iLimits gives parents the tool to restrict Voxer if the specific circumstances warrant it — and the flexibility to make that decision based on the child's individual situation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to restrict Voxer — closing the voice-messaging monitoring blind spot that the app creates in standard parental oversight tools, when the specific circumstances of the child's use make restriction appropriate.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restrict Voxer and voice messaging platforms with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Closes the voice-message monitoring blind spot in standard parental tools</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents image and video sharing within unmonitored voice conversations</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when Voxer is accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div class="note-text">
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Voxer as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Voxer is a legitimate tool with many benign uses. The restriction decision should be based on <strong>who your child is communicating with</strong> and whether the voice-format monitoring blind spot is a significant concern in your family's specific oversight approach. For families who do not actively monitor text content, the voice format gap may be less significant than for those who do.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps reflecting Voxer's specific and contextual risk — understanding the monitoring blind spot it creates, reviewing who the child communicates with through the app, and making a calibrated restriction decision based on the child's specific contact context.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div class="tip-text">
+        <div class="tip-name">Have a Conversation About Why Voice Messaging Feels Different — and Whether the Contacts Are Known</div>
+        <div class="tip-body">A conversation about Voxer is most effective when it focuses on two specific questions: does the child understand that voice messages on Voxer are not visible to the same monitoring tools that cover text messages, and who are the contacts the child is communicating with through the app? A child who understands both of these things — that Voxer conversations are not text-reviewable, and that this matters because the parent monitors text — can engage honestly with the question of whether specific Voxer conversations are ones they would be comfortable with the parent knowing about. A child who is using Voxer to communicate with their known peer group about normal topics will typically have no difficulty answering this question; a child who becomes evasive about who they are communicating with or what they are discussing through Voxer is providing meaningful information through that evasiveness, even without the content of the conversations being directly reviewable.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div class="tip-text">
+        <div class="tip-name">Open Voxer and Review the Conversation List and Contact Identities Before Making a Restriction Decision</div>
+        <div class="tip-body">If Voxer is found on a child's device, open the app and review the conversation list — the names and usernames of contacts the child is communicating with, and the names and member lists of any group chats. This review does not require listening to any voice messages to be informative — the identity of the contacts and groups gives the primary context for whether the specific concern applies. If all contacts are recognisable as the child's established social circle — classmates, teammates, known friends — the monitoring blind spot concern is significantly reduced. If any contacts are unfamiliar, or if group chats include participants whose identity is unclear, this is the more significant finding and warrants a direct conversation with the child about those specific contacts before making any restriction decision.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div class="tip-text">
+        <div class="tip-name">Apply the iLimits Restriction if the Contact Context or Monitoring Approach Makes It Warranted</div>
+        <div class="tip-body">Use iLimits to restrict Voxer if the contact review reveals unfamiliar contacts in voice conversations, if the child is evasive about their Voxer use, or if your family's parental oversight specifically includes text message content monitoring — making the voice-format blind spot a significant gap in that oversight. For families whose oversight approach focuses on app-level controls and time limits rather than message content monitoring, the voice-format gap may be less significant and restriction may be less necessary. Voxer does not have a web version in the same way that Telegram does — the app is the primary access route, and app-level restriction through iLimits is the primary protection mechanism. The restriction decision for Voxer is one of the most context-dependent in this document — the same child using the same app presents a very different risk level depending on who they are communicating with.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Risk Is the Blind Spot, Not the Platform — and the Blind Spot Matters Most in the Contacts, Not the App</h3>
+    <p class="closing-body">
+      Voxer is a legitimate tool for legitimate communication — the walkie-talkie format has genuine appeal for sports teams, gaming coordination, and peer conversation. The specific concern it creates is precise: voice messages are not readable by the text-monitoring tools most parents use, and a child who understands this has a communication channel that operates outside standard oversight. iLimits gives you the tool to close that channel when the circumstances make it necessary — and the information to make that decision based on who your child is actually communicating with, rather than the platform name alone.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
