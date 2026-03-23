@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Likee – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Likee brand: vivid orange-red */
+    --lk:           #FF4500;
+    --lk-mid:       #E03D00;
+    --lk-deep:      #7A1E00;
+    --lk-light:     #FFF7F4;
+    --lk-bdr:       #FFBBA0;
+    --lk-text:      #5C1500;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0500 0%, #2E0A00 50%, #3D1200 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(255,69,0,0.38) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,69,0,0.32) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,69,0,0.16);
+    border: 1px solid rgba(255,69,0,0.32);
+    color: #FFBBA0; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #1A0500 0%, #FF4500 55%, #FF8C61 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(255,69,0,0.52), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Likee callout ── */
+  .lk-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--lk-light); border: 1.5px solid var(--lk-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .lk-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE8DC; border: 1.5px solid var(--lk-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .lk-title { font-size: 13px; font-weight: 700; color: var(--lk-text); line-height: 1.3; margin-bottom: 3px; }
+  .lk-body  { font-size: 12px; color: #5C1500; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--lk-light); border: 1.5px solid var(--lk-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE8DC; border: 1.5px solid var(--lk-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--lk-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #5C1500; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0500 0%, #2E0A00 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,69,0,0.26) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .lk-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain platforms may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🎬</div>
+        <div>
+          <div class="app-name-text">Likee</div>
+          <div class="app-sub">Short Video Creation Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Social Video / Short-Form</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Sexually suggestive content in algorithmically served feeds, adult stranger access to children's profiles, and documented grooming and child safety incidents on the platform</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this platform instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Likee — a short-form video creation and sharing app that allows users to record, edit and publish videos with special effects, and which exposes viewers to an algorithmically curated feed of content from strangers, including content that is frequently sexualised or age-inappropriate.</p>
+  </div>
+
+  <div class="lk-callout">
+    <div class="lk-ico">⚠️</div>
+    <div>
+      <div class="lk-title">Likee Has Been the Subject of Multiple Child Safety Investigations and Regulatory Actions in Several Countries — Its Risks Are Well-Documented and Serious</div>
+      <div class="lk-body">Likee is a short-form video platform developed by BIGO Technology and primarily popular in Southeast Asia, the Middle East and parts of Europe and Africa. Despite presenting itself as a creative video platform for general audiences, Likee has been the subject of child safety investigations and regulatory scrutiny in multiple countries, including findings related to sexually suggestive content served to minors, insufficient age verification, adult access to children's accounts, and documented grooming incidents. The platform's algorithmic content feed, public-by-default profile settings and weak moderation make it a high-risk environment for children of all ages.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#FF4500;"></span> Short Video Feed</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Public Profiles</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Live Streaming</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Direct Messaging</div>
+    <div class="mode-chip"><span class="cdot" style="background:#6366F1;"></span> Virtual Gifting</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Likee is a <strong>short-form video creation and discovery platform</strong> where users record and publish videos using the app's built-in effects, filters and editing tools, and where other users discover that content through an <strong>algorithmically curated feed</strong> that serves videos from strangers based on engagement patterns rather than followed accounts — a structure that gives the platform's algorithm, rather than the user, control over what content a child sees.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--lk-light);">🎞️</div>
+      <div>
+        <div class="feat-name">Algorithmically Curated Video Feed Served From Strangers' Accounts</div>
+        <div class="feat-desc">Likee's primary content experience is an algorithmically curated feed of short videos from accounts the user does not follow, similar in structure to TikTok's For You Page. This means a child opening the app is immediately served content from strangers, with the algorithm determining what is shown based on engagement signals. Because the algorithm optimises for watch time rather than age-appropriateness, children are routinely served content that includes sexualised dancing, adult humour and other material that would not pass moderation on a platform with robust content controls. Parents cannot predict or control what content the algorithm will serve to their child's account.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">👤</div>
+      <div>
+        <div class="feat-name">Public-by-Default Profiles Visible to All Users Including Adults</div>
+        <div class="feat-desc">Likee accounts are public by default, meaning a child's profile — including their published videos, username, follower list and the videos they have interacted with — is visible to any user on the platform, including adults with no connection to the child. Public profiles allow unknown adults to identify, follow and directly engage with children's content before any contact is initiated. While privacy settings exist, they are not applied automatically to new accounts, and children who set up accounts independently are unlikely to locate and apply them. The platform's default openness is a structural risk factor that creates the conditions for grooming and unwanted adult contact.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Direct Messaging Between Users Including Unconnected Adults and Children</div>
+        <div class="feat-desc">Likee allows direct messaging between users who have not established a prior connection, meaning unknown adults can send private messages directly to a child's account without any mutual follow or connection requirement. Direct messaging is one of the primary channels through which grooming contact is initiated on social video platforms — the combination of public profiles that allow adults to identify child accounts and an open messaging system that allows unsolicited contact creates the conditions that have contributed to documented child safety incidents on the platform.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">📡</div>
+      <div>
+        <div class="feat-name">Live Streaming With Real-Money Virtual Gifting</div>
+        <div class="feat-desc">Likee includes a live streaming feature through which users broadcast themselves in real time to followers and other platform users. Live streams on Likee frequently feature content that is inappropriate for children — including sexualised performance, adult behaviour and unmoderated commentary from viewers. The platform's live gifting system allows viewers to send virtual gifts purchased with real money, incentivising broadcasters to produce content that maximises viewer engagement and spending. Children who watch live streams are exposed both to the content itself and to the social dynamics of a gifting economy that encourages financial participation.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🔍</div>
+      <div>
+        <div class="feat-name">No Reliable Age Verification and Weak Content Moderation</div>
+        <div class="feat-desc">Likee does not apply meaningful age verification at account creation — users provide a date of birth, but no identity check is performed to verify the information provided. The platform's content moderation has been criticised in multiple investigations for failing to remove sexualised content involving minors and for allowing adult users to maintain open access to children's accounts. Regulatory investigations in several countries have found that Likee's moderation and safety systems are inadequate relative to the risks posed by its open, algorithm-driven design — and the platform's improvements in response to regulatory pressure have been inconsistent across its different regional versions.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from algorithmically served inappropriate content, public-by-default profiles that expose children to adult strangers, direct messaging with no connection requirement, documented grooming incidents, and a live streaming environment that combines adult content with real-money spending mechanics.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🎯</span>
+      <div class="rc-name">Algorithm-Served Inappropriate Content</div>
+      <div class="rc-desc">Likee's feed algorithm serves content from strangers based on engagement, not age-appropriateness — children are routinely served sexualised, adult-themed or otherwise inappropriate video content without seeking it out or being able to predict or avoid it</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👁️</span>
+      <div class="rc-name">Public Profiles Visible to Adult Strangers</div>
+      <div class="rc-desc">Accounts are public by default — a child's videos, profile details and engagement activity are visible to any adult on the platform, creating the conditions for identification, targeting and unsolicited contact by unknown adult users</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📨</span>
+      <div class="rc-name">Open Direct Messaging With Unknown Adults</div>
+      <div class="rc-desc">Unknown adults can send private messages directly to children's accounts without any prior connection or mutual follow — the primary channel through which grooming contact is initiated on social platforms, and one that Likee does not restrict by default</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚨</span>
+      <div class="rc-name">Documented Child Safety Incidents and Regulatory Action</div>
+      <div class="rc-desc">Likee has been the subject of formal child safety investigations and regulatory action in multiple countries, with findings including grooming incidents, sexualised content involving minors, and inadequate safety systems — a documented risk record that distinguishes it from platforms where risks are theoretical</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Sexualised Live Stream Content</div>
+      <div class="rc-desc">Live streams on Likee frequently feature adult-oriented and sexualised content — including sexualised dancing and performance — in an environment with inconsistent moderation and no age-based filtering of live content accessible to child accounts</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧒</span>
+      <div class="rc-name">Platform Appeal Specifically to Young Children</div>
+      <div class="rc-desc">Likee's special effects, filters and creative tools have strong appeal to young children — but the platform's safety infrastructure is not commensurate with the age of its youngest users, creating a significant mismatch between who the platform attracts and how safely it protects them</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Likee Carries a High Risk Rating — Supported by Documented Child Safety Incidents</strong>
+      <span>Unlike platforms where child safety risks are primarily theoretical, Likee's risks are supported by regulatory investigations, documented grooming incidents and formal findings in multiple countries. The platform's algorithm-driven content feed, public-by-default profiles, open direct messaging and inadequate moderation make it unsuitable for use by children of any age without robust parental controls in place.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">📱</div>
+    <div>
+      <div class="control-title">Likee Is Primarily a Mobile App but Is Also Accessible via Web Browser — Both Access Routes Must Be Addressed</div>
+      <div class="control-body">Likee is primarily designed for use through its mobile app, available on iOS and Android, but content on the platform can also be viewed through a web browser without downloading the app. A child whose access to the Likee app has been removed can still reach the platform's content through any browser on a phone, tablet or shared computer. Effective restriction requires controls applied at both the app level and the browser and network level, across every device the child can access. iLimits provides controls that address this broader access vector rather than just the app installation on a single device.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Likee's Risks Are Documented — Not Just Theoretical</div>
+        <div class="know-body">Many social platform risks are discussed in general terms as possibilities — potential exposure to inappropriate content, potential contact from strangers. Likee is different in that its risks have been documented through formal regulatory investigations and published child safety findings in multiple countries. Parents who are deciding whether to restrict the platform do not need to extrapolate from general principles — they can be confident that the risks associated with Likee are established, serious and ongoing. The platform has not, at the time of this writing, made systemic changes sufficient to resolve the concerns raised by regulatory investigators.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Platform's Appeal to Young Children Is a Significant Concern</div>
+        <div class="know-body">Likee's video creation tools — special effects, face filters, animated stickers and music integration — have strong appeal to younger children, including primary school-age children who may discover the platform through friends or siblings. The gap between the age at which children are drawn to Likee's creative features and the age at which the platform's safety systems might be considered adequate is a central concern. Parents of younger children in particular should be alert to the possibility that their child has discovered or is using the platform without parental awareness, as the app's colourful, creative interface does not signal the risks it carries to an uninformed viewer.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children May Have Active Likee Accounts Parents Are Not Aware Of</div>
+        <div class="know-body">Because Likee requires only a date of birth at registration — which any child can falsify — and because the app's interface does not look obviously risky to a child or a parent who does not know what to look for, children may have established active accounts without their parents' knowledge. If a parent is not certain whether their child has a Likee account, a direct and calm conversation is more likely to surface an existing account than a device search alone. Parents who discover an existing account should review the account's privacy settings, check the direct message history and consider together with their child whether continued use is appropriate and under what conditions.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Privacy Settings Exist but Are Not Applied by Default and Must Be Actively Configured</div>
+        <div class="know-body">Likee does offer privacy settings that can make an account private, restrict direct messages and limit who can comment on a child's videos. However, these settings are not applied automatically to new accounts and must be located and configured manually. Children who set up accounts independently — which is the majority of children on the platform — will not have applied these settings. If a parent decides that supervised use of Likee is appropriate for their child rather than full restriction, configuring the account's privacy settings to the most restrictive available options, removing the direct messaging feature, and ensuring the account does not display the child's real name or location is the minimum baseline before use begins.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block platforms like Likee instantly — no technical knowledge required, with no disruption to your child's other apps or device features.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block social video platforms and websites by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar short-video and social platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which apps or platforms are accessible</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like Likee as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from the documented risks associated with Likee, and to build the open conversation and digital literacy that help children recognise and respond to unsafe situations on social platforms.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Have a Direct Conversation About Stranger Contact and Grooming on Social Platforms</div>
+        <div class="tip-body">Given the documented grooming-related incidents associated with Likee specifically, having a direct and age-appropriate conversation with your child about what grooming looks like on social platforms — how it typically starts, why an adult might seek to make a child feel special or to build a private relationship online, and what to do if they experience it — is one of the most important protective steps a parent can take. This conversation does not need to be alarming or clinical; it can be framed around helping your child recognise when someone online is not who they say they are, and reinforcing that coming to you immediately in that situation is always the right response, without consequences for the child. Children who have had this conversation are significantly better equipped to recognise and exit grooming contact than those who have not.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check Whether Your Child Already Has a Likee Account</div>
+        <div class="tip-body">Because Likee has strong appeal to younger children and requires only a falsifiable date of birth to register, many children have active Likee accounts that their parents are not aware of. Before applying a restriction, it is worth having a calm, non-accusatory conversation with your child about whether they use Likee — making clear that the conversation is about keeping them safe rather than getting them in trouble. If your child does have an account, reviewing it together — looking at privacy settings, direct message history and who follows them — gives you a clear picture of any existing risk and an opportunity to discuss why the platform is being restricted. Addressing an existing account alongside applying a technical restriction is more complete than applying the restriction alone.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply iLimits Restrictions Across All Devices and All Access Routes</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — including tablets, secondary phones and shared family computers — and ensure that browser-based access to the platform is also addressed, since Likee content is accessible through a web browser without downloading the app. If your child uses a school device or accesses the internet through a network you do not control, consider discussing the platform restriction with them directly so they understand why it exists and are less likely to use uncontrolled devices or networks to circumvent it. Technical controls and open conversation together provide the most durable and complete protection for your child against the documented risks associated with this platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Safe Digital Environment Begins With the Boundaries You Set at Home</h3>
+    <p class="closing-body">
+      Likee's documented safety record makes it one of the platforms where restriction is most clearly warranted. iLimits gives you the tools to enforce that protection technically — and the honest, open conversations you have with your child about stranger contact, private messaging and what safe behaviour online looks like give them the resilience to stay safe even in environments you cannot directly monitor or control.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
