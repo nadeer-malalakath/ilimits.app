@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Signal – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Signal brand: deep cobalt-navy */
+    --sg:           #2B5BE8;
+    --sg-mid:       #1E4BD4;
+    --sg-deep:      #0A1F6B;
+    --sg-light:     #EEF2FF;
+    --sg-bdr:       #A5B4FC;
+    --sg-text:      #0A1F6B;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --cobalt-bg:    #EEF2FF;
+    --cobalt-bdr:   #A5B4FC;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --green-bg:     #F0FDF4;
+    --green-bdr:    #86EFAC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #030A24 0%, #091535 50%, #0F1F4A 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(43,91,232,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(165,180,252,0.24) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(43,91,232,0.22);
+    border: 1px solid rgba(165,180,252,0.36);
+    color: #A5B4FC; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+    word-break: break-word;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #030A24 0%, #2B5BE8 58%, #7C9BFF 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(43,91,232,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-top-text { flex: 1; min-width: 0; }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val {
+    font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .meta-val.medium { color: #FDE68A; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-inner { flex: 1; min-width: 0; }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid); font-weight: 400;
+    margin-top: 5px; line-height: 1.65;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Signal callout ── */
+  .sg-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cobalt-bg); border: 1.5px solid var(--cobalt-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .sg-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E0E7FF; border: 1.5px solid var(--cobalt-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .sg-callout-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .sg-title { font-size: 13px; font-weight: 700; color: var(--sg-text); line-height: 1.3; margin-bottom: 3px; }
+  .sg-body  { font-size: 12px; color: #0A1F6B; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ── Reputation badge ── */
+  .rep-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--green-bg); border: 1.5px solid var(--green-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .rep-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #DCFCE7; border: 1.5px solid var(--green-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .rep-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .rep-text strong { font-size: 12.5px; font-weight: 700; color: #052E16; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .rep-text span   { font-size: 11.5px; color: #065F46; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Feature rows ── */
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; display: block; overflow-wrap: break-word; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+    word-break: break-word;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; overflow-wrap: break-word; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; overflow-wrap: break-word; }
+
+  /* ── Medium-High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFAF0; border: 1.5px solid #FBD38D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEEBCB; border: 1.5px solid #FBD38D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #744210; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5A3110; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cobalt-bg); border: 1.5px solid var(--cobalt-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E0E7FF; border: 1.5px solid var(--cobalt-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--sg-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #0A1F6B; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ══ WHAT PARENTS SHOULD KNOW ══ */
+  .know-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num-wrap {
+    padding: 18px 0 18px 18px;
+    flex-shrink: 0;
+  }
+  .know-num {
+    width: 32px; height: 32px; min-width: 32px;
+    border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .know-text {
+    flex: 1; min-width: 0;
+    padding: 18px 18px 18px 14px;
+    overflow-wrap: break-word; word-break: break-word;
+  }
+  .know-title {
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    line-height: 1.4; margin-bottom: 7px; display: block; overflow-wrap: break-word;
+  }
+  .know-body {
+    font-size: 12.5px; color: var(--ink-mid); font-weight: 400;
+    line-height: 1.65; display: block; overflow-wrap: break-word; word-break: break-word;
+  }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #030A24 0%, #091535 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(43,91,232,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; overflow-wrap: break-word; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; flex: 1; min-width: 0; overflow-wrap: break-word; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; overflow-wrap: break-word; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; display: block; overflow-wrap: break-word; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; overflow-wrap: break-word; word-break: break-word; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔐</div>
+        <div class="app-top-text">
+          <div class="app-name-text">Signal</div>
+          <div class="app-sub">End-to-End Encrypted Messaging</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Encrypted Messaging App</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟡 Medium</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">A gold-standard privacy messaging app with end-to-end encryption by default on all messages, disappearing messages with configurable timers, and a deliberate design to leave no accessible message record — features that make all conversations invisible to parental oversight, but which also make Signal specifically sought out by children who want communication their parents cannot see</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div class="rf-inner">
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can restrict Signal from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Signal — the most privacy-focused mainstream messaging app available, used by journalists, activists, security researchers, and privacy-conscious adults for entirely legitimate communication. Its restriction in iLimits is not about the platform being harmful — Signal is widely regarded as one of the most responsibly designed apps in existence. The concern is narrow and specific: Signal's privacy architecture, deliberately designed to leave no accessible message record, makes it the most effective tool available for a child who specifically wants communication their parents cannot see.</p>
+  </div>
+
+  <div class="sg-callout">
+    <div class="sg-ico">🔐</div>
+    <div class="sg-callout-text">
+      <div class="sg-title">Signal Is Widely Considered the Gold Standard of Private Messaging — and That Same Privacy Architecture Is What Creates the Parental Oversight Concern</div>
+      <div class="sg-body">Signal is a messaging application developed by the Signal Foundation, a non-profit organisation committed to private communication as a fundamental right. It is recommended by security experts, journalists, human rights organisations, and privacy researchers worldwide as the most secure and trustworthy consumer messaging platform available. Every message is end-to-end encrypted by default — unlike Telegram, which requires manual selection of Secret Chat mode. Signal has no advertising, no data collection, and deliberately minimal metadata retention. Disappearing messages are available with configurable timers on every conversation. These features represent responsible and principled privacy design in an adult context. In a child's hands, on a device a parent is responsible for, they represent the most complete parental oversight gap available through any mainstream messaging application.</div>
+    </div>
+  </div>
+
+  <div class="rep-band">
+    <div class="rep-icon">🏆</div>
+    <div class="rep-text">
+      <strong>Signal Is the Gold Standard of Secure Messaging — Recommended by Security Experts Worldwide</strong>
+      <span>Signal's outstanding privacy reputation is precisely what creates the parental oversight concern: a child who wants communication their parents cannot read will find no better tool than Signal — and that reputation makes it easy to justify installing.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#2B5BE8;"></span> E2E by Default</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Disappearing Msgs</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A5B4FC;"></span> No Data Collection</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Note to Self</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Screen Lock</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Signal is the <strong>most privacy-respecting mainstream messaging app</strong> — end-to-end encrypted by default on every message, with disappearing message timers, minimal metadata, and no data collection. Its parental oversight concern is precisely its excellence: it is the most effective tool available for a child who wants conversations their parents cannot access.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--cobalt-bg);">🔒</div>
+      <div class="feat-text">
+        <div class="feat-name">End-to-End Encryption by Default on Every Message — No Action Required</div>
+        <div class="feat-desc">Unlike Telegram, which requires manually switching to Secret Chat mode for end-to-end encryption, Signal encrypts every message end-to-end by default without any user action. There is no standard mode and a secret mode — all Signal messages are end-to-end encrypted from the first message in any conversation. This means that every conversation a child has on Signal — with any contact, about any topic — is encrypted in a way that prevents access by Signal's servers, by the network, or by any monitoring tool. The default nature of the encryption means that even a child who does not understand encryption is automatically using end-to-end encrypted communication simply by using Signal.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">⏱️</div>
+      <div class="feat-text">
+        <div class="feat-name">Disappearing Messages on Every Conversation — Configurable Down to 30 Seconds</div>
+        <div class="feat-desc">Signal allows disappearing message timers to be set on any conversation, with options ranging from 30 seconds to four weeks. When a disappearing message timer is active, messages are automatically deleted from both devices after the configured time expires — with no record remaining on either device or any server. Unlike Telegram's self-destruct feature which must be selected per session, Signal's disappearing message timer can be set as the default for a specific conversation, automatically applying to every message in that thread. A child can configure every Signal conversation to delete messages after 30 seconds, leaving no record of any communication that occurred in the conversation.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🗄️</div>
+      <div class="feat-text">
+        <div class="feat-name">Minimal Metadata Retention — Signal Knows Almost Nothing About Its Users</div>
+        <div class="feat-desc">Signal's architecture is designed to minimise the metadata it retains about user communications. Signal does not store message content, contact lists, group memberships, profile photos, or the details of who communicates with whom. In legal proceedings where Signal has been compelled to produce user data, the only information available has been the account creation date and the date of last connection. This minimal metadata architecture means that even a legal investigation of Signal's systems would produce almost no information about a user's communication patterns — a standard that far exceeds any other mainstream messaging platform.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🔕</div>
+      <div class="feat-text">
+        <div class="feat-name">Screen Lock, Incognito Keyboard, and Screen Security Features</div>
+        <div class="feat-desc">Signal includes a suite of additional privacy features beyond encryption and disappearing messages: a screen lock that requires a PIN or biometric authentication to open the app, an incognito keyboard option that prevents the device keyboard from learning typed words, and a screen security feature that prevents Signal from appearing in the device's recent apps overview — the screen stays blank when Signal is viewed in the app switcher. These features specifically address the concern of someone physically accessing the device and reviewing Signal content — providing layered protection against device-level review as well as network-level interception.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">📝</div>
+      <div class="feat-text">
+        <div class="feat-name">Note to Self — Private Encrypted Storage on the Device</div>
+        <div class="feat-desc">Signal includes a "Note to Self" feature — an encrypted private messaging thread with oneself that functions as a secure private notepad. Content stored in Note to Self is end-to-end encrypted and stored in Signal's encrypted database on the device. A child can use this feature as a private encrypted storage space for notes, images, or information they do not want accessible through the device's standard storage — functioning similarly to Aloha Browser's encrypted vault but within a mainstream messaging app that carries a gold-standard privacy reputation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Signal's risks for children are entirely about what its privacy architecture prevents parents from seeing — not about any harmful content the platform itself hosts or enables. Signal's risks are the inverse of most platforms in this document: it is the most responsibly designed app described here, and that responsibility is what creates the parental oversight gap.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">All Messages Encrypted by Default</div>
+      <div class="rc-desc">Every Signal conversation is end-to-end encrypted without any user action — no monitoring tool, no parental oversight system, and no access to Signal's servers can read message content from any Signal conversation</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">⏱️</span>
+      <div class="rc-name">Disappearing Messages With No Trace</div>
+      <div class="rc-desc">Configurable disappearing message timers as short as 30 seconds automatically delete messages from both devices — a child can have extensive conversations that leave no record on any device or server after the timer expires</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏆</span>
+      <div class="rc-name">Reputation Makes It Easy to Justify</div>
+      <div class="rc-desc">Signal's outstanding privacy reputation — recommended by security experts, journalists, and privacy advocates worldwide — gives a child an easy and credible justification for having it: "It's just the most secure messaging app"</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔕</span>
+      <div class="rc-name">Screen Lock and App Switcher Concealment</div>
+      <div class="rc-desc">Signal's screen lock and screen security features prevent device-level review as well as network-level monitoring — the app requires a PIN or biometric to open, and appears blank in the device's recent apps overview</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📝</span>
+      <div class="rc-name">Encrypted Private Storage via Note to Self</div>
+      <div class="rc-desc">The Note to Self feature provides an encrypted private storage space within a gold-standard privacy app — content stored there is protected by Signal's encryption and inaccessible through standard device review</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎯</span>
+      <div class="rc-name">Specifically Sought Out for Privacy From Parents</div>
+      <div class="rc-desc">Unlike most apps children adopt for social reasons, Signal is often specifically installed by children who want communication their parents cannot access — its reputation makes it the deliberate choice for oversight evasion rather than an incidental platform</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Signal Carries a Medium Risk Rating — The Most Private Mainstream App, Used Deliberately for Its Privacy by Children Who Want Oversight-Free Communication</strong>
+      <span>Signal's medium rating reflects the same nuance as Voxer and Telegram — the platform is not inherently harmful. Signal is a deeply responsible, principled application whose designers genuinely care about user privacy as a fundamental right. The specific concern in a parental context is narrow: Signal is the most effective tool available for a child who wants communication their parents cannot see, and its reputation provides easy justification. A child using Signal to communicate with a known peer group about ordinary topics presents minimal risk; a child who installed Signal specifically because other messaging tools are monitored presents a different situation entirely.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🔐</div>
+    <div class="control-text">
+      <div class="control-title">Signal's Privacy Design Is Excellent — The Question for Parents Is Whether a Child Installed It Because of That Excellence or in Spite of Their Age</div>
+      <div class="control-body">Signal's privacy architecture reflects serious, principled design by people who believe private communication is a fundamental right — and they are correct in that belief. The question for a parent is not whether Signal is a well-designed app — it clearly is — but why their child has it installed. A teenager who installed Signal because they have read about digital privacy, understand encryption, and are genuinely interested in secure communication as a concept is presenting a very different situation from one who installed it specifically because they want to have conversations their parents cannot access. The motivation for installation is the primary question, and the conversation about Signal should focus on that question rather than on whether Signal's privacy design is appropriate in principle — because it is, for adults who choose it for themselves.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍oudou👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">1</div></div>
+      <div class="know-text">
+        <div class="know-title">Signal Is Genuinely Excellent — The Parental Concern Is Who Installed It and Why, Not What Signal Is</div>
+        <div class="know-body">Signal deserves its outstanding reputation. It is developed by a non-profit organisation with a genuine commitment to privacy as a human right, is recommended by the most credible security researchers in the world, and has no advertising, no data collection, and no commercial incentive to compromise user privacy. A parent who restricts Signal should be clear with their child that the restriction is not because Signal is a bad or unsafe application — it is an excellent one. The restriction is about whether an application specifically designed to make communications invisible to everyone except the two parties is appropriate on a device that is the parent's legal and moral responsibility to oversee. That is a legitimate parental concern that has nothing to do with Signal being poorly designed or harmful.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">2</div></div>
+      <div class="know-text">
+        <div class="know-title">A Child Who Has Signal Installed Has Typically Made a Deliberate and Informed Choice to Have It</div>
+        <div class="know-body">Unlike many apps in this document that children adopt because peers use them or because they find them through search, Signal is not a casual social adoption — it is a deliberate choice. A child who has Signal installed has typically sought it out specifically, understands broadly what it does, and has chosen it because of its privacy properties. This deliberateness is important context for the conversation: a child who has Signal because they are interested in digital privacy and encryption as topics is presenting a very different situation from one who installed it the week after finding out their text messages are monitored. The timing and context of Signal's installation on the device — and the child's explanation for why they have it — are the most informative starting points for the conversation.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">3</div></div>
+      <div class="know-text">
+        <div class="know-title">Disappearing Messages Mean There May Be No Content to Review — The Installation Itself Is the Primary Finding</div>
+        <div class="know-body">Unlike Aloha Browser or Tellonym, where opening the app reveals content — a vault of stored media, a history of received anonymous messages — Signal with disappearing message timers active may reveal very little reviewable content even when opened. If message timers have been running, conversations may show empty or near-empty histories even if extensive communication has occurred. The existence of Signal on the device, and the presence of active conversations with disappearing message settings, is itself the primary finding — more informative than what is or is not visible in the message history. A parent who opens Signal and finds mostly empty conversation histories with disappearing message timers configured should not interpret this as evidence that little communication has occurred — it may indicate the opposite.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">4</div></div>
+      <div class="know-text">
+        <div class="know-title">The Restriction Decision Involves a Genuine Tension Between Privacy and Oversight — Acknowledge That Tension With the Child</div>
+        <div class="know-body">Signal presents the clearest case in this entire document of a genuine tension between two legitimate values: a child's developing right to privacy in their communications, and a parent's responsibility for their child's safety and wellbeing. Most platforms in this document are restricted because they carry specific harms — stranger contact, anonymous harassment, adult content, content filter bypass. Signal carries none of these specific harms. The restriction is based purely on the parental oversight gap its privacy design creates. A parent who restricts Signal and has a conversation with a child that acknowledges this genuine tension — that privacy in communication is a real and important value, but that the parent's responsibility for the child's safety means they need to be able to maintain some oversight of the child's communications at this stage of life — is more likely to have a productive conversation than one who treats Signal as obviously inappropriate without engaging with why the child values privacy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to restrict Signal — preventing the installation of the most complete parental-oversight-free messaging application available, when the child's specific circumstances make that oversight gap a concern.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restrict Signal and end-to-end encrypted messaging apps with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Closes the most complete parental oversight gap in mainstream messaging</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents disappearing-message conversations that leave no accessible record</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when Signal is accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div class="note-text">
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Signal as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Signal is a genuinely excellent, responsibly designed application. The restriction decision should reflect the child's specific situation — particularly <strong>why they have Signal installed</strong> and whether their use of it represents a genuine privacy interest or a deliberate circumvention of parental oversight. Both are legitimate considerations that may lead to different decisions.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect Signal's unique position — acknowledging its genuine quality, approaching the conversation around why the child has it rather than what it is, and making a restriction decision that honestly engages with the tension between privacy and oversight.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div class="tip-text">
+        <div class="tip-name">Ask Why They Have Signal — and Engage Seriously With the Answer</div>
+        <div class="tip-body">The most important conversation about Signal is a simple question: why does the child have it? A child who says they installed Signal because they are interested in encryption and digital privacy — and who can describe what end-to-end encryption means, or who has encountered Signal through reading about online security — is presenting a genuine intellectual interest that deserves serious engagement. A child who says they got it because their friend told them their parents can't see Signal messages is presenting a different situation that deserves a different conversation. Both conversations should acknowledge that Signal is a genuinely excellent application — because it is, and a child who knows that will see through any conversation that treats it as otherwise. The conversation that lands most effectively with a privacy-aware teenager acknowledges that Signal is excellent, explains why parental oversight remains the parent's responsibility regardless of the quality of the tool used to circumvent it, and invites the child to consider whether the specific conversations they want to have on Signal are ones they would be comfortable discussing directly.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div class="tip-text">
+        <div class="tip-name">Open Signal and Note What Is Visible — Then Focus on Contact Identity and Disappearing Message Settings</div>
+        <div class="tip-body">If Signal is found on a child's device, open it and review what is visible. If disappearing message timers have been active on conversations, message content may not be visible — but the identities of contacts and the fact that disappearing timers are configured are visible and informative. Note: the contacts the child is communicating with, whether any contacts are unfamiliar names, whether disappearing message timers are configured on conversations and at what interval, and whether the Note to Self feature contains any content. Signal's screen lock feature means the parent may need to ask the child to unlock the app — this request itself is informative. A child who is reluctant to unlock Signal for a parent's review is providing meaningful information about what they expect would be found, even if the disappearing message settings have already removed the content.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div class="tip-text">
+        <div class="tip-name">Apply the iLimits Restriction If Warranted — and Consider Whether the Privacy Conversation Should Continue</div>
+        <div class="tip-body">Apply the iLimits restriction to prevent Signal from being installed or used on the child's device if the circumstances warrant it — particularly if the child's explanation for having Signal suggests circumvention of parental oversight rather than genuine privacy interest, or if the contact review reveals unfamiliar contacts with disappearing message settings configured. After applying the restriction, consider whether the broader privacy conversation is one worth continuing — because a child who is genuinely interested in digital privacy and encryption is a child whose interest is worth nurturing in age-appropriate ways. A parent who restricts Signal and then has a conversation about how encryption works, why privacy in communication is valuable for adults, and at what age and under what circumstances Signal or similar tools become appropriate, is doing something more durable and more educational than a restriction alone can achieve. The restriction closes the immediate oversight gap; the conversation gives the child a framework for thinking about privacy and parental responsibility that carries forward beyond the current decision.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">The Best Private Messaging App in the World Is Not Appropriate for a Child Specifically Because It Is the Best</h3>
+    <p class="closing-body">
+      Signal's designers built the most private consumer messaging application available — and they built it to be that way on purpose, because they believe private communication is a fundamental right. They are correct. A child, on a device a parent is responsible for, using an application specifically because it makes all communication invisible to the parent is a different situation — not because Signal is wrong, but because the child's age and the parent's responsibility make the oversight gap it creates a legitimate concern. iLimits restricts the app. The conversation explains the difference between privacy as a value and privacy as a tool for avoiding parental oversight — a distinction that matters now and that a child will carry forward.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
