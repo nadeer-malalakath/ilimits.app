@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Down Dating – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Down Dating: deep burgundy-wine */
+    --dn:           #9F1239;
+    --dn-mid:       #881337;
+    --dn-deep:      #4C0519;
+    --dn-light:     #FFF1F2;
+    --dn-bdr:       #FDA4AF;
+    --dn-text:      #4C0519;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --wine-bg:      #FFF1F2;
+    --wine-bdr:     #FDA4AF;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --orange-bg:    #FFF7ED;
+    --orange-bdr:   #FDBA74;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #200010 0%, #380020 50%, #4C0030 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(159,18,57,0.52) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.24) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(253,164,175,0.26) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.26) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(159,18,57,0.22);
+    border: 1px solid rgba(253,164,175,0.36);
+    color: #FDA4AF; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+    word-break: break-word;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #200010 0%, #9F1239 55%, #FB7185 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(159,18,57,0.60), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-top-text { flex: 1; min-width: 0; }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val {
+    font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-inner { flex: 1; min-width: 0; }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid); font-weight: 400;
+    margin-top: 5px; line-height: 1.65;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Down Dating callout ── */
+  .dn-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--wine-bg); border: 1.5px solid var(--wine-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .dn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E8; border: 1.5px solid var(--wine-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .dn-callout-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .dn-title { font-size: 13px; font-weight: 700; color: var(--dn-text); line-height: 1.3; margin-bottom: 3px; }
+  .dn-body  { font-size: 12px; color: #6B1F37; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ── Disguise badge ── */
+  .disguise-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--orange-bg); border: 1.5px solid var(--orange-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .disguise-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEE0C0; border: 1.5px solid var(--orange-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .disguise-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .disguise-text strong { font-size: 12.5px; font-weight: 700; color: #431407; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .disguise-text span   { font-size: 11.5px; color: #5C1A00; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Feature rows ── */
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; display: block; overflow-wrap: break-word; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+    word-break: break-word;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; overflow-wrap: break-word; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; overflow-wrap: break-word; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--wine-bg); border: 1.5px solid var(--wine-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E8; border: 1.5px solid var(--wine-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--dn-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #6B1F37; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ══ WHAT PARENTS SHOULD KNOW ══ */
+  .know-row {
+    display: flex; align-items: flex-start;
+    gap: 0; padding: 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num-wrap { padding: 18px 0 18px 18px; flex-shrink: 0; }
+  .know-num {
+    width: 32px; height: 32px; min-width: 32px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .know-text {
+    flex: 1; min-width: 0;
+    padding: 18px 18px 18px 14px;
+    overflow-wrap: break-word; word-break: break-word;
+  }
+  .know-title {
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    line-height: 1.4; margin-bottom: 7px; display: block; overflow-wrap: break-word;
+  }
+  .know-body {
+    font-size: 12.5px; color: var(--ink-mid); font-weight: 400;
+    line-height: 1.65; display: block; overflow-wrap: break-word; word-break: break-word;
+  }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #200010 0%, #380020 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(159,18,57,0.30) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; overflow-wrap: break-word; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; flex: 1; min-width: 0; overflow-wrap: break-word; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; overflow-wrap: break-word; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; display: block; overflow-wrap: break-word; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; overflow-wrap: break-word; word-break: break-word; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">💘</div>
+        <div class="app-top-text">
+          <div class="app-name-text">Down Dating</div>
+          <div class="app-sub">Adult Hookup &amp; Casual Dating App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Adult Dating / Hookup Platform</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">An adult hookup and casual dating platform that presents itself with a mainstream dating app appearance while explicitly facilitating sexual encounter matching — previously integrated with Facebook to mine social connections, with minimal age verification and a user base and intent that are explicitly adult sexual in nature</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div class="rf-inner">
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Down Dating and adult hookup platforms from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Down Dating — an adult hookup platform that presents itself with the visual aesthetic and app store positioning of a mainstream dating app, while explicitly facilitating casual sexual encounter matching. Its defining characteristic compared to Pure is the mainstream dating app disguise: Down Dating looks like Tinder but functions as a hookup platform, making it harder for a child to recognise what they are accessing — and harder for a parent to recognise what their child has installed.</p>
+  </div>
+
+  <div class="dn-callout">
+    <div class="dn-ico">💘</div>
+    <div class="dn-callout-text">
+      <div class="dn-title">Down Dating Presents as a Mainstream Dating App While Explicitly Functioning as an Adult Hookup Platform — the Disguise Is What Makes It Distinctively Risky Compared to Pure</div>
+      <div class="dn-body">Down Dating is an adult hookup platform with a mainstream dating app visual identity — swipe-based matching, a conventional app store listing that resembles Tinder or Bumble in appearance, and branding that does not immediately communicate its explicit adult sexual orientation. The app offers two distinct matching modes: "Date" for conventional dating and "Down" for explicitly casual sexual encounters. The "Down" mode is the platform's defining feature and primary adult sexual orientation. Unlike Pure, whose marketing and branding are explicitly adult, Down Dating's mainstream appearance may lead both children discovering it and parents reviewing it to misidentify it as a standard dating app rather than an adult hookup platform.</div>
+    </div>
+  </div>
+
+  <div class="disguise-band">
+    <div class="disguise-icon">🎭</div>
+    <div class="disguise-text">
+      <strong>Mainstream Dating App Appearance Conceals an Adult Hookup Platform Underneath</strong>
+      <span>Down Dating's swipe-based interface and conventional app listing resemble mainstream dating apps — making it harder for both children and parents to immediately recognise it as an adult sexual platform with explicit hookup matching functionality.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#9F1239;"></span> Hookup Matching</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Dating App Disguise</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FDA4AF;"></span> "Down" Mode</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> No Age Check</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Social Graph Access</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Down Dating is an <strong>adult hookup platform with a mainstream dating app interface</strong>. Its two matching modes — conventional dating and explicit sexual encounter matching — make it function as an adult sexual platform while appearing to a casual observer as a standard dating app, creating a specific disguise risk absent from more explicitly branded adult platforms like Pure.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--wine-bg);">💘</div>
+      <div class="feat-text">
+        <div class="feat-name">Two Matching Modes — "Date" and "Down" — the Second Explicitly for Sexual Encounters</div>
+        <div class="feat-desc">Down Dating offers two distinct interaction modes for every match. The "Date" mode functions like a conventional dating app. The "Down" mode — the platform's distinctive feature — explicitly signals interest in casual sexual encounters. When a user swipes "Down" on another user's profile, they are indicating explicit sexual interest. If both users have swiped "Down" on each other, the match is surfaced as a mutual sexual encounter interest. This dual-mode structure means the app presents a veneer of conventional dating functionality while the "Down" matching system is explicitly oriented toward adult casual sexual connections.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🎭</div>
+      <div class="feat-text">
+        <div class="feat-name">Mainstream Dating App Appearance — Resembles Tinder in Interface and App Store Listing</div>
+        <div class="feat-desc">Down Dating's visual design, swipe interface, and app store presentation resemble conventional mainstream dating applications. A parent who finds Down Dating on their child's device and searches for it in the app store may see a listing that looks similar to Tinder or Bumble in its screenshots and description — without immediately recognising the explicit adult hookup functionality that the "Down" matching mode represents. This mainstream appearance is specifically what distinguishes Down Dating's risk profile from Pure, whose explicit adult branding is immediately recognisable. The disguise creates a higher likelihood that both a child and a parent may underestimate what the platform actually enables.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🔗</div>
+      <div class="feat-text">
+        <div class="feat-name">Previously Facebook-Integrated — Social Graph Mining for Sexual Encounter Matching</div>
+        <div class="feat-desc">Down Dating was previously integrated with Facebook — originally operating as a Facebook application that accessed a user's social graph to identify friends and friends-of-friends as potential hookup matches. This Facebook integration model, which has since been modified following Facebook's policy changes, represented a particularly concerning approach: the app attempted to surface sexual encounter matching within a user's existing social network. While the depth of this integration has changed, Down Dating's model of using social graph proximity as a hookup matching signal remains a distinctive and concerning feature — it attempts to facilitate sexual encounters between people who are socially connected, rather than between complete strangers.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🔓</div>
+      <div class="feat-text">
+        <div class="feat-name">No Meaningful Age Verification — Adult Platform Accessible Without Identity Check</div>
+        <div class="feat-desc">Down Dating requires no meaningful age verification beyond a self-declared date of birth at account creation. No identity document, no phone number verification requiring a real-world identity, and no parental consent mechanism exists for accounts created by users under 18. A child can create a Down Dating account and access its full functionality — including the explicit "Down" mode hookup matching — without any verification of their age. Similarly, adults on the platform are not meaningfully verified as adults, meaning a child cannot determine whether any match is actually of the age they claim.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">📍</div>
+      <div class="feat-text">
+        <div class="feat-name">Location-Based Matching — Nearby Adults Seeking Sexual Encounters Identified</div>
+        <div class="feat-desc">Like most dating applications, Down Dating uses location-based matching to surface users in the same geographic area. In the context of the "Down" mode's explicit sexual encounter purpose, location-based matching means that adults in the child's physical area who are seeking casual sexual connections are surfaced as potential matches. The combination of location proximity, explicit sexual intent, and no meaningful age verification creates conditions directly similar to those described for Pure — adults in physical proximity whose explicit intention is sexual encounter, with no barrier preventing a child from being visible to them on the platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Down Dating carries the same fundamental adult hookup platform risks as Pure — explicit sexual encounter matching, no meaningful age verification, and location-based contact with adults seeking sexual connections — with the additional and distinctive risk of a mainstream dating app appearance that makes it harder to recognise for what it is.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Mainstream Appearance Conceals Adult Hookup Function</div>
+      <div class="rc-desc">The conventional dating app interface makes Down Dating harder to identify as an adult hookup platform — both for a child who may not fully understand what "Down" mode means, and for a parent who finds it on the device and searches the app store</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💘</span>
+      <div class="rc-name">"Down" Mode Explicitly Signals Sexual Intent</div>
+      <div class="rc-desc">The "Down" matching mode explicitly signals interest in casual sexual encounters — a child on Down Dating can be exposed to adults who have swiped "Down" specifically to signal sexual interest in the child's profile</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔗</span>
+      <div class="rc-name">Social Graph Hookup Matching</div>
+      <div class="rc-desc">Down Dating's model of using social connections for hookup matching means the platform attempts to surface sexual encounter opportunities within a user's existing social network — making the sexual intent more targeted and less anonymous than random stranger platforms</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Location-Based Sexual Encounter Matching</div>
+      <div class="rc-desc">Nearby adults seeking explicit sexual encounters are surfaced as matches — the combination of geographic proximity and explicit sexual intent, with no meaningful age verification, creates the same physical danger conditions as Pure</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">No Meaningful Age Verification</div>
+      <div class="rc-desc">Account creation requires only a self-declared date of birth — a child can access the full platform including "Down" mode hookup matching, and adults can access the platform presenting any age they choose</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏪</span>
+      <div class="rc-name">App Store Listing Resembles Mainstream Dating Apps</div>
+      <div class="rc-desc">The app store listing and screenshots resemble conventional dating applications — a parent who reviews the listing to understand what their child has installed may not immediately identify the platform's explicit adult sexual hookup function</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Down Dating Carries the Highest Risk Rating — Adult Hookup Platform With a Mainstream App Disguise That Makes It Harder to Identify</strong>
+      <span>Down Dating is in the same risk category as Pure — an adult hookup platform with no appropriate use case for any child — with the additional and distinctive concern that its mainstream dating app appearance makes it less immediately recognisable as an adult sexual platform. The disguise increases the risk in two ways: a child may not fully understand that "Down" mode is explicitly sexual, and a parent may not immediately recognise what they have found. Both gaps in recognition serve the same function: keeping an adult hookup platform on a child's device longer before the parent understands what it is.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">💘</div>
+    <div class="control-text">
+      <div class="control-title">Down Dating Is Differentiated From Pure by the Mainstream Disguise — Both Carry the Same Fundamental Adult Hookup Platform Risk, but Down Dating Is Less Immediately Recognisable</div>
+      <div class="control-body">A parent who finds Pure on their child's device and searches the app store will immediately encounter a platform whose explicit adult sexual purpose is apparent — the marketing, the name, and the reviews make it clear. A parent who finds Down Dating and searches the app store may find a listing that resembles a conventional dating app in its presentation, requiring more careful investigation to understand the "Down" mode's explicit sexual purpose. This recognition gap is specifically what makes Down Dating warrant its own page alongside Pure — the shared adult hookup platform risk combined with a specific additional concern about how readily both children and parents identify the platform for what it actually is.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">1</div></div>
+      <div class="know-text">
+        <div class="know-title">The "Down" Mode Is the Key Feature to Understand — It Explicitly Signals Sexual Encounter Interest</div>
+        <div class="know-body">A parent who finds Down Dating on a child's device and is unfamiliar with the platform needs to understand specifically what the "Down" matching mode means. When a user swipes "Down" on another user's profile rather than using the conventional "Date" swipe, they are explicitly signalling interest in a casual sexual encounter. Mutual "Down" swipes surface as sexual encounter matches — distinct from conventional dating matches. A child who has been using Down Dating in "Down" mode has been participating in explicit adult sexual encounter matching. This is not a subtle distinction that requires expert knowledge to find — it is visible within the app's interface and in user reviews and descriptions available through a web search for "Down Dating Down mode."</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">2</div></div>
+      <div class="know-text">
+        <div class="know-title">The App Store Listing Does Not Adequately Communicate the Platform's Adult Hookup Function — Search for "Down Dating Down mode" to Understand What It Enables</div>
+        <div class="know-body">The standard app store listing for Down Dating may not immediately communicate the explicit sexual purpose of its "Down" matching mode. A parent who finds Down Dating on their child's device and only reviews the app store listing may underestimate what the platform enables. A direct web search for "Down Dating Down mode" or "Down Dating hookup" will surface the platform's explicit adult sexual purpose through user reviews, app descriptions, and media coverage that more clearly communicate what the "Down" mode is designed for. Understanding the platform fully before the conversation with the child gives the parent more accurate and confident grounds for the restriction discussion.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">3</div></div>
+      <div class="know-text">
+        <div class="know-title">Open the App and Review Which Mode Has Been Used — Date or Down</div>
+        <div class="know-body">If Down Dating is found on a child's device, open the app and review the match history and active conversations. The interface distinguishes between "Date" and "Down" matches — reviewing which type of matches the child has been engaging with gives the most direct indication of how the platform has been used. A child who has exclusively conventional "Date" matches may have been using the platform as they would Tinder or Bumble, without fully engaging with its adult hookup functionality. A child who has "Down" matches has explicitly participated in sexual encounter matching. Also review the contacts with whom the child has active conversations — any matches who appear to be significantly older than the child, or any conversations that have become sexually explicit, are of immediate concern and may warrant the same safeguarding considerations described in Pure's page.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">4</div></div>
+      <div class="know-text">
+        <div class="know-title">Dating Apps as a Category Are Inappropriate for Children — Down Dating Is One of Several Adult Platforms That Appear as Conventional Dating Apps</div>
+        <div class="know-body">Down Dating is not the only adult hookup platform that presents with a mainstream dating app appearance. A child who is blocked from Down Dating may search for dating apps generally and find alternatives — some of which carry the same adult sexual orientation beneath a conventional dating interface. The most durable protection combines the Down Dating restriction with a broader conversation about dating apps as a category: why dating platforms generally are designed for adults, what the specific risks of adult dating platforms are for children regardless of their visual interface, and why the presence of any adult-oriented dating or hookup platform on a child's device warrants the same response regardless of whether the branding is explicitly adult. This category-level conversation, combined with iLimits restrictions covering adult dating platforms broadly, provides more complete protection than addressing Down Dating alone.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Down Dating and adult hookup platforms — preventing access to an adult sexual encounter platform regardless of its mainstream dating app appearance, and covering similar adult platforms in the same category.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Down Dating and adult hookup platforms with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover adult dating and hookup apps broadly</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents access to explicit sexual encounter matching regardless of the app's visual presentation</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged adult dating platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div class="note-text">
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Down Dating as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. If Down Dating is found on your child's device, <strong>search for "Down Dating Down mode" to fully understand the platform before the conversation</strong>, review which matching mode the child has been using within the app, and consider whether any contacts or conversations require a safeguarding response beyond the restriction.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps reflecting Down Dating's specific profile — understanding the "Down" mode before the conversation, reviewing which mode the child has used within the app, and applying category-level restrictions that cover adult hookup platforms beyond Down Dating specifically.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div class="tip-text">
+        <div class="tip-name">Understand What "Down" Mode Means Before the Conversation — and Be Direct About It</div>
+        <div class="tip-body">A parent who understands Down Dating's "Down" mode before the conversation with the child is in a significantly stronger position than one who approaches it as a vague "dating app" concern. A web search for "Down Dating Down mode" before sitting down with the child provides accurate information about what the mode explicitly enables — so the conversation can be direct and factual rather than vague. The conversation can acknowledge that Down Dating resembles a conventional dating app in appearance, while explaining clearly what the "Down" matching feature is designed for and why a platform that facilitates adult sexual encounter matching is inappropriate for a child regardless of the conventional-looking interface. A child who has been using Down Dating in "Down" mode and who realises the parent fully understands what that means is more likely to engage honestly with the conversation than one whose parent has only a partial understanding of the platform.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div class="tip-text">
+        <div class="tip-name">Open the App and Identify Whether "Down" Mode Matches Exist — Then Review Any Active Conversations</div>
+        <div class="tip-body">Open Down Dating on the child's device and review the match interface to determine whether the child has "Down" mode matches in addition to or instead of conventional "Date" matches. The interface distinguishes between the two types of matches. Also review any active conversations for content, and note the apparent age and identity of any contacts who appear significantly older than the child. If any conversation has become sexually explicit, or if any contact has suggested meeting in person, treat this as a situation that may require the same safeguarding considerations as Pure — involving child safety professionals or law enforcement if the circumstances warrant it. Delete the account and the app after reviewing, and apply the iLimits restriction to prevent reinstallation.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div class="tip-text">
+        <div class="tip-name">Apply Category-Level Restrictions — Adult Hookup Platforms Come in Both Explicit and Mainstream-Appearing Varieties</div>
+        <div class="tip-body">Apply the iLimits restriction to block Down Dating and the broader category of adult dating and hookup platforms. Because Down Dating demonstrates that adult hookup platforms can present with a mainstream dating app appearance, category-level restrictions covering adult dating platforms broadly are more protective than individual app identification. A child who is blocked from Down Dating can search for dating apps generally and find alternatives with similar adult sexual functionality beneath conventional interfaces. The iLimits category restriction addresses the class of adult dating and hookup platforms rather than requiring individual identification of each variant. Also review whether any other dating app — even one that appears to be a standard dating platform — is present on the child's device, since the Down Dating case illustrates that mainstream appearance does not indicate appropriate age range or platform purpose.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Looking Like Tinder Does Not Make It Tinder — The "Down" Mode Is the Platform Beneath the Interface</h3>
+    <p class="closing-body">
+      Down Dating's mainstream dating app appearance is the feature that makes it specifically more challenging than Pure — a parent who encounters it without prior knowledge may not immediately recognise what they are looking at. Understanding the "Down" mode, reviewing which matching mode the child has used, and applying category-level restrictions that cover adult hookup platforms in all their visual presentations are the three steps that close the specific gap Down Dating's disguise creates. iLimits blocks the platform. The restriction covers the category. The conversation explains that the interface does not determine the purpose — and that adult sexual encounter matching is inappropriate for a child regardless of how familiar the surrounding design feels.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
