@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CamSurf – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* CamSurf: warm sunset-coral */
+    --cs:           #E05C20;
+    --cs-mid:       #C2440E;
+    --cs-deep:      #4A1500;
+    --cs-light:     #FFF7F0;
+    --cs-bdr:       #FDBA74;
+    --cs-text:      #4A1500;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --red-bg:       #FFF5F5;
+    --red-bdr:      #FFBEBE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0700 0%, #3A1000 50%, #4A1500 100%);
+    padding: 46px 20px 62px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%, rgba(224,92,32,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8% 96%, rgba(240,67,106,0.20) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush); border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(224,92,32,0.40) 0%, transparent 68%);
+    filter: blur(32px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(224,92,32,0.20);
+    border: 1px solid rgba(253,186,116,0.36);
+    color: #FDBA74; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg); padding: 18px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #4A1500 0%, #E05C20 55%, #FB923C 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(224,92,32,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Callouts ── */
+  .cs-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--cs-light); border: 1.5px solid var(--cs-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .cs-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FED7AA; border: 1.5px solid var(--cs-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .cs-title { font-size: 13px; font-weight: 700; color: var(--cs-text); line-height: 1.3; margin-bottom: 3px; }
+  .cs-body  { font-size: 12px; color: #7C2D12; font-weight: 400; line-height: 1.55; }
+
+  /* ── CR comparison banner ── */
+  .diff-banner {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    box-shadow: var(--shadow-xs);
+  }
+  .diff-title {
+    font-size: 11px; font-weight: 700; color: var(--ink-muted);
+    text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;
+  }
+  .diff-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid var(--border-soft);
+  }
+  .diff-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .diff-label { font-size: 12px; color: var(--ink-mid); font-weight: 500; flex: 1; }
+  .diff-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .dtag {
+    font-size: 10px; font-weight: 700; padding: 2px 8px;
+    border-radius: 100px; white-space: nowrap;
+  }
+  .dtag.cr  { background: #ECFEFF; color: #0891B2; border: 1px solid #67E8F9; }
+  .dtag.cs  { background: var(--cs-light); color: var(--cs); border: 1px solid var(--cs-bdr); }
+  .dtag.same{ background: #F5F5F5; color: #555; border: 1px solid #E0E0E0; }
+
+  /* ── Chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; border-radius: 3px 3px 0 0;
+  }
+  .risk-card.c-rose::before   { background: var(--rose); }
+  .risk-card.c-coral::before  { background: #E05C20; }
+  .risk-card.c-amber::before  { background: #F59E0B; }
+  .risk-card.c-red::before    { background: #EF4444; }
+  .risk-card.c-blue::before   { background: #3B82F6; }
+  .risk-card.c-slate::before  { background: #64748B; }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── "Family-friendly" claim note ── */
+  .claim-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .cn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .cn-title { font-size: 13px; font-weight: 700; color: #78350F; line-height: 1.3; margin-bottom: 3px; }
+  .cn-body  { font-size: 12px; color: var(--amber-text); font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0700 0%, #4A1500 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(224,92,32,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: 0 2px 14px rgba(240,67,106,0.10); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card          { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid     { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card       { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box      { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip    { animation: fadeUp 0.42s ease 0.05s both; }
+  .cs-callout    { animation: fadeUp 0.42s ease 0.03s both; }
+  .diff-banner   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip    { animation: fadeUp 0.42s ease 0.04s both; }
+  .claim-note    { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing       { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyebrow-dot"></div>iLimits Parental Controls</div>
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🌊</div>
+        <div>
+          <div class="app-name-text">CamSurf</div>
+          <div class="app-sub">Random Stranger Video Chat Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell"><div class="meta-lbl">Category</div><div class="meta-val">Random Video Chat</div></div>
+        <div class="meta-cell"><div class="meta-lbl">Risk Level</div><div class="meta-val high">🔴 High</div></div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Connects children with random anonymous strangers via live video — identical core risks to ChatRoulette, with a "family-friendly" marketing claim that may lower a child's guard and make parents less likely to recognise the platform's dangers</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this app instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of CamSurf — a random stranger video chat platform with the same core function and risks as ChatRoulette, distinguished by a "family-friendly" marketing claim that does not reflect the reality of random anonymous video chat with unverified strangers.</p>
+  </div>
+
+  <div class="cs-callout">
+    <div class="cs-ico">🌊</div>
+    <div>
+      <div class="cs-title">CamSurf Is a Random Stranger Video Chat Platform — Its "Family-Friendly" Claim Does Not Change the Reality of What Random Anonymous Video Chat With Unverified Adults Means for a Child</div>
+      <div class="cs-body">CamSurf operates identically to ChatRoulette: it connects users via live two-way video to random anonymous strangers from anywhere in the world, with no age verification, no identity checks, and no content filtering before connection. A child who opens CamSurf is immediately in a live video call with an unknown person. CamSurf markets itself as "family-friendly" and claims to have moderation that reduces inappropriate content. These claims do not address the structural reality of random anonymous video chat — that any adult from anywhere can appear in a child's live camera feed before any moderation is possible, and that the child's own camera is live and visible to every stranger they connect with.</div>
+    </div>
+  </div>
+
+  <div class="diff-banner">
+    <div class="diff-title">CamSurf vs ChatRoulette — What Actually Differs</div>
+    <div class="diff-row">
+      <div class="diff-label">Immediate live video with random anonymous strangers</div>
+      <div class="diff-tags"><span class="dtag cr">ChatRoulette ✓</span><span class="dtag cs">CamSurf ✓</span></div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-label">Child's camera visible to every stranger connected</div>
+      <div class="diff-tags"><span class="dtag cr">ChatRoulette ✓</span><span class="dtag cs">CamSurf ✓</span></div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-label">No meaningful age verification</div>
+      <div class="diff-tags"><span class="dtag cr">ChatRoulette ✓</span><span class="dtag cs">CamSurf ✓</span></div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-label">Random global anonymous user pool</div>
+      <div class="diff-tags"><span class="dtag cr">ChatRoulette ✓</span><span class="dtag cs">CamSurf ✓</span></div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-label">Browser-based, no account required</div>
+      <div class="diff-tags"><span class="dtag cr">ChatRoulette ✓</span><span class="dtag cs">CamSurf ✓</span></div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-label">Markets itself as "family-friendly"</div>
+      <div class="diff-tags"><span class="dtag same">ChatRoulette —</span><span class="dtag cs">CamSurf ✓</span></div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-label">Claims active content moderation</div>
+      <div class="diff-tags"><span class="dtag same">ChatRoulette —</span><span class="dtag cs">CamSurf ✓</span></div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#E05C20;"></span> Random Video Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Anonymous Strangers</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> "Family-Friendly" Claim</div>
+    <div class="mode-chip"><span class="cdot" style="background:#EF4444;"></span> No Age Verification</div>
+    <div class="mode-chip"><span class="cdot" style="background:#64748B;"></span> Browser-Based</div>
+  </div>
+
+  <div class="card">
+    <div class="s-intro">CamSurf is a <strong>random anonymous stranger video chat platform</strong> with the same core function and risks as ChatRoulette — connecting users via live two-way video to random strangers with no age verification, no identity checks and no pre-connection screening — distinguished primarily by a "family-friendly" marketing claim.</div>
+
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--cs-light);">🎲</div>
+      <div>
+        <div class="feat-name">Immediate Live Two-Way Video With a Random Anonymous Stranger</div>
+        <div class="feat-desc">CamSurf connects users to random strangers via live two-way video immediately upon opening the platform — no introduction, no profile, no screening. A child who opens CamSurf is in a live video call with an unknown adult from anywhere in the world before they have made any decision about who to connect with. The "next" button connects them to another random person immediately. The platform's core function is structurally identical to ChatRoulette in every respect that matters for child safety.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📷</div>
+      <div>
+        <div class="feat-name">Child's Own Camera Is Live and Visible to Every Stranger</div>
+        <div class="feat-desc">Like all random video chat platforms, CamSurf is two-way — a child's camera feed is active and visible to every random stranger they connect with throughout every session. Every adult they are matched with can see the child's face and environment in real time, and may screenshot or record the feed. The child is not a passive viewer; they are visible to strangers from the moment they open the platform to the moment they close it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--amber-bg);">⚠️</div>
+      <div>
+        <div class="feat-name">The "Family-Friendly" Claim Does Not Reflect the Reality of Random Anonymous Video Chat</div>
+        <div class="feat-desc">CamSurf's marketing materials describe it as a "family-friendly" alternative to other random video chat platforms. This framing is misleading in a specific and important way: no random video chat platform where any adult from anywhere can appear in a live connection — before any moderation is applied — can accurately be described as family-friendly. Post-connection moderation and reporting tools do not prevent a child from being exposed to an adult stranger before the connection is ended. The "family-friendly" claim may make parents less likely to restrict the platform and children less cautious about using it — precisely the opposite of what child safety requires.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--red-bg);">🚫</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification</div>
+        <div class="feat-desc">CamSurf has no meaningful age verification. A child can access the platform immediately through a browser with no account, no registration, and no date of birth entry. Any moderation measures CamSurf applies operate after a connection has been established — not before it. The structural problem of random anonymous video chat — that any adult can appear in a child's live feed before any check is possible — is not addressed by post-connection moderation regardless of how well-resourced that moderation is.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--blue-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Browser-Based — Accessible Without an App, Account or Installation</div>
+        <div class="feat-desc">CamSurf is primarily a web platform accessible through any browser — no app installation, no account, no email address required. A child can access it through a phone browser, a shared household computer or a tablet with no installation trigger for Family Link to detect. Browser-level DNS filtering and network-level controls are necessary alongside app-level restrictions to address the web access route.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">CamSurf carries identical core risks to ChatRoulette, with the specific additional concern that its "family-friendly" marketing may lead parents to underestimate the platform and children to lower their guard about who they are connecting with.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card c-rose">
+      <span class="rc-emoji">🎲</span>
+      <div class="rc-name">Immediate Live Video With Random Anonymous Adults</div>
+      <div class="rc-desc">Opening CamSurf places a child in immediate live two-way video with a random adult — the same structural risk as ChatRoulette, present from the first second of use, with no screening before the connection is live</div>
+    </div>
+    <div class="risk-card c-amber">
+      <span class="rc-emoji">⚠️</span>
+      <div class="rc-name">"Family-Friendly" Claim May Lower a Child's Guard</div>
+      <div class="rc-desc">CamSurf's marketing as a "family-friendly" platform may make children less cautious about who they are connecting with — the framing implies a level of safety that the platform's fundamental design cannot deliver</div>
+    </div>
+    <div class="risk-card c-coral">
+      <span class="rc-emoji">📷</span>
+      <div class="rc-name">Child's Camera Is Visible to Every Stranger Connected</div>
+      <div class="rc-desc">The child's live camera feed is active and visible to every random adult they connect with throughout the session — identical to ChatRoulette, with the same risk of recording or screenshotting by adult strangers</div>
+    </div>
+    <div class="risk-card c-red">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Pre-Connection Age Verification or Screening</div>
+      <div class="rc-desc">CamSurf's moderation operates after a connection is established — not before it. A child is already in a live session with an adult stranger before any moderation can intervene, regardless of how active CamSurf's moderation team is</div>
+    </div>
+    <div class="risk-card c-blue">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Global Random Anonymous User Pool</div>
+      <div class="rc-desc">CamSurf's random connections draw from a global anonymous user base — there is no geographic, social or demographic filter on who a child can be connected with, and no information available about the person before the live connection is active</div>
+    </div>
+    <div class="risk-card c-slate">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Browser-Based — No Installation Trigger</div>
+      <div class="rc-desc">CamSurf is primarily web-based — accessible through any browser with no app, account or installation, generating no Family Link alert and accessible via shared household devices and public networks</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>CamSurf Carries a High Risk Rating — Identical to ChatRoulette</strong>
+      <span>CamSurf's core risks are identical to ChatRoulette: immediate live two-way video with random anonymous adults, no pre-connection age verification or screening, and the child's own camera visible to every stranger they connect with. The "family-friendly" marketing claim adds a specific additional concern — it may reduce parental vigilance and lower a child's caution — without reducing the structural risk of random anonymous video chat.</span>
+    </div>
+  </div>
+
+  <div class="claim-note">
+    <div class="cn-ico">⚠️</div>
+    <div>
+      <div class="cn-title">Why the "Family-Friendly" Label on CamSurf Is Specifically Misleading — Not Just Inadequate</div>
+      <div class="cn-body">A "family-friendly" label on an app typically signals that the content has been reviewed and found appropriate for children — a meaningful certification in most contexts. Applied to a random anonymous video chat platform, the label is structurally misleading: no post-connection moderation system can make a platform "family-friendly" if any adult from anywhere can appear in a child's live camera feed before that moderation is applied. CamSurf's use of the label is not simply an overclaim about its moderation quality — it misrepresents the fundamental nature of what the platform is. Parents who see "family-friendly" on CamSurf and lower their concern are making a reasonable response to a label that does not accurately describe the platform's actual risk profile.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">CamSurf's Risks Are Identical to ChatRoulette's — "Family-Friendly" Marketing Does Not Change the Structural Reality</div>
+        <div class="know-body">Parents who are familiar with ChatRoulette's risks should treat CamSurf with exactly the same level of concern. The platform's core function is identical — random anonymous live video connections with no pre-connection screening. The "family-friendly" label and moderation claims describe efforts to address a symptom (inappropriate content once a connection is live) without addressing the cause (the structural impossibility of screening random anonymous connections before they are active). A child who encounters an adult displaying explicit content on CamSurf has been exposed before any moderation can intervene, regardless of how quickly that connection is subsequently terminated. The presence of moderation does not make random anonymous video chat safe for children; it makes it marginally less bad than an equivalent platform with no moderation at all.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">A Child May Have Found CamSurf Specifically Because It Appears "Safer" Than ChatRoulette</div>
+        <div class="know-body">A child who is aware of ChatRoulette's reputation — and many older teenagers are — may have found CamSurf as an apparently safer or more acceptable alternative. The "family-friendly" framing makes CamSurf more likely to survive a casual parental search than ChatRoulette, and the claimed moderation may have made the child feel it was an acceptable choice. This motivation is worth addressing directly in conversation: the reason CamSurf appears safer is a marketing decision, not a structural difference. The core risk — random live two-way video with anonymous strangers, child's camera visible throughout — is identical. A child who made an effort to find a "safer" version of random video chat deserves a clear explanation of why no such version currently exists.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Both CamSurf and ChatRoulette Must Be Restricted — They Are Separate Platforms With Identical Risks</div>
+        <div class="know-body">CamSurf and ChatRoulette are separate platforms that must be addressed independently. A child who has been restricted from ChatRoulette may turn to CamSurf as an alternative, and a child familiar with CamSurf may also have used or be aware of ChatRoulette. Blocking one without the other leaves a gap. iLimits allows blocking the random video chat category at a whole-category level, which covers both platforms alongside other equivalent services in a single restriction — this is the most complete and durable approach and does not require individually identifying each platform as it becomes known.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The Conversation About CamSurf Should Address the "Family-Friendly" Label Directly</div>
+        <div class="know-body">If your child has used CamSurf — possibly because they perceived it as safer than other random chat platforms — the most useful part of the conversation is explaining specifically why the "family-friendly" label does not deliver what it implies. Help your child understand the difference between post-connection moderation (which can remove content or users after a harmful interaction) and pre-connection screening (which would need to verify every user before any connection is possible, which random anonymous chat platforms do not do). The insight that a "family-friendly" label on a random anonymous video platform is structurally misleading — not just an overclaim — gives them a more accurate framework for evaluating platform safety claims in general, which will be useful throughout their digital life.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents reliable tools to block CamSurf and the broader random stranger video chat category — covering CamSurf, ChatRoulette and equivalent platforms in a single category-level restriction alongside browser-based controls for complete coverage.</p>
+    <div class="il-rows">
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Block CamSurf and random stranger video chat platforms by category</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Category restriction covers CamSurf, ChatRoulette and equivalent platforms together</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Parents remain fully in control of which apps and platforms are accessible</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Receive alerts when flagged apps are installed or accessed on your child's device</div></div>
+      <div class="il-row"><div class="il-chk">✓</div><div class="il-lbl">Runs quietly in the background — completely invisible to the child</div></div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically — and Browser-Level Controls Are Also Needed</div>
+      <div class="note-body">iLimits identifies and flags apps like CamSurf as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Because CamSurf is primarily browser-based, applying iLimits restrictions alongside DNS-based web filtering at the router or device level provides the most complete coverage. Both CamSurf and ChatRoulette should be blocked together.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for CamSurf — including how to address the "family-friendly" framing directly, how to apply category-level restrictions that cover both CamSurf and ChatRoulette, and how to use this as an opportunity to help your child evaluate platform safety claims critically.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Address the "Family-Friendly" Label Directly — It Is the Most Important Difference From ChatRoulette</div>
+        <div class="tip-body">The most useful part of the CamSurf conversation is the "family-friendly" label. Begin by acknowledging that it is entirely reasonable to look for a safer version of a platform — that is a sensible instinct. Then explain specifically why the label does not deliver what it implies: CamSurf's moderation operates after a connection is live, not before it. A child is already in a live session with an adult stranger before any moderation can act. The "family-friendly" claim describes how CamSurf responds to problems once they occur, not whether problems will occur in the first place. Help your child understand that for a random anonymous video platform, "family-friendly" cannot mean the same thing it means for a streaming service or a game — because there is no way to review what random anonymous strangers will do before they are connected. This is a specific and teachable insight about how platform safety claims work, and it will serve your child well as they encounter future platforms that use similar framing.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--cs-light); border-color: var(--cs-bdr);">🗂️</div>
+      <div>
+        <div class="tip-name">Block Both CamSurf and ChatRoulette Using Category-Level Restrictions</div>
+        <div class="tip-body">Apply iLimits category-level restrictions to block the random video chat category — this covers CamSurf, ChatRoulette and equivalent platforms in a single action without requiring each to be individually identified. A child who has been restricted from ChatRoulette but not CamSurf has an immediate alternative with identical risks and a more reassuring marketing framing. Category-level blocking removes this gap and provides coverage of future entrants to the category as they appear. Enable Family Link's app installation approval requirement to generate alerts for any future installation of related apps. The combination of category-level restrictions and Family Link approval is more durable than individually blocking each platform as it is discovered.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Both App-Level and Browser-Level Controls — Then Use This as a Platform Safety Evaluation Lesson</div>
+        <div class="tip-body">Apply iLimits category-level restrictions and also DNS-based web filtering to block CamSurf's domain at the network level — this addresses the browser-based access route that app restrictions alone do not cover, using the same approach described on the ChatRoulette page. After addressing the technical controls, use CamSurf as a concrete case study for helping your child develop the habit of asking critical questions about platform safety claims: What does "family-friendly" actually mean for this type of platform? Does the moderation happen before or after I am connected? Who is in the pool of people I can be matched with? How does the platform verify that? These questions — applied to any new platform before use — are a more durable protection than any restriction, because they remain with your child in contexts where restrictions cannot reach.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">"Family-Friendly" Cannot Mean What It Normally Means on a Random Anonymous Video Platform</h3>
+    <p class="closing-body">
+      CamSurf's risks are identical to ChatRoulette's — the "family-friendly" label describes post-connection moderation, not pre-connection screening. A child is already in a live session with a random adult before any moderation can act. iLimits gives you the tools to block both platforms at the category level alongside browser-based DNS filtering. The conversation that explains why no random anonymous video chat platform can be accurately called family-friendly — and that teaches your child to ask "when does the moderation happen?" before using any platform — gives them something more durable than any single restriction.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
