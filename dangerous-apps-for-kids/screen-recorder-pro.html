@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Screen Recorder Pro – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Screen Recorder Pro brand: deep graphite-magenta */
+    --sr:           #9D174D;
+    --sr-mid:       #831843;
+    --sr-deep:      #4C0519;
+    --sr-light:     #FFF1F2;
+    --sr-bdr:       #FDA4AF;
+    --sr-text:      #4C0519;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --pink-bg:      #FFF1F2;
+    --pink-bdr:     #FDA4AF;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --violet-bg:    #F5F3FF;
+    --violet-bdr:   #DDD6FE;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #160008 0%, #280010 50%, #380018 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(157,23,77,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(253,164,175,0.26) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.24) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(157,23,77,0.22);
+    border: 1px solid rgba(253,164,175,0.36);
+    color: #FDA4AF; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #160008 0%, #9D174D 58%, #EC4899 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(157,23,77,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium { color: #FDE68A; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── SRP callout ── */
+  .sr-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--pink-bg); border: 1.5px solid var(--pink-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .sr-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E8; border: 1.5px solid var(--pink-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .sr-title { font-size: 13px; font-weight: 700; color: var(--sr-text); line-height: 1.3; margin-bottom: 3px; }
+  .sr-body  { font-size: 12px; color: #6B1F37; font-weight: 400; line-height: 1.55; }
+
+  /* ── Generic name badge ── */
+  .generic-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--violet-bg); border: 1.5px solid var(--violet-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .generic-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #EDE9FE; border: 1.5px solid var(--violet-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .generic-text strong { font-size: 12.5px; font-weight: 700; color: #2E1065; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .generic-text span   { font-size: 11.5px; color: #4C1D95; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 0 0 0;
+    border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFAF0; border: 1.5px solid #FBD38D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEEBCB; border: 1.5px solid #FBD38D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #744210; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5A3110; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--pink-bg); border: 1.5px solid var(--pink-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE4E8; border: 1.5px solid var(--pink-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--sr-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #6B1F37; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #160008 0%, #280010 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(157,23,77,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🎬</div>
+        <div>
+          <div class="app-name-text">Screen Recorder Pro</div>
+          <div class="app-sub">Screen Capture &amp; Recording Tool</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Screen Recording Utility</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟡 Medium</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Captures everything visible on the device screen — including private messages, passwords, notifications, and sensitive content from any app — and enables this content to be shared without the knowledge of those whose information is recorded</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block screen recording tools from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Screen Recorder Pro — a screen capture utility that records the full device display continuously, capturing every app, every message, every notification, and every piece of content that appears on screen during the recording session, with the capability to share recordings immediately from within the app to messaging platforms, cloud storage, and social media.</p>
+  </div>
+
+  <div class="sr-callout">
+    <div class="sr-ico">🎬</div>
+    <div>
+      <div class="sr-title">Screen Recorder Pro Captures a Continuous Video of Everything on the Device Screen — Including Content From Any App, Any Conversation, and Any Private or Sensitive Information That Appears During the Session</div>
+      <div class="sr-body">Screen Recorder Pro is a screen capture application that records a continuous video of everything visible on the device display — any app that is open, any message that arrives, any notification that appears, and any content the user navigates to during the recording session. Unlike a screenshot that captures a single static moment, a screen recording session captures the full sequence of on-screen activity over time, including transitions between apps, content scrolled through, messages typed and received, and any other on-screen interaction. The recording is saved as a video file that can be shared immediately from within the app, and the person recording may not always be the person whose information or conversations are captured.</div>
+    </div>
+  </div>
+
+  <div class="generic-band">
+    <div class="generic-icon">🔢</div>
+    <div class="generic-text">
+      <strong>Multiple Apps Share This Generic Name — Category Matters More Than a Single App Listing</strong>
+      <span>Several distinct apps use "Screen Recorder Pro" or close variants as their name. The risks described here apply to the category of screen recording tools, and category-level restrictions are more effective than targeting a single named app.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#9D174D;"></span> Full Screen Capture</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> All Apps Recorded</div>
+    <div class="mode-chip"><span class="cdot" style="background:#FDA4AF;"></span> Immediate Sharing</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Private Info Risk</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Audio Capture</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Screen Recorder Pro is a <strong>continuous full-screen video capture tool</strong> that records everything visible on the device during a session — any app, any content, any private information — and enables immediate sharing of that recording from within the app, without the knowledge of anyone whose information appears on screen.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--pink-bg);">📹</div>
+      <div>
+        <div class="feat-name">Records the Full Device Screen Continuously — Every App, Every Message, Every Notification</div>
+        <div class="feat-desc">Screen Recorder Pro captures a continuous video of everything visible on the device display for the duration of the recording session. This includes any messaging app conversations visible on screen, social media content being scrolled through, browsing sessions, games, calls, and any notification or alert that appears during recording. Unlike the device's native screenshot function — which captures a single still frame — a screen recording session captures all on-screen activity over time, creating a video record of whatever the device displays from start to finish of the session.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔑</div>
+      <div>
+        <div class="feat-name">Captures Passwords, Private Messages, and Sensitive Information Appearing on Screen</div>
+        <div class="feat-desc">Because the recording captures everything that appears on screen, it can include sensitive information that appears during the session — passwords entered into visible login fields, banking or payment notifications, private messages from any messaging app, account details, personal photographs scrolled through in the gallery, and any other sensitive or private content. If the recording is subsequently shared — whether deliberately or accidentally — all sensitive information visible during the recorded session is included in the shared video. The person who initiates a recording is not necessarily the only person whose information it captures.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">📤</div>
+      <div>
+        <div class="feat-name">Recordings Can Be Shared Immediately to Messaging Apps, Social Platforms, and Cloud Storage</div>
+        <div class="feat-desc">Screen Recorder Pro typically provides direct sharing capability from within the app, allowing a completed recording to be sent immediately to messaging apps, social media platforms, cloud storage services, and other destinations without any additional steps. A child can record a session on the device — capturing anything that appeared on screen during that session — and share the recording directly to any contact or platform with a single action from within the recording app. There is no built-in review step between recording and sharing that would prompt reflection before the content is distributed.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">📵</div>
+      <div>
+        <div class="feat-name">Can Capture Other People's Private Information on Shared Devices Without Their Knowledge</div>
+        <div class="feat-desc">On household devices shared between family members — tablets, shared phones, or family computers — a screen recording session initiated by one person can capture another person's private information if they use the device during or before the recording session without being aware it is running. Conversations, accounts, personal information, and other content belonging to other household members can be captured and retained in a recording file that the child who initiated the recording has access to. The person whose information was captured may have no awareness that a recording was made or that their on-screen activity was retained as a video file.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🎙️</div>
+      <div>
+        <div class="feat-name">Microphone Audio Captures Conversations in the Physical Environment</div>
+        <div class="feat-desc">Screen Recorder Pro can record audio alongside the screen capture, including audio from the device's microphone. When microphone recording is enabled, the recording captures not only what is visible on screen but also conversations and ambient sound in the child's physical environment during the recording session. This can inadvertently capture private conversations between household members, sensitive information spoken aloud, or environmental audio that identifies the recording location — all of which becomes part of the video file that may subsequently be shared.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Screen Recorder Pro's risks centre on the capture and potential sharing of private information — both the child's own and others' — that appears on the device screen during a recording session, and on the immediate sharing capability that enables recorded content to be distributed without a review step.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔑</span>
+      <div class="rc-name">Private Information Captured Without Consent</div>
+      <div class="rc-desc">Passwords, messages, account details, and personal information from any app can appear on screen during a recording session and be captured in the video — potentially shared without the knowledge of those whose information was recorded</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📤</span>
+      <div class="rc-name">Immediate Sharing Without Review Step</div>
+      <div class="rc-desc">Recordings can be shared directly from the app to any messaging platform or social media immediately after capture — there is no built-in pause or review step between recording and distribution that would prompt consideration before sharing</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📵</span>
+      <div class="rc-name">Other Household Members' Screens Captured</div>
+      <div class="rc-desc">On shared devices, a recording session captures whatever appears on screen — including the private activity of other household members who use the device without knowing a recording session is or has been running</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Private Conversations Recorded and Redistributed</div>
+      <div class="rc-desc">Messaging conversations visible on screen during a recording session are captured in the video — a child can record and share conversations that other people had no expectation would be captured or redistributed to third parties</div>
+    </div>
+    <div class="rc-emoji-card risk-card">
+      <span class="rc-emoji">🎙️</span>
+      <div class="rc-name">Ambient Audio Captures the Physical Environment</div>
+      <div class="rc-desc">Microphone recording captures conversations and ambient sound in the physical environment during a session — private conversations between household members can be captured and included in a recording that is subsequently shared</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔢</span>
+      <div class="rc-name">Multiple Apps Under the Same Generic Name</div>
+      <div class="rc-desc">Several apps use "Screen Recorder Pro" or close variants as their name — the risks apply to the category of screen recording tools rather than a single specific app, and category restrictions are more durable than single-app blocking</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Screen Recorder Pro Carries a Medium Risk Rating — Focused on Information Capture and Sharing Rather Than Content Filter Bypass</strong>
+      <span>Screen Recorder Pro's medium rating reflects that its risks are different in nature from the bypass and concealment tools that dominate this category — it does not circumvent content filters or hide browsing activity. Its risks relate to the capture and potential sharing of private information and conversations without the consent of those involved. These risks are contextual — they depend significantly on how the recording capability is used and on the family's specific circumstances.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🎬</div>
+    <div>
+      <div class="control-title">The Risk Is About What Gets Captured and Shared — Not About Bypassing Parental Controls</div>
+      <div class="control-body">Screen Recorder Pro sits in a different risk category from the majority of tools in this document. It does not bypass content filters, hide browsing history, or conceal apps. Its risk is about the capture of private information from the device screen — including information belonging to other people — and the easy sharing of that recorded content without a built-in review or consent step. The restriction decision is therefore less about parental oversight of the child's own online activity and more about protecting the privacy of family members whose information may appear on a shared device, and about the appropriateness of a child having an easy-to-use tool for recording and sharing any on-screen content without review.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Screen Recording Is a Genuinely Useful Capability — The Risk Is in How It Is Used and What It Captures</div>
+        <div class="know-body">Screen recording tools have many entirely legitimate uses — capturing gameplay to share with friends, creating tutorial content, documenting a technical problem for support, recording an online event or presentation for later review. The capability itself is neutral and valuable. The restriction concern is not screen recording as a concept but the specific risks that arise from full-device-screen capture combined with easy sharing: the capture of sensitive information from any app on the device during a recording session, and the distribution of that content — including other people's private information — without a review step. Parents should assess the restriction decision in the context of their family's specific circumstances — whether the child is likely to use the tool responsibly, whether shared household devices create a specific risk of other members' information being captured, and whether the easy sharing capability creates a concern about content being distributed without reflection.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Most Devices Already Have a Built-In Screen Recorder — Pro Apps Primarily Add Sharing Convenience and Additional Features</div>
+        <div class="know-body">Most modern Android devices include a built-in screen recording function accessible through the quick settings panel, and iOS includes native screen recording in the Control Centre. These built-in functions record the screen without the additional sharing pipelines and feature enhancements that apps like Screen Recorder Pro add. For parents considering the restriction, it is worth noting that the device's built-in recording function may already be available to the child — restricting Screen Recorder Pro does not prevent the child from using the native function. The decision to restrict a third-party recording app is therefore most meaningful in the context of the additional sharing capabilities and features it provides beyond what the native function offers, and the specific risks those additional capabilities introduce.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Shared Device Risk Is the Most Distinctive Concern for Many Families</div>
+        <div class="know-body">The risk of a screen recording app that is most specific to family contexts — and that is not typically present in single-user adult contexts — is the capture of other household members' private information on shared devices. A tablet shared between children, or a family phone used by multiple family members, may be used by different people at different times. If a recording session is initiated before the device is put down and a family member subsequently uses it without checking whether a recording is in progress, their activity can be captured. Similarly, a recording session that includes notification content from other household members' messaging accounts can capture their private conversations without their knowledge. This shared-device risk is worth considering specifically in the context of how the device is used in the family's home environment.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The Category Matters More Than the Specific App Name — Multiple Apps Use This Name or Close Variants</div>
+        <div class="know-body">Several distinct apps use the name "Screen Recorder Pro" or close variations — "Screen Recorder Pro+", "Pro Screen Recorder", "HD Screen Recorder Pro", and similar names are all used by different apps in the Play Store and App Store. Restricting a single specific app listing under this name does not address the category as a whole, and a child who finds one app blocked can easily find an alternative under a similar name. Category-level restrictions covering screen recording tools as a class provide more durable protection than individual app blocking. This is particularly relevant for families whose primary concern is the capture of sensitive information on shared devices — the risk is present with any full-screen recording tool, not only the specific app whose name appears in the app list.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents category-level tools to block screen recording apps — addressing the full class of screen capture tools rather than a single named app, and protecting family members whose private information may appear on shared device screens.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Screen Recorder Pro and screen capture tools with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Category restrictions cover similar screen recording tools automatically</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Protects household members whose information may appear on shared device screens</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged recording tools are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Screen Recorder Pro as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Screen recording has legitimate uses and its risks are highly contextual. iLimits gives you the information to assess whether restriction is appropriate for your family's specific situation, and the tools to act if you decide it is.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps reflecting the contextual nature of Screen Recorder Pro's risks — from a conversation about responsible recording to practical guidance on checking for existing recordings, and a calibrated restriction approach that reflects the difference between the app and the device's built-in recording function.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Children About What Screen Recording Captures and Why Sharing It Without Consent Is a Privacy Issue</div>
+        <div class="tip-body">The most effective conversation about screen recording for children focuses on what the tool actually captures — a continuous video of everything on screen, including other people's messages, notifications, and private information — and on the concept of consent in the context of sharing that content. Many children who use screen recording tools do so without thinking about the information they may capture that belongs to other people: a friend's message that appears in a notification during a gaming recording, a parent's banking notification that pops up during a shared-device session, or a sibling's messages visible on a shared tablet. The idea that sharing a screen recording can share someone else's private information without their knowledge or consent is a concrete and understandable privacy concept — more so than abstract discussions of data privacy — and a conversation framed in those terms tends to land more effectively than a generalised discussion of responsible technology use.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check the App for Saved Recordings Before Any Restriction Decision</div>
+        <div class="tip-body">If Screen Recorder Pro is found on a child's device, review the app's recording library before making a restriction decision — the recordings it contains will give a clearer picture of how the app has been used and what has been captured. This is particularly important for shared household devices where other family members' information may have been captured during recording sessions they were unaware of. The recording library also indicates how frequently the tool has been used and whether the content suggests the recording has been used for legitimate purposes — gameplay capture, tutorial content — or for capturing private information from other apps or conversations. Reviewing the recordings before restricting the app and deleting it ensures you have a complete picture of how it has been used before that information is removed.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Category Restrictions If the Risk Applies — And Note That the Device's Built-In Recorder Is a Separate Capability</div>
+        <div class="tip-body">If the capture and sharing risks of Screen Recorder Pro apply to your family's specific situation — particularly if a shared household device creates a risk that other family members' information could be captured — use iLimits to restrict screen recording tools as a category rather than targeting the single named app. Category restrictions address the capability class regardless of which specific app is currently installed. Be aware that the device's native screen recording function — available through the quick settings panel on Android and the Control Centre on iOS — is a separate capability that app-level restrictions do not address. If the concern is specifically about the ease-of-sharing and additional features that third-party apps add, restricting those apps while leaving the native function available may be a proportionate response. If the concern is about screen recording capability generally on a shared household device, the native function may also warrant consideration through platform-native parental controls rather than app-level blocking alone.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Screen Recording Is a Video of Everything — Including What Wasn't Meant to Be Shared</h3>
+    <p class="closing-body">
+      Screen Recorder Pro's risk is not about bypassing parental controls — it is about what a full-screen recording captures and how easily that recording can be shared. Every notification, every message, every piece of private information that appears on screen during a recording session becomes part of a video file that can be distributed with a single tap. iLimits gives you the category-level tools to restrict this capability where it applies to your family's situation — and the information to make that decision in the context of your household, your shared devices, and your child's specific use patterns.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
