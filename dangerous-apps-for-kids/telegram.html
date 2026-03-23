@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Telegram – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Telegram brand: deep cerulean-blue */
+    --tg:           #0088CC;
+    --tg-mid:       #006DA3;
+    --tg-deep:      #00344F;
+    --tg-light:     #E8F6FD;
+    --tg-bdr:       #7DD3F0;
+    --tg-text:      #00344F;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --sky-bg:       #E8F6FD;
+    --sky-bdr:      #7DD3F0;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --violet-bg:    #F5F3FF;
+    --violet-bdr:   #DDD6FE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #001824 0%, #003348 50%, #004D6E 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(0,136,204,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(125,211,240,0.26) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(0,136,204,0.22);
+    border: 1px solid rgba(125,211,240,0.36);
+    color: #7DD3F0; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+    word-break: break-word;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #001824 0%, #0088CC 58%, #54C6F0 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(0,136,204,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+    flex: 1; min-width: 0;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val {
+    font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .meta-val.medium-high { color: #FDBA74; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-inner { flex: 1; min-width: 0; }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc {
+    font-size: 13px; color: var(--ink-mid); font-weight: 400;
+    margin-top: 5px; line-height: 1.65;
+    word-break: break-word; overflow-wrap: break-word;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Telegram callout ── */
+  .tg-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--sky-bg); border: 1.5px solid var(--sky-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .tg-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #BAE6FD; border: 1.5px solid var(--sky-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .tg-callout-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .tg-title { font-size: 13px; font-weight: 700; color: var(--tg-text); line-height: 1.3; margin-bottom: 3px; }
+  .tg-body  { font-size: 12px; color: #00344F; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ── Secret chats badge ── */
+  .secret-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--red-bg); border: 1.5px solid var(--red-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .secret-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FFE4E8; border: 1.5px solid var(--red-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .secret-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .secret-text strong { font-size: 12.5px; font-weight: 700; color: #881337; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .secret-text span   { font-size: 11.5px; color: #9F1239; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+    word-break: break-word; overflow-wrap: break-word;
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  /* ── Feature rows ── */
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; display: block; overflow-wrap: break-word; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+    word-break: break-word;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; overflow-wrap: break-word; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; overflow-wrap: break-word; }
+
+  /* ── Medium-High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFAF0; border: 1.5px solid #FBD38D;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEEBCB; border: 1.5px solid #FBD38D;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #744210; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5A3110; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--sky-bg); border: 1.5px solid var(--sky-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #BAE6FD; border: 1.5px solid var(--sky-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--tg-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #00344F; font-weight: 400; line-height: 1.55; overflow-wrap: break-word; }
+
+  /* ══ WHAT PARENTS SHOULD KNOW ══ */
+  .know-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num-wrap {
+    padding: 18px 0 18px 18px;
+    flex-shrink: 0;
+  }
+  .know-num {
+    width: 32px; height: 32px; min-width: 32px;
+    border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .know-text {
+    flex: 1; min-width: 0;
+    padding: 18px 18px 18px 14px;
+    overflow-wrap: break-word; word-break: break-word;
+  }
+  .know-title {
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    line-height: 1.4; margin-bottom: 7px; display: block; overflow-wrap: break-word;
+  }
+  .know-body {
+    font-size: 12.5px; color: var(--ink-mid); font-weight: 400;
+    line-height: 1.65; display: block; overflow-wrap: break-word; word-break: break-word;
+  }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #001824 0%, #003348 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,136,204,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; overflow-wrap: break-word; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; flex: 1; min-width: 0; overflow-wrap: break-word; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; overflow-wrap: break-word; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-text { flex: 1; min-width: 0; overflow-wrap: break-word; }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; display: block; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; display: block; overflow-wrap: break-word; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; overflow-wrap: break-word; word-break: break-word; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">✈️</div>
+        <div class="app-name-text">
+          <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.2px;line-height:1.2;">Telegram</div>
+          <div class="app-sub">Messaging &amp; Channel Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Messaging / Social Platform</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium-high">🟠 Medium–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">A legitimate major messaging platform whose specific features — secret chats with end-to-end encryption and self-destruct timers, public channels with minimal content moderation, and username-based contact without phone number sharing — create parental oversight gaps that do not exist in standard messaging apps</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div class="rf-inner">
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can restrict Telegram from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Telegram — one of the world's largest messaging platforms, used by hundreds of millions of people for entirely legitimate communication, but whose specific feature set includes capabilities that are meaningfully different from standard messaging apps and that create specific parental oversight gaps: secret chats with end-to-end encryption and automatic message deletion, public channels with minimal content moderation, and contact discovery through public usernames rather than phone numbers.</p>
+  </div>
+
+  <div class="tg-callout">
+    <div class="tg-ico">✈️</div>
+    <div class="tg-callout-text">
+      <div class="tg-title">Telegram Is a Legitimate Major Platform — But Its Specific Features Create Oversight Gaps That Standard Messaging Apps Do Not</div>
+      <div class="tg-body">Telegram is one of the world's largest messaging applications, used by hundreds of millions of adults for entirely legitimate personal, professional, and organisational communication. Its restriction in iLimits is not based on Telegram being inherently unsafe or primarily used for harmful purposes — it is based on specific features that meaningfully differ from standard messaging apps and create parental oversight challenges that parents should understand before deciding whether those features are appropriate for their child. Secret chats with end-to-end encryption and self-destruct timers, public channels with minimal content moderation, and username-based contact discovery without phone number sharing each create a specific oversight gap. Together, they make Telegram a platform where parental awareness of a child's activity is significantly harder to maintain than on most standard messaging apps.</div>
+    </div>
+  </div>
+
+  <div class="secret-band">
+    <div class="secret-icon">🔒</div>
+    <div class="secret-text">
+      <strong>Secret Chats With Self-Destruct Timers Leave No Trace — Not Even on Telegram's Own Servers</strong>
+      <span>Telegram's Secret Chat mode uses end-to-end encryption and automatic message deletion that removes messages from both devices after a timer set by the sender — leaving no record of the conversation on any server or device.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#0088CC;"></span> Secret Chats</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Self-Destruct</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7DD3F0;"></span> Public Channels</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Username Contact</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Minimal Moderation</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Telegram is a <strong>major legitimate messaging platform</strong> restricted not because of what it primarily is, but because of specific features — secret chats with encryption and self-destruct, public channels with limited moderation, and username-based contact — that create oversight gaps meaningfully different from standard messaging apps.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--sky-bg);">🔒</div>
+      <div class="feat-text">
+        <div class="feat-name">Secret Chats — End-to-End Encrypted With Automatic Self-Destruct</div>
+        <div class="feat-desc">Telegram's Secret Chat mode uses end-to-end encryption and stores messages only on the devices of the two participants — not on Telegram's servers. Within a Secret Chat, the sender can set a self-destruct timer ranging from one second to one week after which messages are automatically deleted from both devices. No record of the conversation remains on either device or any server once the timer expires. A child conducting conversations through Secret Chat mode can do so with complete confidence that no trace of the conversation will remain — not in the app history, not on Telegram's servers, and not on the recipient's device. This is a qualitatively different level of conversation privacy from standard message deletion, which typically leaves at least a record that messages existed.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📢</div>
+      <div class="feat-text">
+        <div class="feat-name">Public Channels With Minimal Content Moderation</div>
+        <div class="feat-desc">Telegram allows any user to create a public channel — a broadcast platform that any other user can join and follow — with minimal content moderation compared to mainstream social media platforms. Public Telegram channels have been documented as hosting extremist content, illegal material, adult content, and other harmful information that would be removed from more moderated platforms. A child can search for and join any public channel, and Telegram's search function makes channels discoverable by keyword. The channel landscape on Telegram is significantly less moderated than the equivalent on Instagram, YouTube, or TikTok, and a child exploring public channels may encounter content that would not pass moderation on those platforms.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">👤</div>
+      <div class="feat-text">
+        <div class="feat-name">Username-Based Contact Without Phone Number Sharing</div>
+        <div class="feat-desc">Unlike WhatsApp, which requires a phone number to initiate contact, Telegram allows users to set a public username and be contacted by anyone who knows that username — without sharing their phone number. A child can share their Telegram username on social media, in gaming communities, or through any other channel, and anyone who encounters it can initiate a direct message without the child's phone number being exposed. Conversely, a child can be directed to contact an adult through their Telegram username without any phone number exchange. The username system extends Telegram's reach as a contact platform well beyond the child's existing phone contact list.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">🤖</div>
+      <div class="feat-text">
+        <div class="feat-name">Bots and Inline Tools Can Deliver Content Outside Standard Moderation</div>
+        <div class="feat-desc">Telegram's bot ecosystem allows third-party developers to create automated bots accessible within the app that can deliver content, media, and services directly through Telegram's interface. Bots on Telegram have been used to distribute content — including adult content and pirated material — that would be removed from mainstream app stores and platforms. A child directed to interact with a Telegram bot may receive content delivered through the bot's interface that bypasses the content moderation applied to standard Telegram channels and messages.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🌍</div>
+      <div class="feat-text">
+        <div class="feat-name">Cross-Platform and Fully Functional on Web — No App Required</div>
+        <div class="feat-desc">Telegram is available on iOS, Android, Windows, macOS, and Linux, and has a fully functional web version at web.telegram.org. A child whose Telegram app is blocked on their phone can access their full Telegram account — including all chats, channels, and Secret Chats — through the web version in any browser, on any device. Restricting the Telegram app alone does not prevent Telegram access; DNS-level domain blocking for telegram.org and web.telegram.org is required for complete protection on home network-connected devices.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Telegram's risks are not about the platform being primarily harmful — they are about specific features that create parental oversight gaps significantly larger than those of standard messaging apps, combined with a content environment in its public channels that is less moderated than mainstream social platforms.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Secret Chats Leave No Trace</div>
+      <div class="rc-desc">End-to-end encrypted Secret Chats with self-destruct timers leave no record on any server or device — a child can conduct and completely erase conversations with no trace, unlike standard message deletion which typically leaves some record</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📢</span>
+      <div class="rc-name">Unmoderated Public Channels</div>
+      <div class="rc-desc">Public Telegram channels have hosted extremist, adult, and illegal content with less moderation than mainstream platforms — a child can search for and join channels containing content that would be removed elsewhere</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">Username Contact Without Phone Number</div>
+      <div class="rc-desc">Any user who knows a child's Telegram username can initiate direct private messages without a phone number — extending contact access well beyond the child's existing contact list to anyone who encounters their username</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🤖</span>
+      <div class="rc-name">Bots Deliver Unmoderated Content</div>
+      <div class="rc-desc">Telegram bots can deliver adult and otherwise moderated content directly through the app's interface — a child directed to a specific bot may receive content that bypasses standard content moderation</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Full Web Access Bypasses App Restrictions</div>
+      <div class="rc-desc">Telegram's fully functional web version means blocking the app alone is not sufficient — the complete Telegram experience including all chats and Secret Chats remains accessible at web.telegram.org in any browser</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🛡️</span>
+      <div class="rc-name">Perceived as Legitimate and Safe</div>
+      <div class="rc-desc">Telegram's status as a major mainstream messaging platform with hundreds of millions of users can create a false impression that it carries no specific risks — a child may present it as equivalent to WhatsApp or iMessage without understanding how its specific features differ</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>Telegram Carries a Medium–High Risk Rating — A Legitimate Platform Whose Specific Features Create Significant Oversight Gaps</strong>
+      <span>Telegram's medium–high rating reflects a different risk profile from the platforms earlier in this series. It is not a stranger contact platform, an anonymous harassment tool, or a random video chat service. Its risk is that specific features — Secret Chats with self-destruct, username-based contact, and unmoderated public channels — create oversight gaps that are meaningfully larger than standard messaging apps, in a platform that children will correctly identify as mainstream and widely used. The legitimacy of the platform makes the specific features that differ from standard messaging apps harder to distinguish and easier to overlook.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">✈️</div>
+    <div class="control-text">
+      <div class="control-title">Secret Chats Are the Feature That Differentiates Telegram From All Other Standard Messaging Apps — No Other Major Consumer Messaging App Combines End-to-End Encryption With Automatic Message Deletion From Both Devices</div>
+      <div class="control-body">WhatsApp has end-to-end encryption but does not automatically delete messages from both devices on a timer set by the sender. iMessage has end-to-end encryption and disappearing messages but the feature requires consent from both parties and is far less commonly used. Signal has both features but is primarily used by adults in privacy-conscious contexts and is not a mainstream teen social platform. Telegram's Secret Chat mode brings these capabilities together in a mainstream social platform with hundreds of millions of users and significant teenage adoption — making it the only major consumer messaging platform where a child can have completely untraceable conversations with automatic deletion that leaves no record anywhere. This specific capability is the primary parental oversight concern that distinguishes Telegram from other mainstream messaging platforms.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">1</div></div>
+      <div class="know-text">
+        <div class="know-title">Telegram Is Mainstream and Legitimate — The Restriction Is About Specific Features, Not the Platform as a Whole</div>
+        <div class="know-body">Telegram is used by hundreds of millions of adults worldwide for entirely legitimate communication — personal messaging, professional team communication, news channels, community groups, and many other benign purposes. A child who uses Telegram will correctly point out that it is a major mainstream platform and not an obscure or inherently risky app. The restriction is not about Telegram being primarily dangerous — it is about specific features that create parental oversight challenges significantly larger than those of standard messaging apps. A conversation about Telegram is most effective when it acknowledges the platform's legitimacy and focuses specifically on the features that differ from standard messaging apps — particularly Secret Chats with self-destruct timers and the public channel ecosystem — rather than presenting the platform itself as inherently harmful.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">2</div></div>
+      <div class="know-text">
+        <div class="know-title">Secret Chats Are a Deliberate Choice — A Child Who Uses Them Has Specifically Chosen Untraceable Communication</div>
+        <div class="know-body">Secret Chat mode is not the default on Telegram — standard Telegram messages are not end-to-end encrypted and are stored on Telegram's servers. A child who conducts conversations in Secret Chat mode has actively chosen to switch to that mode and has done so with the knowledge that the conversation will leave no trace. The self-destruct timer is set by the sender, not automatically. A child using Secret Chat mode has made a deliberate choice to have a conversation that will not be recoverable — which is a meaningfully different situation from standard messaging on any platform. A parent who finds Telegram on a child's device should ask specifically whether the child has been using Secret Chats — though there is no record to review if self-destruct timers have been active, because the conversations have already been automatically deleted.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">3</div></div>
+      <div class="know-text">
+        <div class="know-title">Public Channels Are a Specific Risk — Telegram's Channel Ecosystem Is Less Moderated Than Mainstream Social Platforms</div>
+        <div class="know-body">Telegram's public channel ecosystem is a separate risk dimension from its private messaging features. Public channels on Telegram have hosted content including extremist material, adult content, detailed instructions for harmful activities, and illegal material that would be removed from mainstream social platforms. A child who explores Telegram's public channel search can find channels on almost any topic — and the content moderation applied to those channels is significantly less rigorous than on Instagram, TikTok, YouTube, or Twitter. A parent who decides to allow Telegram should specifically discuss the public channel ecosystem with the child and set explicit expectations about which types of channels are appropriate — not assuming that the channel content is equivalent to content on more moderated platforms.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num-wrap"><div class="know-num">4</div></div>
+      <div class="know-text">
+        <div class="know-title">Blocking the App Is Not Sufficient — The Web Version Provides Full Access Through Any Browser</div>
+        <div class="know-body">Unlike most apps in this document, blocking the Telegram mobile app does not prevent Telegram access. The full Telegram experience — including all private chats, Secret Chats, channels, and bots — is accessible at web.telegram.org in any standard browser on any device. A child whose Telegram app is restricted can open any browser, navigate to web.telegram.org, log in with their account credentials, and access their full Telegram account including all conversations. Complete protection requires DNS-level domain blocking for telegram.org and its subdomains on the home network in addition to the app-level restriction. For devices using mobile data outside the home network, the domain block does not apply — meaning a child on mobile data outside the home can still access the web version unless device-level DNS filtering is also applied.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to restrict Telegram at the app level — preventing the mobile app from being installed or used, while DNS-level blocking of telegram.org complements this to close the web-based access route.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restrict Telegram and similar messaging platforms with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents access to Secret Chat, unmoderated channels, and bot content</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Blocks the app while DNS filtering closes the web version access route</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when Telegram is accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div class="note-text">
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Telegram as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. Telegram is a legitimate platform with many benign uses. The restriction decision should reflect whether your child's age, maturity, and specific use patterns make Telegram's specific features — particularly Secret Chats and public channels — an appropriate tool for them at this time. <strong>Blocking the app alone is not sufficient — pair the iLimits restriction with DNS-level blocking of telegram.org for complete coverage.</strong></div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect Telegram's specific profile — acknowledging its legitimacy while addressing the features that differ from standard messaging apps, applying both app and web-level restrictions, and having a feature-specific conversation rather than a general platform conversation.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div class="tip-text">
+        <div class="tip-name">Address the Specific Features — Not Telegram as a Whole</div>
+        <div class="tip-body">The most effective conversation about Telegram focuses on its specific differentiating features rather than the platform as a whole — because a child will correctly identify Telegram as a major mainstream platform and will resist a conversation that treats it as inherently dangerous. Acknowledge that Telegram is a widely used legitimate platform, then explain the specific features that are different from standard messaging apps: Secret Chat mode with self-destruct timers that leave no record anywhere, public channels with less moderation than mainstream social platforms, and username-based contact that extends beyond the phone contact list. For each feature, explain specifically what the oversight gap is — not as a parental control concern but as a practical question of what the feature enables: does the child understand that Secret Chats leave no trace on any device or server? Does the child understand that public channel content is less moderated than what they see on Instagram or YouTube? These specific feature discussions are more productive than a general conversation about platform safety.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div class="tip-text">
+        <div class="tip-name">If Telegram Is Already on the Device — Check Joined Channels and Recent Chats Before Restricting</div>
+        <div class="tip-body">If Telegram is found on a child's device, review the app's content before applying a restriction. The list of channels the child has joined is visible in the left sidebar — checking for any channels whose names or descriptions suggest harmful content gives important context. Also review the recent chat list for any contacts who are not in the child's phone contact list — contacts reached through Telegram usernames rather than phone numbers are a signal that the child has been connecting with people outside their established social circle. Note that if Secret Chats with self-destruct timers have been in use, their content will not be visible — you may see that a Secret Chat exists with a contact without being able to read what was in it if messages have self-destructed. The presence of Secret Chats with unfamiliar contacts is itself meaningful context for the conversation, even without access to the content.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div class="tip-text">
+        <div class="tip-name">Apply Both the iLimits App Restriction and DNS-Level Blocking for telegram.org</div>
+        <div class="tip-body">Apply the iLimits restriction to block the Telegram app on the child's device, and add telegram.org and web.telegram.org to any DNS or router-level domain blocklist on the home network. Both steps are needed — the app restriction prevents mobile app use, and the DNS block prevents access through any browser on any home-network device. For children with mobile data access, DNS filtering on the device itself — through a mobile DNS filtering service — extends this protection to sessions outside the home network. If the child has a Telegram account and the decision is made to restrict it rather than simply prevent initial installation, also consider whether the child should delete the account itself — a Telegram account can be accessed from any browser worldwide regardless of app restrictions, and account deletion is the only complete closure if the concern extends beyond the home network. Account deletion is done through Telegram's settings under Privacy and Security and Delete Account.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Mainstream Platform With Non-Mainstream Features — The Features Are What Matter</h3>
+    <p class="closing-body">
+      Telegram is a legitimate platform used by hundreds of millions of people — and most of them use it for entirely ordinary communication. The restriction is not about what Telegram primarily is. It is about what Secret Chat mode with self-destruct timers specifically enables, about what public channels with minimal moderation specifically expose children to, and about what username-based contact without phone number sharing specifically allows. iLimits blocks the app. DNS filtering closes the web version. The conversation explains the features — so that a child who understands what Secret Chat mode actually does can make an informed choice about whether to use it, rather than simply knowing that Telegram has been restricted.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
