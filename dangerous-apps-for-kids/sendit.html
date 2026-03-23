@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sendit – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Sendit brand: vivid snapchat-adjacent electric green */
+    --se:           #16A34A;
+    --se-mid:       #15803D;
+    --se-deep:      #052E16;
+    --se-light:     #F0FDF4;
+    --se-bdr:       #86EFAC;
+    --se-text:      #052E16;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --green-bg:     #F0FDF4;
+    --green-bdr:    #86EFAC;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --snap-bg:      #FEFCE8;
+    --snap-bdr:     #FDE047;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #020E07 0%, #051A0D 50%, #08261A 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(22,163,74,0.48) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(134,239,172,0.26) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(22,163,74,0.20);
+    border: 1px solid rgba(134,239,172,0.34);
+    color: #86EFAC; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #020E07 0%, #16A34A 58%, #4ADE80 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(22,163,74,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Sendit callout ── */
+  .se-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--green-bg); border: 1.5px solid var(--green-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .se-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DCFCE7; border: 1.5px solid var(--green-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .se-title { font-size: 13px; font-weight: 700; color: var(--se-text); line-height: 1.3; margin-bottom: 3px; }
+  .se-body  { font-size: 12px; color: #052E16; font-weight: 400; line-height: 1.55; }
+
+  /* ── Snapchat snap-in badge ── */
+  .snap-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--snap-bg); border: 1.5px solid var(--snap-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .snap-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEF9C3; border: 1.5px solid var(--snap-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .snap-text strong { font-size: 12.5px; font-weight: 700; color: #365314; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .snap-text span   { font-size: 11.5px; color: #3F6212; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--green-bg); border: 1.5px solid var(--green-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #DCFCE7; border: 1.5px solid var(--green-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--se-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #052E16; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #020E07 0%, #051A0D 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(22,163,74,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📩</div>
+        <div>
+          <div class="app-name-text">Sendit</div>
+          <div class="app-sub">Anonymous Q&amp;A Add-On for Snapchat</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Anonymous Q&amp;A / Snap Add-On</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">A Snapchat-integrated anonymous Q&A tool that routes anonymous messages through Snapchat's existing social graph — bringing anonymous harassment and stranger contact directly into a platform and friend network the child already trusts, via their existing Snapchat Story audience</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Sendit and anonymous Snapchat add-ons from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Sendit — an anonymous Q&A add-on that integrates directly with Snapchat, allowing a child to post a question sticker to their Snapchat Story and receive completely anonymous responses from anyone who sees it. Sendit's integration with Snapchat's existing social graph is what makes it distinctively risky: anonymous harassment and stranger contact arrive through the platform the child already trusts, among people they already know.</p>
+  </div>
+
+  <div class="se-callout">
+    <div class="se-ico">📩</div>
+    <div>
+      <div class="se-title">Sendit Brings Anonymous Messaging Into Snapchat — Routing Untraceable Messages Through a Platform and Friend Network the Child Already Trusts</div>
+      <div class="se-body">Sendit is a Snapchat-integrated anonymous Q&A tool that allows a user to add an anonymous question sticker to their Snapchat Story. Anyone who views the Story can submit an anonymous message, which Sendit collects and delivers to the account holder. The critical distinction from standalone anonymous Q&A platforms like Tellonym is that Sendit operates within Snapchat's existing social ecosystem — the anonymous messages appear to come from within the trusted friend network the child has already built on Snapchat, making them harder to be appropriately sceptical of. The child's entire Snapchat Story audience — including people added as "friends" who may be acquaintances or near-strangers — gains anonymous messaging access automatically when a Sendit sticker is posted.</div>
+    </div>
+  </div>
+
+  <div class="snap-band">
+    <div class="snap-icon">👻</div>
+    <div class="snap-text">
+      <strong>Snapchat-Integrated — Anonymous Abuse Arrives Through a Platform the Child Already Trusts</strong>
+      <span>Unlike standalone anonymous apps, Sendit routes anonymous messages through Snapchat's existing social graph — bringing harassment and stranger contact into a trusted platform the child uses daily, without requiring them to install a separate social app.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#16A34A;"></span> Snapchat Add-On</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Anonymous Senders</div>
+    <div class="mode-chip"><span class="cdot" style="background:#86EFAC;"></span> Story Audience Access</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> Trusted Platform</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> No Sender ID</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Sendit is a <strong>Snapchat-integrated anonymous Q&A add-on</strong> that opens a child's existing Snapchat Story audience to anonymous, untraceable messaging. Its integration with Snapchat is its defining risk: it imports the structural anonymity harm of platforms like Tellonym into the social platform the child already uses, trusts, and has their real social connections on.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--green-bg);">👻</div>
+      <div>
+        <div class="feat-name">Integrates Directly With Snapchat — No Separate Social Platform Needed</div>
+        <div class="feat-desc">Sendit works as an add-on to Snapchat rather than a standalone social platform. A child adds a Sendit anonymous question sticker to their Snapchat Story from within the Snapchat interface, and anonymous responses are collected through the Sendit app and delivered to the account holder. Because Sendit operates through Snapchat, a child who already uses Snapchat can adopt Sendit without having to build a new social network or establish a new platform presence — the anonymous messaging is immediately available to their entire existing Snapchat Story audience, which may include dozens or hundreds of connections accumulated over years of social media use.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🎯</div>
+      <div>
+        <div class="feat-name">Anonymous Messages Appear to Come From Within a Trusted Social Network</div>
+        <div class="feat-desc">Because Sendit operates through Snapchat, anonymous messages appear to the recipient as if they come from within their established friend and follower network rather than from unknown strangers on a separate platform. This is the key distinction between Sendit and standalone anonymous Q&A platforms: a child who receives an anonymous message through Sendit will likely assume it comes from someone in their Snapchat circle — a classmate, a friend, a peer they know. This assumption makes the child less likely to treat the message with the scepticism appropriate to contact from a complete stranger, and more likely to engage with, respond to, or be emotionally affected by its content as if it comes from someone in their social world.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">👥</div>
+      <div>
+        <div class="feat-name">The Entire Story Audience Gains Anonymous Messaging Access Instantly</div>
+        <div class="feat-desc">When a child posts a Sendit sticker to their Snapchat Story, every account that views their Story can submit an anonymous message — without any additional steps, without creating a Sendit account, and without any identity verification. A child's Snapchat Story audience may include people they have added as friends who are more acquaintance or near-stranger than close connection, people who have been added through friend-of-friend chains, and potentially adults who have found their way into the child's social circle through any number of Snapchat-specific discovery mechanisms. All of them gain instant anonymous access the moment the Sendit sticker goes live in the Story.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">😔</div>
+      <div>
+        <div class="feat-name">Creates the Same Anonymous Harassment Channel as Tellonym — Inside a Platform Already on the Device</div>
+        <div class="feat-desc">The anonymous harassment risk of Sendit is structurally identical to Tellonym's: the sender is completely anonymous, the recipient is named and identified, and harmful messages cannot be traced back to their source. The key difference is that Sendit operates through a platform — Snapchat — that is almost certainly already on the child's device, already integrated into their social life, and already trusted. A child who would not seek out a standalone anonymous Q&A platform may adopt Sendit simply because it appears as an option within the Snapchat ecosystem they already use every day, without fully understanding what anonymous messaging access they are opening to their Story audience.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">💰</div>
+      <div>
+        <div class="feat-name">Sendit Charges Fees to Reveal Sender Hints — Creating a Financial Incentive Around Harmful Content</div>
+        <div class="feat-desc">Sendit offers a paid feature that provides partial hints about who sent an anonymous message — not full identity disclosure, but approximate clues such as the sender's age range, general location, or astrological sign. This creates a financial incentive structure around harmful content: a child who has received a cruel or upsetting anonymous message may be motivated to pay for a hint to understand who sent it, with no guarantee the hint is accurate or meaningful. The payment mechanism is a specific concern because it can lead children to spend money in distressing circumstances — paying for information that may not resolve the distress, while providing Sendit with revenue generated by the negative emotional impact of anonymous harassment.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Sendit's risks combine the anonymous harassment channel of standalone Q&A platforms with the additional danger of routing that harassment through Snapchat — a platform the child already trusts — while adding a paid sender-hint feature that can financially exploit children receiving harmful content.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">😔</span>
+      <div class="rc-name">Anonymous Harassment Inside a Trusted Platform</div>
+      <div class="rc-desc">Anonymous abuse arrives through Snapchat — a platform the child already trusts — making messages feel as if they come from within the social network, increasing emotional impact and reducing appropriate scepticism of anonymous content</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Entire Story Audience Gets Instant Anonymous Access</div>
+      <div class="rc-desc">Every account that views a Story with a Sendit sticker can submit anonymous messages without any additional steps, verification, or registration — including acquaintances, near-strangers, and anyone who has found their way into the child's Snapchat friend list</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💰</span>
+      <div class="rc-name">Paid Sender Hints Exploit Distressed Children</div>
+      <div class="rc-desc">Sendit charges for partial hints about who sent an anonymous message — a payment mechanism that financially exploits children in distress from harmful anonymous messages, with no guarantee the hints are accurate or resolve the underlying harm</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">The Trusted-Platform Effect Reduces Protective Scepticism</div>
+      <div class="rc-desc">Children are less likely to treat Sendit messages with appropriate caution because they appear to come from within their Snapchat social circle — the trusted platform context makes anonymous harmful content feel more credible and more personally targeted</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📱</span>
+      <div class="rc-name">Adopted Without Seeking a Separate Social Platform</div>
+      <div class="rc-desc">A child who would not install a standalone anonymous Q&A app may adopt Sendit because it appears as an option within Snapchat — dramatically lowering the threshold of deliberate choice and increasing the likelihood of incidental adoption through social peer pressure</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎯</span>
+      <div class="rc-name">Same Structural Harm as Tellonym — With Wider Reach</div>
+      <div class="rc-desc">Named, identified recipient; completely anonymous senders; no ability to screen or prevent harmful messages before receipt — the same anonymous harassment structure as Tellonym, but with a larger immediate audience through Snapchat's existing social graph</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Sendit Carries the Highest Risk Rating — Snapchat Integration Makes Anonymous Harassment Feel Credible and Targeted</strong>
+      <span>Sendit's highest risk rating reflects not only that it creates the same anonymous harassment channel as standalone platforms like Tellonym, but that its Snapchat integration amplifies that harm in two specific ways: it gives anonymous messages the perceived credibility of coming from within a trusted social network, and it dramatically lowers the threshold of adoption by embedding itself in a platform already in daily use. The paid sender-hint feature adds a further dimension of financial exploitation of children experiencing harmful anonymous contact.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">📩</div>
+    <div>
+      <div class="control-title">Sendit's Integration With Snapchat Is the Feature That Makes It More Dangerous Than a Standalone Anonymous Q&A App — Not Less</div>
+      <div class="control-body">It might seem that an add-on to an existing, monitored platform is less risky than a standalone anonymous social app — because the parent is already aware of the child's Snapchat use, already potentially monitoring their Snapchat activity, and the child is not going elsewhere for their social interaction. In practice, the integration makes Sendit more dangerous for the specific harm of anonymous harassment. A child who receives a cruel anonymous message through a dedicated platform like Tellonym knows it has come from someone with access to a separate platform. A child who receives the same message through Sendit experiences it as if it comes from within their Snapchat friend network — from someone they know, someone in their social world — which makes the emotional impact more direct, more personal, and more difficult to distance from.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Sendit May Be on a Child's Device Even if a Parent Is Already Monitoring Their Snapchat</div>
+        <div class="know-body">Parents who monitor their child's Snapchat usage — reviewing snaps, checking stories, or using Snapchat's own family tools — may not be aware of Sendit as a separate app that integrates with Snapchat. Sendit's anonymous messages are delivered through the Sendit app itself rather than appearing as standard Snapchat messages — a parent reviewing Snapchat conversations will not see Sendit content in the Snapchat inbox. The Sendit app must be checked separately, and its presence in the installed app list must be identified specifically. A child who understands that a parent reviews their Snapchat messages may use Sendit precisely because anonymous messages are delivered to the Sendit app rather than appearing in the standard Snapchat message history a parent might review.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Paid Sender Hint Feature Can Lead Children to Spend Money While Experiencing Emotional Distress</div>
+        <div class="know-body">Sendit's paid sender hint feature is specifically designed to be purchased in the context of receiving an anonymous message — the feature is presented as a way to find out who sent a message the child has already received and is already emotionally responding to. A child who has received a cruel, confusing, or emotionally affecting anonymous message is in precisely the state of distress most likely to lead to an impulsive in-app purchase — they want to know who sent it, and Sendit offers a paid pathway to partial information. Parents whose children have Sendit installed should check whether any in-app purchases have been made, as these may indicate the child has been receiving messages distressing enough to motivate spending money on hints. Any in-app purchase history in Sendit is significant context for the conversation about what the child has been experiencing through the app.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children Adopt Sendit Through Peer Group Social Dynamics Within Snapchat Itself</div>
+        <div class="know-body">Because Sendit appears as a sticker option within Snapchat's Story creation interface, children encounter it in the context of their existing Snapchat social activity rather than as a separate app to be deliberately sought out. A child who sees a classmate's Snapchat Story with a Sendit sticker, responds to it, and is then prompted to create their own, can adopt Sendit through a sequence of steps that feels like ordinary Snapchat interaction rather than a deliberate choice to install an anonymous messaging platform. This means parents cannot rely on the deliberateness of installation as a signal that a child has actively sought out an anonymous Q&A tool — the adoption pathway through Snapchat is specifically designed to feel seamless and social rather than intentional.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Restricting Sendit Does Not Affect Snapchat — They Are Separate Apps</div>
+        <div class="know-body">Sendit is a separate application from Snapchat — it is installed independently, operates as a distinct app on the device, and can be restricted or removed without affecting the child's Snapchat account or access. Restricting or deleting Sendit through iLimits or directly from the device removes the anonymous messaging add-on while leaving Snapchat intact. This is an important clarification for children who may resist the restriction on the grounds that they do not want to lose access to Snapchat — the restriction of Sendit is targeted specifically at the anonymous messaging add-on, not at the underlying social platform. If a Sendit sticker has already been posted to a Snapchat Story, removing the Sendit app does not automatically remove the sticker from the Story — the Story may need to be deleted or allowed to expire for the anonymous message collection link associated with it to become inactive.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Sendit and similar anonymous Snapchat add-ons — preventing anonymous harassment from entering a trusted social platform, without affecting the child's Snapchat access itself.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Sendit and anonymous Snapchat Q&A add-ons with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricts the add-on without affecting the child's Snapchat account or access</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents anonymous harassment from routing through a platform the child trusts</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged anonymous add-on apps are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags apps like Sendit as restricted — but <strong>no app is ever blocked without your explicit decision</strong>. If Sendit is on your child's device, <strong>check Sendit's message inbox for any harmful content, check for in-app purchases, and delete any active Sendit Story stickers from Snapchat</strong> before or alongside removing the app to close all active anonymous access points.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect Sendit's Snapchat-integrated nature — checking the Sendit inbox separately from Snapchat messages, addressing the paid sender-hint feature, and explaining the restriction without conflating Sendit with Snapchat itself.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Be Clear That Restricting Sendit Is Not Restricting Snapchat — And Explain What Sendit Specifically Enables</div>
+        <div class="tip-body">One of the most important things to establish in the conversation about Sendit is that restricting the Sendit app is not the same as restricting Snapchat. A child who hears that Sendit is being blocked may immediately assume that their Snapchat access is also under threat, and may resist the conversation on that basis. Making clear at the outset that Sendit is a separate app that adds anonymous messaging to Snapchat — and that restricting it removes only the anonymous add-on, not the social platform — removes that concern and makes the conversation about the specific risk Sendit creates rather than about Snapchat use generally. The conversation can then focus specifically on what anonymous messaging means: anyone who sees a Snapchat Story with a Sendit sticker can send an anonymous message with no ability for the recipient to know who it came from or prevent further messages from the same person.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check Sendit's Inbox, Any In-App Purchases, and Active Story Stickers Before Removing the App</div>
+        <div class="tip-body">Open the Sendit app separately from Snapchat and review the anonymous messages that have been received in its inbox — these will not appear in the child's standard Snapchat message history and are only visible within the Sendit app itself. Check for any in-app purchases related to sender hints — these indicate messages distressing enough to motivate spending, and are important context for understanding what the child has been experiencing. Also check the child's active Snapchat Stories for any Sendit sticker that may currently be collecting anonymous messages — a live Sendit sticker on an active Story continues to allow anonymous submissions until the Story expires or is deleted, even after the Sendit app is removed from the device. Deleting the active Story or waiting for it to expire closes that particular anonymous access point. After reviewing all of this, remove the Sendit app and apply the iLimits restriction to prevent reinstallation.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Block Sendit Through iLimits and Review Snapchat's Own Privacy Settings as a Complementary Step</div>
+        <div class="tip-body">Use iLimits to block Sendit on the child's device. As a complementary step, review the child's Snapchat privacy settings to ensure their Story audience is appropriately limited — Snapchat allows Story visibility to be restricted to close friends rather than all friends or public. A child whose Story is visible to a large and loosely connected Snapchat audience is more exposed to anonymous messaging from near-strangers than one whose Story is limited to close connections, regardless of whether Sendit is in use. Snapchat's Family Centre feature also provides parents with some visibility into their child's Snapchat contacts and activity, and is worth enabling as a complementary layer of oversight for the platform that Sendit integrates with. The combination of Sendit restriction through iLimits and tighter Snapchat privacy settings provides the most complete protection against the specific harm that Sendit introduces into the Snapchat ecosystem.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Anonymous Harassment Hurts More When It Feels Like It Comes From Someone You Know</h3>
+    <p class="closing-body">
+      Sendit's distinctive danger is that it routes anonymous harassment through Snapchat — a platform a child already trusts, already uses, and already associates with their real social world. An anonymous cruel message feels different when it appears to come from within your friend network than when it comes from a standalone anonymous platform. Sendit makes that the default experience for every message received. iLimits blocks the add-on while leaving Snapchat intact — removing the anonymous channel while preserving the social platform, and ensuring that when a message arrives through Snapchat, the child knows it comes from someone who stands behind it.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
