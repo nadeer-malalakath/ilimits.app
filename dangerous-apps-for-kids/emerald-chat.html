@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Emerald Chat – Restricted App Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Emerald Chat: deep jewel-green */
+    --em:           #047857;
+    --em-mid:       #065F46;
+    --em-deep:      #022C22;
+    --em-light:     #ECFDF5;
+    --em-bdr:       #6EE7B7;
+    --em-text:      #022C22;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --emerald-bg:   #ECFDF5;
+    --emerald-bdr:  #6EE7B7;
+    --red-bg:       #FFF5F6;
+    --red-bdr:      #FECDD3;
+    --blue-bg:      #EFF6FF;
+    --blue-bdr:     #BFDBFE;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --slate-bg:     #F8FAFC;
+    --slate-bdr:    #CBD5E1;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+    --orange-bg:    #FFF7ED;
+    --orange-bdr:   #FDBA74;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #010E08 0%, #031A10 50%, #052A1A 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(4,120,87,0.50) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.22) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 285px; height: 285px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(110,231,183,0.24) 0%, transparent 68%);
+    filter: blur(34px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 195px; height: 195px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+    animation: fadeUp 0.42s ease both;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(4,120,87,0.22);
+    border: 1px solid rgba(110,231,183,0.34);
+    color: #6EE7B7; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #010E08 0%, #047857 58%, #34D399 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(4,120,87,0.58), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .gap { height: 6px; }
+
+  /* ── Emerald callout ── */
+  .em-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--emerald-bg); border: 1.5px solid var(--emerald-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.03s both;
+  }
+  .em-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D1FAE5; border: 1.5px solid var(--emerald-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .em-title { font-size: 13px; font-weight: 700; color: var(--em-text); line-height: 1.3; margin-bottom: 3px; }
+  .em-body  { font-size: 12px; color: #022C22; font-weight: 400; line-height: 1.55; }
+
+  /* ── Omegle successor badge ── */
+  .omegle-band {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--orange-bg); border: 1.5px solid var(--orange-bdr);
+    border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px;
+    animation: fadeUp 0.42s ease 0.035s both;
+  }
+  .omegle-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #FEE0C0; border: 1.5px solid var(--orange-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .omegle-text strong { font-size: 12.5px; font-weight: 700; color: #431407; display: block; line-height: 1.3; margin-bottom: 2px; }
+  .omegle-text span   { font-size: 11.5px; color: #5C1A00; font-weight: 400; line-height: 1.4; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    animation: fadeUp 0.42s ease 0.04s both;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section intro ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--emerald-bg); border: 1.5px solid var(--emerald-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+    animation: fadeUp 0.42s ease 0.05s both;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D1FAE5; border: 1.5px solid var(--emerald-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--em-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #022C22; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #010E08 0%, #031A10 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.08s both;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 210px; height: 210px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(4,120,87,0.28) 0%, transparent 68%);
+    filter: blur(24px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.22) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.42s ease 0.06s both;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    animation: fadeUp 0.42s ease 0.10s both;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This App Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain apps may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">💎</div>
+        <div>
+          <div class="app-name-text">Emerald Chat</div>
+          <div class="app-sub">Random Stranger Video &amp; Text Chat</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Random Stranger Chat / Video</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">A random stranger video and text chat platform — operating in the direct tradition of Omegle — that connects users instantly with unverified, anonymous strangers via live video or text, with no account required and documented exposure to adult content, harassment, and exploitation</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block Emerald Chat and random stranger video platforms from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This App Does</h2>
+    <p class="sh-desc">A clear picture of Emerald Chat — a random stranger video and text chat platform that connects users with completely anonymous, unverified strangers via live camera feed or text chat, requiring no account and no personal information, and carrying the same fundamental risks as Omegle — the platform it is widely considered a successor to — with the addition of features presented as safety improvements that do not meaningfully protect children.</p>
+  </div>
+
+  <div class="em-callout">
+    <div class="em-ico">💎</div>
+    <div>
+      <div class="em-title">Emerald Chat Connects Children Live by Video With Random, Unverified Strangers — No Account, No Identity, No Moderation That Meaningfully Protects Minors</div>
+      <div class="em-body">Emerald Chat is a random stranger chat platform that matches users for one-on-one live video or text conversations with completely anonymous strangers. No account is required to use the platform, and no identity verification is performed. The platform presents itself as a safer alternative to Omegle — which shut down in 2023 — and positions its interest-matching and moderation features as meaningful safety improvements. In practice, the core experience is identical to the platform it succeeds: a child can be connected by live video feed with any adult stranger anywhere in the world, within seconds, with no screening and no ability to know in advance anything about who they will be shown. The closure of Omegle and the documented child safety crises it created are the direct context for understanding what Emerald Chat provides and who uses it.</div>
+    </div>
+  </div>
+
+  <div class="omegle-band">
+    <div class="omegle-icon">🔄</div>
+    <div class="omegle-text">
+      <strong>Widely Considered an Omegle Successor — The Same Risks in a New Name</strong>
+      <span>Omegle shut down in November 2023 following documented child safety crises and legal action. Emerald Chat is among the platforms its users migrated to — carrying the same random-stranger live video model with the same fundamental child protection failures.</span>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#047857;"></span> Live Video Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Random Strangers</div>
+    <div class="mode-chip"><span class="cdot" style="background:#6EE7B7;"></span> No Account</div>
+    <div class="mode-chip"><span class="cdot" style="background:#D97706;"></span> No Verification</div>
+    <div class="mode-chip"><span class="cdot" style="background:#DC2626;"></span> Omegle Successor</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Emerald Chat is a <strong>random stranger live video and text chat platform</strong> — the direct successor to Omegle's model — that connects a child by live camera feed with an unknown, unverified adult stranger in seconds, with no account, no identity check, and no pre-screening of who they will be shown.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--emerald-bg);">📹</div>
+      <div>
+        <div class="feat-name">Live One-on-One Video Chat With Random Unverified Strangers — Instant Connection</div>
+        <div class="feat-desc">Emerald Chat's core function is connecting a user by live video feed with a random stranger — immediately, anonymously, and without any pre-screening of the person they will be shown. A child who visits the platform is matched with a stranger within seconds of arriving, and sees that stranger's live camera feed while the stranger sees theirs. No account is required, no age is verified, and the child has no information about who they are about to be connected with before the connection is made. The experience is indistinguishable in its fundamental structure from Omegle — a platform whose closure was directly prompted by documented child exploitation and legal action specifically related to this model.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔓</div>
+      <div>
+        <div class="feat-name">No Account Required — No Identity, No Age, No Parental Trace</div>
+        <div class="feat-desc">Emerald Chat can be used without creating an account, providing any personal information, or entering any verifiable identity. A child can visit the site — it is primarily web-based — and begin a live video session with a random stranger with no registration barrier whatsoever. No account means no login record, no email confirmation, no account history, and no parental trace of any kind. If a child uses Emerald Chat on a school device, home computer, tablet, or phone, no account-based signal exists to indicate that the platform has been accessed. Detection relies entirely on direct device, browser history, or network traffic review.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--blue-bg);">🛑</div>
+      <div>
+        <div class="feat-name">Interest-Matching and Moderation Features Do Not Meaningfully Protect Children</div>
+        <div class="feat-desc">Emerald Chat presents itself as safer than Omegle by offering interest-based matching and automated moderation. In practice, these features do not meaningfully address the fundamental protection failure: any adult can present any set of interests, and automated content moderation cannot reliably prevent inappropriate behaviour before a child has already been exposed to it. Interest-matching is a self-reported preference list — an adult who wishes to be matched with young users can select interests that are common among teenagers. Moderation operates reactively, after exposure, not preventively. The "safer than Omegle" positioning is a marketing claim, not a child protection standard.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--peach-bg);">⚠️</div>
+      <div>
+        <div class="feat-name">Direct Successor to Omegle — Attracts the Same Adult Population That Omegle Did</div>
+        <div class="feat-desc">Omegle shut down in November 2023 following years of documented child exploitation, legal action, and public pressure from child safety organisations. Its closure was specifically because of the harm its random stranger video model enabled when children accessed it. The users who used Omegle for those purposes did not stop when Omegle closed — they migrated to alternative platforms offering the same model. Emerald Chat is among the most prominent platforms that inherited Omegle's user base, including that portion of the user base that sought access to minors. A child on Emerald Chat is not entering a new and unproven platform — they are entering an environment that directly inherited Omegle's documented adult exploitation risks.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background: var(--slate-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Primarily Web-Based — Accessible on Any Device Without Installation</div>
+        <div class="feat-desc">Emerald Chat is primarily accessed through a web browser rather than requiring a dedicated app installation. This means it is accessible on any internet-connected device — phone, tablet, laptop, family computer, school device — without the child installing any application that would appear in the device's installed app list. Standard app-level parental control approaches that check installed applications will not detect Emerald Chat use if it is accessed through a browser. Detection requires browser history review or network-level traffic monitoring rather than app list inspection — a specific and important distinction from app-based stranger chat platforms.</dive>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Emerald Chat carries the highest risk rating because it replicates Omegle's random stranger live video model — a model whose specific and documented harm to children directly caused Omegle's closure — in a new platform that inherits the same adult user base and the same fundamental protection failures, while adding cosmetic safety features that do not address the core risk.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📹</span>
+      <div class="rc-name">Live Video With Unverified Strangers — Instant Exposure</div>
+      <div class="rc-desc">A child is connected by live camera feed with a completely unverified, anonymous adult within seconds of accessing the platform — no pre-screening, no warning, no ability to see who they will be shown before the connection is live</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔄</span>
+      <div class="rc-name">Omegle's Model and User Base Inherited</div>
+      <div class="rc-desc">Emerald Chat directly inherited the random stranger video chat model and, with it, the adult population that Omegle attracted — including those who used Omegle to seek access to and exploit minors, documented in the legal action that caused Omegle's closure</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">No Account, No Identity, No Parental Trace</div>
+      <div class="rc-desc">No registration or account required — no login record, no email, no account history exists for any session. If accessed through a browser, it does not appear in any installed app list and leaves no account-based detection signal of any kind</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌐</span>
+      <div class="rc-name">Browser-Based — Not Visible in Installed App Lists</div>
+      <div class="rc-desc">Primarily web-based access means standard app-level parental controls that check installed applications cannot detect Emerald Chat use — it requires browser history review or network-level monitoring to identify, which is a different inspection approach from most app-based platforms</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🛑</span>
+      <div class="rc-name">Safety Features Are Cosmetic, Not Protective</div>
+      <div class="rc-desc">Interest-matching and automated moderation do not prevent a child from being connected with adults who misrepresent their interests, and do not reliably intercept inappropriate behaviour before the child has already been exposed to it</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧒</span>
+      <div class="rc-name">Children Find It Through Omegle-Adjacent Search</div>
+      <div class="rc-desc">Children who search for Omegle alternatives after its closure — or who are directed to Emerald Chat by peers or online communities — arrive at a platform carrying the same risks in a new name, without necessarily understanding that the closure of the original was directly related to child safety failures</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Emerald Chat Carries the Highest Risk Rating — It Replicates Omegle's Model, Which Was Shut Down for Child Safety Reasons</strong>
+      <span>Omegle's closure in November 2023 was directly prompted by documented child exploitation incidents and legal action. Emerald Chat replicates the same random stranger live video model in a new platform that explicitly positions itself as an alternative. The risks that caused Omegle's closure — live video access to minors by unverified adults, no age verification, no account requirement — are not resolved by the "safer alternative" branding. A child on Emerald Chat faces the same fundamental risks that caused the original platform to be shut down.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">💎</div>
+    <div>
+      <div class="control-title">Emerald Chat Is Primarily Web-Based — Browser History and Network Monitoring Are the Detection Approaches, Not App List Inspection</div>
+      <div class="control-body">Because Emerald Chat is primarily accessed through a web browser rather than a dedicated app installation, parents who review their child's installed app list for concerning applications will not find Emerald Chat there — it leaves no app installation trace. Detection requires reviewing the device's browser history — searching specifically for emeraldchat.com and related domains in Chrome, Safari, or other browsers — or, for families with network-level monitoring tools, checking for Emerald Chat domain traffic in network logs. This detection approach is different from most platforms in this document and is a specific and important thing for parents to know. An iLimits restriction on the app does not prevent web-based access through a browser; web content filtering or DNS-level blocking of the Emerald Chat domain provides a complementary layer of protection.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Omegle's Closure Was Directly Related to Child Safety Failures — Emerald Chat Continues the Same Model</div>
+        <div class="know-body">Omegle shut down in November 2023 following years of documented incidents in which adults used the platform to contact, exploit, and produce illegal content involving minors. The platform's operators faced legal action in multiple jurisdictions specifically related to these failures, and the closure was attributed by Omegle's own founder to the inability to prevent the harm the platform's model was enabling. This documented history is the direct context for understanding Emerald Chat. A child who finds Emerald Chat by searching for Omegle alternatives — or who is directed there by peers — is not arriving at a new platform with a new safety record. They are arriving at a platform that explicitly continues the same structural model whose specific and documented failure to protect children caused the original platform's closure. The "safer than Omegle" positioning in Emerald Chat's marketing does not change this fundamental continuity.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children Access Emerald Chat Through Browser — Detection Requires Browser History Review, Not App List Inspection</div>
+        <div class="know-body">Unlike virtually every other platform in this document, Emerald Chat is primarily web-based — it is accessed by visiting emeraldchat.com in any browser, not by installing a dedicated application. This means a parent who reviews the installed app list on their child's phone, tablet, or computer will not find Emerald Chat listed there, even if the child has been using it regularly. Detection requires reviewing the browser history — checking Chrome, Safari, Firefox, or any other browser the child uses for visits to emeraldchat.com or related domains. Also check any private or incognito browsing sessions if the device allows these to be reviewed through parental monitoring software. For families with router-level parental controls or DNS filtering, adding emeraldchat.com to a blocked domain list provides network-level protection that applies regardless of which device or browser is used on the home network.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Children May Arrive at Emerald Chat Without Seeking Out Something Specifically Risky</div>
+        <div class="know-body">Many children who arrive at Emerald Chat do so through Omegle-related search activity — they have heard about Omegle from peers or online communities, searched for it, and been redirected to or discovered Emerald Chat as an alternative because Omegle no longer exists. A child who searches "Omegle alternative" or "chat with strangers" may find Emerald Chat without understanding the connection between its model and Omegle's documented child safety failures. The conversation with a child found using Emerald Chat should not assume deliberate risk-seeking — the child may genuinely not know the history of the platform or understand why a random stranger live video model is specifically dangerous. Explaining Omegle's closure — that it was specifically shut down because adults used it to exploit children — gives the child concrete historical context for why Emerald Chat carries the same risks, rather than a general warning about stranger contact.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">The Live Video Component Adds a Dimension of Risk Not Present in Text-Only Stranger Contact</div>
+        <div class="know-body">Random stranger chat platforms that are text-only carry significant risks; Emerald Chat's live video component adds a specific and serious additional dimension. Live video exposes both parties to each other's physical appearances and surroundings in real time — a child using Emerald Chat is visible by live camera feed to the stranger they are connected with. Adults who use random stranger video platforms to exploit minors can use this live video access to view a child's appearance and physical environment, to record the child without their knowledge, and to expose the child to their own camera feed in ways that are harmful. The live video component also adds an immediacy and intimacy that text contact does not — a child may feel a greater sense of connection to someone they have seen on camera than to someone they have only exchanged messages with, which can make the relationship feel more credible and make grooming more effective.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents the tools to block Emerald Chat and random stranger video chat platforms — preventing access to a platform that directly replicates Omegle's random stranger live video model, whose documented child safety failures caused that platform's closure.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Emerald Chat and random stranger video platforms with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories cover similar Omegle-successor platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Prevents live video connection with unverified strangers on any device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged stranger video platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like Emerald Chat as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Because Emerald Chat is <strong>primarily web-based and not app-based</strong>, complementary protection through browser history monitoring and DNS-level domain blocking provides the most complete coverage alongside the iLimits restriction.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps that reflect Emerald Chat's specific profile — its web-based access route, its connection to Omegle's documented history, and the live video dimension that adds risks not present in text-only stranger contact platforms.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Explain Omegle's Closure as the Context for Why Emerald Chat Is Specifically Dangerous</div>
+        <div class="tip-body">The most grounding conversation about Emerald Chat for a child uses Omegle's closure as concrete, historical context — not as an abstract warning about stranger danger but as a specific and documented event with a clear cause. Omegle was shut down by its own operators in November 2023 because adults were using it to exploit children through the same random stranger video model that Emerald Chat now offers. The closure was not a business decision — it followed legal action and public documentation of harm to children that the platform's operators concluded they could not prevent. Emerald Chat presents itself as a safer alternative, but it provides the same connection: any adult, by video, immediately, with no screening. A child who understands why the original platform was closed — specifically because adults used it to harm children through live video contact — has concrete and factual grounds for understanding why Emerald Chat carries the same risk, rather than only a parental instruction not to use it.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔎</div>
+      <div>
+        <div class="tip-name">Check Browser History for Emerald Chat — This Platform Does Not Appear in the App List</div>
+        <div class="tip-body">Because Emerald Chat is web-based rather than app-based, check the browser history on every device the child uses — not the installed app list. Search specifically for "emeraldchat.com" in the history of each browser (Chrome, Safari, Firefox, Edge, and any other browsers installed) on every device the child has access to. Also check whether any private or incognito browsing history is accessible through parental monitoring software installed on the device. If Emerald Chat use is found in the browser history, review whether it appears to have been a single visit or a repeated pattern — the frequency and recency of visits gives important context for the conversation. After addressing the discovery with the child, add emeraldchat.com to any DNS-level or router-level domain blocklist in use on the home network, to prevent access through any browser on any device connected to the home Wi-Fi. This DNS-level block provides protection that does not depend on the child's browser of choice and applies across all devices on the network.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply the iLimits Restriction and Complement It With DNS-Level Domain Blocking for Web-Based Access</div>
+        <div class="tip-body">Apply the iLimits restriction to block Emerald Chat. Because the platform is primarily web-based, pair this with DNS-level domain blocking for emeraldchat.com through the home network's router parental controls or DNS filtering service. DNS-level blocking prevents access through any browser on any device connected to the home network, without depending on the child's cooperation with browser settings or the absence of private browsing modes. For mobile data access outside the home network — which DNS home filtering cannot address — discuss with older children the specific reasons for the restriction, using the context of Omegle's documented child safety failures and the live video access that Emerald Chat provides, so that the child understands the restriction as grounded in specific, documented risk rather than general parental caution. The most durable protection combines the technical restriction with the child's own understanding of why the platform carries risks that are not addressed by its "safer alternative" positioning.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Safer Name Does Not Make the Model Safer — Omegle Was Shut Down for What Emerald Chat Now Offers</h3>
+    <p class="closing-body">
+      Emerald Chat describes itself as a safer alternative to Omegle. What it offers is the same model: live video, random stranger, no account, no verification, any adult, immediately. Omegle was not shut down because of its name — it was shut down because of what its model enabled when adults used it to access children. Emerald Chat continues that model with a new name and cosmetic safety features that do not change the fundamental exposure. iLimits blocks the platform. The conversation explains the history. Together they give a child both the protection and the understanding of why this specific model carries risks that "safer" branding cannot resolve.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
