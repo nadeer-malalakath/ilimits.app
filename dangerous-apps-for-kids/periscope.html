@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Periscope – Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Periscope brand: deep purple-indigo */
+    --ps:           #6B4FA0;
+    --ps-mid:       #543D80;
+    --ps-deep:      #2E1F50;
+    --ps-light:     #F7F3FF;
+    --ps-bdr:       #C4B0E8;
+    --ps-text:      #1E1035;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --green-bg:     #F0FDF4;
+    --green-bdr:    #BBF7D0;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0D0820 0%, #1A1235 50%, #2E1F50 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(107,79,160,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.16) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,79,160,0.42) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(107,79,160,0.20);
+    border: 1px solid rgba(107,79,160,0.36);
+    color: #C4B0E8; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #D4C4F5; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0D0820 0%, #6B4FA0 55%, #A98EDA 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(107,79,160,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.13); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Periscope callout ── */
+  .ps-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ps-light); border: 1.5px solid var(--ps-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .ps-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E8DFFA; border: 1.5px solid var(--ps-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .ps-title { font-size: 13px; font-weight: 700; color: var(--ps-text); line-height: 1.3; margin-bottom: 3px; }
+  .ps-body  { font-size: 12px; color: #2E1F50; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--ps-light); border: 1.5px solid var(--ps-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #E8DFFA; border: 1.5px solid var(--ps-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--ps-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #2E1F50; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0D0820 0%, #1A1235 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,79,160,0.30) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .ps-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Understanding<br><em>Periscope</em> as a Parent</h1>
+    <p class="hero-sub">What this live-streaming platform does, why real-time public broadcasting carries serious risks for children, and how you can take action to protect them.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📡</div>
+        <div>
+          <div class="app-name-text">Periscope</div>
+          <div class="app-sub">Live Video Streaming Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Live Streaming / Social</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Real-time public broadcasting to unknown audiences with live commenting, no content delay and minimal moderation</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this platform instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Periscope — Twitter's live video streaming platform that allows users to broadcast in real time to a public or private audience, with live commenting, viewer location data, and streams that can be replayed after broadcast ends.</p>
+  </div>
+
+  <div class="ps-callout">
+    <div class="ps-ico">📡</div>
+    <div>
+      <div class="ps-title">Periscope Allows Anyone to Broadcast Live Video to the Public — With Real-Time Comments From Unknown Viewers and No Broadcast Delay</div>
+      <div class="ps-body">Periscope is a live video streaming platform originally developed as a standalone app and subsequently integrated into Twitter, allowing users to broadcast live video to anyone who chooses to watch — publicly, without prior approval of viewers. Broadcasts are accompanied by a live comment stream visible to both the broadcaster and all viewers, allowing unknown members of the public to send messages directly to a child who is live on camera in real time. There is no broadcast delay that would allow inappropriate content to be intercepted before reaching viewers, no meaningful age verification for broadcasters or viewers, and no parental control features of any kind. Although Periscope as a standalone app was officially shut down in 2021, its live streaming functionality continues through Twitter (now X), and the platform name and its associated risks remain relevant to parents whose children use the Twitter ecosystem.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#6B4FA0;"></span> Live Broadcasting</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Public Streams</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Live Comments</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Stream Replays</div>
+    <div class="mode-chip"><span class="cdot" style="background:#00AFF0;"></span> Twitter Integration</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Periscope is a <strong>live video broadcasting platform</strong> that allows users to go live in front of a public or restricted audience, receive real-time comments and reactions from viewers, share their location at the time of broadcast, and have their streams saved for replay by anyone who missed them live. The platform requires no age verification to broadcast or view content, and has no parental control features.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--ps-light);">📹</div>
+      <div>
+        <div class="feat-name">Real-Time Public Video Broadcasting to an Unknown Audience</div>
+        <div class="feat-desc">Periscope's core feature is the ability to broadcast live video to the public — meaning that when a child goes live, their face, voice, home environment and anything visible in frame can be seen by any member of the public who finds or is notified of the stream. Public streams are discoverable by all users of the platform, not only followers or contacts. A child who starts a public broadcast is effectively appearing live on camera in front of an audience that could include adults with no legitimate relationship to them, with no ability to screen who is watching before the broadcast begins.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💬</div>
+      <div>
+        <div class="feat-name">Live Comment Stream Visible to Broadcaster in Real Time</div>
+        <div class="feat-desc">During a live broadcast, viewers can send comments that appear on the broadcaster's screen in real time — meaning a child who is live on camera receives messages from unknown members of the public while actively broadcasting. There is no moderation delay between a comment being sent and it appearing on the broadcaster's screen. Viewers can send inappropriate, sexual, threatening or manipulative messages to a child who is live on camera, with no buffer or filtering between sender and recipient during the broadcast.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFFBF0;">📍</div>
+      <div>
+        <div class="feat-name">Optional Location Sharing That Can Reveal a Broadcaster's Position</div>
+        <div class="feat-desc">Periscope includes the option to share a broadcaster's location at the time of a stream, which can reveal where a child is broadcasting from — including, in many cases, their home address or the address of their school. While location sharing is optional rather than mandatory, children may not understand the implications of enabling this feature or may be encouraged by viewers to share their location during a broadcast. Even without explicit location sharing, environmental details visible in a broadcast can allow determined viewers to identify a child's location.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F7F3FF;">🔁</div>
+      <div>
+        <div class="feat-name">Broadcasts Are Saved and Replayable After the Stream Ends</div>
+        <div class="feat-desc">Periscope streams are saved and can be replayed by viewers after the live broadcast ends, meaning that content broadcast by a child does not disappear when the stream is over. A child who broadcasts their face, home environment, school uniform or any other identifying information creates a permanent record that can be viewed, saved or shared by anyone who accesses the replay. The child may have no awareness of who has saved or distributed their broadcast content after it ends.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🐦</div>
+      <div>
+        <div class="feat-name">Integration With Twitter Extends Audience Reach Significantly</div>
+        <div class="feat-desc">Periscope's integration with Twitter — and its continuation as a live streaming feature within the Twitter/X platform — means that a live broadcast can be shared automatically to a user's Twitter followers and, in the case of public accounts, to the entire Twitter audience. This dramatically extends the potential reach of a child's live broadcast beyond the Periscope user base alone, and means that restricting Periscope does not fully address live streaming risks if a child has access to Twitter with live broadcast features enabled.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It Poses Serious Risks for Children</h2>
+    <p class="sh-desc">Key risks from live video broadcasting by children, including real-time contact from unknown adults, the permanent nature of broadcast recordings, location exposure, the absence of any content delay or moderation, and the platform's integration with Twitter's broader audience.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🎥</span>
+      <div class="rc-name">Live Broadcast Exposes Child's Face and Environment in Real Time</div>
+      <div class="rc-desc">A child broadcasting live is visible on camera to an unknown public audience in real time — their appearance, voice, home or school environment, and any identifying details in frame are accessible to anyone watching, including adults with harmful intent</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧑‍💻</span>
+      <div class="rc-name">Unknown Adults Can Send Messages During Broadcast</div>
+      <div class="rc-desc">The live comment stream allows any viewer — including unknown adults — to send messages directly to a child who is on camera, with no delay and no moderation. Children can be exposed to inappropriate, manipulative or sexually explicit messages while actively broadcasting, with no buffer between sender and recipient</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Location Data Can Reveal Where a Child Is</div>
+      <div class="rc-desc">Optional location sharing and environmental details visible in a broadcast can allow viewers to identify where a child is broadcasting from — potentially including their home address or school. Children may not understand the risk of location disclosure during a live stream</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💾</span>
+      <div class="rc-name">Broadcasts Are Permanent and Can Be Saved or Shared</div>
+      <div class="rc-desc">Streams saved as replays create a permanent record of a child's broadcast that can be viewed, saved and distributed by any viewer — long after the child believes the broadcast has ended. Content that a child considered ephemeral in the moment may be preserved and shared without their knowledge or consent</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Parental Controls or Content Moderation</div>
+      <div class="rc-desc">Neither Periscope nor its Twitter integration offers any parental control features, content filtering for live broadcasts, or pre-broadcast moderation. Parents have no visibility into their child's broadcasting activity and no tools within the platform to restrict or monitor it</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">No Age Verification for Broadcasters or Viewers</div>
+      <div class="rc-desc">There is no age verification for either broadcasting or viewing on Periscope or via Twitter's live streaming features. Any child can go live in front of a public audience, and any adult can watch and comment on a child's broadcast without any verification process in place</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Periscope Carries a High Risk Rating for Children of All Ages</strong>
+      <span>The combination of real-time public broadcasting, live unmoderated comments from unknown adults, location exposure, permanent broadcast recordings and no parental controls makes Periscope and its Twitter-integrated equivalent a platform that poses serious and immediate risks when used by children. Unrestricted access to live broadcasting features should be actively prevented on all devices accessible to children.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🐦</div>
+    <div>
+      <div class="control-title">Periscope's Functionality Continues Through Twitter — Restricting Periscope Alone May Not Be Sufficient If a Child Has Twitter Access</div>
+      <div class="control-body">Although the standalone Periscope app was officially discontinued in 2021, its live streaming functionality was integrated into Twitter (now X) and continues to be available through that platform. Parents who restrict the Periscope app or website should be aware that a child with access to Twitter on any device may still have access to the same live broadcasting and viewing features that Periscope provided. Comprehensive protection requires addressing both the Periscope brand and Twitter's live streaming features — either by restricting Twitter access as well, or by ensuring that any Twitter account used by the child has appropriate privacy settings applied. iLimits can assist with restricting access to both platforms.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Live Streaming Is Fundamentally Different From Other Social Media — Its Real-Time Nature Creates Risks That Cannot Be Reversed Once a Broadcast Has Started</div>
+        <div class="know-body">Unlike posting a photo or video that can be deleted after the fact, a live broadcast cannot be recalled once it is underway. Anything a child shows or says while live on camera is already visible to viewers in real time — and if viewers are recording or screenshotting the stream, its content exists permanently regardless of what the child does after the broadcast ends. This irreversibility makes live streaming a particularly high-stakes activity for children, who may not fully understand that the moment they go live, control over what happens to that content passes largely to their audience. Parents should treat live streaming access as a distinct and serious permission, separate from other social media use.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Children May Not Understand the Size or Nature of the Audience Watching a Public Broadcast</div>
+        <div class="know-body">Children who use live streaming platforms may conceptualise their audience as similar to their social media followers — people they know, or at least people who are part of their social context. In reality, a public live stream is visible to any member of the platform's user base who discovers it, including adults with no connection to the child. The number of viewers on a live stream can grow rapidly and unpredictably, and the nature of who is watching at any moment is entirely outside the broadcaster's control. Children may also be unaware that their streams are being saved or that viewers can screenshot or record their broadcast without their knowledge.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Periscope Brand Is Discontinued But the Risk It Represents Continues Through Twitter's Live Features</div>
+        <div class="know-body">Parents who are aware of Periscope as a platform should know that the standalone app no longer exists as an active service — but the live streaming features it represented are now embedded within Twitter, which remains a major active platform. A child who uses Twitter on any device has access to the same live broadcasting capability that Periscope provided, without needing to download a separate application. Parents managing their child's social media access should consider Twitter's live streaming features alongside the Periscope name when assessing their child's exposure to live broadcasting risks.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Restricting Access to Live Streaming Features Is a Meaningful Step Even for Teenagers Who Use Social Media Generally</div>
+        <div class="know-body">For families where a teenager has some supervised social media access, live streaming features represent a meaningfully different and higher-risk activity than standard posting and browsing. A teenager who uses Instagram or Twitter for standard social content may not need the same level of unrestricted access to live broadcasting tools that those platforms offer. It is reasonable and appropriate for parents to allow social media access while specifically restricting or limiting live streaming features — and to make that distinction explicit in household agreements about digital use. iLimits provides the tools to apply that distinction at the device and network level.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block access to Periscope and related live streaming platforms — preventing live broadcasting and viewing on your child's devices without disrupting their broader digital life.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Periscope and live streaming platforms instantly from the iLimits dashboard</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restrict access to Twitter and related platforms where live streaming continues</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which apps and websites are accessible and when</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits flags platforms like Periscope as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect children from the specific risks of live video broadcasting — including what conversations to have, what settings to check, and how to address the continuation of Periscope's features within Twitter.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Your Child Specifically About the Risks of Live Video Broadcasting</div>
+        <div class="tip-body">Live streaming risks are distinct enough from other online safety topics that they warrant a specific conversation — not just a general reminder about internet safety. Talk with your child about what a public live stream actually means: that anyone can watch, that comments arrive in real time with no filter, that the stream is saved and can be shared, and that anything visible in frame — their face, their room, their school uniform — can be seen by people they do not know. Explain why these features make live broadcasting a different kind of activity from posting a photo, and be clear about your household's rules around live video content. For teenagers, acknowledge that live streaming is a popular activity while being specific about why the risks it carries are serious regardless of age.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--ps-light); border-color: var(--ps-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Check Twitter Privacy Settings to Restrict Live Broadcasting If Your Child Uses That Platform</div>
+        <div class="tip-body">If your child has a Twitter account, review the account's privacy settings to ensure that the account is set to private rather than public, and that live broadcasting features are not enabled or accessible. A private Twitter account limits the audience for any content — including live streams — to approved followers only, which provides a meaningful reduction in risk compared to a public account. Also review which apps have permission to access the Twitter account on your child's device, as third-party applications may have live streaming integrations that extend the same risks through a different interface. Combine in-platform settings with iLimits restrictions for the most complete approach.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use iLimits to Block Live Streaming Platforms Across All of Your Child's Devices</div>
+        <div class="tip-body">Apply iLimits restrictions to block Periscope and related live streaming platforms on every device your child uses — including tablets, secondary phones and shared household devices. Because Periscope's features now exist primarily within Twitter, consider whether Twitter access itself should be restricted or time-limited for younger children. For older teenagers with supervised social media access, a household agreement that specifically excludes live broadcasting — backed by the technical restriction iLimits provides — gives you the most durable and consistent approach. Review restrictions periodically as new live streaming features appear within existing platforms your child uses.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">📡</span>
+    <h3 class="closing-title">Live Broadcasting Is One of the Highest-Risk Activities Available to Children Online — And One of the Easiest to Prevent</h3>
+    <p class="closing-body">
+      The risks of live video broadcasting — real-time exposure to unknown adults, unmoderated comments, permanent broadcast recordings and location disclosure — are serious and in many cases irreversible once a broadcast has begun. iLimits gives you the tools to prevent access to live streaming features across all of your child's devices before any of those risks have the chance to materialise. Paired with an honest conversation about why live broadcasting is different from other online activities, that prevention is both straightforward and highly effective.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
