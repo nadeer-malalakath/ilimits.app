@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GroupMe – Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* GroupMe brand: teal/blue */
+    --gm:           #00AFF0;
+    --gm-mid:       #0090C8;
+    --gm-deep:      #00547A;
+    --gm-light:     #F0FBFF;
+    --gm-bdr:       #9FDEF7;
+    --gm-text:      #003A52;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --green-bg:     #F0FDF4;
+    --green-bdr:    #BBF7D0;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #001820 0%, #002A3D 50%, #003A52 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(0,175,240,0.38) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.14) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,175,240,0.32) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(0,175,240,0.16);
+    border: 1px solid rgba(0,175,240,0.30);
+    color: #7FD9F8; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #7FD9F8;
+    box-shadow: 0 0 0 2px rgba(0,175,240,0.28);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(0,175,240,0.28); }
+    50%      { box-shadow: 0 0 0 5px rgba(0,175,240,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #A8E9FC; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #001820 0%, #00AFF0 60%, #5DD6FF 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(0,175,240,0.50), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium { color: #FDBA74; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .monitored-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(0,175,240,0.14); border: 1px solid rgba(0,175,240,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .mf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #7FD9F8; flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(0,175,240,0.24); animation: pdot 2s infinite;
+  }
+  .mf-title { font-size: 13px; font-weight: 700; color: #7FD9F8; line-height: 1.3; }
+  .mf-sub   { font-size: 11px; color: rgba(127,217,248,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── GroupMe callout ── */
+  .gm-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--gm-light); border: 1.5px solid var(--gm-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .gm-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D0F2FD; border: 1.5px solid var(--gm-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .gm-title { font-size: 13px; font-weight: 700; color: var(--gm-text); line-height: 1.3; margin-bottom: 3px; }
+  .gm-body  { font-size: 12px; color: #003A52; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-high risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF8F0; border: 1.5px solid #FDCFA0;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEE9D4; border: 1.5px solid #FDCFA0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #7C2D12; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--gm-light); border: 1.5px solid var(--gm-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D0F2FD; border: 1.5px solid var(--gm-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--gm-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #003A52; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #001820 0%, #002A3D 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,175,240,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .gm-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Understanding<br><em>GroupMe</em> as a Parent</h1>
+    <p class="hero-sub">What this messaging platform does, why its group chat features carry specific risks for younger users, and how you can stay informed and in control.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">💬</div>
+        <div>
+          <div class="app-name-text">GroupMe</div>
+          <div class="app-sub">Group Messaging Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Messaging / Social</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟠 Moderate–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Unmonitored group and direct messaging with no parental controls, content moderation, or minimum age enforcement</div>
+      </div>
+      <div class="monitored-flag">
+        <div class="mf-dot"></div>
+        <div>
+          <div class="mf-title">Flagged for Parental Awareness in iLimits</div>
+          <div class="mf-sub">Parents can monitor usage, set time limits, or restrict access from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of GroupMe — a group messaging service owned by Microsoft that allows users to create and join group chats of any size, send direct messages, and share media, with no minimum age requirement and no parental controls of any kind.</p>
+  </div>
+
+  <div class="gm-callout">
+    <div class="gm-ico">💬</div>
+    <div>
+      <div class="gm-title">GroupMe Is a Group Messaging App With No Parental Controls, No Content Moderation and No Meaningful Age Restriction</div>
+      <div class="gm-body">GroupMe is a group messaging application owned by Microsoft, widely used in schools, universities and social groups to organise communication among large numbers of people. While it is most commonly associated with college-age users, there is no minimum age requirement enforced on the platform and no parental control features of any kind. Children can join groups created by anyone, receive direct messages from unknown users, and access or share any content sent within a group chat — all without any moderation, filtering or parental visibility. The absence of any child safety features makes GroupMe a platform that requires deliberate parental attention when used by younger children and teenagers.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#00AFF0;"></span> Group Chats</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Direct Messages</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Media Sharing</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> No Age Gate</div>
+    <div class="mode-chip"><span class="cdot" style="background:#6366F1;"></span> SMS Integration</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      GroupMe is a <strong>group and direct messaging platform</strong> that allows users to create group chats of up to 5,000 members, send direct messages to individual contacts, share photos, videos, documents and links, and receive messages via SMS as well as through the app. The platform requires only an email address or phone number to register, with no age verification of any kind.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--gm-light);">👥</div>
+      <div>
+        <div class="feat-name">Large Group Chats With No Membership Restrictions</div>
+        <div class="feat-desc">GroupMe's core feature is the ability to create and join group chats of up to 5,000 members. Groups can be created by anyone and joined via a shared link, meaning a child can be added to or join a group whose other members are entirely unknown to them or their parents. The size and open nature of groups means that the content and participants in any given chat can be entirely outside a parent's awareness — a child may be participating in large group conversations with adults, older teenagers or people with no connection to their school or social circle.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📩</div>
+      <div>
+        <div class="feat-name">Direct Messaging Between Any Two Users</div>
+        <div class="feat-desc">In addition to group chats, GroupMe supports one-to-one direct messaging between any two users on the platform. A child who has their phone number or username can be contacted directly by any other user — including adults with no legitimate connection to the child. Unlike some platforms, GroupMe does not restrict who can send a direct message based on any prior connection, and there is no option for a parent to limit or review direct message contacts.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFFBF0;">🖼️</div>
+      <div>
+        <div class="feat-name">Unrestricted Media Sharing Including Images and Video</div>
+        <div class="feat-desc">GroupMe allows users to share photos, videos, documents and links within both group chats and direct messages. There is no content moderation applied to media shared within chats — no scanning for explicit content, no filtering of inappropriate images or video, and no restriction on the type of material that can be sent. A child participating in a group chat has no protection against being sent explicit, disturbing or age-inappropriate media by other group members.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FDF4;">📱</div>
+      <div>
+        <div class="feat-name">SMS Integration Means Messages Arrive Even Without the App Open</div>
+        <div class="feat-desc">GroupMe integrates with SMS, meaning that messages sent in a group or direct conversation can be delivered as standard text messages to a child's phone — even if the GroupMe app is not installed or is restricted. This SMS delivery feature bypasses app-level controls, meaning that restricting or removing the GroupMe app from a device does not necessarily prevent a child from receiving messages sent through the platform if their phone number is associated with a GroupMe account.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🔗</div>
+      <div>
+        <div class="feat-name">Group Joining via Shareable Links With No Approval Required</div>
+        <div class="feat-desc">GroupMe groups can be shared via a link that anyone with the link can use to join the group immediately, without requiring approval from the group creator or any existing members. This means a child can join a group of entirely unknown adults simply by tapping a link shared in another platform or message. Parents may have no awareness that their child has joined a new group, who the other members are, or what content is being shared within it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It Requires Parental Awareness</h2>
+    <p class="sh-desc">Key risks associated with GroupMe use by children and teenagers, including unmonitored contact with adults, unrestricted media sharing, the complete absence of parental controls, and the platform's SMS integration which can bypass app-level restrictions.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Parental Controls of Any Kind</div>
+      <div class="rc-desc">GroupMe has no parental account linking, no activity reporting, no content filtering and no ability for a parent to monitor or restrict their child's use of the platform from within the app itself — making external controls via iLimits the only available option</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧑‍💻</span>
+      <div class="rc-name">Unmonitored Contact With Adults</div>
+      <div class="rc-desc">Children can be added to groups containing adults with no prior relationship to the child or family, and can receive direct messages from any user who has their contact details. There is no restriction on who can message a child and no notification to parents when a new contact is established</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🖼️</span>
+      <div class="rc-name">No Moderation of Shared Media</div>
+      <div class="rc-desc">Any image, video or file can be shared within GroupMe conversations without any screening or filtering. A child in a group chat has no technical protection against being sent explicit, harmful or age-inappropriate content by other members of that group</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📲</span>
+      <div class="rc-name">SMS Bypass of App Restrictions</div>
+      <div class="rc-desc">GroupMe's SMS integration means messages can be delivered as standard text messages to a child's phone even if the app is blocked or removed. App-level restrictions alone are not sufficient to prevent a child from receiving GroupMe messages if their phone number is registered with the platform</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">No Minimum Age Requirement or Verification</div>
+      <div class="rc-desc">GroupMe has no minimum age requirement and performs no age verification. Any child of any age can create an account using a phone number or email address, with no process in place to identify or protect younger users from the platform's unmoderated environment</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔗</span>
+      <div class="rc-name">Open Group Joining via Shared Links</div>
+      <div class="rc-desc">Groups can be joined instantly via a shared link, meaning children can enter conversations with large numbers of unknown adults simply by tapping a link received in another messaging platform — with no parental visibility of which groups they have joined or who the other members are</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>GroupMe Carries a Moderate–High Risk Rating for Younger Users</strong>
+      <span>GroupMe's complete absence of parental controls, content moderation and age restrictions — combined with its SMS integration that can bypass app-level blocking — makes it a platform that requires deliberate parental action. For younger children in particular, unrestricted access to GroupMe should be carefully considered by parents in light of who their child is communicating with and through which groups.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">⚠️</div>
+    <div>
+      <div class="control-title">GroupMe Provides No Built-In Parental Controls — External Controls via iLimits Are the Only Available Option for Parents</div>
+      <div class="control-body">Unlike many other messaging platforms, GroupMe does not offer any parental control features — there is no family account linking, no activity monitoring, no content filtering and no way to restrict a child's use from within the platform itself. Parents who want to manage their child's access to GroupMe must rely entirely on device-level and network-level controls. iLimits can restrict access to the GroupMe app and block the platform's web interface — however, parents should also be aware of the platform's SMS integration, which can deliver messages to a child's phone as standard texts even when app access is restricted. Managing the phone number associated with a GroupMe account may be necessary for complete restriction.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">GroupMe Is Most Commonly Used by Teenagers and Young Adults — But Has No Features Designed to Protect Younger Users</div>
+        <div class="know-body">GroupMe is particularly common among secondary school and university students as a tool for organising class groups, sports teams, clubs and social gatherings. This means that many children encounter the platform for the first time through a legitimate school or extracurricular context. However, the platform's complete absence of child safety features means that even a legitimately created school group sits alongside direct messaging and group joining features that carry real risks. Parents should distinguish between the specific group their child was invited to join and the broader platform capabilities that child now has access to as a registered user.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">A Child May Have a GroupMe Account Without a Parent Being Aware of It</div>
+        <div class="know-body">Because GroupMe requires only a phone number or email address to register — with no age verification and no parental notification — children can create accounts independently without a parent's knowledge. The app may not be immediately visible if a child has placed it in a folder or if the parent does not regularly review their child's installed applications. Parents who want to know whether their child is using GroupMe should check both the installed apps on their child's device and whether their child is receiving GroupMe-originated SMS messages, which will often include GroupMe branding or be from an unfamiliar number.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">The Groups a Child Belongs to Matter As Much as Whether They Use the Platform</div>
+        <div class="know-body">GroupMe's risk level varies significantly depending on which groups a child is part of. A closed, school-administered group for a specific class is a very different environment from a large open group joined via a link shared on another platform. Parents whose children use GroupMe for legitimate purposes — such as a school sports team chat — should be aware of which groups their child belongs to and who the other members of those groups are. Periodic conversations about group membership, and an agreement that the child will not join new groups without a parent's knowledge, are among the most practical steps available in the absence of any platform-level controls.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Blocking the App Alone May Not Be Sufficient — GroupMe's SMS Integration Requires Additional Consideration</div>
+        <div class="know-body">GroupMe's integration with SMS means that messages sent through the platform can arrive as standard text messages on a child's phone even if the GroupMe app is restricted or removed. Parents who block app access via iLimits should also be aware of this delivery mechanism. If a child's phone number is registered with a GroupMe account, messages from any group they belong to may continue to arrive as texts. Deactivating the GroupMe account associated with the child's phone number — rather than simply restricting app access — may be necessary for complete prevention of message delivery where that is the parent's intention.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to monitor, manage and restrict GroupMe access at the app and browser level — providing the external oversight that the platform itself does not offer.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block the GroupMe app and web interface instantly from the iLimits dashboard</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Set time-based access restrictions to limit when messaging apps can be used</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which platforms are accessible and when</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits flags platforms like GroupMe for parental awareness — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to help you manage your child's use of GroupMe safely — including what to discuss, what to check, and how to apply the right technical controls given the platform's unique SMS delivery behaviour.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Your Child About Which Groups They Belong to and Who the Other Members Are</div>
+        <div class="tip-body">Because GroupMe has no parental visibility features, conversation with your child is one of the most important tools available. Ask your child to show you which GroupMe groups they are part of, who created each group and who the other members are. Agree on a household rule that they will not join any new group without telling you first — and explain the reason for that rule in practical terms: that groups can contain people they do not know, and that content shared in large groups is outside anyone's control. For younger children, consider asking that GroupMe use be confined to specific, parent-approved groups rather than open access to all platform features.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--gm-light); border-color: var(--gm-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Check Whether Your Child Has a GroupMe Account and Review Their Group Memberships</div>
+        <div class="tip-body">If you are not certain whether your child has a GroupMe account, check for the app on their device and look for GroupMe-branded SMS messages in their text message inbox — the platform often delivers messages as texts from unfamiliar numbers with GroupMe branding. If your child does have an account, ask them to log in while you are with them so you can review their group memberships and direct message contacts together. This is not a punitive exercise — frame it as a regular check-in about their digital communication in the same way you might ask about their social life more broadly.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use iLimits to Restrict App Access, and Consider Account Deactivation for Full Message Prevention</div>
+        <div class="tip-body">Apply iLimits restrictions to block the GroupMe app and web interface on your child's devices. If your intention is to prevent all GroupMe messaging — rather than to manage access by time or context — also consider deactivating the GroupMe account associated with your child's phone number, since the platform's SMS integration means that messages can continue to arrive as standard texts even when the app is blocked. Account deactivation can be done from within the GroupMe app settings or by contacting GroupMe support, and is the most complete way to prevent message delivery where full restriction is the goal.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">💬</span>
+    <h3 class="closing-title">Staying Informed Is the Most Effective Tool When a Platform Provides None of Its Own</h3>
+    <p class="closing-body">
+      GroupMe's complete absence of parental controls makes it a platform where external tools and direct parental involvement carry more weight than on most other messaging apps. iLimits gives you the technical controls to manage app and browser access — and staying in regular, open conversation with your child about who they are communicating with and through which groups gives you the broader picture that no technical tool can provide on its own.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
