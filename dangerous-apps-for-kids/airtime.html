@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Airtime – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #F7F5FF;
+    --blush-2:      #EEF0FF;
+    --ink:          #0E0B16;
+    --ink-soft:     #231D33;
+    --ink-mid:      #5C5272;
+    --ink-muted:    #9690A8;
+    --border:       #E4E1F0;
+    --border-soft:  #EDEAFF;
+    --surface:      #FFFFFF;
+
+    /* Airtime brand: vivid purple-violet */
+    --at:           #7C3AED;
+    --at-mid:       #6D28D9;
+    --at-deep:      #3B1278;
+    --at-light:     #F5F3FF;
+    --at-bdr:       #C4B5FD;
+    --at-text:      #1E0A4A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(124,58,237,0.07);
+    --shadow-sm:    0 2px 14px rgba(124,58,237,0.10);
+    --shadow-md:    0 6px 30px rgba(124,58,237,0.13);
+    --shadow-lg:    0 14px 52px rgba(124,58,237,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0A0614 0%, #130A28 50%, #1C1040 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(124,58,237,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.42) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(124,58,237,0.18);
+    border: 1px solid rgba(124,58,237,0.36);
+    color: #C4B5FD; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #C4B5FD; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #4C1D95 0%, #7C3AED 55%, #A78BFA 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(124,58,237,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-val.medium { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--at-light); border: 1px solid var(--at-bdr);
+    color: var(--at); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Airtime callout ── */
+  .at-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--at-light); border: 1.5px solid var(--at-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .at-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE9FE; border: 1.5px solid var(--at-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .at-title { font-size: 13px; font-weight: 700; color: var(--at-text); line-height: 1.3; margin-bottom: 3px; }
+  .at-body  { font-size: 12px; color: #1E0A4A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--at-light); border: 1.5px solid var(--at-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #EDE9FE; border: 1.5px solid var(--at-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--at-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #1E0A4A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--at-light); border: 1.5px solid var(--at-bdr);
+    color: var(--at); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0A0614 0%, #130A28 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.34) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+    border: 1.5px solid var(--at-bdr); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.14) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--at-mid); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #1E0A4A; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .at-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why Airtime may pose risks for children and how you can take action as a parent to keep your child safe online.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📺</div>
+        <div>
+          <div class="app-name-text">Airtime</div>
+          <div class="app-sub">Social Watch Party Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Social Media &amp; Streaming</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Live video chat with strangers, anonymous rooms and unmoderated real-time content sharing</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can monitor or block Airtime instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Airtime — a social platform that lets users watch videos, listen to music and share content together in real time while communicating via live video, voice and text chat, often alongside or with strangers in open public rooms.</p>
+  </div>
+
+  <div class="at-callout">
+    <div class="at-ico">📺</div>
+    <div>
+      <div class="at-title">Airtime Is Built Around Real-Time Shared Experiences With Strangers — Including Live Video Chat in Open Public Rooms</div>
+      <div class="at-body">Airtime is a social platform designed for co-watching and co-listening experiences, where users join rooms to watch videos or listen to music together while chatting via text, voice or live video. The platform's central feature — the ability to join public rooms and interact with other users in real time — means that a child using Airtime may be in live video or voice contact with adult strangers immediately upon opening the app. Rooms are discoverable by anyone on the platform, and content shared within rooms is not subject to meaningful pre-moderation. The app has been popular with teenagers, which also makes it a platform that adults may use specifically to seek contact with younger users.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#7C3AED;"></span> Watch Parties</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Live Video Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Music Listening</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Public Rooms</div>
+    <div class="mode-chip"><span class="cdot" style="background:#3B82F6;"></span> Direct Messaging</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Airtime is a <strong>real-time social co-watching platform</strong> that allows users to share and watch content together while interacting via live video, voice and text. Unlike platforms that primarily host pre-recorded content, Airtime's core experience involves live, real-time interaction with other users — including strangers in public rooms — which creates immediate and direct contact risks for children using the platform.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--at-light);">🎬</div>
+      <div>
+        <div class="feat-name">Public Watch Party Rooms Open to Any User on the Platform</div>
+        <div class="feat-desc">Airtime's primary feature allows users to create or join public rooms where they watch videos or listen to music together in real time. These rooms are discoverable and joinable by any user on the platform, meaning that a child can enter a room shared with adults they do not know — and adults can join rooms that children are hosting. The live, real-time nature of these interactions means that inappropriate behaviour, contact or content can occur within seconds of a child joining or creating a room, with no pre-moderation in place to prevent it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📹</div>
+      <div>
+        <div class="feat-name">Live Video and Voice Chat With Other Users in Real Time</div>
+        <div class="feat-desc">Within watch party rooms, users can enable live video and voice chat, allowing all participants to see and hear each other in real time. This means that a child in a public room may be visible on live video to adult strangers — and those adults may be visible to the child. Live video interactions are not recorded or moderated in real time, and the spontaneous nature of room-based interactions means that inappropriate contact can occur very quickly in an environment where children feel they are simply watching videos with others.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">💬</div>
+      <div>
+        <div class="feat-name">Text Chat and Direct Messaging Between Platform Users</div>
+        <div class="feat-desc">Airtime includes text chat within rooms as well as direct messaging between users who have interacted on the platform. Direct messages allow any user who has been in the same room as a child to initiate a private conversation — creating the same direct contact risk as any messaging platform, but with the added context that the initial point of contact was a shared watch party room that the child may have joined for entirely innocent reasons. There is no parental visibility into these direct conversations by default.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🎵</div>
+      <div>
+        <div class="feat-name">Music and Video Content Shared by Other Users Without Pre-Moderation</div>
+        <div class="feat-desc">Content within Airtime rooms is shared by users from external platforms and is not pre-screened for age-appropriateness before being played in a shared room. A child joining a watch party room may be exposed to adult-themed, violent or otherwise inappropriate video content that the room host has chosen to share. Because rooms are live and real-time, a child may be exposed to this content before they or a parent has any opportunity to review it.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🌐</div>
+      <div>
+        <div class="feat-name">Discoverable Public Rooms With No Meaningful Age Verification</div>
+        <div class="feat-desc">Airtime's public rooms are discoverable through the platform's browse and search features, and any user can join any public room regardless of age. Account creation on Airtime requires only a date of birth with no identity verification, meaning that children can create accounts and access all platform features — including public rooms, live video and direct messaging — without any effective age check. The platform's age gate provides no meaningful protection against underage access to its full feature set.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from unrestricted use of Airtime, including live video contact with strangers, exposure to unmoderated content, the absence of meaningful age verification and the platform's design features that make it particularly easy for adults to initiate contact with children.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📹</span>
+      <div class="rc-name">Live Video With Unknown Adults</div>
+      <div class="rc-desc">Children on Airtime can be in live, real-time video contact with adult strangers within seconds of joining a public room — with no parental visibility, no moderation and no record of what occurred during the interaction</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Grooming Risk Via Shared Rooms</div>
+      <div class="rc-desc">The shared watch party format provides adults with a natural, low-pressure pretext for initiating contact with children — presenting the interaction as innocent co-watching before progressing to direct messages or private contact</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Unmoderated Content in Live Rooms</div>
+      <div class="rc-desc">Content shared in live rooms is not pre-screened — children may be exposed to adult-themed or violent material chosen by other room participants before any moderation or parental intervention can occur</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👤</span>
+      <div class="rc-name">No Parental Visibility by Default</div>
+      <div class="rc-desc">Parents have no access to a child's room history, direct messages, live video interactions or the content shared during watch parties — the platform provides no parental monitoring tools of any kind</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔓</span>
+      <div class="rc-name">No Meaningful Age Verification</div>
+      <div class="rc-desc">Account creation requires only a self-declared date of birth — children of any age can access all platform features including public rooms and live video with no identity check or parental consent mechanism</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌍</span>
+      <div class="rc-name">Attractive to Children Due to Entertainment Format</div>
+      <div class="rc-desc">The watch party and music-sharing format makes Airtime feel like a harmless entertainment activity, which may reduce a child's alertness to contact risks — and may cause parents to underestimate the platform's real-time interaction features</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Airtime Carries a High Risk Rating for Children</strong>
+      <span>The platform's live video contact with strangers, public room architecture, unmoderated real-time content, absence of parental visibility tools and minimal age verification combine to create significant child safety risks. The entertainment format of the platform may reduce the perceived risk for both children and parents, making active restriction particularly important.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">📡</div>
+    <div>
+      <div class="control-title">Airtime Is Accessible Through Both Its App and a Web Browser — App Removal Alone Does Not Block Access</div>
+      <div class="control-body">Airtime is available as a mobile app and is also accessible through web browsers, meaning that removing the app from a child's device does not prevent access to the platform and its live video rooms. A child can continue to use Airtime's full feature set — including public rooms, live video and direct messaging — through any browser on any device with an internet connection. Effective restriction requires controls applied at both the app and browser level across every device the child uses, including shared household devices and tablets. iLimits provides controls that address this full access vector.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Airtime May Look Like a Harmless Entertainment App — Its Live Interaction Features Create Real Risk</div>
+        <div class="know-body">Airtime's marketing and interface centre on the idea of watching videos and listening to music together with friends — an activity that sounds entirely benign and is genuinely how many younger users think of the platform. However, the same architecture that enables watching YouTube videos with a friend also enables a child to be in a live video room with adult strangers within moments of opening the app. The entertainment framing of the platform is one of its primary risk factors, because it reduces the likelihood that either a child or a parent will recognise it as a platform that enables direct, real-time contact with unknown adults.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Live Video Format Makes Airtime Particularly Risky Compared to Text-Based Platforms</div>
+        <div class="know-body">Many parents are familiar with the risks of text-based messaging platforms and monitor or restrict them accordingly. Live video contact carries additional risks that go beyond text — a child's appearance, location details visible in a home environment, and emotional reactions are all visible to strangers in a live video room in ways that text communication does not allow. Live video interactions are also not logged or recorded, making it impossible for parents to review what occurred during a session even if they become aware that an interaction took place.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Adults Seeking Contact With Children May Use Airtime's Rooms as a First Point of Contact</div>
+        <div class="know-body">The public room structure of Airtime — where any user can join any open room — provides adults seeking contact with children a low-effort, low-suspicion way to begin an interaction. Joining a child's watch party room, or being in a room that a child joins, creates an immediate shared context that can be used to initiate conversation in a way that feels natural and unthreatening to the child. Child safety practitioners have identified this kind of entertainment-led contact initiation as a common pattern in online grooming cases. Parents should be aware that a platform that appears to be about entertainment may be being used for contact purposes.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Restricting Airtime Across All Devices Is the Most Reliable Safeguard for Younger Children</div>
+        <div class="know-body">For children below their mid-teens, restricting Airtime entirely across all devices and browsers is the most reliable safeguard. The platform's live video and public room features carry risks that are difficult to mitigate through conversation alone, and the absence of any parental monitoring tools within the platform means that supervised use is not a practical alternative to restriction for younger children. For older teenagers, parents may choose to discuss the platform's risks and set clear household rules about which features are appropriate to use — but this conversation should be accompanied by iLimits controls that provide usage alerts and visibility, not permission granted in the absence of any technical safeguard.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block Airtime at the app and browser level instantly — no technical knowledge required, with no disruption to your child's other device activities.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Airtime at the app and browser level across all devices</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block all live video and social watch party platforms by category</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when Airtime is accessed or opened on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Set time-based restrictions to limit when apps can be accessed</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like Airtime as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Practical steps to protect your child from the risks associated with live video platforms and real-time stranger contact, and to build the kind of open conversation that keeps children safer online across every platform they use.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:var(--at-light); border-color: var(--at-bdr);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Your Child About the Risks of Live Video With Strangers</div>
+        <div class="tip-body">An honest conversation about why live video with strangers is different from — and riskier than — text messaging is one of the most useful things a parent can do to protect a child who uses platforms like Airtime. Children may understand that they should not talk to strangers in person, but may not recognise that the same principle applies to live video rooms on entertainment platforms. Explaining clearly that adults in a watch party room are still strangers, that a live video call gives someone access to what your child looks and sounds like in real time, and that it is always safe to leave a room or conversation that feels uncomfortable will help your child make better decisions both on Airtime and on other platforms they use.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🌱</div>
+      <div>
+        <div class="tip-name">Help Your Child Understand What Makes a Platform Safe for Shared Watching</div>
+        <div class="tip-body">There are safe ways for children to enjoy co-watching and shared entertainment experiences online — platforms designed specifically for known-contact groups, or features within platforms they already use that allow them to watch content with friends they know in real life. Helping your child identify and prefer these options — rather than open-room platforms like Airtime that mix strangers into the experience — gives them a positive alternative rather than simply a restriction. A child who understands why one platform is safer than another is better equipped to evaluate new platforms they encounter in the future.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply iLimits Restrictions Across Every Device Your Child Has Access To</div>
+        <div class="tip-body">Apply iLimits restrictions for Airtime across every device in your household that your child uses or could access — including shared family tablets, secondary devices and any device they use regularly outside the home. Because Airtime is accessible via browser as well as app, ensure that browser-level restrictions are in place alongside app-level controls. Review your restrictions periodically, particularly when your child acquires a new device or begins using a new network. The combination of technical controls through iLimits and ongoing conversation about online safety gives your family the most complete and durable protection available.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Real-Time Contact With Strangers Requires Real-Time Parental Action</h3>
+    <p class="closing-body">
+      Platforms that enable live video and real-time contact with strangers carry risks that are qualitatively different from static content platforms — the interaction is immediate, unrecorded and invisible to parents by default. iLimits gives you the tools to act on that risk decisively, and the conversations you have with your child about what makes online contact safe or unsafe give them the awareness to protect themselves even when you are not able to intervene directly.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
