@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Roblox – Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Roblox brand: vivid red */
+    --rb:           #E8192C;
+    --rb-mid:       #C0141F;
+    --rb-deep:      #8B0D15;
+    --rb-light:     #FFF5F5;
+    --rb-bdr:       #FFBFC4;
+    --rb-text:      #5A0A10;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --green-bg:     #F0FDF4;
+    --green-bdr:    #BBF7D0;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #1A0003 0%, #2D0005 50%, #3D0008 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(232,25,44,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.18) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,25,44,0.38) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.20) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(232,25,44,0.18);
+    border: 1px solid rgba(232,25,44,0.32);
+    color: #FF8F98; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #FF8F98;
+    box-shadow: 0 0 0 2px rgba(232,25,44,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(232,25,44,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(232,25,44,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3BE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #1A0003 0%, #E8192C 55%, #FF4D5E 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(232,25,44,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium { color: #FDBA74; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .monitored-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(232,25,44,0.16); border: 1px solid rgba(232,25,44,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .mf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #FF8F98; flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(232,25,44,0.28); animation: pdot 2s infinite;
+  }
+  .mf-title { font-size: 13px; font-weight: 700; color: #FF8F98; line-height: 1.3; }
+  .mf-sub   { font-size: 11px; color: rgba(255,143,152,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Roblox callout ── */
+  .rb-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--rb-light); border: 1.5px solid var(--rb-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .rb-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE0E3; border: 1.5px solid var(--rb-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .rb-title { font-size: 13px; font-weight: 700; color: var(--rb-text); line-height: 1.3; margin-bottom: 3px; }
+  .rb-body  { font-size: 12px; color: #5A0A10; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFFBF0; border: 1.5px solid #FDE68A;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEF3C7; border: 1.5px solid #FDE68A;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #78350F; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--rb-light); border: 1.5px solid var(--rb-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE0E3; border: 1.5px solid var(--rb-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--rb-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #5A0A10; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #1A0003 0%, #2D0005 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,25,44,0.32) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .rb-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Understanding<br><em>Roblox</em> as a Parent</h1>
+    <p class="hero-sub">What this platform does, why it carries risks for younger children, and how you can stay informed and in control.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🎮</div>
+        <div>
+          <div class="app-name-text">Roblox</div>
+          <div class="app-sub">Online Gaming & Social Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Gaming / Social</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟡 Moderate</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Open social platform with chat, user-generated content, and in-app purchasing accessible to all ages</div>
+      </div>
+      <div class="monitored-flag">
+        <div class="mf-dot"></div>
+        <div>
+          <div class="mf-title">Flagged for Parental Awareness in iLimits</div>
+          <div class="mf-sub">Parents can monitor usage, set time limits, or restrict access from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Roblox — an online gaming and social platform that allows users to play, create and share games with others worldwide, with a user base that is predominantly made up of children and teenagers.</p>
+  </div>
+
+  <div class="rb-callout">
+    <div class="rb-ico">🎮</div>
+    <div>
+      <div class="rb-title">Roblox Is a Gaming and Social Platform Used by Millions of Children — With Features That Require Active Parental Awareness</div>
+      <div class="rb-body">Roblox is one of the world's most widely used online platforms among children and teenagers, with hundreds of millions of registered accounts and a large proportion of its active user base under the age of 13. The platform combines gameplay, social interaction, user-generated content creation and a virtual economy built around its in-game currency, Robux. While Roblox provides parental control settings and content moderation tools, the open and social nature of the platform means that active parental engagement — including awareness of who children are communicating with, what content they are accessing and how much they are spending — is essential to safe use.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#E8192C;"></span> Multiplayer Gaming</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Live Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Robux Currency</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> User-Created Games</div>
+    <div class="mode-chip"><span class="cdot" style="background:#6366F1;"></span> Avatar Customisation</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Roblox is a <strong>user-generated gaming and social platform</strong> where players can explore millions of games created by other users, interact through live and asynchronous chat, build and publish their own games and experiences, and participate in a virtual economy using Robux — a purchased in-game currency. The platform is accessible via app on iOS, Android and gaming consoles, and through any web browser.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF5F5;">🕹️</div>
+      <div>
+        <div class="feat-name">Millions of User-Created Games Across All Themes and Genres</div>
+        <div class="feat-desc">Roblox hosts an enormous library of games and interactive experiences created by its own users — ranging from age-appropriate games designed for younger children to experiences that simulate violence, horror, or themes that may not be suitable for all age groups. Because the content library is user-generated and extremely large, content moderation cannot guarantee that all available experiences are appropriate for every age. Parents should be aware of which games their child is playing within Roblox, not only that they are using the platform in general.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💬</div>
+      <div>
+        <div class="feat-name">Live and In-Game Chat With Other Users</div>
+        <div class="feat-desc">Roblox includes live chat functionality within games and experiences, allowing players to communicate with other users in real time. The platform applies automated chat filters — particularly for accounts registered as under-13 — that attempt to block personally identifiable information and inappropriate language. However, no automated moderation system is entirely reliable, and children can encounter attempts to move conversations to unmonitored external platforms. Parents should discuss online communication safety with children using Roblox.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFFBF0;">💰</div>
+      <div>
+        <div class="feat-name">In-App Currency (Robux) and Purchasing System</div>
+        <div class="feat-desc">Roblox operates an in-game currency system called Robux, which is purchased with real money and used to buy avatar items, game passes and access to premium experiences. The purchasing system is integrated into the platform's normal flow and can be accessed directly from a child's device if a parent's payment method is stored. Without spending controls in place, children can make repeated purchases that accumulate into significant real-world costs. Roblox offers parental spending controls, but these must be actively configured by the parent.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0FDF4;">🌐</div>
+      <div>
+        <div class="feat-name">Social Features Including Friend Lists and Direct Messaging</div>
+        <div class="feat-desc">Beyond in-game chat, Roblox includes friend request systems, follower features and, on some account types, direct messaging between users. These social features extend the platform beyond a simple gaming application and into the territory of a social network — with the associated risks of contact from unknown adults, social pressures around friend counts and status, and potential exposure to content shared through social channels within the platform.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🛠️</div>
+      <div>
+        <div class="feat-name">Game Creation and Publishing Tools Available to All Users</div>
+        <div class="feat-desc">Roblox Studio — the platform's game development tool — is available to all users, including children, and allows them to create and publish their own games and experiences for other players. While this is a genuinely valuable creative tool, it also means that children are not only consumers of content on the platform but potential publishers of it. Parents should be aware that their child may be building and sharing content with the platform's global user base, not only playing games created by others.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It Requires Parental Awareness</h2>
+    <p class="sh-desc">Key risks associated with Roblox use by children, including exposure to inappropriate user-generated content, contact risks from unknown adults, in-app spending, and the social pressures inherent in a platform with hundreds of millions of users.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">User-Generated Content Varies Widely in Suitability</div>
+      <div class="rc-desc">Because Roblox's game library is user-created, the content available spans a very wide range of themes — including games simulating violence, horror, or adult social scenarios that may not be appropriate for younger children despite the platform's overall child-friendly positioning</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧑‍💻</span>
+      <div class="rc-name">Contact Risk From Unknown Adults</div>
+      <div class="rc-desc">Roblox's open social features mean that children can receive friend requests from and communicate with unknown adults. The platform's large size and predominantly young user base can make it a target for adults seeking to contact children, including attempts to move conversations off-platform</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💸</span>
+      <div class="rc-name">In-App Spending Can Escalate Quickly</div>
+      <div class="rc-desc">The Robux purchasing system is designed to be frictionless and is integrated throughout the platform experience. Without active spending controls, children may make multiple small purchases that accumulate into significant amounts — often without a clear sense of the real-world value being spent</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">⏱️</span>
+      <div class="rc-name">Highly Engaging Design Encourages Extended Use</div>
+      <div class="rc-desc">Roblox is designed to be deeply engaging, with social elements, regular updates and an enormous content library that can make it difficult for children to disengage voluntarily. Extended daily use — particularly at the expense of sleep, homework or physical activity — is a common concern reported by parents</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👥</span>
+      <div class="rc-name">Social Pressures Around Status and In-Game Items</div>
+      <div class="rc-desc">As a platform with a large social dimension, Roblox can generate social pressures around avatar appearance, item ownership and popularity. Children may feel pressure to spend Robux to keep up with peers, or experience social exclusion within the platform's community dynamics</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔇</span>
+      <div class="rc-name">Chat Filters Are Not Fully Reliable</div>
+      <div class="rc-desc">While Roblox applies automated chat filtering — particularly on under-13 accounts — no automated system catches all inappropriate communication. Children can be exposed to offensive language, attempts to share external contact details, or content designed to circumvent filters through coded language or deliberate misspellings</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟡</div>
+    <div class="risk-strip-text">
+      <strong>Roblox Carries a Moderate Risk Rating — Safe With Active Parental Involvement</strong>
+      <span>Roblox is a legitimate and popular platform that many children enjoy safely, but its open social features, user-generated content library and integrated spending system mean that safe use requires active parental engagement, configured account controls, and regular conversation with children about their activity on the platform.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">⚙️</div>
+    <div>
+      <div class="control-title">Roblox Provides Parental Control Settings — But They Must Be Actively Configured and Are Not Enabled by Default</div>
+      <div class="control-body">Roblox offers a parental controls system called Parental Controls, accessible through the platform's settings, which allows parents to restrict chat, limit spending, set account restrictions that limit access to age-rated content, and receive a monthly summary of their child's activity. These controls are not enabled by default and require a parent to actively create a parent account and link it to their child's account. Parents should configure these settings as a first step, then use iLimits to add an additional layer of oversight and screen time management on top of the platform's own tools.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Roblox Is Primarily a Children's Platform, But Its Open Nature Introduces Real Risks That Require Active Management</div>
+        <div class="know-body">Roblox is not an adult platform — it is designed for and predominantly used by children, and the company invests significantly in moderation and child safety features. However, the platform's enormous scale, open social features and user-generated content mean that risks exist that cannot be entirely eliminated by the platform itself. Parents who treat Roblox as a sealed, child-safe environment without any oversight are likely to be unaware of their child's actual experience on the platform. Understanding what Roblox contains and how its features work is the foundation of keeping a child safe while using it.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Configure the Platform's Built-In Parental Controls Before Allowing Access</div>
+        <div class="know-body">Roblox's parental control features — including chat restrictions, account restrictions that limit exposure to age-rated content, and spending controls — are not active by default and must be configured by a parent. Creating a linked parent account through Roblox's family settings is the single most important practical step a parent can take before their child begins using the platform. Without these settings in place, a child's account operates with default settings that are more permissive than most parents would choose if they were aware of the options available.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Talk to Children About the Specific Risks Associated With Online Gaming Platforms</div>
+        <div class="know-body">Children using Roblox benefit from age-appropriate conversations about the risks specific to online gaming platforms — including the possibility of contact from unknown adults, the importance of never sharing personal information in chat, the real-world value of in-game purchases, and the importance of telling a parent immediately if something makes them uncomfortable. These conversations are more effective when they are specific and practical rather than general warnings about internet safety, and should be revisited periodically as children's use of the platform develops.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Set and Regularly Review Screen Time Limits for Platform Use</div>
+        <div class="know-body">Roblox is designed to be engaging and can absorb very large amounts of a child's time without the child having a clear sense of how long they have been using it. Setting clear, consistently enforced time limits — and using iLimits to apply those limits technically rather than relying on self-regulation alone — is one of the most practical things parents can do to ensure that platform use remains a healthy part of a child's day rather than displacing sleep, homework, physical activity or face-to-face social interaction.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to monitor, manage and if necessary restrict Roblox access — working alongside the platform's own parental controls to give you a complete picture of your child's activity.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Set daily screen time limits for Roblox with automatic enforcement</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when the platform is accessed outside approved hours</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block app and browser access instantly from the iLimits dashboard</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which platforms are accessible and when</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits flags platforms like Roblox for parental awareness — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to help your child enjoy Roblox safely, with the right boundaries, the right conversations and the right technical controls in place.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk Openly With Children About Online Gaming Safety</div>
+        <div class="tip-body">Children who understand the specific risks of online gaming platforms — including the possibility of contact from unknown adults, the real-world cost of in-game purchases, and the importance of not sharing personal information in chat — are significantly better equipped to respond appropriately when they encounter these situations. The conversation does not need to be alarming or extensive; it needs to be practical, specific to the platform they are using, and delivered in a way that makes it clear they can come to a parent without fear if something concerns them. Regular brief check-ins about what they are playing and who they are talking to are more effective than a single detailed conversation at the start of use.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--green-bg); border-color: var(--green-bdr);">⚙️</div>
+      <div>
+        <div class="tip-name">Configure Roblox's Parental Controls Before Your Child Begins Using the Platform</div>
+        <div class="tip-body">Roblox's built-in parental controls — accessed by creating a linked parent account through the platform's family settings — allow parents to restrict chat to approved contacts, limit account access to age-appropriate content, control spending and receive activity summaries. These settings represent the most direct layer of protection available within the platform and should be configured as a first step, before a child begins using their account. Review the settings periodically, as the platform updates its features and controls regularly, and what was configured at account creation may not reflect all available options.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">⏱️</div>
+      <div>
+        <div class="tip-name">Set Clear Time Limits and Use Technical Controls to Enforce Them</div>
+        <div class="tip-body">Self-regulation of screen time is genuinely difficult for children when using an engaging platform like Roblox — the platform's design actively encourages continued engagement. Setting clear household rules about how much time can be spent on the platform each day, and using iLimits to enforce those limits technically rather than relying on a child to stop voluntarily, removes the need for repeated negotiations and reduces conflict around screen time. Combine technical time limits with consistent household routines — no Roblox before homework is done, no Roblox after a set evening time — to create a sustainable, balanced approach to the platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🎮</span>
+    <h3 class="closing-title">Roblox Can Be a Safe and Enjoyable Platform With the Right Boundaries in Place</h3>
+    <p class="closing-body">
+      Roblox is a platform that millions of children enjoy safely every day — but safe use is not automatic. It is the result of parents taking the time to configure the platform's built-in controls, staying engaged with what their child is doing on the platform, and having the kind of open, practical conversations that prepare children to handle the risks of online social interaction. iLimits gives you the tools to support all of that — from setting time limits to monitoring access across all of your child's devices.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
