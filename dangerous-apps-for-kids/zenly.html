@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Zenly – Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Zenly brand: fresh lime-green */
+    --zn:           #2ECC71;
+    --zn-mid:       #21A85C;
+    --zn-deep:      #145C35;
+    --zn-light:     #F0FDF6;
+    --zn-bdr:       #9FECBF;
+    --zn-text:      #0A2E1A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --green-bg:     #F0FDF4;
+    --green-bdr:    #BBF7D0;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #071A0E 0%, #0E2E1A 50%, #145C35 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(46,204,113,0.38) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.15) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,204,113,0.36) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(46,204,113,0.16);
+    border: 1px solid rgba(46,204,113,0.30);
+    color: #7EEAAA; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #AAEFCA; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #071A0E 0%, #2ECC71 58%, #7EEAAA 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(46,204,113,0.50), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.13); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.medium { color: #FDBA74; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Zenly callout ── */
+  .zn-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--zn-light); border: 1.5px solid var(--zn-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .zn-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #C6F5DA; border: 1.5px solid var(--zn-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .zn-title { font-size: 13px; font-weight: 700; color: var(--zn-text); line-height: 1.3; margin-bottom: 3px; }
+  .zn-body  { font-size: 12px; color: #145C35; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Medium-high risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF8F0; border: 1.5px solid #FDCFA0;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FEE9D4; border: 1.5px solid #FDCFA0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #7C2D12; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #92400E; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--zn-light); border: 1.5px solid var(--zn-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #C6F5DA; border: 1.5px solid var(--zn-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--zn-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #145C35; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #071A0E 0%, #0E2E1A 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,204,113,0.28) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .zn-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Understanding<br><em>Zenly</em> as a Parent</h1>
+    <p class="hero-sub">What this real-time location sharing app does, why continuous location visibility carries specific risks for children, and what you should know even though the app is now discontinued.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📍</div>
+        <div>
+          <div class="app-name-text">Zenly</div>
+          <div class="app-sub">Real-Time Location Sharing App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Location Sharing / Social</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val medium">🟠 Moderate–High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Continuous real-time location sharing with contacts, social pressure dynamics, and no parental visibility or control features</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged for Parental Awareness in iLimits</div>
+          <div class="rf-sub">Parents can block this platform and similar location-sharing apps from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Zenly — a real-time location sharing app that allowed friends to see each other's precise GPS position continuously on a shared map, along with battery level, speed of movement and other passive data, with a social layer built around location visibility.</p>
+  </div>
+
+  <div class="zn-callout">
+    <div class="zn-ico">📍</div>
+    <div>
+      <div class="zn-title">Zenly Was a Real-Time Location Sharing App Designed Around Continuous, Always-On GPS Tracking Between Friends — With No Parental Controls and Significant Social Pressure to Stay Visible</div>
+      <div class="zn-body">Zenly was a location sharing application owned by Snap Inc. that allowed users to share their precise GPS location with friends on a continuous, real-time basis — not just for a specific journey or event, but as a persistent, always-on feed of where each person was at any moment. The app was popular among teenagers and included features that revealed not just location but battery percentage, speed of travel, and how recently the location had been updated. Zenly was officially shut down by Snap in February 2023, but the category of app it represented — always-on social location sharing — continues through successor apps and features built into other platforms. Parents whose children were Zenly users, or who are now using similar location-sharing apps, should understand what this category of application does and why it requires careful consideration.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#2ECC71;"></span> Real-Time GPS</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Always-On Sharing</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Social Map</div>
+    <div class="mode-chip"><span class="cdot" style="background:#6366F1;"></span> Battery & Speed Data</div>
+    <div class="mode-chip"><span class="cdot" style="background:#00AFF0;"></span> Friend Network</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Zenly was an <strong>always-on location sharing application</strong> that displayed each user's precise GPS position on a shared map visible to their friend network, updated continuously in real time. Beyond location, the app surfaced passive data including battery percentage, movement speed, and the last time a user's location was refreshed — creating a detailed picture of each user's daily movements, routines and habits that was permanently visible to all their contacts on the platform.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--zn-light);">🗺️</div>
+      <div>
+        <div class="feat-name">Continuous Real-Time GPS Location Visible to All Friends</div>
+        <div class="feat-desc">Zenly's core feature was a shared map showing the precise GPS location of every friend in a user's network, updated continuously and viewable at any time. Unlike location sharing features in other apps that require an active decision to share for a specific trip or period, Zenly's sharing was always-on by default — a child's location was visible to everyone in their friend list at every moment of the day and night, without the child needing to take any active step to share it. This persistent, passive visibility is the defining feature that makes always-on location sharing apps a distinct category of risk.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🔋</div>
+      <div>
+        <div class="feat-name">Passive Data Including Battery Level, Speed and Last-Seen Time</div>
+        <div class="feat-desc">In addition to GPS position, Zenly surfaced each user's battery percentage, their speed of movement, and precisely how long ago their location was last updated. This combination of data allowed anyone in a user's friend network to infer detailed information about their daily patterns — whether they were at home, travelling, awake or asleep, and whether their phone was running low on charge. For a child, this level of passive data visibility to a network of contacts represents a significant privacy exposure that goes well beyond simple location sharing.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFFBF0;">👥</div>
+      <div>
+        <div class="feat-name">Social Layer Built Around Location Visibility and Presence</div>
+        <div class="feat-desc">Zenly was designed as a social application, not merely a utility — the shared map was a social space where users could interact with each other's locations, leave comments tied to places, and build a shared picture of their social world through the lens of where everyone was at any given moment. This social dimension created pressure dynamics: a child who turned off location sharing or appeared to be hiding their location could face social questions or accusations from friends, making the decision to stop sharing feel socially costly in ways that abstract privacy concerns rarely do for teenagers.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F7F3FF;">🔒</div>
+      <div>
+        <div class="feat-name">No Parental Visibility, Controls or Account Linking Features</div>
+        <div class="feat-desc">Zenly provided no parental control features of any kind — no family account linking, no ability for a parent to see their child's friend list on the platform, no activity reporting and no option to review or approve the contacts who could see a child's location. A parent whose child used Zenly had no visibility into who was tracking their child's movements in real time, and no tools within the platform to manage or restrict that access. External controls and direct conversation with the child were the only available approach.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🔄</div>
+      <div>
+        <div class="feat-name">Discontinued in 2023 — But Successor Apps Fill the Same Category</div>
+        <div class="feat-desc">Snap shut down Zenly in February 2023, but the always-on social location sharing category the app represented has not disappeared. Several successor applications emerged in its wake — including Snapchat's own location sharing features, Life360, Beacon, and various other apps — that offer substantially the same functionality. Parents whose children used Zenly may find that they have migrated to one of these alternatives, often without the transition being discussed or the new app being subject to the same level of parental awareness as the original.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It Requires Parental Awareness</h2>
+    <p class="sh-desc">Key risks associated with always-on social location sharing apps, including physical safety implications of continuous location visibility, social pressure dynamics that make opting out difficult, the absence of parental controls, and the migration of Zenly users to successor platforms.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Continuous Location Visible to an Unvetted Friend Network</div>
+      <div class="rc-desc">A child's precise GPS location, updated in real time throughout the day and night, was visible to everyone in their Zenly friend list — which may have included people the parent had never met, older contacts from online communities, or individuals the child had lost touch with but never removed from the app</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🏠</span>
+      <div class="rc-name">Home Address and Daily Routine Exposed by Movement Patterns</div>
+      <div class="rc-desc">A persistent location feed effectively reveals a child's home address, school, regular routes and daily patterns to everyone who can see their location — information that could be misused by any contact whose intentions toward the child are not entirely benign, including older contacts or adults who entered the friend network through indirect social connections</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">😰</span>
+      <div class="rc-name">Social Pressure to Remain Visible at All Times</div>
+      <div class="rc-desc">The social design of apps like Zenly creates significant peer pressure to keep location sharing active — turning it off, or appearing to hide one's location, can trigger social friction or accusations among teenage peer groups, making privacy protection feel socially costly in ways that are difficult for younger users to navigate independently</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🕵️</span>
+      <div class="rc-name">Enables Monitoring and Control by Peers or Older Contacts</div>
+      <div class="rc-desc">Always-on location sharing can be exploited by controlling peers, ex-partners or older contacts to monitor a child's movements and whereabouts without explicit consent at the time of each check-in — a dynamic that has been associated with controlling relationship behaviours among teenagers</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔄</span>
+      <div class="rc-name">Migration to Successor Apps May Go Unnoticed</div>
+      <div class="rc-desc">Children who used Zenly often migrated to successor applications when it shut down, sometimes without discussing the transition with parents. A parent who is aware of Zenly as a risk may be unaware that their child has moved to a functionally identical alternative and is sharing their location continuously through a different app name</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Parental Controls in the App or Its Successors</div>
+      <div class="rc-desc">Zenly had no parental control features, and most of its successor applications in the social location sharing category similarly provide no tools for parents to monitor, restrict or review their child's use — meaning that external device-level controls are the primary available safeguard</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🟠</div>
+    <div class="risk-strip-text">
+      <strong>Always-On Location Sharing Carries a Moderate–High Risk Rating for Children and Teenagers</strong>
+      <span>The continuous, passive visibility of a child's precise location to an unvetted peer network — combined with the absence of any parental controls and the social pressure dynamics that make opting out difficult — makes always-on location sharing apps a category that warrants deliberate parental consideration, particularly for younger teenagers whose friend networks are less well known to parents.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🔄</div>
+    <div>
+      <div class="control-title">Zenly Is Closed But the Category It Represents Is Active — Parents Should Check for Successor Apps on Their Child's Device</div>
+      <div class="control-body">Because Zenly shut down in early 2023, a parent who restricts the Zenly app specifically is addressing a platform that no longer operates. The more relevant action for parents today is to check whether their child is using any of the successor applications that have emerged in its place — including Snapchat's location features, Life360 (which also has a family-focused version), Beacon, and others. The same questions apply to all of these: who is in the child's contact list on the app, who can see their location in real time, and has the child agreed to share their location with contacts the parent is not aware of? iLimits can assist with restricting access to location-sharing applications across this broader category.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Always-On Location Sharing Is Categorically Different From Sharing Location for a Specific Trip or Event</div>
+        <div class="know-body">Many parents are comfortable with the idea of knowing where their child is — and many families use location sharing for exactly this purpose, as a safety tool that works in both directions. Always-on social location sharing apps like Zenly are a different thing: the sharing is not between parent and child for safety, but between a child and their entire peer network for social purposes, continuously and passively, without any active decision being made each time. The distinction matters because it changes who has access to the location data, how that data can be used, and what social dynamics it creates. Parents who are comfortable with family location sharing should still give careful consideration to peer-facing always-on location sharing, which serves a different purpose and carries different risks.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Friend Networks on These Apps Are Often Less Well Known to Parents Than Those on Other Social Platforms</div>
+        <div class="know-body">Location sharing apps tend to have friend networks that reflect a teenager's social world in full — including contacts from school year groups, sports teams, online communities and other social contexts that a parent may have limited visibility into. Unlike a parent who reviews their child's Instagram followers, a parent may have no awareness of who is in their child's Zenly or successor app contact list, and therefore no basis for assessing whether any of those contacts having access to the child's real-time location is appropriate. Asking to see the contact list on any location sharing app a child uses is a reasonable and important step for parents.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Teenagers May Not Perceive the Privacy Risk Because the Sharing Feels Reciprocal and Social</div>
+        <div class="know-body">One of the features that made Zenly and similar apps appealing to teenagers is that the location sharing is mutual — everyone can see everyone else, which makes it feel like a shared, social activity rather than surveillance. This reciprocity makes it harder for teenagers to perceive the privacy risk, because the app is framed around connection and presence rather than tracking. Parents should acknowledge this when talking to teenagers about the app — the issue is not that sharing location with close friends is inherently wrong, but that the friend network is broader than close friends, that the data is more detailed than a simple location pin, and that the always-on nature removes the active consent that characterises safer forms of location sharing.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Location Sharing Features Are Embedded in Many Other Apps — The Risk Does Not Require a Dedicated Location App</div>
+        <div class="know-body">Snapchat's Snap Map feature, Instagram's location sharing, Find My Friends on iOS, and various other platforms all include location sharing features that carry some of the same considerations as dedicated location apps. A parent who blocks dedicated location sharing apps should also be aware that a child may have access to equivalent features within social platforms they already use. Reviewing the location permissions and location features within every social app on a child's device — not just dedicated location apps — is the most complete approach to managing this risk category.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents tools to restrict location-sharing apps across the broader category — not just Zenly, but the successor applications that have emerged in its place and any new platforms in this space.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block location sharing apps by category across your child's devices</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restrict specific successor apps including Life360, Beacon and similar platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged location apps are accessed or installed</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which apps are accessible and when</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits flags platforms like Zenly for parental awareness — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps for managing your child's use of location sharing apps — including how to have the conversation, what to check on their device, and how to think about the broader category of location-sharing features across all the platforms they use.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Your Child About Who Can See Their Location and Why That Matters</div>
+        <div class="tip-body">The most effective way to approach location sharing apps with teenagers is to make the conversation about the specific details rather than the general principle. Ask your child to show you their contact list on any location sharing app they use and talk through who each person is — not as an interrogation, but as a genuine conversation about whether every person on that list having access to their real-time location at any moment makes sense. Acknowledge that sharing location with close friends can feel like a natural part of staying connected, while being specific about why the always-on nature of these apps is different from sharing location for a specific occasion. Also talk about the social pressure dimension — give your child language and permission to opt out of location sharing with contacts they are less certain about, without feeling that doing so is socially unacceptable.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--zn-light); border-color: var(--zn-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Check for Successor Apps and Review Location Permissions Across All Social Apps</div>
+        <div class="tip-body">If your child used Zenly, check whether they have migrated to a successor application — common alternatives include Life360 (which has both a consumer social version and a family safety version), Snapchat's Snap Map, Beacon, and other apps in this category. Also review the location permissions settings on your child's device for every social app they use: many platforms request always-on location access that enables location sharing features even if a dedicated location app is not installed. Revoking always-on location permissions for social apps that do not require them — and restricting location access to only when the app is in use — is a practical step that reduces passive location exposure across all platforms simultaneously.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use iLimits to Restrict Location-Sharing Apps Across the Category, Not Just by Individual App Name</div>
+        <div class="tip-body">Because the always-on location sharing category includes multiple apps and is regularly joined by new entrants, restricting individual named apps is less durable than applying category-level restrictions that cover the broader space. Use iLimits to restrict location sharing applications as a category across your child's devices, and review the restricted list periodically as new apps emerge. Combine app-level restrictions with the location permission review described above — together, these two steps address the risk both at the app level and at the device operating system level, providing the most complete protection available without requiring the child to make any active privacy decisions each time they use a social platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">📍</span>
+    <h3 class="closing-title">Location Sharing Is a Category to Manage, Not Just a Single App to Block</h3>
+    <p class="closing-body">
+      Zenly may no longer be active, but the always-on social location sharing it pioneered among teenagers continues through successor apps and embedded features across the platforms children already use. The most effective parental response is one that addresses the category — through a combination of open conversation about who should have access to a child's real-time location, a review of location permissions across all apps on their device, and the category-level restrictions that iLimits provides. That combination is more durable than any individual app block, and more meaningful than any single conversation.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
