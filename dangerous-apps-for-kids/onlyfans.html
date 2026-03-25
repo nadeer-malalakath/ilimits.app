@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>OnlyFans – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* OnlyFans brand: signature blue-cyan */
+    --of:           #00AFF0;
+    --of-mid:       #0090C8;
+    --of-deep:      #005A82;
+    --of-light:     #F0FAFF;
+    --of-bdr:       #7FDDFF;
+    --of-text:      #003D5C;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #001A2C 0%, #002E4D 50%, #003D5C 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(0,175,240,0.32) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.16) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,175,240,0.36) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(0,175,240,0.16);
+    border: 1px solid rgba(0,175,240,0.30);
+    color: #7FDDFF; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFB3CE; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #001A2C 0%, #00AFF0 60%, #7FDDFF 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(0,175,240,0.45), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.12); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── OnlyFans callout ── */
+  .of-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--of-light); border: 1.5px solid var(--of-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .of-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CCEEFF; border: 1.5px solid var(--of-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .of-title { font-size: 13px; font-weight: 700; color: var(--of-text); line-height: 1.3; margin-bottom: 3px; }
+  .of-body  { font-size: 12px; color: #003D5C; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--of-light); border: 1.5px solid var(--of-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #CCEEFF; border: 1.5px solid var(--of-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--of-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #003D5C; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #001A2C 0%, #002E4D 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,175,240,0.30) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .of-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why certain platforms may not be suitable for children and how you can take action as a parent.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔞</div>
+        <div>
+          <div class="app-name-text">OnlyFans</div>
+          <div class="app-sub">Adult Content Subscription Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Adult Entertainment</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Subscription platform hosting adult and explicit content from independent creators</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this platform instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of OnlyFans — a subscription-based content platform that has become predominantly associated with adult and explicit content created and sold directly by independent creators, and which is entirely unsuitable for children or teenagers at any age.</p>
+  </div>
+
+  <div class="of-callout">
+    <div class="of-ico">🔞</div>
+    <div>
+      <div class="of-title">OnlyFans Is a Subscription Platform Used Primarily to Distribute Adult Content — It Has No Age-Appropriate Offering for Children</div>
+      <div class="of-body">OnlyFans is a subscription-based platform that allows creators to charge followers for access to content they post. While the platform does not exclusively host adult content, it is overwhelmingly associated with sexually explicit material and is widely used by adult content creators as a direct-to-consumer distribution channel. The platform applies no meaningful age verification — requiring only a self-declared date of birth to create an account — and the nature of the content available across the majority of active creator accounts makes it entirely unsuitable for children or teenagers. No version of OnlyFans is appropriate for a child, and no legitimate reason exists for a minor to have access to the platform.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#00AFF0;"></span> Creator Subscriptions</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Explicit Photo &amp; Video</div>
+    <div class="mode-chip"><span class="cdot" style="background:#7FDDFF;"></span> Direct Messaging</div>
+    <div class="mode-chip"><span class="cdot" style="background:#718096;"></span> Pay-Per-View Content</div>
+    <div class="mode-chip"><span class="cdot" style="background:#A855F7;"></span> Live Streaming</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      OnlyFans is a <strong>subscription content platform</strong> that allows independent creators to sell access to their content directly to paying subscribers. The platform is predominantly used by adult content creators, and the vast majority of widely-discovered content on the platform is explicit or sexually themed in nature. The platform operates across web browsers and can be accessed from any internet-connected device without app installation.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--of-light);">💳</div>
+      <div>
+        <div class="feat-name">Paid Subscriptions Granting Access to Creator Content Libraries</div>
+        <div class="feat-desc">OnlyFans allows creators to set a monthly subscription fee that unlocks access to their full content library — which, for the majority of adult creators on the platform, consists of explicit photographs and video content. A child with access to a parent's stored payment credentials on a shared device, or with their own prepaid payment card, can subscribe to creator accounts and access their content without requiring any identity verification beyond a self-declared date of birth at account creation.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">📩</div>
+      <div>
+        <div class="feat-name">Direct Private Messaging Between Subscribers and Creators</div>
+        <div class="feat-desc">OnlyFans includes a direct messaging system that allows subscribers to communicate privately with the creators they follow. Many creators use this messaging channel to sell additional explicit content directly to subscribers on a pay-per-message or pay-per-media basis. This means the platform enables direct private contact between an adult creator and a subscriber — a channel that would be entirely inappropriate for a child to access, and one that provides no safeguard to prevent a minor from initiating or receiving private communications of an explicit nature.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🎬</div>
+      <div>
+        <div class="feat-name">Pay-Per-View Explicit Video and Photo Content</div>
+        <div class="feat-desc">In addition to subscription content, OnlyFans allows creators to send individual pieces of content to subscribers on a pay-per-view basis — requiring an additional payment to unlock each item. This system is widely used by adult content creators to distribute explicit material directly to individual subscribers. Payment barriers of this kind do not prevent access where a child has access to a stored payment method, and the platform's design does not include any safeguard that identifies or restricts purchases made by minors.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">📡</div>
+      <div>
+        <div class="feat-name">Live Streaming Directly From Creators to Subscribers</div>
+        <div class="feat-desc">OnlyFans supports live video streaming by creators, which can be accessed by subscribers in real time. Live content on the platform, particularly from adult creators, may be explicit in nature and is streamed without the pre-screening or editorial review that might apply to pre-recorded content on other platforms. A child who has subscribed to a creator account may receive notifications when that creator goes live and can access the stream directly from the platform or via notification, with no additional access control beyond the initial account login.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🌐</div>
+      <div>
+        <div class="feat-name">Fully Web-Accessible Without App Installation or Verification</div>
+        <div class="feat-desc">OnlyFans is accessible through any standard web browser on any internet-connected device without requiring an app download. Account creation requires only an email address and a self-declared date of birth, with no identity verification applied at sign-up. This means that any child who knows about the platform can create an account and begin browsing creator profiles and previewing content within minutes, using any device with a browser and internet connection — regardless of whether that device has app-level parental controls applied.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from unrestricted access to OnlyFans, including the predominance of explicit adult content across the platform, the absence of effective safeguards for younger users, the risks posed by the platform's private messaging system, and the ease of account creation without identity verification.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Predominantly Adult Content Across the Platform</div>
+      <div class="rc-desc">The majority of widely-discovered creator accounts on OnlyFans produce explicit adult content — the platform has become strongly associated with adult entertainment, and this is the content a child is most likely to encounter when browsing or searching the platform</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📩</span>
+      <div class="rc-name">Private Messaging With Adult Creators</div>
+      <div class="rc-desc">The platform's direct messaging system enables private contact between adult creators and subscribers — a channel with no safeguards to prevent a minor from receiving explicit content or engaging in direct private communication with an adult they have no prior relationship with</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Impact on Developing Understanding of Relationships</div>
+      <div class="rc-desc">Research consistently documents that early or unmediated exposure to explicit adult content can shape a child's developing understanding of relationships, intimacy and consent in ways that are harmful to their long-term emotional and psychological wellbeing</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Payment Access Enables Content Purchase Without Parental Knowledge</div>
+      <div class="rc-desc">A child with access to a stored payment method on a shared device can subscribe to creator accounts and purchase pay-per-view content without any secondary authorisation step — the platform applies no verification to purchases beyond a logged-in account</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔍</span>
+      <div class="rc-name">Widely Known and Easily Discoverable</div>
+      <div class="rc-desc">OnlyFans is one of the most widely discussed platforms among teenagers — awareness of the platform is high among older children even without prior direct access, making independent discovery and account creation significantly more likely</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🚫</span>
+      <div class="rc-name">No Meaningful Age Verification at Account Creation</div>
+      <div class="rc-desc">Creating an OnlyFans account requires only an email address and a self-declared date of birth — no identity document, no verification code sent to a verified adult, and no secondary check that would prevent a child from registering and accessing the platform</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>OnlyFans Carries the Highest Possible Risk Rating</strong>
+      <span>The platform is predominantly used for adult content distribution, has no meaningful age verification, enables direct private messaging between subscribers and adult creators, allows content purchases using stored payment methods, and is highly discoverable among teenagers. This platform should be blocked on all devices accessible to children.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🌐</div>
+    <div>
+      <div class="control-title">OnlyFans Is Fully Accessible Through Web Browsers Without Any App Download — App-Level Controls Alone Are Not Sufficient</div>
+      <div class="control-body">OnlyFans does not require an app installation to access — the full platform, including account creation, content browsing, subscriptions and messaging, is available through any standard web browser. A child can create an account and access content through a phone browser, a shared family computer or a tablet without any installation step that a device-level app control would intercept. Browser-level and network-level restrictions are necessary to block access reliably. iLimits provides controls that address this broader access vector, not just individual app installations on a child's primary device.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">OnlyFans Is Widely Known Among Teenagers — Awareness Does Not Require Prior Access</div>
+        <div class="know-body">OnlyFans has a very high level of cultural visibility among teenagers — the platform is referenced widely in music, social media and peer conversation, meaning many children are aware of the platform by name well before they might attempt to access it. Parents should not assume that a child's awareness of OnlyFans indicates they have already accessed it, but should understand that this awareness makes independent discovery and account creation significantly more likely without proactive restriction in place. The platform's ease of access — requiring only an email address and a self-declared date of birth — means that awareness is only a short step from access.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Platform's Private Messaging Feature Presents Risks Beyond Content Exposure</div>
+        <div class="know-body">Unlike passive content platforms, OnlyFans includes a direct messaging system that enables private, real-time communication between subscribers and adult creators. For a child who has accessed the platform, this means exposure is not limited to pre-produced content — it extends to private contact with adults who may send explicit material directly, or who may engage in communications that are entirely inappropriate for a minor. Parents should understand that the risks presented by OnlyFans are not limited to what a child may see on creator profiles, but extend to the interactive and communicative features the platform provides to subscribers.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Stored Payment Methods on Shared Devices Present a Specific Risk</div>
+        <div class="know-body">OnlyFans operates on a paid subscription model — accessing most creator content requires a monthly payment, and additional content is available on a pay-per-item basis. Where a parent's payment credentials are stored on a shared device or on a device used by a child, these payment methods can be used to subscribe to creator accounts and purchase content without any secondary authorisation. Parents should review the payment methods stored on all devices their children have access to and ensure that payments on those devices require a biometric or PIN confirmation that the child cannot provide independently.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Restriction Needs to Be Applied at the Browser and Network Level Across All Devices</div>
+        <div class="know-body">Because OnlyFans does not require an app download, removing an app from a child's device does not block access. A child can reach the full platform through any browser on any internet-connected device — including shared household computers, tablets and secondary phones. Effective restriction requires controls applied at the browser and network level across every device the child can access, not only app-level controls on a primary phone. iLimits provides the tools necessary to address this broader access vector and to block the platform consistently across a child's full digital environment.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block adult content platforms like OnlyFans instantly — no technical knowledge required, with no disruption to your child's device.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block adult content platforms and websites by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Restricted categories allow quick blocking of similar adult content subscription platforms</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which apps or platforms are accessible</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like OnlyFans as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from adult content platforms and build a foundation of open, honest conversation about responsible internet use and age-appropriate digital habits.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">💬</div>
+      <div>
+        <div class="tip-name">Talk Openly With Children About Responsible Internet Use</div>
+        <div class="tip-body">Age-appropriate, honest conversation about adult content platforms — what they are, who uses them and why they are not suitable for children — is one of the most effective protective tools available to parents. With a platform as widely discussed as OnlyFans, many children will already have some awareness of it, and a direct, calm and honest conversation is more effective than silence or a simple prohibition without explanation. Children who receive a clear explanation of why a platform is restricted, rather than simply being told it is off-limits, are better equipped to make the right decision when they encounter it in an environment where controls are not in place. Equally important is ensuring they know they can come to a parent without fear if something they encounter online confuses or concerns them.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🌱</div>
+      <div>
+        <div class="tip-name">Encourage Healthy and Age-Appropriate Digital Habits</div>
+        <div class="tip-body">Help your child develop a thoughtful and balanced approach to the internet by making it normal to talk about what they are doing online, what platforms they are using and who they are communicating with. Children who feel that their digital life is something they can share with a parent — rather than something they need to conceal — are significantly more resilient when they encounter content that is not appropriate for their age. Reinforce that restrictions on platforms like OnlyFans are not punishments but protections, and frame the conversation around their wellbeing and development rather than around rules and consequences.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Use Parental Control Tools and Review Device Payment Settings</div>
+        <div class="tip-body">Apply iLimits restrictions consistently across every device your child has access to — including shared family computers and tablets — and review those restrictions periodically as children acquire new devices or access new networks. Because OnlyFans is accessible through browsers without any installation, consider enabling safe-search settings on all browsers used by children as an additional layer of protection. Also review and secure the payment methods stored on all shared devices: requiring biometric or PIN confirmation for purchases on family devices prevents a child from subscribing to content using a saved payment method without parental awareness. Technical controls and open conversation together form the most complete and durable protection available to your family.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">A Safe Digital Environment Begins With the Boundaries You Set at Home</h3>
+    <p class="closing-body">
+      Protecting children from adult content platforms is one of the most straightforward and important steps any parent can take as part of their family's approach to digital safety. iLimits gives you the tools to enforce that protection technically — and the open, honest conversations you have with your child about why those boundaries exist give them the understanding and resilience to stay safe even when you are not there to intervene directly.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
