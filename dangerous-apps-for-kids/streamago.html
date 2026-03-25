@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Streamago – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FFF8F2;
+    --blush-2:      #FFF0E6;
+    --ink:          #140A00;
+    --ink-soft:     #2E1A08;
+    --ink-mid:      #6B4A2A;
+    --ink-muted:    #A8846A;
+    --border:       #F0DDD0;
+    --border-soft:  #FAF0E8;
+    --surface:      #FFFFFF;
+
+    /* Streamago brand: warm broadcast-orange */
+    --sg:           #F4620F;
+    --sg-mid:       #D4520A;
+    --sg-deep:      #7A2C00;
+    --sg-light:     #FFF4EE;
+    --sg-bdr:       #FFBA98;
+    --sg-text:      #3D1400;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(244,98,15,0.07);
+    --shadow-sm:    0 2px 14px rgba(244,98,15,0.10);
+    --shadow-md:    0 6px 30px rgba(244,98,15,0.13);
+    --shadow-lg:    0 14px 52px rgba(244,98,15,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #110500 0%, #200A00 50%, #2E1000 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(244,98,15,0.42) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.16) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,98,15,0.40) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(244,98,15,0.18);
+    border: 1px solid rgba(244,98,15,0.36);
+    color: #FFBA98; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFBA98; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #7A2C00 0%, #F4620F 55%, #FF9A5C 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(244,98,15,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-val.medium { color: #FCD34D; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--sg-light); border: 1px solid var(--sg-bdr);
+    color: var(--sg); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Streamago callout ── */
+  .sg-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--sg-light); border: 1.5px solid var(--sg-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .sg-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE0CC; border: 1.5px solid var(--sg-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .sg-title { font-size: 13px; font-weight: 700; color: var(--sg-text); line-height: 1.3; margin-bottom: 3px; }
+  .sg-body  { font-size: 12px; color: #3D1400; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--sg-light); border: 1.5px solid var(--sg-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FFE0CC; border: 1.5px solid var(--sg-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--sg-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #3D1400; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--sg-light); border: 1.5px solid var(--sg-bdr);
+    color: var(--sg-mid); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #110500 0%, #200A00 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,98,15,0.32) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF4EE 0%, #FFE8D6 100%);
+    border: 1.5px solid var(--sg-bdr); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,98,15,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--sg-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #3D1400; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .sg-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why Streamago poses serious risks for children and the steps you can take as a parent to protect your child from its live broadcasting dangers.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📡</div>
+        <div>
+          <div class="app-name-text">Streamago</div>
+          <div class="app-sub">Live Video Broadcasting App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Live Streaming &amp; Broadcast</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Live video broadcasting to unknown viewers, real-time comments from strangers and no meaningful age verification or parental controls</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can monitor or block Streamago instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Streamago — a live video broadcasting app that allows users to go live to a public audience, receive real-time comments and messages from viewers, and watch other users' live streams, all without meaningful age verification or parental oversight tools.</p>
+  </div>
+
+  <div class="sg-callout">
+    <div class="sg-ico">📡</div>
+    <div>
+      <div class="sg-title">Streamago Is a Live Broadcasting Platform That Puts Children in Front of an Unknown Public Audience in Real Time</div>
+      <div class="sg-body">Streamago is a live video streaming application that allows any registered user to broadcast live video of themselves to a public audience. Viewers can watch any live stream, send real-time comments and messages to the broadcaster, and interact with other viewers — all while the broadcaster is live on camera. The platform has been popular with teenagers who use it to broadcast from their bedrooms, schools and daily lives. A child broadcasting on Streamago is visible in real time to an unknown and unverified audience that may include adults who seek contact with minors, and is receiving live comments and messages with no effective content moderation or filtering in place to protect them.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#F4620F;"></span> Live Broadcasting</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Live Comments</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Public Audience</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Stream Discovery</div>
+    <div class="mode-chip"><span class="cdot" style="background:#8B5CF6;"></span> Viewer Follows</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Streamago is a <strong>live video broadcasting platform</strong> that allows users to stream live video of themselves to a public audience while receiving real-time messages and comments from viewers. The platform's core experience centres on live, unfiltered personal broadcast — which means that a child using Streamago is broadcasting their appearance, voice, surroundings and real-time reactions to an entirely unknown audience with no parent or platform safeguard between the child and whoever is watching.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--sg-light);">🎥</div>
+      <div>
+        <div class="feat-name">Live Personal Video Broadcast to a Public Audience</div>
+        <div class="feat-desc">Streamago's primary feature allows any user to go live at any time, broadcasting real-time video of themselves to any viewer who discovers or follows their stream. Streams are publicly discoverable through the platform's browse and search features, meaning that a child who goes live is immediately visible to the platform's full user base — including adult strangers — without any approval process, age verification of viewers or parental notification. The live format means that whatever a child shows on camera — their appearance, their home environment, their school uniform, their emotional state — is visible to strangers in real time.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💬</div>
+      <div>
+        <div class="feat-name">Real-Time Comments and Messages From Viewers During Live Streams</div>
+        <div class="feat-desc">While a child is broadcasting live, any viewer can send real-time comments and messages that appear on screen during the stream. These comments are not pre-moderated and arrive in real time — meaning that inappropriate, sexual, manipulative or distressing messages from adult strangers can appear during a child's live broadcast without any filtering or delay. A child who is live on camera may feel pressure to respond to or engage with comments in real time, creating a dynamic where viewers can direct a child's behaviour during a broadcast in ways that are difficult for the child to recognise as manipulation.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🔍</div>
+      <div>
+        <div class="feat-name">Publicly Discoverable Streams Visible to Any Platform User</div>
+        <div class="feat-desc">Live streams on Streamago are discoverable through the platform's browse interface, which allows any user to find and watch streams by other users. A child who goes live does not need to share a link or invite viewers — their stream will appear in the platform's discovery features and can be found by any user browsing live content. This means that a child who begins broadcasting with the intention of streaming to a small group of friends is in practice broadcasting to the entire platform's user base, with no control over who watches.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">👥</div>
+      <div>
+        <div class="feat-name">Follower Relationships That Enable Ongoing Contact Between Viewers and Broadcasters</div>
+        <div class="feat-desc">Streamago allows viewers to follow broadcasters, creating an ongoing relationship where a follower is notified when the broadcaster goes live again. An adult who watches a child's stream can follow the child, building a pattern of attendance at the child's future broadcasts. This creates a mechanism for ongoing, one-sided attention from unknown adults that the child may experience as flattering engagement from fans, without recognising it as potentially predatory behaviour. The follow relationship also provides a basis for initiating direct contact.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">🔓</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification and No Parental Controls</div>
+        <div class="feat-desc">Account creation on Streamago requires only a basic registration with no identity verification or age confirmation beyond a date of birth entry. Children of any age can create accounts, go live and access other users' streams without any effective age check. The platform provides no parental account features, no monitoring tools and no mechanism for a parent to receive notification that their child has begun broadcasting live video to a public audience. A child can go live from their bedroom without a parent being aware that the broadcast is happening.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It May Be Risky for Children</h2>
+    <p class="sh-desc">Key risks from unrestricted access to Streamago, including live personal broadcast to unknown adults, unmoderated real-time messages, location and identity exposure through broadcast content, follower-based ongoing attention from strangers and the complete absence of parental visibility.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">📹</span>
+      <div class="rc-name">Live Broadcast to Unknown Adults</div>
+      <div class="rc-desc">A child going live on Streamago is immediately visible in real time to any adult on the platform — their face, voice, home environment and emotional state are all broadcast publicly without any control over who is watching</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Unmoderated Real-Time Messages</div>
+      <div class="rc-desc">Viewers can send real-time comments during a live stream with no pre-moderation — inappropriate, sexual or manipulative messages from adult strangers can appear on screen while a child is live on camera with no filtering or delay</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📍</span>
+      <div class="rc-name">Location and Identity Exposure Through Broadcast</div>
+      <div class="rc-desc">Children broadcasting from home inadvertently reveal location details — street views through windows, school uniforms, recognisable local landmarks, home interiors — that enable adults watching the stream to identify where the child lives or attends school</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎭</span>
+      <div class="rc-name">Grooming Through Viewer Attention and Flattery</div>
+      <div class="rc-desc">Adults can use follower relationships, positive comments and regular attendance at a child's streams to build a sense of familiarity and trust before progressing to direct contact — a grooming pattern that is difficult to recognise in a broadcast context</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🌑</span>
+      <div class="rc-name">No Parental Visibility Into Broadcasting Activity</div>
+      <div class="rc-desc">Parents have no way to know that their child is broadcasting live video — Streamago provides no parental notifications, no monitoring tools and no account features that give parents visibility into their child's live streaming activity</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔁</span>
+      <div class="rc-name">Recordings of Live Streams Can Persist</div>
+      <div class="rc-desc">Viewers can record or screenshot live streams during broadcast — meaning that video of a child is not limited to the duration of the live session but can be saved, shared or posted elsewhere without the child's knowledge or consent</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Streamago Carries a High Risk Rating for Children</strong>
+      <span>The platform's core feature — live personal video broadcast to a public audience — creates immediate and serious child safety risks that cannot be mitigated through conversation or partial restriction alone. A child using Streamago is broadcasting themselves in real time to unknown adults, receiving unmoderated messages from strangers and leaving no record for parents to review. Restriction is strongly recommended for all children and teenagers.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">📡</div>
+    <div>
+      <div class="control-title">Streamago Is Accessible via App and Web — Removing the App Does Not End the Risk</div>
+      <div class="control-body">Streamago is available as a mobile application and is also accessible through web browsers on any internet-connected device. Removing the app from a child's phone does not prevent the child from accessing the platform and going live through a browser on the same device or any other device in the household. Because live broadcasting can happen silently and briefly — a child can go live for a few minutes before a parent is aware — browser-level controls are particularly important alongside app-level restrictions. iLimits applies restrictions across both vectors, ensuring that access is blocked consistently regardless of how a child attempts to reach the platform.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Children May Not Understand That Going Live Means Broadcasting to Complete Strangers</div>
+        <div class="know-body">Many children who use live streaming apps do so with the intention of broadcasting to their friends — people they know in real life who follow them on the platform. What they may not fully appreciate is that a live stream on a public platform is visible to the platform's entire user base, not just their followers, and that their followers may include adults they have never met who began following them after discovering their stream through the platform's browse feature. A child who believes they are streaming to a small audience of known friends may in fact be visible to hundreds of adult strangers at any given moment. This misunderstanding of who is watching is one of the most significant risk factors for children on live streaming platforms.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Live Broadcasts Can Reveal More Personal Information Than Children Realise</div>
+        <div class="know-body">A child broadcasting from their bedroom inadvertently reveals a significant amount of personally identifiable information — the layout of their home, items visible in the background, street or neighbourhood views through windows, school uniforms or sports kit, and the timing of their broadcasts (which can indicate school hours and routines). Adults who watch a child's streams regularly can aggregate this information to build a detailed picture of the child's location, school, home address and daily routine without the child ever having directly shared any of this information. Parents should be aware that a child can expose significant personal safety information through live streaming without having said a single thing that seems like a disclosure.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Viewer Flattery and Regular Attendance at a Child's Streams Can Be a Form of Grooming</div>
+        <div class="know-body">Children who broadcast regularly on platforms like Streamago often develop a sense of relationship with their regular viewers — people who watch every stream, leave positive comments and make the child feel seen and valued. This dynamic can be genuinely positive among peer-age audiences, but it can also be deliberately cultivated by adults who use regular attendance, flattery and positive reinforcement to build a sense of trust and familiarity with a child before progressing to private contact. A child who has come to think of a regular viewer as a fan or supporter may not recognise an adult's escalating attention as grooming behaviour. Parents should be aware of this pattern and should discuss it with children who use any live streaming platform.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Broadcasts Can Be Recorded Without the Child's Knowledge and Shared Elsewhere</div>
+        <div class="know-body">Any viewer watching a live stream can use screen recording tools to capture the broadcast without the broadcaster's knowledge or consent. This means that video of a child — including their appearance, voice, home environment and any behaviour during the stream — can be saved and distributed beyond the platform, to other websites or messaging platforms, with no notification to the child or their family. The content of a live stream does not disappear when the broadcast ends — it may persist in recordings made by viewers indefinitely. Parents should ensure that children understand this before they consider using any live streaming platform.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block Streamago at the app and browser level instantly — protecting your child from the platform's live broadcasting risks without requiring any technical knowledge.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Streamago at the app and browser level across all devices</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block all live streaming and broadcast platforms by category</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when Streamago is accessed or opened on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Set time-based restrictions to control when apps and websites are accessible</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like Streamago as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual maturity and needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Practical steps to protect your child from the specific risks of live video broadcasting — including conversations about who is really watching, what information a broadcast reveals and why viewer attention is not the same as genuine friendship.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:var(--sg-light); border-color: var(--sg-bdr);">💬</div>
+      <div>
+        <div class="tip-name">Talk With Your Child About Who Is Really Watching When They Go Live</div>
+        <div class="tip-body">One of the most important conversations a parent can have with a child who uses or wants to use live streaming platforms is about the reality of who makes up a live audience. Children often imagine streaming to a small group of known followers — but in practice, public live streams are visible to the entire platform, and a child's audience at any moment may include adults they have never met and whose intentions they cannot know. Helping your child understand that going live on a public platform is fundamentally different from video calling friends — and that the audience includes strangers by default, not by exception — is the foundation of safe thinking about live streaming. This conversation should happen before a child ever goes live for the first time, not after.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🌱</div>
+      <div>
+        <div class="tip-name">Help Your Child Understand What a Broadcast Reveals Without Them Realising</div>
+        <div class="tip-body">Sit with your child and walk through a hypothetical broadcast from their bedroom or another familiar location, identifying what a stranger watching would be able to learn — visible street signs, recognisable landmarks through a window, school uniform or sports kit, the layout of the home, the time of broadcast. Children are often genuinely surprised by how much information is visible in a background they take for granted. This exercise — done calmly and without framing it as a punishment or accusation — helps children develop a much more concrete sense of what personal safety means in a live video context, and builds habits that will protect them on any platform they use in the future.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🔒</div>
+      <div>
+        <div class="tip-name">Apply iLimits Restrictions Across Every Device and Keep the Conversation Open</div>
+        <div class="tip-body">Apply iLimits restrictions for Streamago at the app and browser level across every device your child uses — including shared household tablets, secondary phones and any device they access regularly outside the home. Because live broadcasting can happen very quickly and leave no visible trace on the device, technical controls are particularly important for this category of platform — a brief live session may be over before a parent becomes aware it was happening. Alongside these controls, keep the conversation about live streaming open and non-judgmental, so that your child is more likely to come to you if they receive a message or have an experience during a stream that concerns them.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Going Live Should Never Mean Going Unprotected</h3>
+    <p class="closing-body">
+      Live video broadcasting puts a child in front of an unknown audience in real time — with no record, no moderation and no way for a parent to know it is happening. The risks are immediate, the exposure is personal and the consequences can be lasting. iLimits gives you the tools to prevent access before a broadcast begins, and the conversations you have with your child about the reality of who watches live streams give them the understanding to protect themselves on every platform they use.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
