@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Jerkmate – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #FEF7F9;
+    --blush-2:      #FDF2F5;
+    --ink:          #19121F;
+    --ink-soft:     #35253F;
+    --ink-mid:      #6B5879;
+    --ink-muted:    #A594B2;
+    --border:       #F0E6EC;
+    --border-soft:  #F8EEF3;
+    --surface:      #FFFFFF;
+
+    /* Jerkmate: deep charcoal-crimson */
+    --jm:           #B91C1C;
+    --jm-mid:       #991B1B;
+    --jm-deep:      #450A0A;
+    --jm-light:     #FFF5F5;
+    --jm-bdr:       #FECACA;
+    --jm-text:      #450A0A;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(240,67,106,0.07);
+    --shadow-sm:    0 2px 14px rgba(240,67,106,0.10);
+    --shadow-md:    0 6px 30px rgba(240,67,106,0.13);
+    --shadow-lg:    0 14px 52px rgba(240,67,106,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #0D0000 0%, #200000 50%, #350505 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(185,28,28,0.44) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.16) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(185,28,28,0.40) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(185,28,28,0.18);
+    border: 1px solid rgba(185,28,28,0.34);
+    color: #FCA5A5; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #FFBDBD; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #0D0000 0%, #B91C1C 55%, #EF4444 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(185,28,28,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.11); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--rose-light); border: 1px solid var(--rose-mid);
+    color: var(--rose); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Jerkmate callout ── */
+  .jm-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--jm-light); border: 1.5px solid var(--jm-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .jm-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE2E2; border: 1.5px solid var(--jm-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .jm-title { font-size: 13px; font-weight: 700; color: var(--jm-text); line-height: 1.3; margin-bottom: 3px; }
+  .jm-body  { font-size: 12px; color: #450A0A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--rose); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── High risk strip ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #FFF5F5; border: 1.5px solid #FFBEBE;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #FFE4E4; border: 1.5px solid #FFBEBE;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #800000; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #5C0000; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--jm-light); border: 1.5px solid var(--jm-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEE2E2; border: 1.5px solid var(--jm-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--jm-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #450A0A; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose-light); border: 1.5px solid var(--rose-mid);
+    color: var(--rose); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #0D0000 0%, #200000 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(185,28,28,0.30) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #FFF0F4 0%, #FEF3F6 100%);
+    border: 1.5px solid var(--rose-mid); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--rose-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #5A1F35; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner   { animation: fadeUp 0.42s ease both; }
+  .card         { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid    { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card      { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box     { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip   { animation: fadeUp 0.42s ease 0.05s both; }
+  .jm-callout   { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip   { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing      { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding why this platform is wholly unsuitable for children and how you can take action as a parent to block access immediately.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">🔞</div>
+        <div>
+          <div class="app-name-text">Jerkmate</div>
+          <div class="app-sub">Adult Webcam & Live Chat Platform</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Adult Entertainment</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val high">🔴 High</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Reason</div>
+        <div class="meta-val">Explicit adult webcam and live chat platform with no meaningful age verification and interactive real-time content</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged as Restricted in iLimits</div>
+          <div class="rf-sub">Parents can block this platform instantly from the iLimits dashboard.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Jerkmate — an adult webcam and live interactive chat platform that hosts explicit sexual content performed live by adult performers, with real-time audience interaction, entirely unsuitable for any child at any age.</p>
+  </div>
+
+  <div class="jm-callout">
+    <div class="jm-ico">🔞</div>
+    <div>
+      <div class="jm-title">Jerkmate Is an Explicit Adult Webcam Platform — Every Element of Its Content Is Sexual in Nature and Intended Exclusively for Adult Audiences</div>
+      <div class="jm-body">Jerkmate is an adult webcam and live interactive chat platform whose entire content catalogue consists of explicit sexual performances streamed live by adult performers. Unlike static adult content platforms, Jerkmate is interactive — viewers can communicate directly with performers in real time through a chat interface, request specific acts, and in some cases engage in two-way video interaction. There is no age-appropriate section of the platform, no content suitable for children at any age, and no legitimate reason for a child to access it. Age verification on the platform amounts to a self-declaration, making parental restriction at the device and network level the only effective safeguard against access by children.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#B91C1C;"></span> Live Webcam Shows</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Real-Time Chat</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Interactive Requests</div>
+    <div class="mode-chip"><span class="cdot" style="background:#6B4FA0;"></span> Two-Way Video</div>
+    <div class="mode-chip"><span class="cdot" style="background:#718096;"></span> Subscription Access</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Jerkmate is an <strong>adult webcam and live interactive entertainment platform</strong> hosting explicit sexual content performed live by adult performers and streamed in real time to paying or registered viewers. The platform's interactive features allow viewers to communicate directly with performers, creating a real-time two-way dynamic that distinguishes it from passive adult content consumption and introduces an additional layer of risk for any child who accesses it.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--jm-light);">📹</div>
+      <div>
+        <div class="feat-name">Live Explicit Webcam Performances Streamed in Real Time</div>
+        <div class="feat-desc">Jerkmate's primary content format is live webcam streaming of explicit sexual performances by adult performers. Unlike pre-recorded adult content, live streams cannot be moderated before reaching the viewer — what is broadcast reaches the audience immediately and without any editorial filter. A child who accesses the platform is exposed to live explicit sexual content from the moment the stream loads, with no delay, no preview and no opportunity for intervention once the stream begins. The live format also means that content is uniquely unpredictable and may include material that is significantly more extreme than what a child might encounter on a pre-recorded adult content platform.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">💬</div>
+      <div>
+        <div class="feat-name">Direct Real-Time Chat Between Viewers and Performers</div>
+        <div class="feat-desc">Jerkmate includes a live chat interface that allows viewers to send messages directly to performers during their streams. This interactive element means that a child accessing the platform is not merely a passive viewer of adult content but a participant in a real-time communication channel with an adult performer. Performers respond to viewer messages, creating a direct interpersonal dynamic that is qualitatively different from passive adult content consumption and that may involve explicit, personalised communication directed at whoever is on the other end of the chat interface — including a child.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFFBF0;">🎯</div>
+      <div>
+        <div class="feat-name">Viewer-Directed Content Requests and Tip-Based Interaction</div>
+        <div class="feat-desc">The platform's interactive model includes tip-based systems that allow viewers to pay for specific acts or requests from performers. This transactional, viewer-directed content model means that the platform is designed to respond to viewer input — including the input of any child who has access to a parent's stored payment credentials or who has obtained access to funds. The interactive and request-based nature of the content amplifies the harm potential of exposure compared to passive viewing of adult material.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F7F3FF;">🖥️</div>
+      <div>
+        <div class="feat-name">Two-Way Video Interaction Available Between Viewers and Performers</div>
+        <div class="feat-desc">Some features of the Jerkmate platform allow for two-way video interaction — enabling a child to potentially appear on camera to an adult performer in a live, interactive session. This feature represents one of the most serious risk vectors on the platform: a child who enables two-way video becomes visible to a stranger in an explicitly sexual context, in real time. The implications for the child's safety, wellbeing and potential legal exposure are severe, and this feature alone is sufficient reason to block the platform entirely on all devices accessible to children.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🔓</div>
+      <div>
+        <div class="feat-name">No Meaningful Age Verification Before Accessing Explicit Content</div>
+        <div class="feat-desc">Jerkmate's age gate consists of a self-declaration — a single click confirming that the user is over 18, with no identity verification, no payment card check and no other mechanism that would prevent a child from proceeding. This provides no meaningful protection and should not be treated as a safeguard. Any child with access to the platform's URL can reach explicit live content in seconds without providing any verifiable information about their age. Device and network-level restrictions are the only reliable barrier to access.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Why It Poses the Highest Risk to Children</h2>
+    <p class="sh-desc">Key risks from exposure to live interactive adult webcam content — including the interactive and real-time nature of the content, the two-way video feature, the absence of any age verification, and the documented harm of early exposure to explicit sexual material on child development.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🔞</span>
+      <div class="rc-name">Entire Platform Is Explicit Adult Content — No Safe Area Exists</div>
+      <div class="rc-desc">Every piece of content on Jerkmate is explicit sexual material performed live by adults. There is no age-appropriate section, no content tier suitable for younger audiences, and no version of the platform that is appropriate for a child at any age or developmental stage</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💬</span>
+      <div class="rc-name">Real-Time Direct Communication With Adult Performers</div>
+      <div class="rc-desc">The platform's live chat feature puts a child in direct, real-time communication with an adult performer in an explicitly sexual context — a qualitatively more serious exposure than passive adult content viewing, with direct interpersonal dynamics that can include personalised, explicit communication directed at the child</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🎥</span>
+      <div class="rc-name">Two-Way Video Can Expose Child to Performer on Camera</div>
+      <div class="rc-desc">Two-way video features mean a child could appear on camera to an adult stranger in an explicitly sexual live context — creating a serious and immediate risk of harm, potential legal implications, and a uniquely traumatic exposure that differs fundamentally from any other form of adult content access</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Interactive Format Amplifies Developmental Harm</div>
+      <div class="rc-desc">Research on the developmental impact of early exposure to explicit adult content is consistently clear — but interactive, viewer-directed sexual content creates additional harm vectors beyond passive viewing, including the normalisation of transactional sexual interaction and distorted understandings of consent and personal boundaries</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">💳</span>
+      <div class="rc-name">Tip and Subscription Payments Accessible via Stored Credentials</div>
+      <div class="rc-desc">The platform's tip-based and subscription payment systems can be accessed using a parent's stored payment credentials on a shared device, enabling a child to make real financial transactions within an explicitly adult context without the parent's knowledge or consent</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔍</span>
+      <div class="rc-name">Discoverable Through Search and Advertising</div>
+      <div class="rc-desc">Jerkmate is a heavily advertised platform with a widely recognised name that appears in search results and online advertising. A child can reach the platform's explicit content through a standard browser search or by following an advertisement without any additional barrier beyond the platform's self-declaration age gate</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔴</div>
+    <div class="risk-strip-text">
+      <strong>Jerkmate Carries the Highest Possible Risk Rating</strong>
+      <span>The platform's entirely explicit content, interactive real-time format, two-way video capability, direct communication with adult performers, absence of any meaningful age verification, and payment features accessible via stored credentials together make Jerkmate one of the most serious adult content risks for children. This platform should be blocked on every device accessible to children without exception.</span>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🌐</div>
+    <div>
+      <div class="control-title">Jerkmate Is Accessible Through Any Browser Without an App Download — Browser-Level and Network-Level Controls Are Essential</div>
+      <div class="control-body">Jerkmate's full content and interactive features are accessible through any standard web browser on any internet-connected device, without downloading an app, creating a verified account, or completing any meaningful access verification. A child can reach the platform's explicit live content on a phone browser, a shared household computer or a tablet in seconds. Removing an app is not sufficient protection — device-level controls must address browser-based access across every device a child uses. iLimits provides controls that block both app and web access to the platform, and these should be applied across all devices and networks the child has access to.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Live Interactive Adult Content Is a Categorically More Serious Exposure Than Passive Adult Content Viewing</div>
+        <div class="know-body">Parents who are aware of the risks of adult content websites should understand that live webcam platforms like Jerkmate represent a meaningfully more serious category of exposure for children. The interactive, real-time nature of the content means a child is not merely viewing pre-recorded material but potentially communicating directly with an adult performer in an explicitly sexual live context — and in the case of two-way video features, appearing on camera themselves. The harm potential of this category of platform is higher than standard adult content sites, and the case for blocking it is correspondingly stronger and more urgent.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">The Platform Name Is Widely Recognised and Easily Found Through Standard Web Search</div>
+        <div class="know-body">Jerkmate is a heavily advertised adult platform with a name that is widely known through online advertising, social media references and peer discussion. Older children and teenagers are likely to be aware of the platform name through these channels — and the ease with which the platform is accessible through a standard browser search means that awareness of the name is a very short step from access to its explicit live content. Parents of older children and teenagers should not assume that unfamiliarity with the platform on the parent's part means their child has not encountered it.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">No Element of the Platform Is Appropriate for Any Child at Any Age — Blocking Is the Appropriate Default</div>
+        <div class="know-body">Unlike some platforms that carry age-dependent risks or that have child-appropriate versions or settings, Jerkmate has no element that is appropriate for any child at any age. The platform is an adult entertainment service in its entirety, and there is no use case that would make access appropriate for a minor. The decision for parents is not whether to restrict access but how comprehensively to do so — across all devices, all browsers and all networks the child uses, not just the primary device or home network.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Review Payment Methods on Shared Devices to Prevent Transactional Access</div>
+        <div class="know-body">Jerkmate's tip and subscription payment systems can be accessed using stored payment credentials on a shared device. Parents who share a device with their child, or whose child uses a device where a parent's payment details are stored, should review and remove stored payment methods as a safeguard against transactional access to the platform. This step is relevant even where the device is otherwise restricted — if a child discovers access to the platform on a device where payment methods are stored, the transactional features represent an additional harm vector that should be closed independently of access controls.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Protection</div>
+    <h3 class="il-title">You Stay Fully in Control</h3>
+    <p class="il-desc">iLimits gives parents straightforward tools to block Jerkmate and other adult webcam platforms instantly — across both app and browser access, on every device your child uses.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block adult content platforms and webcam sites by category with one tap</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Covers both app and browser-based access — not just app installations</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Parents maintain full control over which sites and apps are accessible</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts when flagged platforms are accessed on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Works quietly in the background — completely invisible to the child</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits identifies and flags platforms like Jerkmate as restricted — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you, based on your family's own guidelines and your child's individual needs.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Three practical steps to protect your child from live interactive adult content platforms — including browser-level blocking, payment credential review, and age-appropriate conversation about why this category of content is harmful.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:#FFF0F4; border-color: var(--rose-mid);">🔒</div>
+      <div>
+        <div class="tip-name">Apply Comprehensive Device and Browser-Level Blocks Across All Devices Your Child Can Access</div>
+        <div class="tip-body">Because Jerkmate is fully accessible through any web browser without an app installation, effective restriction requires controls applied at both the app and browser level across every device a child uses — including secondary phones, tablets, shared household computers and any device connected to a home, school or public network the child accesses. Use iLimits to apply category-level restrictions covering adult webcam and live content platforms, and enable safe-search settings on all browsers as an additional layer. Review the restrictions periodically as children acquire new devices or gain access to new networks, and consider applying restrictions at the router level for home networks to cover all connected devices simultaneously.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--jm-light); border-color: var(--jm-bdr);">💳</div>
+      <div>
+        <div class="tip-name">Remove Stored Payment Methods From Shared Devices and Review Purchase Histories</div>
+        <div class="tip-body">Review all devices your child has access to and remove any stored payment credentials — saved card details, digital wallets, or in-app purchase authorisations — that could be used to make transactions on adult platforms. On shared devices, consider requiring a PIN or password for all purchases rather than allowing one-tap payment. Also periodically review purchase histories on shared devices and payment accounts for unexplained transactions, which may indicate that a child has accessed a premium or subscription service on an adult platform. This step is relevant regardless of whether access has been restricted — payment credential management is an independent safeguard worth maintaining on all shared devices.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">💬</div>
+      <div>
+        <div class="tip-name">Talk Honestly With Children About Why Live Interactive Adult Content Is Harmful</div>
+        <div class="tip-body">Age-appropriate, honest conversation about adult content — particularly the interactive and live format that platforms like Jerkmate represent — is one of the most durable forms of protection available to parents, because it equips children with an understanding of why these platforms are harmful rather than simply knowing they are off-limits. For older children and teenagers, a conversation that specifically addresses the interactive nature of live webcam platforms — the real people involved, the power dynamics at play, the way these platforms distort understanding of relationships and consent, and the particular risks of two-way video features — is more effective than a general reference to adult content being inappropriate. Keep the conversation calm, factual and framed around the child's wellbeing, and make clear that they can come to you without fear if they have encountered this type of content.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Live Interactive Adult Platforms Require the Same Urgency of Response as Any Other Adult Content — and More</h3>
+    <p class="closing-body">
+      Jerkmate represents a category of adult content platform that carries higher risk than passive adult content sites, because its interactive, real-time format creates direct contact between a child and an adult performer in an explicitly sexual context. iLimits gives you the tools to block this platform and others in its category across all of your child's devices — and the honest, specific conversations you have with your child about why these platforms are harmful give them the understanding and resilience to make the right decision even in environments where technical controls are not in place.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
