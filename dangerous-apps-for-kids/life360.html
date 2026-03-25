@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Life360 – Restricted Platform Info · iLimits</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:         #F0436A;
+    --rose-deep:    #C72E54;
+    --rose-light:   #FFF0F4;
+    --rose-mid:     #FFCCD8;
+    --blush:        #F2F8FF;
+    --blush-2:      #E6F1FF;
+    --ink:          #040D18;
+    --ink-soft:     #0E2035;
+    --ink-mid:      #3A5A7A;
+    --ink-muted:    #7A9AB5;
+    --border:       #CCE0F0;
+    --border-soft:  #E0EFF9;
+    --surface:      #FFFFFF;
+
+    /* Life360 brand: sky blue */
+    --l3:           #1A6FDB;
+    --l3-mid:       #155CB8;
+    --l3-deep:      #082E68;
+    --l3-light:     #EEF5FF;
+    --l3-bdr:       #93C4F8;
+    --l3-text:      #071E44;
+
+    --amber-bg:     #FFFBF0;
+    --amber-bdr:    #FDDCB0;
+    --amber-text:   #7A3C08;
+    --teal-bg:      #F0FDFB;
+    --teal-bdr:     #9FEDE0;
+    --blue-bg:      #F0F6FF;
+    --blue-bdr:     #BFDBFE;
+    --peach-bg:     #FFF8F5;
+    --peach-bdr:    #FFD4BC;
+
+    --radius-sm:    12px;
+    --radius-md:    18px;
+    --radius-lg:    26px;
+    --shadow-xs:    0 1px 5px rgba(26,111,219,0.07);
+    --shadow-sm:    0 2px 14px rgba(26,111,219,0.10);
+    --shadow-md:    0 6px 30px rgba(26,111,219,0.13);
+    --shadow-lg:    0 14px 52px rgba(26,111,219,0.17);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blush);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* ══ HERO ══ */
+  .hero {
+    background: linear-gradient(158deg, #020812 0%, #061428 50%, #0A1E3C 100%);
+    padding: 46px 20px 62px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 52% at 115% 0%,   rgba(26,111,219,0.42) 0%, transparent 55%),
+      radial-gradient(ellipse 44% 38% at -8%  96%,  rgba(240,67,106,0.16) 0%, transparent 52%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 36px; background: var(--blush);
+    border-radius: 36px 36px 0 0;
+  }
+  .hero-glow-a {
+    position: absolute; top: -72px; right: -72px;
+    width: 265px; height: 265px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,111,219,0.40) 0%, transparent 68%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .hero-glow-b {
+    position: absolute; bottom: 28px; left: -56px;
+    width: 185px; height: 185px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.16) 0%, transparent 70%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(26,111,219,0.18);
+    border: 1px solid rgba(26,111,219,0.36);
+    color: #93C4F8; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.9px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 2px rgba(240,67,106,0.32);
+    animation: pdot 2.2s infinite;
+  }
+  @keyframes pdot {
+    0%,100% { box-shadow: 0 0 0 2px rgba(240,67,106,0.32); }
+    50%      { box-shadow: 0 0 0 5px rgba(240,67,106,0.10); }
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 29px; font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: #93C4F8; }
+
+  .hero-sub {
+    font-size: 13.5px; color: rgba(255,255,255,0.52);
+    font-weight: 400; line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* ── App Card ── */
+  .app-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .app-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .app-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: linear-gradient(140deg, #082E68 0%, #1A6FDB 55%, #5BA8FF 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; flex-shrink: 0;
+    box-shadow: 0 4px 22px rgba(26,111,219,0.55), 0 0 0 1px rgba(255,255,255,0.10);
+    position: relative; overflow: hidden;
+  }
+  .app-icon::after {
+    content: '';
+    position: absolute; top:0; left:0; right:0; height:46%;
+    background: rgba(255,255,255,0.14); border-radius: 16px 16px 0 0;
+  }
+  .app-name-text {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 700;
+    color: #fff; letter-spacing: -0.2px; line-height: 1.2;
+  }
+  .app-sub {
+    font-size: 11.5px; color: rgba(255,255,255,0.42);
+    font-weight: 500; margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .meta-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px;
+  }
+  .meta-lbl {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 3px;
+  }
+  .meta-val { font-size: 12.5px; font-weight: 600; color: #fff; line-height: 1.3; }
+  .meta-val.high { color: #FCA5A5; }
+  .meta-val.medium { color: #FCD34D; }
+  .meta-val.advisory { color: #93C4F8; }
+  .meta-full {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 11px; padding: 9px 12px; margin-bottom: 12px;
+  }
+  .restricted-flag {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(240,67,106,0.16); border: 1px solid rgba(240,67,106,0.28);
+    border-radius: 11px; padding: 11px 14px;
+  }
+  .rf-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rose); flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(240,67,106,0.28); animation: pdot 2s infinite;
+  }
+  .rf-title { font-size: 13px; font-weight: 700; color: #FF9DB5; line-height: 1.3; }
+  .rf-sub   { font-size: 11px; color: rgba(255,155,181,0.68); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+
+  /* ══ MAIN ══ */
+  .main { max-width: 480px; margin: 0 auto; padding: 30px 16px 52px; }
+
+  .sh { margin-bottom: 16px; }
+  .sh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--l3-light); border: 1px solid var(--l3-bdr);
+    color: var(--l3); font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 9px;
+  }
+  .sh-title {
+    font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.35px; line-height: 1.25;
+  }
+  .sh-desc { font-size: 13px; color: var(--ink-mid); font-weight: 400; margin-top: 5px; line-height: 1.65; }
+
+  .card {
+    background: var(--surface); border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .gap { height: 6px; }
+
+  /* ── Life360 callout ── */
+  .l3-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--l3-light); border: 1.5px solid var(--l3-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .l3-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D6EAFF; border: 1.5px solid var(--l3-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .l3-title { font-size: 13px; font-weight: 700; color: var(--l3-text); line-height: 1.3; margin-bottom: 3px; }
+  .l3-body  { font-size: 12px; color: #071E44; font-weight: 400; line-height: 1.55; }
+
+  /* Advisory callout — distinct from the brand callout */
+  .advisory-callout {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: #FFFBF0; border: 1.5px solid #FDDCB0;
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .advisory-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #FEF3C7; border: 1.5px solid #FDDCB0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .advisory-title { font-size: 13px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 3px; }
+  .advisory-body  { font-size: 12px; color: #5C2E08; font-weight: 400; line-height: 1.55; }
+
+  /* ── Feature chips ── */
+  .mode-strip {
+    display: flex; gap: 8px; margin-bottom: 14px;
+    overflow-x: auto; padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .mode-strip::-webkit-scrollbar { display: none; }
+  .mode-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 100px; padding: 7px 13px;
+    font-size: 12px; font-weight: 600; color: var(--ink-mid);
+    white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow-xs);
+  }
+  .mode-chip .cdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Section 1 ── */
+  .s1-intro {
+    padding: 16px 20px 15px;
+    font-size: 13.5px; color: var(--ink-mid); font-weight: 400; line-height: 1.72;
+    border-bottom: 1px solid var(--border-soft); background: var(--blush-2);
+  }
+  .s1-intro strong { color: var(--ink); font-weight: 600; }
+  .feat-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .feat-row:last-child { border-bottom: none; }
+  .feat-ico {
+    width: 38px; height: 38px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feat-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .feat-desc { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 3px; line-height: 1.5; }
+
+  /* ── Risk grid ── */
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 16px 13px 14px;
+    box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+  }
+  .risk-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0;
+    height: 3px; background: var(--l3); border-radius: 3px 3px 0 0;
+  }
+  .rc-emoji { font-size: 24px; margin-bottom: 9px; display: block; }
+  .rc-name  { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .rc-desc  { font-size: 11px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.45; }
+
+  /* ── Advisory strip (not danger-red) ── */
+  .risk-strip {
+    display: flex; align-items: center; gap: 12px;
+    background: #EEF5FF; border: 1.5px solid var(--l3-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .risk-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #D6EAFF; border: 1.5px solid var(--l3-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .risk-strip-text strong { font-size: 13.5px; font-weight: 700; color: #071E44; display: block; line-height: 1.3; margin-bottom: 3px; }
+  .risk-strip-text span   { font-size: 12px; color: #0E2035; font-weight: 400; line-height: 1.5; }
+
+  /* ── Control note ── */
+  .control-note {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--l3-light); border: 1.5px solid var(--l3-bdr);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 22px;
+  }
+  .control-ico {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: #D6EAFF; border: 1.5px solid var(--l3-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .control-title { font-size: 13px; font-weight: 700; color: var(--l3-text); line-height: 1.3; margin-bottom: 3px; }
+  .control-body  { font-size: 12px; color: #071E44; font-weight: 400; line-height: 1.55; }
+
+  /* ── Know rows ── */
+  .know-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 15px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .know-row:last-child { border-bottom: none; }
+  .know-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--l3-light); border: 1.5px solid var(--l3-bdr);
+    color: var(--l3-mid); font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .know-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .know-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── iLimits dark card ── */
+  .il-card {
+    background: linear-gradient(150deg, #020812 0%, #061428 100%);
+    border-radius: var(--radius-lg); padding: 24px 20px 22px;
+    margin-bottom: 22px; box-shadow: var(--shadow-lg);
+    position: relative; overflow: hidden;
+  }
+  .il-card::before {
+    content: ''; position: absolute; top:-55px; right:-55px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,111,219,0.30) 0%, transparent 68%);
+    filter: blur(22px); pointer-events: none;
+  }
+  .il-card::after {
+    content: ''; position: absolute; bottom:-32px; left:-32px;
+    width: 135px; height: 135px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,67,106,0.18) 0%, transparent 70%);
+    filter: blur(16px); pointer-events: none;
+  }
+  .il-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.7px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 100px; margin-bottom: 12px; position: relative;
+  }
+  .il-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: #fff;
+    line-height: 1.25; margin-bottom: 6px; position: relative;
+  }
+  .il-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px; position: relative; }
+  .il-rows { position: relative; }
+  .il-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .il-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .il-chk {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(240,67,106,0.18); border: 1px solid rgba(240,67,106,0.28);
+    color: #FF9DB5; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .il-lbl { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.82); line-height: 1.4; }
+
+  /* ── Note box ── */
+  .note-box {
+    background: var(--amber-bg); border: 1.5px solid var(--amber-bdr);
+    border-radius: var(--radius-md); padding: 18px 16px 18px 18px;
+    margin-bottom: 22px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .note-ico {
+    width: 42px; height: 42px; border-radius: 13px;
+    background: #FEF3C7; border: 1.5px solid var(--amber-bdr);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .note-title { font-size: 14px; font-weight: 700; color: #7A3C08; line-height: 1.3; margin-bottom: 5px; }
+  .note-body  { font-size: 13px; color: var(--amber-text); font-weight: 400; line-height: 1.6; }
+  .note-body strong { font-weight: 700; }
+
+  /* ── Tip rows ── */
+  .tip-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+  }
+  .tip-row:last-child { border-bottom: none; }
+  .tip-ico {
+    width: 40px; height: 40px; border-radius: 13px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; flex-shrink: 0; border: 1.5px solid var(--border);
+  }
+  .tip-name { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .tip-body  { font-size: 12px; color: var(--ink-mid); font-weight: 400; margin-top: 4px; line-height: 1.55; }
+
+  /* ── Closing ── */
+  .closing {
+    background: linear-gradient(135deg, #EEF5FF 0%, #D6EAFF 100%);
+    border: 1.5px solid var(--l3-bdr); border-radius: var(--radius-lg);
+    padding: 30px 22px; text-align: center; margin-bottom: 14px;
+    box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+  }
+  .closing::before {
+    content: ''; position: absolute; top:-42px; right:-42px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,111,219,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .closing-emoji { font-size: 46px; margin-bottom: 14px; display: block; position: relative; }
+  .closing-title {
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700;
+    color: var(--l3-deep); margin-bottom: 10px; line-height: 1.25; position: relative;
+  }
+  .closing-body { font-size: 13px; color: #071E44; font-weight: 400; line-height: 1.72; position: relative; }
+
+  /* ── Footer ── */
+  .footer { text-align: center; padding: 4px 20px 20px; }
+  .footer-brand { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+  .f-icon {
+    width: 22px; height: 22px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 800;
+  }
+  .f-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+  .footer-txt { font-size: 11px; color: var(--ink-muted); font-weight: 400; line-height: 1.6; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner        { animation: fadeUp 0.42s ease both; }
+  .card              { animation: fadeUp 0.42s ease 0.04s both; }
+  .risk-grid         { animation: fadeUp 0.42s ease 0.06s both; }
+  .il-card           { animation: fadeUp 0.42s ease 0.08s both; }
+  .note-box          { animation: fadeUp 0.42s ease 0.06s both; }
+  .risk-strip        { animation: fadeUp 0.42s ease 0.05s both; }
+  .l3-callout        { animation: fadeUp 0.42s ease 0.03s both; }
+  .advisory-callout  { animation: fadeUp 0.42s ease 0.03s both; }
+  .mode-strip        { animation: fadeUp 0.42s ease 0.04s both; }
+  .control-note      { animation: fadeUp 0.42s ease 0.05s both; }
+  .closing           { animation: fadeUp 0.42s ease 0.10s both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      iLimits Parental Controls
+    </div>
+
+    <h1 class="hero-title">Why This Platform Is<br>Marked as <em>Restricted</em></h1>
+    <p class="hero-sub">Understanding the important concerns around Life360 — a family tracking app that raises serious questions about children's privacy, trust and data security.</p>
+
+    <div class="app-card">
+      <div class="app-top">
+        <div class="app-icon">📍</div>
+        <div>
+          <div class="app-name-text">Life360</div>
+          <div class="app-sub">Family Location Tracking App</div>
+        </div>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-lbl">Category</div>
+          <div class="meta-val">Family Safety &amp; Tracking</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-lbl">Risk Level</div>
+          <div class="meta-val advisory">🔵 Advisory</div>
+        </div>
+      </div>
+      <div class="meta-full">
+        <div class="meta-lbl">Primary Concern</div>
+        <div class="meta-val">Continuous precise location data collection, third-party data sharing practices and the impact of covert surveillance on child wellbeing and trust</div>
+      </div>
+      <div class="restricted-flag">
+        <div class="rf-dot"></div>
+        <div>
+          <div class="rf-title">Flagged for Parental Review in iLimits</div>
+          <div class="rf-sub">Parents should read this guidance carefully before deciding whether and how to use Life360 with their child.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- Section 1 -->
+  <div class="sh">
+    <div class="sh-pill">📱 Section 1</div>
+    <h2 class="sh-title">What This Platform Does</h2>
+    <p class="sh-desc">A clear picture of Life360 — a family location-sharing app that continuously tracks the real-time GPS location of every family member who has the app installed, along with driving behaviour, place history and other personal data, much of which is shared with third parties.</p>
+  </div>
+
+  <div class="l3-callout">
+    <div class="l3-ico">📍</div>
+    <div>
+      <div class="l3-title">Life360 Is a Continuous Location Tracking Service — Its Concerns Are About Privacy and Data Practices, Not Third-Party Contact</div>
+      <div class="l3-body">Life360 is different from every other platform in this series. It does not expose children to strangers, adult content or unmoderated communities. Its purpose is family location sharing — parents installing it on a child's phone to track their whereabouts in real time. iLimits flags Life360 not because it connects children with dangers from outside the family, but because of documented concerns about the platform's commercial data practices, the privacy implications of continuous precise location tracking, and the well-documented impact that covert or non-consensual surveillance can have on the parent-child relationship, particularly for teenagers. These are concerns worth understanding before deciding whether and how to use the app.</div>
+    </div>
+  </div>
+
+  <div class="mode-strip">
+    <div class="mode-chip"><span class="cdot" style="background:#1A6FDB;"></span> Real-Time GPS</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F0436A;"></span> Location History</div>
+    <div class="mode-chip"><span class="cdot" style="background:#10B981;"></span> Place Alerts</div>
+    <div class="mode-chip"><span class="cdot" style="background:#F59E0B;"></span> Drive Detection</div>
+    <div class="mode-chip"><span class="cdot" style="background:#8B5CF6;"></span> Data Sharing</div>
+  </div>
+
+  <div class="card">
+    <div class="s1-intro">
+      Life360 is a <strong>continuous family location tracking application</strong> that monitors the real-time GPS position of every enrolled family member, logs location history, detects driving behaviour and sends alerts when family members arrive at or leave designated places. The app is widely marketed as a family safety tool — but its data practices, its commercial model and its psychological impact on children and teenagers have been the subject of significant concern from privacy researchers, child development experts and investigative journalists.
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--l3-light);">📡</div>
+      <div>
+        <div class="feat-name">Continuous Real-Time GPS Location Tracking of All Family Members</div>
+        <div class="feat-desc">Life360 continuously tracks the precise GPS location of every family member with the app installed, updating their position on a shared family map in real time. This means that a parent with Life360 installed on a child's phone can see exactly where the child is at any moment of any day — their current street, their speed of travel and how long they have been at any given location. The app runs in the background continuously, including at school, at friends' homes, during extracurricular activities and in any other setting, without requiring the child to take any action to share their location.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#FFF0F4;">🗓️</div>
+      <div>
+        <div class="feat-name">Detailed Location History Logs Retained Over Time</div>
+        <div class="feat-desc">Life360 does not only show where a family member is now — it retains a detailed log of everywhere they have been, accessible to other family members through the app. This history includes specific addresses, timestamps and duration of stay at every location the child has visited. Location history logs create a detailed record of a child's social life, routine, relationships and movements that goes far beyond what most parents would have access to through normal family communication, and that the child may not know is being retained and reviewable.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F0F6FF;">🚗</div>
+      <div>
+        <div class="feat-name">Driving Behaviour Monitoring Including Speed and Phone Use Detection</div>
+        <div class="feat-desc">Life360's premium tiers include monitoring of driving behaviour — detecting speed, hard braking, rapid acceleration and phone use while driving. While this feature is presented as a road safety tool, it also means that the app collects and retains detailed behavioural data about a child's driving patterns over time, which is stored on Life360's servers and subject to the platform's data sharing practices alongside location data.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:var(--peach-bg);">🏷️</div>
+      <div>
+        <div class="feat-name">Place Alerts That Notify Parents of Arrivals and Departures</div>
+        <div class="feat-desc">Parents can designate specific locations — home, school, a friend's house — and receive automatic notifications when a family member arrives at or departs from these places. While this feature has legitimate safety applications, it also means that a child's movements trigger automatic notifications to a parent without the child taking any action or having any awareness of when those notifications are sent. A child using Life360 may not know at any given moment whether their current location has triggered a parental alert.</div>
+      </div>
+    </div>
+    <div class="feat-row">
+      <div class="feat-ico" style="background:#F6F1FF;">💼</div>
+      <div>
+        <div class="feat-name">Commercial Data Sharing Practices That Extend Beyond the Family Circle</div>
+        <div class="feat-desc">Life360 has been the subject of significant investigative journalism and regulatory attention regarding its practice of selling precise location data collected from its users — including data collected from children — to third-party data brokers. Investigations have found that this data, while technically anonymised, can often be de-anonymised using other available information. The commercial value of Life360's service is partly derived from the location data it collects, meaning that families using the app are not simply using a safety tool — they are contributing to a commercial data collection operation whose downstream uses they cannot control or audit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">⚠️ Section 2</div>
+    <h2 class="sh-title">Key Concerns for Parents</h2>
+    <p class="sh-desc">The specific concerns that led iLimits to flag Life360 for parental review — covering data privacy, the wellbeing impact of surveillance on children and teenagers, the difference between transparent safety tools and covert monitoring, and the platform's commercial data model.</p>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <span class="rc-emoji">🗄️</span>
+      <div class="rc-name">Location Data Sold to Third Parties</div>
+      <div class="rc-desc">Life360 has been documented selling precise user location data to commercial data brokers — data that includes location records from children's devices, collected continuously and retained over extended periods</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🧠</span>
+      <div class="rc-name">Psychological Impact on Teenagers</div>
+      <div class="rc-desc">Child development researchers have documented that continuous surveillance — particularly when installed without a child's knowledge or full understanding — can increase anxiety, damage trust and reduce the development of healthy independence in adolescents</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🤝</span>
+      <div class="rc-name">Risk to Parent-Child Trust</div>
+      <div class="rc-desc">When children discover they are being tracked without their knowledge or without genuine consent, the damage to the parent-child relationship can significantly outweigh any safety benefit the tracking was intended to provide — particularly for teenagers</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">🔒</span>
+      <div class="rc-name">Broad Data Collection Beyond Location</div>
+      <div class="rc-desc">Life360 collects not only location data but driving behaviour, device information and usage patterns — building a detailed profile of each family member that is stored on commercial servers and subject to data breach risk alongside its sharing practices</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">👁️</span>
+      <div class="rc-name">Covert Installation Undermines Safety Goals</div>
+      <div class="rc-desc">Life360 can be installed on a child's device without their full awareness — but children who discover covert tracking are more likely to find workarounds and less likely to communicate openly with parents, undermining the very safety outcomes the app is intended to support</div>
+    </div>
+    <div class="risk-card">
+      <span class="rc-emoji">📊</span>
+      <div class="rc-name">Commercial Model Incentivises Data Volume</div>
+      <div class="rc-desc">Life360's commercial revenue model has historically included data brokerage alongside subscription fees — creating a structural incentive to collect as much location and behavioural data as possible from as many users as possible, including children</div>
+    </div>
+  </div>
+
+  <div class="risk-strip">
+    <div class="risk-badge">🔵</div>
+    <div class="risk-strip-text">
+      <strong>Life360 Is Flagged for Advisory Review, Not Automatic Restriction</strong>
+      <span>Unlike other platforms in this series, Life360 is not flagged because it exposes children to external dangers. It is flagged because its data practices, its impact on child wellbeing and the important questions around consent and transparency in family tracking deserve careful consideration before the app is installed on a child's device. Some families will find it genuinely useful — with the right approach, it can be. Others may decide the concerns outweigh the benefits.</span>
+    </div>
+  </div>
+
+  <div class="advisory-callout">
+    <div class="advisory-ico">⚖️</div>
+    <div>
+      <div class="advisory-title">The Way Life360 Is Used Matters as Much as Whether It Is Used</div>
+      <div class="advisory-body">Research on family tracking apps consistently finds that the same tool can have very different outcomes depending on whether a child knows it is installed, understands what it does and has been involved in the decision to use it. Life360 used transparently — as a mutually agreed safety tool with clear boundaries and a shared understanding — is a different proposition from Life360 installed covertly. If you are considering using Life360, the approach matters as much as the decision itself.</div>
+    </div>
+  </div>
+
+  <div class="control-note">
+    <div class="control-ico">🌐</div>
+    <div>
+      <div class="control-title">Life360 Is Not a Stranger-Contact Risk — Its Concerns Are About Data, Privacy and Wellbeing</div>
+      <div class="control-body">Unlike most platforms flagged in iLimits, Life360 does not need to be blocked to protect a child from external harms. The question iLimits raises about this platform is not whether to prevent your child from accessing it, but whether and how to use it yourself as a parent — with full awareness of what data it collects, how that data is used commercially, and what the research says about the impact of location tracking on children's development and your relationship with them.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">👨‍👩‍👧 Section 3</div>
+    <h2 class="sh-title">What Parents Should Know</h2>
+  </div>
+
+  <div class="card">
+    <div class="know-row">
+      <div class="know-num">1</div>
+      <div>
+        <div class="know-title">Life360 Has Sold Precise Location Data Collected From Its Users — Including Children — to Data Brokers</div>
+        <div class="know-body">In 2021, investigative reporting established that Life360 was selling the precise location data of its users to a range of commercial data brokers — companies that aggregate and resell location data to advertisers, insurers, hedge funds and other commercial buyers. This data included location records collected from children's devices. Life360 subsequently announced changes to some of its data-sharing practices, but parents should be aware that a platform marketed as a family safety tool has a commercial history of monetising the location data it collects from families, including their children. Reviewing Life360's current privacy policy and data-sharing disclosures before installation is strongly recommended.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">2</div>
+      <div>
+        <div class="know-title">Continuous Tracking Can Damage Teenage Wellbeing and the Parent-Child Relationship</div>
+        <div class="know-body">A growing body of research from child development specialists and adolescent psychologists has examined the impact of parental location tracking on teenagers. The findings are nuanced but consistent on several points: teenagers who are tracked continuously and without genuine consent report higher levels of anxiety and lower levels of trust in their parents; teenagers who discover covert tracking are significantly more likely to find technological workarounds and significantly less likely to communicate openly about their whereabouts and activities; and the development of healthy independence in adolescence — which requires the experience of managing one's own movements and decisions — can be impeded by continuous real-time surveillance. These are not arguments against all forms of parental oversight, but they are important context for understanding what continuous tracking does and does not achieve.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">3</div>
+      <div>
+        <div class="know-title">Transparent Use With a Child's Knowledge and Agreement Produces Better Outcomes Than Covert Installation</div>
+        <div class="know-body">Studies of family tracking apps consistently find that the same tool produces meaningfully different outcomes depending on how it is introduced and used. When Life360 is installed transparently — with the child's knowledge of what it does, an honest conversation about why the parent wants to use it, and agreed boundaries around when and how location data will be checked — it is associated with better safety outcomes and less damage to the parent-child relationship than when it is installed covertly. If you decide to use Life360, involving your child in that decision, explaining the reasons honestly and agreeing clear rules about how the data will be used is not just advisable — it is likely to make the app more effective as a safety tool.</div>
+      </div>
+    </div>
+    <div class="know-row">
+      <div class="know-num">4</div>
+      <div>
+        <div class="know-title">Other Approaches to Family Safety May Achieve Similar Goals With Fewer Privacy Trade-Offs</div>
+        <div class="know-body">For families whose primary interest is knowing that a child has arrived safely at a destination or being reachable in an emergency, there are approaches that achieve similar safety outcomes without the continuous data collection and commercial data-sharing practices of Life360. Agreed check-in messages, native device location-sharing features offered by Apple and Google that do not involve a third-party data collector, and open conversations about expected whereabouts are all approaches that parents may wish to consider alongside or instead of a commercial tracking service. iLimits does not prescribe the right approach for any individual family — but it does encourage parents to make that decision with full awareness of the trade-offs involved.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">🛡️ Section 4</div>
+    <h2 class="sh-title">How iLimits Helps</h2>
+  </div>
+
+  <div class="il-card">
+    <div class="il-eyebrow">✦ iLimits Guidance</div>
+    <h3 class="il-title">You Make the Decision — We Give You the Information</h3>
+    <p class="il-desc">For Life360, iLimits does not recommend automatic blocking. Instead, iLimits gives parents the tools to make an informed decision and — if they choose to allow or limit access — to manage it on their own terms.</p>
+    <div class="il-rows">
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Block Life360 if you decide the data practices are not acceptable for your family</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Allow Life360 with iLimits monitoring to keep visibility of how the app is used</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Set time-based controls to limit when location tracking is active on a child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Receive alerts if Life360 is installed or uninstalled on your child's device</div>
+      </div>
+      <div class="il-row">
+        <div class="il-chk">✓</div>
+        <div class="il-lbl">Use iLimits as your own family safety layer — without the data-sharing concerns of third-party trackers</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">📌 Section 5</div>
+    <h2 class="sh-title">Important Note</h2>
+  </div>
+
+  <div class="note-box">
+    <div class="note-ico">⚠️</div>
+    <div>
+      <div class="note-title">iLimits Does Not Block Apps or Websites Automatically</div>
+      <div class="note-body">iLimits flags Life360 for parental review — but <strong>no platform is ever blocked without your explicit decision</strong>. Every restriction is set by you. For Life360, the decision is more nuanced than for other flagged platforms, and iLimits encourages you to read the guidance above in full before deciding what approach is right for your family.</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="gap"></div>
+  <div class="sh">
+    <div class="sh-pill">💡 Section 6</div>
+    <h2 class="sh-title">Guidance for Parents</h2>
+    <p class="sh-desc">Practical steps for families considering Life360 — covering how to approach the conversation with your child, what to review before installation and how to use location tools in a way that supports rather than undermines your family's safety and trust.</p>
+  </div>
+
+  <div class="card">
+    <div class="tip-row">
+      <div class="tip-ico" style="background:var(--l3-light); border-color: var(--l3-bdr);">💬</div>
+      <div>
+        <div class="tip-name">Have the Conversation Before You Install — Not After</div>
+        <div class="tip-body">If you are considering installing Life360 on your child's device, the single most important step you can take is to have an honest conversation with your child before you do so — not after, and not in a way that frames the app as something being done to them without their input. Explain what the app does, why you think it would be useful, what you intend to use the data for and what you will not use it for. Invite your child's response. You do not need your child's permission to install a monitoring app — but involving them in the decision, and giving them a genuine voice in how it is used, will significantly improve both the safety outcomes and the effect on your relationship. A child who agrees to transparent tracking is in a much stronger position than one who discovers covert tracking and concludes they cannot trust their parent.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--teal-bg); border-color: var(--teal-bdr);">🔍</div>
+      <div>
+        <div class="tip-name">Review Life360's Current Privacy Policy and Data-Sharing Practices Before Installation</div>
+        <div class="tip-body">Before installing Life360, read the platform's current privacy policy and data-sharing disclosures carefully. Life360 has updated its practices following investigative reporting and regulatory pressure, but the specifics of what data is collected, how long it is retained and what third parties it may be shared with remain important information for parents to understand before enrolling their family on the platform. Pay particular attention to data relating to children, opt-out provisions and what happens to collected data if you cancel your subscription. Making an informed decision about whether the platform's current data practices are acceptable to your family is a basic step that many parents skip because the app is marketed as a safety tool rather than a data collection service — but it remains both categories.</div>
+      </div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-ico" style="background: var(--blue-bg); border-color: var(--blue-bdr);">🌱</div>
+      <div>
+        <div class="tip-name">Consider Whether Agreed Check-Ins or Native Device Tools Meet Your Safety Needs Without the Trade-Offs</div>
+        <div class="tip-body">For many families, the safety goal that Life360 is intended to serve — knowing that a child has arrived somewhere safely and being able to reach them in an emergency — can be met through less data-intensive approaches. Apple's Find My and Google's native location-sharing features offer real-time location sharing without a commercial third party collecting and potentially monetising that data. Agreed check-in messages — a simple text when a child arrives at a destination — build communication habits that remain useful long after a child no longer lives at home. If your primary goal is emergency safety rather than continuous oversight, these alternatives are worth considering alongside Life360 before deciding which approach best fits your family's values and your child's stage of development.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <span class="closing-emoji">🔐</span>
+    <h3 class="closing-title">Informed Decisions About Tracking Are as Important as the Tracking Itself</h3>
+    <p class="closing-body">
+      Keeping children safe requires good information — about the platforms they use, and about the tools parents use to monitor them. Life360 can be a genuine safety asset for some families, used transparently and with full awareness of its data practices. For others, the privacy concerns and the wellbeing research may point toward different approaches. iLimits gives you the information to make that decision clearly, and the tools to implement whatever approach your family decides is right.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">
+      <div class="f-icon">i</div>
+      <div class="f-name">iLimits</div>
+    </div>
+    <p class="footer-txt">Provided by iLimits – Helping families build healthier digital habits.</p>
+  </div>
+
+</main>
+</body>
+</html>
